@@ -18,7 +18,7 @@ import java.util.List;
 
 public class FarmerDao {
 
-    public int farmerInsert(FarmerDao farmer) throws SQLException {
+    public int insert(Farmer farmer) throws SQLException {
 
         Entity entity = Entity.parse(farmer);
 
@@ -28,7 +28,7 @@ public class FarmerDao {
 
     }
 
-    public int farmerDelete(int id) throws SQLException {
+    public int delete(int id) throws SQLException {
 
         int rw = Db.use().del(
                 Entity.create("FARMER").set("FARMER_ID", id)
