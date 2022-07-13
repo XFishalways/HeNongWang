@@ -14,19 +14,20 @@ import java.sql.SQLException;
 import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
 
-@WebServlet("/Servlets/GetBuyerUsers")
+@WebServlet(name = "getBuyerUsers", value = "/BuyerUsers")
 public class getBuyerUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         PrintWriter pw = resp.getWriter();
         BuyerUserDao buyerUserDao = new BuyerUserDao();
+        String id = new String(req.getParameter("USER_ID"));
         String json = null;
         try {
-            BuyerUser user = buyerUserDao.findOneBuyer("0");
+            BuyerUser user = buyerUserDao.findOneBuyer(id);
             json = JSON.toJSONString(user);
         } catch (SQLException e) {
-            e.printStackTrace();
+            json = "{\"log\":\"Invalid id\"}";
         }
         pw.print(json);
     }
