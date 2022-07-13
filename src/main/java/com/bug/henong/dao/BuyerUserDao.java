@@ -45,6 +45,7 @@ public class BuyerUserDao {
 
         List<BuyerUser> buyerUsers = new ArrayList<BuyerUser>();
         List<Entity> entities = Db.use().findAll("BUYER_USER");
+
         for(Entity e : entities){
             String buyerStr = JSONUtil.toJsonStr(e);
             BuyerUser buyerUser = BeanUtil.toBean(buyerStr,BuyerUser.class);
