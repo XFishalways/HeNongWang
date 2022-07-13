@@ -1,5 +1,5 @@
 package com.bug.henong.dao;
-import cn.hutool.core.bean.BeanUtil;
+
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
@@ -48,7 +48,7 @@ public class BuyerUserDao {
 
         for(Entity e : entities){
             String buyerStr = JSONUtil.toJsonStr(e);
-            BuyerUser buyerUser = BeanUtil.toBean(buyerStr,BuyerUser.class);
+            BuyerUser buyerUser = JSONUtil.toBean(buyerStr,BuyerUser.class);
             buyerUsers.add(buyerUser);
         }
 
@@ -64,7 +64,7 @@ public class BuyerUserDao {
 
         Entity e = entities.get(0);
         String buyerStr = JSONUtil.toJsonStr(e);
-        BuyerUser buyerUser = BeanUtil.toBean(buyerStr,BuyerUser.class);
+        BuyerUser buyerUser = JSONUtil.toBean(buyerStr,BuyerUser.class);
 
         return  buyerUser;
     }
@@ -146,5 +146,26 @@ public class BuyerUserDao {
 
         return rw;
 
+    }
+    /**更新累计消费金额*/
+    public int updateTotalCostAmt(Double totalCostAmt,String id) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("TOTAL_COST_AMT",totalCostAmt),
+                Entity.create("BUYER_USER").set("USER_ID",id)
+        );
+
+        return rw;
+    }
+
+    /**更新最后登录时间*/
+    public int updateLastLoginTime(Timestamp timestamp, String id) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("LAST_LOGIN_TIME",timestamp),
+                Entity.create("BUYER_USER").set("USER_ID",id)
+        );
+
+        return rw;
     }
 }
