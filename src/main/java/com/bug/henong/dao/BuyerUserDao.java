@@ -20,7 +20,7 @@ public class BuyerUserDao {
     /**添加*/
     public int insert(BuyerUser user) throws SQLException {
 
-        Entity entity = Entity.parse(user);
+        Entity entity = Entity.parseWithUnderlineCase(user);
 
         int rw = Db.use().insert(entity);
 

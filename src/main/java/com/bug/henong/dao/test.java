@@ -14,7 +14,5 @@ public class test {
         farmer.setFarmerPlace("CD");
         FarmerDao farmerDao = new FarmerDao();
         System.out.println(farmerDao.insert(farmer)+"row changed");
-
-
     }
 }

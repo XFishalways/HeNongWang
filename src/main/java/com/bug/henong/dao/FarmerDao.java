@@ -20,7 +20,7 @@ public class FarmerDao {
 
     public int insert(Farmer farmer) throws SQLException {
 
-        Entity entity = Entity.parse(farmer);
+        Entity entity = Entity.parseWithUnderlineCase(farmer);
 
         int rw = Db.use().insert(entity);
 
