@@ -1,6 +1,5 @@
 package com.bug.henong.dao;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.db.*;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BuyerUser;
@@ -45,7 +44,7 @@ public class FarmerDao {
 
         for(Entity e : entities){
             String farmerStr = JSONUtil.toJsonStr(e);
-            Farmer farmer = BeanUtil.toBean(farmerStr,Farmer.class);
+            Farmer farmer = JSONUtil.toBean(farmerStr,Farmer.class);
             farmers.add(farmer);
         }
 
@@ -60,7 +59,7 @@ public class FarmerDao {
 
         Entity e = entities.get(0);
         String farmerStr = JSONUtil.toJsonStr(e);
-        Farmer farmer = BeanUtil.toBean(farmerStr,Farmer.class);
+        Farmer farmer = JSONUtil.toBean(farmerStr,Farmer.class);
 
         return farmer;
     }
