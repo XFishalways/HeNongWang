@@ -3,8 +3,7 @@ package com.bug.henong.dao;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
-import com.bug.henong.entity.BuyerUser;
-
+import com.bug.henong.entity.BusinessBuyrecord;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +47,7 @@ public class BusinessBuyrecordDao {
 
         for(Entity e : entities){
             String recordStr = JSONUtil.toJsonStr(e);
-            BusinessBuyrecord businessBuyrecord = JSONUtil.toBean(recordStr,businessBuyrecord.class);
+            BusinessBuyrecord businessBuyrecord = JSONUtil.toBean(recordStr,BusinessBuyrecord.class);
             businessBuyrecords.add(businessBuyrecord);
         }
 
