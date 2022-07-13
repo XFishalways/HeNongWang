@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test</title>
+</head>
+<body>
+<div>
+    <form action="">
+        User ID:<br>
+        <input id="input" type="text" name="id">
+        <button type="submit" onclick="showUser(document.getElementById(input).value())">查找</button>
+    </form>
+</div>
+<div id="test"><h2>显示用户数据</h2></div>
+
+<script>
+    function showUser(userId)
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                var jsonArr = JSON.parse(this.responseText);
+                showUserInfo(jsonArr);
+            }
+        }
+        xmlhttp.open("GET","/try/ajax/ajax_info.txt",true);
+        xmlhttp.send();
+    }
+
+    function showUserInfo(arr)
+    {
+        var out = "";
+        out += "<h3>密码盐：" + arr.passSalt + "<\h3><br>";
+        out += "<h3>用户ID：" + arr.userId + "<\h3><br>";
+        out += "<h3>用户名称：" + arr.userName + "<\h3><br>";
+        out += "<h3>用户密码：" + arr.userPass + "<\h3><br>";
+        out += "<h3>用户状态：" + arr.userStatus + "<\h3><br>";
+        document.getElementById("test").innerHTML = out;
+    }
+</script>
+
+</body>
+</html>
