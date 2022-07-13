@@ -1,4 +1,4 @@
-package com.bug.henong.servlet;
+package com.bug.henong;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
