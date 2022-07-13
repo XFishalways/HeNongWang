@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
 
-@WebServlet("/Servlets/GetBuyerUsers")
+@WebServlet(name = "getBuyerUsers", value = "/BuyerUsers")
 public class getBuyerUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class getBuyerUsers extends HttpServlet {
         BuyerUserDao buyerUserDao = new BuyerUserDao();
         String json = null;
         try {
-            BuyerUser user = buyerUserDao.findOneBuyer("0");
+            BuyerUser user = buyerUserDao.findOneBuyer("1");
             json = JSON.toJSONString(user);
         } catch (SQLException e) {
             e.printStackTrace();
