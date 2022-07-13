@@ -56,6 +56,9 @@ public class BuyerOrderDao {
                 Entity.create("BUYER_ORDER").set("ORDER_ID",id)
         );
 
+        if(entities.isEmpty()){
+            return null;
+        }
         Entity e = entities.get(0);
         String buyerStr = JSONUtil.toJsonStr(e);
         BuyerOrder buyerOrder = JSONUtil.toBean(buyerStr,BuyerOrder.class);

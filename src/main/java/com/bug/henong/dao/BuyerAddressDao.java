@@ -57,6 +57,9 @@ public class BuyerAddressDao {
                 Entity.create("BUYER_ADDRESS").set("ADDRESS_ID",id)
         );
 
+        if(entities.isEmpty()){
+            return null;
+        }
         Entity e = entities.get(0);
         String buyerStr = JSONUtil.toJsonStr(e);
         BuyerAddress buyerAddress = JSONUtil.toBean(buyerStr,BuyerAddress.class);

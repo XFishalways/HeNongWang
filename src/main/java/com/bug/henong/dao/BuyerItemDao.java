@@ -55,6 +55,9 @@ public class BuyerItemDao {
                 Entity.create("BUYER_ITEM").set("SKU_ID",id)
         );
 
+        if(entities.isEmpty()){
+            return null;
+        }
         Entity e = entities.get(0);
         String buyerStr = JSONUtil.toJsonStr(e);
         BuyerItem buyerItem = JSONUtil.toBean(buyerStr,BuyerItem.class);

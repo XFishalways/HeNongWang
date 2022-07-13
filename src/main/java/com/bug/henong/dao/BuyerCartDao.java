@@ -56,6 +56,9 @@ public class BuyerCartDao {
                 Entity.create("BUYER_CART").set("USER_ID",id)
         );
 
+        if(entities.isEmpty()){
+            return null;
+        }
         Entity e = entities.get(0);
         String buyerStr = JSONUtil.toJsonStr(e);
         BuyerCart buyerCart = JSONUtil.toBean(buyerStr,BuyerCart.class);
