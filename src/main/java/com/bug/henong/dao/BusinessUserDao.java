@@ -62,6 +62,9 @@ public class BusinessUserDao {
                 Entity.create("BUSINESS_USER").set("USER_ID",id)
         );
 
+        if(entities.isEmpty()){
+            return null;
+        }
         Entity e = entities.get(0);
         String businessStr = JSONUtil.toJsonStr(e);
         BusinessUser businessUser = JSONUtil.toBean(businessStr,BusinessUser.class);
