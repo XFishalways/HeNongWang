@@ -3,7 +3,7 @@ package com.bug.henong.dao;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
-import com.bug.henong.entity.BuyerUser;
+import com.bug.henong.entity.BusinessUser;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,14 +11,14 @@ import java.util.List;
 
 
 /**
- * @author Tan
+ * @author Rui
  * @version 1.0.0
  * @date 22.07.13
  */
-public class BuyerUserDao {
+public class BusinessUserDao {
 
     /**添加*/
-    public int insert(BuyerUser user) throws SQLException {
+    public int insert(BusinessUser user) throws SQLException {
 
         Entity entity = Entity.parseWithUnderlineCase(user);
 
@@ -32,44 +32,41 @@ public class BuyerUserDao {
     public int delete(int id) throws SQLException {
 
         int rw=Db.use().del(
-                Entity.create("BUYER_USER").set("USER_ID",id)
+                Entity.create("BUSINESS_USER").set("USER_ID",id)
         );
         return rw;
 
     }
 
     /**返回所有信息*/
-    public List<BuyerUser> findAll() throws SQLException {
+    public List<BusinessUser> findAll() throws SQLException {
 
-        String sql = "SELECT * FROM BUYER_USER";
+        String sql = "SELECT * FROM BUSINESS_USER";
 
-        List<BuyerUser> buyerUsers = new ArrayList<BuyerUser>();
-        List<Entity> entities = Db.use().findAll("BUYER_USER");
+        List<BusinessUser> businessUsers = new ArrayList<BusinessUser>();
+        List<Entity> entities = Db.use().findAll("BUSINESS_USER");
 
         for(Entity e : entities){
-            String buyerStr = JSONUtil.toJsonStr(e);
-            BuyerUser buyerUser = JSONUtil.toBean(buyerStr,BuyerUser.class);
-            buyerUsers.add(buyerUser);
+            String businessStr = JSONUtil.toJsonStr(e);
+            BusinessUser businessUser = JSONUtil.toBean(businessStr,BusinessUser.class);
+            businessUsers.add(businessUser);
         }
 
-        return buyerUsers;
+        return businessUsers;
     }
 
     /**通过id查找某一行数据*/
-    public BuyerUser findOneBuyer(String id) throws SQLException {
+    public BusinessUser findOneBusiness(String id) throws SQLException {
 
         List<Entity> entities= Db.use().findAll(
-                Entity.create("BUYER_USER").set("USER_ID",id)
+                Entity.create("BUSINESS_USER").set("USER_ID",id)
         );
 
-        if(entities.isEmpty()){
-            return null;
-        }
-        Entity e =entities.get(0);
-        String buyerStr = JSONUtil.toJsonStr(e);
-        BuyerUser buyerUser = JSONUtil.toBean(buyerStr,BuyerUser.class);
+        Entity e = entities.get(0);
+        String businessStr = JSONUtil.toJsonStr(e);
+        BusinessUser businessUser = JSONUtil.toBean(businessStr,BusinessUser.class);
 
-        return  buyerUser;
+        return  businessUser;
     }
 
     /**更新昵称*/
@@ -77,7 +74,7 @@ public class BuyerUserDao {
 
         int rw = Db.use().update(
                 Entity.create().set("NICK_NAME",nickName),
-                Entity.create("BUYER_USER").set("USER_ID",id)
+                Entity.create("BUSINESS_USER").set("USER_ID",id)
         );
 
         return rw;
@@ -88,7 +85,7 @@ public class BuyerUserDao {
 
         int rw = Db.use().update(
                 Entity.create().set("USER_INTRO",userIntro),
-                Entity.create("BUYER_USER").set("USER_ID",id)
+                Entity.create("BUSINESS_USER").set("USER_ID",id)
         );
 
         return rw;
@@ -99,7 +96,7 @@ public class BuyerUserDao {
 
         int rw = Db.use().update(
                 Entity.create().set("AVATAR",avatar),
-                Entity.create("BUYER_USER").set("USER_ID",id)
+                Entity.create("BUSINESS_USER").set("USER_ID",id)
         );
 
         return rw;
@@ -110,7 +107,7 @@ public class BuyerUserDao {
 
         int rw = Db.use().update(
                 Entity.create().set("PHONE",phone),
-                Entity.create("BUYER_USER").set("USER_ID",id)
+                Entity.create("BUSINESS_USER").set("USER_ID",id)
         );
 
         return rw;
@@ -121,7 +118,7 @@ public class BuyerUserDao {
 
         int rw = Db.use().update(
                 Entity.create().set("USER_PASS",userPass),
-                Entity.create("BUYER_USER").set("USER_ID",id)
+                Entity.create("BUSINESS_USER").set("USER_ID",id)
         );
 
         return rw;
@@ -132,7 +129,7 @@ public class BuyerUserDao {
 
         int rw = Db.use().update(
                 Entity.create().set("PASS_SALT",passSalt),
-                Entity.create("BUYER_USER").set("USER_ID",id)
+                Entity.create("BUSINESS_USER").set("USER_ID",id)
         );
 
         return rw;
@@ -144,32 +141,11 @@ public class BuyerUserDao {
 
         int rw = Db.use().update(
                 Entity.create().set("USER_STATUS",userStatus),
-                Entity.create("BUYER_USER").set("USER_ID",id)
+                Entity.create("BUSINESS_USER").set("USER_ID",id)
         );
 
         return rw;
 
     }
 
-    /**更新累计消费金额*/
-    public int updateTotalCostAmt(Double totalCostAmt,String id) throws SQLException {
-
-        int rw = Db.use().update(
-                Entity.create().set("TOTAL_COST_AMT",totalCostAmt),
-                Entity.create("BUYER_USER").set("USER_ID",id)
-        );
-
-        return rw;
-    }
-
-    /**更新最后登录时间*/
-    public int updateLastLoginTime(Timestamp timestamp, String id) throws SQLException {
-
-        int rw = Db.use().update(
-                Entity.create().set("LAST_LOGIN_TIME",timestamp),
-                Entity.create("BUYER_USER").set("USER_ID",id)
-        );
-
-        return rw;
-    }
 }
