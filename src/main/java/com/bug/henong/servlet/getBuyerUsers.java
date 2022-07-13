@@ -26,7 +26,7 @@ public class getBuyerUsers extends HttpServlet {
             BuyerUser user = buyerUserDao.findOneBuyer("1");
             json = JSON.toJSONString(user);
         } catch (SQLException e) {
-            e.printStackTrace();
+            json = "{\"log\":\"Invalid id\"}";
         }
         pw.print(json);
     }
