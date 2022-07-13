@@ -92,7 +92,7 @@ public class BuyerUserDao {
     }
 
     /**更新头像*/
-    public int updateAVATAR(String avatar, String id) throws SQLException {
+    public int updateAvatar(String avatar, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("AVATAR",avatar),
@@ -103,7 +103,7 @@ public class BuyerUserDao {
     }
 
     /**更新手机号*/
-    public int updatePHONE(String phone, String id) throws SQLException {
+    public int updatePhone(String phone, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PHONE",phone),
