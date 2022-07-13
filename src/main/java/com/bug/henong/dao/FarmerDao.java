@@ -7,7 +7,9 @@ import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.entity.Farmer;
 
 /**
- * @author
+ * @author XFishalways
+ * @version 1.0.0
+ * @date 22.07.13
  */
 
 import java.sql.SQLException;

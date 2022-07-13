@@ -24,7 +24,7 @@ public class BuyerAddress implements Serializable,Cloneable{
     private String addressName ;
     /** 顺序号 */
     @ApiModelProperty(name = "顺序号",notes = "")
-    private INTEGER seqNumber ;
+    private int seqNumber ;
     /** 用户ID */
     @ApiModelProperty(name = "用户ID",notes = "")
     private String userId ;
@@ -70,11 +70,11 @@ public class BuyerAddress implements Serializable,Cloneable{
         this.addressName=addressName;
     }
     /** 返回顺序号 */
-    public INTEGER getSeqNumber(){
+    public int getSeqNumber(){
         return this.seqNumber;
     }
     /** 设置顺序号 */
-    public void setSeqNumber(INTEGER seqNumber){
+    public void setSeqNumber(int seqNumber){
         this.seqNumber=seqNumber;
     }
     /** 返回用户ID */

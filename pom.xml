@@ -67,6 +67,11 @@
                 <artifactId>io.swagger.parser</artifactId>
                 <version>1.0.47_1</version>
         </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.7.0</version>
+        </dependency>
     </dependencies>
 
     <build>
