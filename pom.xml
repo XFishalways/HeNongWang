@@ -19,6 +19,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.4</version>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
@@ -57,13 +62,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
                 <groupId>hu.blackbelt.bundles.swagger-parser</groupId>
                 <artifactId>io.swagger.parser</artifactId>
                 <version>1.0.47_1</version>
         </dependency>
-
     </dependencies>
 
     <build>
