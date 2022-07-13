@@ -32,7 +32,7 @@ public class SaleproductDao {
     public int delete(int id) throws SQLException {
 
         int rw=Db.use().del(
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
         return rw;
 
@@ -57,7 +57,7 @@ public class SaleproductDao {
     public SaleProduct findOneProduct(String id) throws SQLException {
 
         List<Entity> entities= Db.use().findAll(
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
         Entity e = entities.get(0);
@@ -72,7 +72,7 @@ public class SaleproductDao {
 
         int rw = Db.use().update(
                 Entity.create().set("TITLE",title),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
         return rw;
@@ -83,7 +83,7 @@ public class SaleproductDao {
 
         int rw = Db.use().update(
                 Entity.create().set("INTRO",intro),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
         return rw;
@@ -94,7 +94,7 @@ public class SaleproductDao {
 
         int rw = Db.use().update(
                 Entity.create().set("CONTENT",content),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
         return rw;
@@ -104,7 +104,7 @@ public class SaleproductDao {
 
         int rw = Db.use().update(
                 Entity.create().set("START_TIME",starttime),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
         return rw;
@@ -115,7 +115,7 @@ public class SaleproductDao {
 
         int rw = Db.use().update(
                 Entity.create().set("END_TIME",endtime),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
         return rw;
@@ -126,7 +126,7 @@ public class SaleproductDao {
 
         int rw = Db.use().update(
                 Entity.create().set("RANGE",range),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
         return rw;
@@ -137,7 +137,7 @@ public class SaleproductDao {
 
         int rw = Db.use().update(
                 Entity.create().set("TYPE",type),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
         return rw;
@@ -148,7 +148,7 @@ public class SaleproductDao {
 
         int rw = Db.use().update(
                 Entity.create().set("STATUS",status),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
         return rw;
