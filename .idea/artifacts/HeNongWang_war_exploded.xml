@@ -15,8 +15,9 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: cn.hutool:hutool-all:5.8.4" />
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.38" />
-          <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.10" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.29" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.19.4" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.2.11" />
           <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.75" />
           <element id="library" level="project" name="Maven: hu.blackbelt.bundles.swagger-parser:io.swagger.parser:1.0.47_1" />
           <element id="library" level="project" name="Maven: io.swagger:swagger-parser:1.0.47" />
