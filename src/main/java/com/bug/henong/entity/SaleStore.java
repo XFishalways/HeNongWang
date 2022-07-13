@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
  /**
@@ -33,10 +34,10 @@ public class SaleStore implements Serializable,Cloneable{
     private String saleStoreContent ;
     /** 店铺活动起始时间 */
     @ApiModelProperty(name = "店铺活动起始时间",notes = "")
-    private TIMESTAMP saleStoreStartTime ;
+    private Timestamp saleStoreStartTime ;
     /** 店铺活动截止时间 */
     @ApiModelProperty(name = "店铺活动截止时间",notes = "")
-    private TIMESTAMP saleStoreEndTime ;
+    private Timestamp saleStoreEndTime ;
     /** 店铺活动范围 */
     @ApiModelProperty(name = "店铺活动范围",notes = "")
     private String saleStoreRange ;
@@ -88,19 +89,19 @@ public class SaleStore implements Serializable,Cloneable{
         this.saleStoreContent=saleStoreContent;
     }
     /** 返回店铺活动起始时间 */
-    public TIMESTAMP getSaleStoreStartTime(){
+    public Timestamp getSaleStoreStartTime(){
         return this.saleStoreStartTime;
     }
     /** 设置店铺活动起始时间 */
-    public void setSaleStoreStartTime(TIMESTAMP saleStoreStartTime){
+    public void setSaleStoreStartTime(Timestamp saleStoreStartTime){
         this.saleStoreStartTime=saleStoreStartTime;
     }
     /** 返回店铺活动截止时间 */
-    public TIMESTAMP getSaleStoreEndTime(){
+    public Timestamp getSaleStoreEndTime(){
         return this.saleStoreEndTime;
     }
     /** 设置店铺活动截止时间 */
-    public void setSaleStoreEndTime(TIMESTAMP saleStoreEndTime){
+    public void setSaleStoreEndTime(Timestamp saleStoreEndTime){
         this.saleStoreEndTime=saleStoreEndTime;
     }
     /** 返回店铺活动范围 */

@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
  /**
@@ -33,7 +35,7 @@ public class Goods implements Serializable,Cloneable{
     private Double goodsPrice ;
     /** 采摘时间 */
     @ApiModelProperty(name = "采摘时间",notes = "")
-    private TIMESTAMP goodsTime ;
+    private Timestamp goodsTime ;
     /** 采摘地址 */
     @ApiModelProperty(name = "采摘地址",notes = "")
     private String goodsPlace ;
@@ -88,11 +90,11 @@ public class Goods implements Serializable,Cloneable{
         this.goodsPrice=goodsPrice;
     }
     /** 返回采摘时间 */
-    public TIMESTAMP getGoodsTime(){
+    public Timestamp getGoodsTime(){
         return this.goodsTime;
     }
     /** 设置采摘时间 */
-    public void setGoodsTime(TIMESTAMP goodsTime){
+    public void setGoodsTime(Timestamp goodsTime){
         this.goodsTime=goodsTime;
     }
     /** 返回采摘地址 */
