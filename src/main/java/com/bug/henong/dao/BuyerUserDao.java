@@ -62,7 +62,10 @@ public class BuyerUserDao {
                 Entity.create("BUYER_USER").set("USER_ID",id)
         );
 
-        Entity e = entities.get(0);
+        if(entities.isEmpty()){
+            return null;
+        }
+        Entity e =entities.get(0);
         String buyerStr = JSONUtil.toJsonStr(e);
         BuyerUser buyerUser = JSONUtil.toBean(buyerStr,BuyerUser.class);
 
@@ -147,6 +150,7 @@ public class BuyerUserDao {
         return rw;
 
     }
+
     /**更新累计消费金额*/
     public int updateTotalCostAmt(Double totalCostAmt,String id) throws SQLException {
 
