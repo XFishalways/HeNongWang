@@ -63,7 +63,7 @@
 
                     <div class="layui-form-item layui-row layui-col-md12 ">
                         <div class="layui-col-md4 layui-col-md-offset4">
-                            <a href="" class="layui-btn layui-btn-lg">----登录----</a>
+                            <button id="log-btn" href="" class="layui-btn layui-btn-lg">----登录----</button>
                         </div>
                     </div>
                 </form>
@@ -89,7 +89,19 @@
         layui.use(['form'],function () {
             form = layui.form;
 
-            $(document).ready()
+            $(document).ready(function(){
+                $('#log-btn').click(function(){
+                    $.ajax({
+                        type:'POST',
+                        url:'',
+                        data:{
+                            
+                        }
+                    })
+
+                    return false;
+                })
+            })
         })
     </script>
     </body>
