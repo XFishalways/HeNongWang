@@ -93,7 +93,7 @@ public class GoodsService {
     }
 
     /**通过id查找某一行数据*/
-    public Goods findOneGoods(String id) throws SQLException {
+    public Goods getOneGoods(String id) throws SQLException {
 
         return goodsDao.findOneGoods(id);
     }
