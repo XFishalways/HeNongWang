@@ -1,5 +1,7 @@
 package com.bug.henong.servlet;
 
+import com.alibaba.fastjson.JSON;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +19,14 @@ public class HelloServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
+        String json = JSON.toJSONString(request.getCookies());
 
         // Hello
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("<h1>" + message + "</h1>");
         out.println("</body></html>");
+        out.println(json);
     }
 
     public void destroy() {
