@@ -32,7 +32,7 @@ public class StoreExamineDao {
     }
 
     /**删除*/
-    public int delete(int id) throws SQLException {
+    public int delete(String id) throws SQLException {
 
         int rw=Db.use().del(
                 Entity.create("STORE_EXAMINE").set("STORE_ID",id)
