@@ -37,7 +37,7 @@ public class AdminDao {
     public int delete(String id) throws SQLException {
 
         int rw = Db.use().del(
-                Entity.create("Admin_USER").set("Admin_ID", id)
+                Entity.create("ADMIN").set("Admin_ID", id)
         );
         return rw;
 
@@ -68,7 +68,7 @@ public class AdminDao {
     public Admin findOneAdmin(String id) throws SQLException {
 
         List<Entity> entities = Db.use().findAll(
-                Entity.create("ADMIN_USER").set("ADMIN_ID", id)
+                Entity.create("ADMIN").set("ADMIN_ID", id)
         );
         if(entities.isEmpty()){
             return null;
@@ -83,16 +83,29 @@ public class AdminDao {
     /**
      * 更新用户名
      */
-    public int updateNickName(String nickName, String id) throws SQLException {
+    public int updateName(String name, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("NICK_NAME", nickName),
-                Entity.create("ADMIN_USER").set("ADMIN_ID", id)
+                Entity.create().set("ADMIN_NAME", name),
+                Entity.create("ADMIN").set("ADMIN_ID", id)
         );
 
         return rw;
     }
 
+
+    /**
+     * 更新密码
+     */
+    public int updatePass(String passwd, String id) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("ADMIN_PASSWD", passwd),
+                Entity.create("ADMIN").set("ADMIN_ID", id)
+        );
+
+        return rw;
+    }
 
     /**
      * 更新手机号
@@ -100,20 +113,7 @@ public class AdminDao {
     public int updatePhone(String phone, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("PHONE", phone),
-                Entity.create("ADMIN_USER").set("ADMIN_ID", id)
-        );
-
-        return rw;
-    }
-
-    /**
-     * 更新密码
-     */
-    public int updatePassword(String Password, String id) throws SQLException {
-
-        int rw = Db.use().update(
-                Entity.create().set("PASSWORD", Password),
+                Entity.create().set("ADMIN_PASSWORD", phone),
                 Entity.create("ADMIN").set("ADMIN_ID", id)
         );
 

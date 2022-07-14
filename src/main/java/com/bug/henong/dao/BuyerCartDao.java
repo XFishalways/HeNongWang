@@ -67,7 +67,7 @@ public class BuyerCartDao {
     }
 
     //更新总金额
-    public int updateTotalPrice(String totalPrice, String id) throws SQLException {
+    public int updateTotalPrice(Double totalPrice, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("TOTAL_PRICE",totalPrice),
@@ -78,7 +78,7 @@ public class BuyerCartDao {
     }
 
     //更新应付金额
-    public int updatePayablePrice(String payablePrice, String id) throws SQLException {
+    public int updatePayablePrice(Double payablePrice, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PAYABLE_PRICE",payablePrice),
