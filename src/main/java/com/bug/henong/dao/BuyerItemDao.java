@@ -66,7 +66,7 @@ public class BuyerItemDao {
     }
 
     //更新商品标题
-    public int updateSkuTitle(String skuTitle, String id) throws SQLException {
+    public int updateSkuTitle(String id, String skuTitle) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SKU_TITLE",skuTitle),
@@ -77,7 +77,7 @@ public class BuyerItemDao {
     }
 
     //更新商品介绍
-    public int updateSkuIntro(String skuIntro, String id) throws SQLException {
+    public int updateSkuIntro(String id, String skuIntro) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SKU_INTRO",skuIntro),
@@ -88,7 +88,7 @@ public class BuyerItemDao {
     }
 
     //更新订单留言备注
-    public int updateLeaveComment(String leaveComment, String id) throws SQLException {
+    public int updateLeaveComment(String id, String leaveComment) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("LEAVE_COMMENT",leaveComment),
@@ -99,7 +99,7 @@ public class BuyerItemDao {
     }
 
     //更新售价
-    public int updateSalePrice(String salePrice, String id) throws SQLException {
+    public int updateSalePrice(String id, Double salePrice) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRICE",salePrice),

@@ -73,7 +73,7 @@ public class BusinessItemDao {
     }
 
     /**更新商品标题*/
-    public int updateSkuTitle(String skuTitle, String id) throws SQLException {
+    public int updateSkuTitle(String id, String skuTitle) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SKU_TITLE",skuTitle),
@@ -84,7 +84,7 @@ public class BusinessItemDao {
     }
 
     /**更新商品介绍*/
-    public int updateSkuIntro(String skuIntro, String id) throws SQLException {
+    public int updateSkuIntro(String id, String skuIntro) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SKU_INTRO",skuIntro),
@@ -95,7 +95,7 @@ public class BusinessItemDao {
     }
 
     /**更新售价*/
-    public int updateSalePrice(String salePrice, String id) throws SQLException {
+    public int updateSalePrice(String id, Double salePrice) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRICE",salePrice),
@@ -106,7 +106,7 @@ public class BusinessItemDao {
     }
 
     /**更新商品数量*/
-    public int updateQuantity(String quantity, String id) throws SQLException {
+    public int updateQuantity(String id, Double quantity) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("QUANTITY",quantity),
@@ -117,7 +117,7 @@ public class BusinessItemDao {
     }
 
     /**更新活动ID*/
-    public int updateEventID(String eventID, String id) throws SQLException {
+    public int updateEventID(String id, String eventID) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("EVENT_ID",eventID),
