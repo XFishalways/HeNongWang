@@ -8,6 +8,7 @@ com\bug\henong\dao\BuyerOrderDao.class
 com\bug\henong\servlet\HelloServlet.class
 com\bug\henong\entity\BusinessUser.class
 com\bug\henong\entity\BuyerOrder.class
+com\bug\henong\test\HelloController.class
 com\bug\henong\dao\BusinessOrderDao.class
 utils\JDBCUtil.class
 com\bug\henong\dao\SalestoreDao.class
