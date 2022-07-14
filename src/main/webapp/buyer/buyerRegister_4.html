@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>买家注册</title>
+    <link rel="stylesheet" href="../lib/layui/css/layui.css">
+</head>
+<body>
+<div class="layui-container" style="margin-top: 50px;">
+
+    <div class="layui-row layui-col-md12 layui-anim layui-anim-down">
+        <i class="layui-icon layui-icon-user layui-col-md4" style="font-size: 50px; color: black;"></i>
+        <h1 class="layui-col-md4" style="text-align: center; font-family: KaiTi; font-size: 50px;">买家用户注册</h1>
+    </div>
+    <hr class="layui-border-black">
+    <div id="reg-nav" class="layui-row layui-col-md12 layui-anim layui-anim-down" style="margin-top: 50px;">
+        <div class="layui-col-md2 layui-col-md-offset2"><h3>一 填写手机号 &nbsp&nbsp&nbsp ></h3></div>
+        <div class="layui-col-md2"><h3>二 填写账号信息 &nbsp&nbsp ></h3></div>
+        <div class="layui-col-md2"><h3>三 账号信息确认 &nbsp&nbsp ></h3></div>
+        <div class="layui-col-md2"><h3 style="color: red;">四 注册成功</h3></div>
+    </div>
+    </br>
+
+    <style>
+        #reg-nav > div {
+            text-align: center;
+            font-family: SimHei;
+        }
+    </style>
+
+    <div class="layui-container" style="margin-top: 100px; width: 600px;">
+        <div class="layui-anim layui-anim-fadein" style="width: 100px; margin-left: auto; margin-right: auto;"><img src="images/success.jpg"></div>
+        <div class="layui-anim layui-anim-fadein" style="width: 200px; margin-top:30px; margin-left: auto; margin-right: auto;"><h2>您已成功注册，请谨记自己的账号密码</h2></div>
+
+        <form action="" class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="width: 100px;margin-top: 30px; margin-left: auto; margin-right: auto;">
+                    <button style="font-size: 30px;" type="submit" class="layui-btn layui-anim layui-anim-up" lay-submit="" lay-filter="demo1">确认</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+<div class="layui-footer" >
+    <!-- 底部固定区域 -->
+    © henong.com
+</div>
+</body>
+</html>

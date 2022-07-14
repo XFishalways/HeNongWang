@@ -4,6 +4,7 @@ import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BusinessUser;
+import com.bug.henong.entity.BuyerUser;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -38,6 +39,17 @@ public class BusinessUserDao {
 
     }
 
+    /**登录*/
+    public BusinessUser login(String id, String pass) throws SQLException {
+        BusinessUser businessUser= findOneBusiness(id);
+        if(businessUser!=null){
+            String passWord = businessUser.getUserPass();
+            if(passWord.equals(pass)){
+                return businessUser;
+            }
+        }
+        return null;
+    }
     /**返回所有信息*/
     public List<BusinessUser> findAll() throws SQLException {
 
