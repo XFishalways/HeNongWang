@@ -2,6 +2,7 @@ package com.bug.henong.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,8 +14,8 @@ import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
 
 @WebServlet(name = "findOneBuyerUserServlet", value = "/FindOneBuyerUser")
-public class FindOneBuyerUserServlet {
-
+public class FindOneBuyerUserServlet extends HttpServlet {
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json;charset=UTF-8");
         PrintWriter pw = resp.getWriter();
