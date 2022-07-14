@@ -61,6 +61,9 @@ public class BusinessBuyrecordDao {
                 Entity.create("BUSINESS_BUYRECORD").set("RECORD_ID",id)
         );
 
+        if(entities.isEmpty()){
+            return null;
+        }
         Entity e = entities.get(0);
         String recordStr = JSONUtil.toJsonStr(e);
         BusinessBuyrecord businessBuyrecord = JSONUtil.toBean(recordStr,BusinessBuyrecord.class);
