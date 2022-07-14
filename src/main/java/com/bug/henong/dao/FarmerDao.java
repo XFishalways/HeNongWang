@@ -11,6 +11,7 @@ import com.bug.henong.entity.Farmer;
  * @date 22.07.13
  */
 
+import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,17 @@ public class FarmerDao {
         return farmer;
     }
 
+    /**登录*/
+    public Farmer login(String id,String pass) throws SQLException {
+        Farmer farmer = findOneFarmer(id);
+        if(farmer!=null){
+            String passWord = farmer.getUserPass();
+            if(passWord.equals(pass)){
+                return farmer;
+            }
+        }
+        return null;
+    }
     /**更新所在地**/
     public int updatePlace(String place, String id) throws SQLException {
 
