@@ -45,6 +45,9 @@
 			      ,{field:'userPass', width:180, title: '密码', sort: true}
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
+				,error: function(){
+					tableInit("GetBuyerUsers");
+				}
 			  });
 			  
 			  //监听工具条 
