@@ -4,10 +4,10 @@ package com.bug.henong.dao;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
-import com.bug.henong.entity.SaleProduct;
 import com.bug.henong.entity.SaleStore;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * ddd
  */
 
-public class SalestoreDao {
+public class SaleStoreDao {
 
     /**添加*/
     public int insert(SaleStore store) throws SQLException {
@@ -108,7 +108,7 @@ public class SalestoreDao {
     }
 
     /**更新开始时间*/
-    public int updateActivityStart_Time(String activityStartTime, String id) throws SQLException {
+    public int updateActivityStart_Time(Timestamp activityStartTime, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("ACTIVITYSTART_TIME",activityStartTime),
@@ -119,7 +119,7 @@ public class SalestoreDao {
     }
 
     /**更新结束时间*/
-    public int updateActivityEnd_time(String activityEndTime, String id) throws SQLException {
+    public int updateActivityEnd_time(Timestamp activityEndTime, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("ACTIVITY_END_TIME",activityEndTime),

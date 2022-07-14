@@ -83,7 +83,7 @@ public class GoodsDao {
     }
 
     /**更新数量*/
-    public int updateQuantity(String goodsQuantity, String id) throws SQLException {
+    public int updateQuantity(Double goodsQuantity, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("GOODS_QUANTITY",goodsQuantity),
@@ -94,7 +94,7 @@ public class GoodsDao {
     }
 
     /**更新价格*/
-    public int updatePrice(String price, String id) throws SQLException {
+    public int updatePrice(Double price, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PRICE",price),
@@ -105,7 +105,7 @@ public class GoodsDao {
     }
 
     /**更新是否售罄*/
-    public int updatePhone(String sellout, String id) throws SQLException {
+    public int updateSale(String sellout, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("IF_SEELOUT",sellout),

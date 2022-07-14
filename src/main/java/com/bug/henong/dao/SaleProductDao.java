@@ -6,6 +6,7 @@ import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.SaleProduct;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * @date 22.07.13
  * ddd
  */
-public class SaleproductDao {
+public class SaleProductDao {
     /**添加*/
     public int insert(SaleProduct product) throws SQLException {
 
@@ -104,7 +105,7 @@ public class SaleproductDao {
         return rw;
     }
     /**更新开始时间*/
-    public int updateStart_time(String startTime, String id) throws SQLException {
+    public int updateStart_time(Timestamp startTime, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("START_TIME",startTime),
@@ -115,7 +116,7 @@ public class SaleproductDao {
     }
 
     /**更新结束时间*/
-    public int updateEnd_time(String endTime, String id) throws SQLException {
+    public int updateEnd_time(Timestamp endTime, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("END_TIME",endTime),
