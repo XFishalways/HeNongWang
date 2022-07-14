@@ -46,7 +46,8 @@
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
 				,error: function(){
-					tableInit("GetBuyerUsers");
+					var patt = "FindOneBuyerUser";
+					if( url.search(patt) != -1) tableInit("GetBuyerUsers");
 				}
 			  });
 			  
