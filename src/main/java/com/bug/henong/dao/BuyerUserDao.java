@@ -4,6 +4,7 @@ import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BuyerUser;
+import com.bug.henong.entity.Farmer;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -171,5 +172,16 @@ public class BuyerUserDao {
         );
 
         return rw;
+    }
+    /**登录*/
+    public BuyerUser login(String id, String pass) throws SQLException {
+        BuyerUser buyerUser= findOneBuyer(id);
+        if(buyerUser!=null){
+            String passWord = buyerUser.getUserPass();
+            if(passWord.equals(pass)){
+                return buyerUser;
+            }
+        }
+        return null;
     }
 }
