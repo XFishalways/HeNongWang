@@ -21,13 +21,17 @@ public class getBuyerUsers extends HttpServlet {
         resp.setContentType("application/json");
         PrintWriter pw = resp.getWriter();
         BuyerUserDao buyerUserDao = new BuyerUserDao();
-        String id = new String(req.getParameter("USER_ID"));
         String json = null;
         try {
-            BuyerUser user = buyerUserDao.findOneBuyer(id);
-            json = JSON.toJSONString(user);
+            BuyerUser user = buyerUserDao.findOneBuyer("0");
+            if(user != null) {
+                json = JSON.toJSONString(user);
+            }
+            else {
+                json = "{\"log\":\"Invalid id\"}";
+            }
         } catch (SQLException e) {
-            json = "{\"log\":\"Invalid id\"}";
+            json = "{\"log\":\"Error connection to database\"}";
         }
         pw.print(json);
     }

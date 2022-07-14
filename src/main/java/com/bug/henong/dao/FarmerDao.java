@@ -17,6 +17,7 @@ import java.util.List;
 
 public class FarmerDao {
 
+    /**添加*/
     public int insert(Farmer farmer) throws SQLException {
 
         Entity entity = Entity.parseWithUnderlineCase(farmer);
@@ -27,6 +28,7 @@ public class FarmerDao {
 
     }
 
+    /**删除*/
     public int delete(int id) throws SQLException {
 
         int rw = Db.use().del(
@@ -35,6 +37,7 @@ public class FarmerDao {
         return rw;
     }
 
+    /**返回所有信息*/
     public List<Farmer> findAll() throws SQLException {
 
         String sql = "SELECT * FROM FARMER";
@@ -64,7 +67,8 @@ public class FarmerDao {
         return farmer;
     }
 
-    public int updateAddress(String place, String id) throws SQLException {
+    /**更新所在地**/
+    public int updatePlace(String place, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("FARMER_PLACE", place),
@@ -74,6 +78,7 @@ public class FarmerDao {
         return rw;
     }
 
+    /**更新资产**/
     public int updateValue(int value, String id) throws SQLException {
 
         int rw = Db.use().update(
@@ -85,6 +90,7 @@ public class FarmerDao {
 
     }
 
+    /**更新信誉度**/
     public int updateCredibility(String credit, String id) throws SQLException {
 
         int rw = Db.use().update(
@@ -96,6 +102,7 @@ public class FarmerDao {
 
     }
 
+    /**更新所属卖家ID号**/
     public int updateBusinessId(String businessId, String id) throws SQLException {
 
         int rw = Db.use().update(
@@ -107,6 +114,7 @@ public class FarmerDao {
 
     }
 
+    /**更新用户密码**/
     public int updateUserPass(String pass, String id) throws SQLException {
 
         int rw = Db.use().update(
@@ -118,6 +126,7 @@ public class FarmerDao {
 
     }
 
+    /**更新密码盐**/
     public int updatePassSalt(String passSalt, String id) throws SQLException {
 
         int rw = Db.use().update(
