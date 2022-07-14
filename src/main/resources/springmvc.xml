@@ -14,7 +14,7 @@
     <!-- 视图解析器对象 -->
     <!--配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/html"/>
+        <property name="prefix" value="/"/>
         <property name="suffix" value=".html"/>
     </bean>
 
