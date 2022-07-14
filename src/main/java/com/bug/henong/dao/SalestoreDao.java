@@ -32,7 +32,7 @@ public class SalestoreDao {
     }
 
     /**删除*/
-    public int delete(int id) throws SQLException {
+    public int delete(String id) throws SQLException {
 
         int rw=Db.use().del(
                 Entity.create("SALE_STORE").set("STORE_ID",id)
@@ -76,20 +76,20 @@ public class SalestoreDao {
     }
 
     /**更新标题*/
-    public int updateActivityTitle(String activity_title, String id) throws SQLException {
+    public int updateActivityTitle(String activityTitle, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_TITLE",activity_title),
+                Entity.create().set("ACTIVITY_TITLE",activityTitle),
                 Entity.create("SALE_STORE").set("STORE_ID",id)
         );
 
         return rw;
     }
     /**更新说明*/
-    public int updateActivityIntro(String activity_intro, String id) throws SQLException {
+    public int updateActivityIntro(String activityIntro, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_INTRO",activity_intro),
+                Entity.create().set("ACTIVITY_INTRO",activityIntro),
                 Entity.create("SALE_STORE").set("PRODUCT_ID",id)
         );
 
@@ -97,10 +97,10 @@ public class SalestoreDao {
     }
 
     /**更新内容*/
-    public int updateActivityContent(String activity_content, String id) throws SQLException {
+    public int updateActivityContent(String activityContent, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_CONTENT",activity_content),
+                Entity.create().set("ACTIVITY_CONTENT",activityContent),
                 Entity.create("SALE_STORE").set("PRODUCT_ID",id)
         );
 
@@ -108,10 +108,10 @@ public class SalestoreDao {
     }
 
     /**更新开始时间*/
-    public int updateActivityStart_Time(String activity_start_time, String id) throws SQLException {
+    public int updateActivityStart_Time(String activityStartTime, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITYSTART_TIME",activity_start_time),
+                Entity.create().set("ACTIVITYSTART_TIME",activityStartTime),
                 Entity.create("SALE_STORE").set("PRODUCT_ID",id)
         );
 
@@ -119,10 +119,10 @@ public class SalestoreDao {
     }
 
     /**更新结束时间*/
-    public int updateActivityEnd_time(String activity_end_time, String id) throws SQLException {
+    public int updateActivityEnd_time(String activityEndTime, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_END_TIME",activity_end_time),
+                Entity.create().set("ACTIVITY_END_TIME",activityEndTime),
                 Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
         );
 
@@ -130,30 +130,30 @@ public class SalestoreDao {
     }
 
     /**更新范围*/
-    public int updateActivityRange(String activity_range, String id) throws SQLException {
+    public int updateActivityRange(String activityRange, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_RANGE",activity_range),
+                Entity.create().set("ACTIVITY_RANGE",activityRange),
                 Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
         );
 
         return rw;
     }
     /**更新类型*/
-    public int updateActivityType(String activity_type, String id) throws SQLException {
+    public int updateActivityType(String activityType, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_TYPE",activity_type),
+                Entity.create().set("ACTIVITY_TYPE",activityType),
                 Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
         );
 
         return rw;
     }
     /**更新状态*/
-    public int updateActivity_Status(String activity_status, String id) throws SQLException {
+    public int updateActivity_Status(String activityStatus, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_STATUS",activity_status),
+                Entity.create().set("ACTIVITY_STATUS",activityStatus),
                 Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
         );
 

@@ -32,7 +32,7 @@ public class ProductExamineDao {
     }
 
     /**删除*/
-    public int delete(int id) throws SQLException {
+    public int delete(String id) throws SQLException {
 
         int rw=Db.use().del(
                 Entity.create("PRODUCT_EXAMINE").set("PRODUCT_ID",id)
@@ -75,20 +75,20 @@ public class ProductExamineDao {
     }
 
     /**更新审批结果*/
-    public int updateProductResult(String product_result, String id) throws SQLException {
+    public int updateProductResult(String productResult, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("PRODUCT_RESULT",product_result),
+                Entity.create().set("PRODUCT_RESULT",productResult),
                 Entity.create("PRODUCT_EXAMINE").set("PRODUCT_ID",id)
         );
 
         return rw;
     }
     /**更新审批批注*/
-    public int updateProductNote(String product_note, String id) throws SQLException {
+    public int updateProductNote(String productNote, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("PRODUCT_Note",product_note),
+                Entity.create().set("PRODUCT_Note",productNote),
                 Entity.create("PRODUCT_EXAMINE").set("PRODUCT_ID",id)
         );
 

@@ -28,7 +28,7 @@ public class BusinessBuyrecordDao {
     }
 
     /**删除*/
-    public int delete(int id) throws SQLException {
+    public int delete(String id) throws SQLException {
 
         int rw=Db.use().del(
                 Entity.create("BUSINESS_BUYRECORD").set("RECORD_ID",id)

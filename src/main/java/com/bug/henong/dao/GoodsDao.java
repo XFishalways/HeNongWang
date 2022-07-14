@@ -29,7 +29,7 @@ public class GoodsDao {
     }
 
     /**删除*/
-    public int delete(int id) throws SQLException {
+    public int delete(String id) throws SQLException {
 
         int rw=Db.use().del(
                 Entity.create("BUYER_USER").set("USER_ID",id)
