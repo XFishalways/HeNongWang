@@ -4,7 +4,6 @@ import com.bug.henong.dao.FarmerDao;
 import com.bug.henong.entity.Farmer;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.sql.SQLException;
 
 /**
@@ -14,7 +13,6 @@ import java.sql.SQLException;
 @Service("FarmerService")
 public class FarmerService {
 
-    @Resource
     private FarmerDao farmerDao;
 
     /**

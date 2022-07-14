@@ -23,6 +23,18 @@
                 <li class="layui-nav-item layui-col-md2">
                   <a href="" class= "layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">个人中心</a>
                 </li>
+                <form class=" layui-form layui-col-md4 layui-col-md-offset1" action="">
+                    <div class="layui-form-item" style="margin-top:15px;">
+                        <div class="layui-input-inline">
+                            <input type="text" name="title" required  lay-verify="required" placeholder="搜索" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-anim layui-anim-scaleSpring" style="padding:0!important;">
+                            <button type="submit" class="layui-btn layui-btn-normal" lay-submit lay-filter="demo1">搜索</button>
+                        </div>
+                    </div>
+
+                </form>
+
             </ul>
            </div>
 
@@ -214,10 +226,11 @@
 
            <script src="lib/layui/layui.js"></script>
            <script>
-            layui.use(['layer','carousel'], function(){
+            layui.use(['layer','carousel','form'], function(){
 
                 var layer = layui.layer;
                 var carousel = layui.carousel;
+                var form = layui.form;
 
                 carousel.render({
                 elem: '#test1'
@@ -225,7 +238,15 @@
                 ,arrow: 'always' //始终显示箭头
                 //,anim: 'updown' //切换动画方式
                 });
+
+                form.on('submit(demo1)',function (){
+
+                })
             }); 
            </script>
+        <div class="layui-footer" >
+            <!-- 底部固定区域 -->
+            © henong.com
+        </div>
     </body>
 </html>

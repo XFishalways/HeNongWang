@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns="http://www.w3.org/1999/html">
+<html lang="zh" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="lib/layui/css/layui.css">
 
     </head>
-    <body>
+    <body style="background-image: url(images/img2.png);">
     <div class="layui-row">
         <ul id="homepage-head" class="layui-nav layui-col-md12 layui-bg-green">
             <li class="layui-nav-item layui-col-md2 ">
@@ -19,40 +19,105 @@
     <div class="layui-container" id="advertising">
         <div class="layui-row layui-col-md12 ">
 
-            <div class = "layui-col-md6">
-                </br> </br> </br> </br> </br> </br> </br> </br> </br> </br> </br>
-                <p class= "layui-anim layui-anim-scaleSpring" style="font-size: 100px; color: green; text-align: center; letter-spacing: 10px; font-family: KaiTi;" >买绿色菜</p>
-                <p class= "layui-anim layui-anim-scaleSpring" style="font-size: 100px; color: green; text-align: center; letter-spacing: 10px; font-family: KaiTi;" >上合农网</p>
+            <div class = "layui-col-md6" style="margin-top:200px;">
+                <p class= "layui-anim layui-anim-scaleSpring" style="font-size: 100px; color: chartreuse; text-align: center; letter-spacing: 10px; font-family: KaiTi;" >买绿色菜</p>
+                <p class= "layui-anim layui-anim-scaleSpring" style="font-size: 100px; color: chartreuse; text-align: center; letter-spacing: 10px; font-family: KaiTi;" >上合农网</p>
 
             </div>
-            <div class = "layui-col-md4">
-                </br> </br> </br> </br> </br> </br> </br> </br> </br> </br> </br> </br> </br> </br>
-                <form class="layui-form" action="">
+            <div class = "layui-col-md6 layui-bg-gray" style="margin-top:160px;">
+                <div class="layui-row">
+                    <p class= "layui-anim layui-anim-scaleSpring" style="font-size: 50px; color:black; text-align: center; letter-spacing: 10px; font-family: KaiTi;" >用户登录</p>
+                </div>
+                <form class="layui-form" style="margin-top:50px;" action="">
                     <div class="layui-form-item layui-row layui-col-md12">
                         <div class="layui-col-md2 layui-col-md-offset2">
                         <i class="layui-icon layui-icon-username" style="font-size: 30px; color: black;"></i>
                         </div>
                         <div class="layui-input-inline layui-col-md4">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入用户名/用户ID" autocomplete="off" class="layui-input">
+                            <input id="input-account" type="text" name="title" required  lay-verify="required" placeholder="请输入用户名/用户ID" autocomplete="off" class="layui-input">
                         </div>
                     </div>
+
                     <div class="layui-form-item layui-row layui-col-md12">
                         <div class="layui-col-md2 layui-col-md-offset2">
                             <i class="layui-icon layui-icon-password" style="font-size: 30px; color: black;"></i>
                         </div>
                         <div class="layui-input-inline layui-col-md4">
-                            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                            <input id="input-pass" type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-row layui-col-md12 ">
+
+                        <div id="choice" class="layui-col-md6 layui-col-md-offset2">
+                            <div class="layui-input-block">
+                                <select id="input-type" name="city" lay-verify="">
+                                    <option value="">请选择你的身份</option>
+                                    <option value="buyer">用户</option>
+                                    <option value="farmer">农户</option>
+                                    <option value="business">卖家</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-row layui-col-md12 ">
+                        <div class="layui-col-md4 layui-col-md-offset4">
+                            <button id="log-btn" href="" class="layui-btn layui-btn-lg">----登录----</button>
                         </div>
                     </div>
                 </form>
-                <div class="layui-row layui-col-md12 ">
-                    <div class="layui-col-md4 layui-col-md-offset4">
-                        <a href="" class="layui-btn layui-btn-lg">----登录----</a>
-                    </div>
+                <div class = "layui-col-md4 layui-col-md-offset8">
+                <a href="" class= "layui-font-cyan php" style="font-size: 15px; text-align: center; font-family: KaiTi;" >农户注册</a>
+                <a href="" class= "layui-font-cyan php" style="font-size: 15px; text-align: center; font-family: KaiTi;" >买家注册</a>
+                <a href="" class= "layui-font-cyan php" style="font-size: 15px; text-align: center; font-family: KaiTi;" >卖家注册</a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="layui-footer" >
+        <!-- 底部固定区域 -->
+        © henong.com
+    </div>
 
+
+    <style>
+        .php{text-decoration:underline}
+
+    </style>
+
+
+    <script src="lib/layui/layui.js"></script>
+    <script>
+        layui.use(['form','jquery'],function () {
+            var form = layui.form;
+            var $ = layui.$;
+
+            $(document).ready(function(){
+                $('#log-btn').click(function(){
+                    $.ajax({
+                        type:'POST',
+                        url:'login',
+                        data:{
+                            userId:$('#input-account').val(),
+                            password:$('input-pass').val(),
+                            type:$('#input-type').val()
+                        },
+                        dataType:'json',
+
+                        success:function(data){
+                            alert('success');
+                        },
+
+                        error:function(){
+                            alert('failed');
+                        }
+                    })
+
+                    return false;
+                })
+            })
+        })
+    </script>
     </body>
 </html>

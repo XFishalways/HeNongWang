@@ -73,7 +73,7 @@ public class BusinessAddressDao {
     }
 
     /**更新地址名称*/
-    public int updateAddressName(String addressName, String id) throws SQLException {
+    public int updateAddressName(String id, String addressName) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("ADDRESS_NAME",addressName),
@@ -84,7 +84,7 @@ public class BusinessAddressDao {
     }
 
     /**更新省*/
-    public int updateProvince(String province, String id) throws SQLException {
+    public int updateProvince(String id, String province) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PROVINCE",province),
@@ -95,7 +95,7 @@ public class BusinessAddressDao {
     }
 
     /**更新市*/
-    public int updateCity(String city, String id) throws SQLException {
+    public int updateCity(String id, String city) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("CITY",city),
@@ -106,7 +106,7 @@ public class BusinessAddressDao {
     }
 
     /**更新区*/
-    public int updateCounty(String county, String id) throws SQLException {
+    public int updateCounty(String id, String county) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("COUNTY",county),
@@ -117,10 +117,22 @@ public class BusinessAddressDao {
     }
 
     /**更新街道*/
-    public int updateStreet(String street, String id) throws SQLException {
+    public int updateStreet(String id, String street) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("STREET",street),
+                Entity.create("BUSINESS_ADDRESS").set("ADDRESS_ID",id)
+        );
+
+        return rw;
+
+    }
+
+    /**更新门牌号*/
+    public int updateLastDetail(String id, String lastDetail) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("LAST_DETAIL",lastDetail),
                 Entity.create("BUSINESS_ADDRESS").set("ADDRESS_ID",id)
         );
 
