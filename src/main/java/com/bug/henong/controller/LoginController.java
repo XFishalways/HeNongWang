@@ -16,14 +16,14 @@ import java.sql.SQLException;
 /**
  * @author Tan
  */
-@Controller("admin")
+@Controller("user")
 public class LoginController {
 
     private LoginService loginService;
     @GetMapping({"/login"})
     public String login() {
         //填入返回地址
-        return "admin/login";
+        return "user/login";
     }
 
     @PostMapping({"/login"})
@@ -33,7 +33,7 @@ public class LoginController {
                         HttpSession session) throws SQLException {
         if (userId==null || password==null) {
             session.setAttribute("errorMsg", "用户名或密码不能为空");
-            return "admin/login";
+            return "user/login";
         }
         switch (type){
             case "farmer":
@@ -66,6 +66,6 @@ public class LoginController {
             default:
                 break;
         }
-        return "admin/login";
+        return "user/login";
     }
 }
