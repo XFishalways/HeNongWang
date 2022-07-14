@@ -63,7 +63,7 @@
 			        //向服务端发送删除指令
 					var id = obj.data.id;
 					$.ajax({
-						url:"DeleteBuyerUserServlet?USER_ID=" + id,
+						url:"DeleteBuyerUserServlet?USER_ID="+ id,
 						success:function(res){
 							console.log(res)
 						}
