@@ -4,17 +4,12 @@ import com.bug.henong.dao.StoreExamineDao;
 import com.bug.henong.entity.ProductExamine;
 import com.bug.henong.entity.StoreExamine;
 
-import javax.annotation.Resource;
+
 import java.sql.SQLException;
 
 public class StoreExamineService {
 
-
-
-    @Resource
     private StoreExamineDao storeExamineDao;
-
-
 
     /**
      * 得到商品活动ID信息

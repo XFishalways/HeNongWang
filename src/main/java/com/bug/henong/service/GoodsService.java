@@ -8,7 +8,6 @@ import com.bug.henong.entity.Goods;
 import com.bug.henong.entity.SaleProduct;
 import com.bug.henong.entity.SaleStore;
 
-import javax.annotation.Resource;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
@@ -16,7 +15,6 @@ import java.sql.Timestamp;
 
 public class GoodsService {
 
-    @Resource
     private GoodsDao goodsDao;
 
     /**

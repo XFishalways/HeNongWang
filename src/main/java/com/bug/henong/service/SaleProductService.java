@@ -5,7 +5,6 @@ import com.bug.henong.dao.SaleProductDao;
 import com.bug.henong.entity.SaleProduct;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
@@ -16,7 +15,6 @@ import java.sql.Timestamp;
 
 public class SaleProductService {
 
-    @Resource
     private SaleProductDao saleProductDao;
     /**
      * 得到商品活动ID信息

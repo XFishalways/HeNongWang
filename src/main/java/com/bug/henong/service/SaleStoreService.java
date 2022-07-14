@@ -5,15 +5,12 @@ import com.bug.henong.dao.SaleStoreDao;
 import com.bug.henong.entity.SaleProduct;
 import com.bug.henong.entity.SaleStore;
 
-import javax.annotation.Resource;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
 
 public class SaleStoreService {
 
-
-    @Resource
     private SaleStoreDao saleStoreDao;
     /**
      * 得到商品活动ID信息
