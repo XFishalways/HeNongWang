@@ -57,7 +57,7 @@ public class ProductExamineDao {
         return productExamines;
     }
     /**通过id查找某一行数据*/
-    public ProductExamine findOneproduct(String id) throws SQLException {
+    public ProductExamine findOneProduct(String id) throws SQLException {
 
         List<Entity> entities= Db.use().findAll(
                 Entity.create("PRODUCT_EXAMINE").set("PRODUCT_ID",id)

@@ -1,100 +1,136 @@
 package com.bug.henong.service;
 
-import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSON;
-import com.bug.henong.dao.GoodsDao;
-import com.bug.henong.entity.Goods;
-import org.springframework.stereotype.Service;
 
+
+import com.bug.henong.dao.GoodsDao;
+import com.bug.henong.dao.SaleStoreDao;
+import com.bug.henong.entity.Goods;
+import com.bug.henong.entity.SaleProduct;
+import com.bug.henong.entity.SaleStore;
 
 import java.sql.SQLException;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
-/**
- * @author XFishalways
- * @version 1.0.0
- * @date 22.07.14
- */
 
-@Service("GoodsService")
+
 public class GoodsService {
 
-    private GoodsDao goodsDao ;
+    private GoodsDao goodsDao;
 
-    /**添加商品*/
-    public int insert (Goods goods) throws SQLException {
-
-        return goodsDao.insert(goods);
+    /**
+     * 得到商品活动ID信息
+     */
+    public Goods getGoodsId(String loginGoodsId) throws SQLException {
+        return goodsDao.findOneGoods(loginGoodsId);
     }
 
-    /**删除商品*/
-    public int delete (String id) throws SQLException {
+    /**
+     * 修改商品名称
+     */
+    public Boolean updateGoodsName(String loginGoodsId, String originalGoodsName, String newGoodsName) throws SQLException {
+        Goods goods = goodsDao.findOneGoods(loginGoodsId);
 
-        return goodsDao.delete(id);
+        //当前用户非空才可以进行更改
+        if (goods != null) {
+            if (originalGoodsName.equals(goods.getGoodsName())) {
+                int rw = goodsDao.updateGoodsName(newGoodsName,loginGoodsId);
+                return rw > 0;
+            }
+
+        }
+
+        return false;
     }
 
-    /**返回所有商品信息*/
-    public List<Goods> findAll() throws SQLException {
+    /**
+     * 修改商品数量
+     */
+    public Boolean updateQuantity(String loginGoodsId, Double originalQuantity, Double newQuantity) throws SQLException {
+        Goods goods = goodsDao.findOneGoods(loginGoodsId);
 
-        return goodsDao.findAll();
+        //当前用户非空才可以进行更改
+        if (goods != null) {
+            if (originalQuantity   ==   (goods.getGoodsQuantity())) {
+                int rw = goodsDao.updateQuantity(newQuantity,loginGoodsId);
+                return rw > 0;
+            }
+
+        }
+
+        return false;
     }
 
-    /**更新名称*/
-    public int updateGoodsName(String goodsName, String id) throws SQLException {
+    /**
+     * 修改商品价格
+     */
+    public Boolean updatePrice(String loginGoodsId, Double originalPrice, Double newPrice) throws SQLException {
+        Goods goods = goodsDao.findOneGoods(loginGoodsId);
 
-        return goodsDao.updateGoodsName(goodsName, id);
+        //当前用户非空才可以进行更改
+        if (goods != null) {
+            if (originalPrice == (goods.getGoodsPrice())) {
+                int rw = goodsDao.updatePrice(newPrice,loginGoodsId);
+                return rw > 0;
+            }
+
+        }
+
+        return false;
     }
 
-    /**更新数量*/
-    public int updateQuantity(String goodsQuantity, String id) throws SQLException {
+    /**
+     * 修改商品是否售罄
+     */
+    public Boolean updateSale(String loginGoodsId, String originalStatus, String newStatus) throws SQLException {
+        Goods goods = goodsDao.findOneGoods(loginGoodsId);
 
-        return goodsDao.updateQuantity(goodsQuantity, id);
+        //当前用户非空才可以进行更改
+        if (goods != null) {
+            if (originalStatus.equals(goods.getGoodsSale())) {
+                int rw = goodsDao.updateSale(newStatus,loginGoodsId);
+                return rw > 0;
+            }
+
+        }
+
+        return false;
     }
 
-    /**更新价格*/
-    public int updatePrice(String price, String id) throws SQLException {
+    /**
+     * 修改审核是否通过
+     */
+    public Boolean updatePass(String loginGoodsId, String originalStatus, String newGoodsStatus) throws SQLException {
+        Goods goods = goodsDao.findOneGoods(loginGoodsId);
 
-        return goodsDao.updatePrice(price, id);
+        //当前用户非空才可以进行更改
+        if (goods != null) {
+            if (originalStatus.equals(goods.getGoodsPass())) {
+                int rw = goodsDao.updateUserPass(newGoodsStatus,loginGoodsId);
+                return rw > 0;
+            }
+
+        }
+
+        return false;
     }
 
-    /**更新采摘地址*/
-    public int updatePlace(String place, String id) throws SQLException {
+    /**
+     * 修改商品好评度
+     */
+    public Boolean updatePassSalt(String loginGoodsId, String originalPraiseDegree, String newPraiseDegree) throws SQLException {
+        Goods goods = goodsDao.findOneGoods(loginGoodsId);
 
-        return goodsDao.updatePlace(place, id);
+        //当前用户非空才可以进行更改
+        if (goods != null) {
+            if (originalPraiseDegree.equals(goods.getGoodsDegree())) {
+                int rw = goodsDao.updatePassSalt(newPraiseDegree,loginGoodsId);
+                return rw > 0;
+            }
+
+        }
+
+        return false;
     }
 
-    /**更新好评度*/
-    public int updateDegree(String degree, String id) throws SQLException {
-
-        return goodsDao.updateDegree(degree, id);
-    }
-
-    /**更新采摘时间*/
-    public int updateTime(Timestamp time, String id) throws SQLException {
-
-        return goodsDao.updateTime(time, id);
-    }
-
-    /**更新是否售罄*/
-    public int updateSale(String sale, String id) throws SQLException {
-
-        return goodsDao.updateSale(sale, id);
-    }
-
-    /**更新审核是否通过*/
-    public int updatePass(String pass, String id) throws SQLException {
-
-        return goodsDao.updatePass(pass, id);
-    }
-
-    /**通过id查找某一行数据*/
-    public Goods getOneGoods(String id) throws SQLException {
-
-        return goodsDao.findOneGoods(id);
-    }
 
 }
-
