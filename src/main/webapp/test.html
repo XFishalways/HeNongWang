@@ -1,58 +1,65 @@
 <!doctype html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>测试JSON</title>
+        <link rel="stylesheet" href="lib/layui/css/layui.css">
+    </head>
 </head>
 <body>
 <div>
-    <form action="">
-        User ID:<br>
-        <input id="input" type="text" name="id">
-        <button type="submit" onclick="showUser(document.getElementById(input).value())">查找</button>
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">输入框</label>
+            <div class="layui-input-inline">
+                <input id="input-test" type="text" name="title" required  lay-verify="required" placeholder="请输入用户名/用户ID" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                  <button id="testBtn" type="submit" class="layui-btn" lay-submit="" lay-filter="submitTest">立即提交</button>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 <div id="test"><h2>显示用户数据</h2></div>
 
 <script>
-    function showUser(userId)
-    {
-        var xmlhttp;
-        if (window.XMLHttpRequest)
-        {
-            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-            xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {
-            // IE6, IE5 浏览器执行代码
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                var jsonArr = JSON.parse(this.responseText);
-                showUserInfo(jsonArr);
-            }
-        }
-        xmlhttp.open("GET","/try/ajax/ajax_info.txt",true);
-        xmlhttp.send();
-    }
+    layui.use(['jquery','form'], function(){
+      var $ = layui.jquery;
+      var form = layui.form;
 
-    function showUserInfo(arr)
-    {
-        var out = "";
-        out += "<h3>密码盐:" + arr.passSalt + "<\h3><br>";
-        out += "<h3>用户ID:" + arr.userId + "<\h3><br>";
-        out += "<h3>用户名称:" + arr.userName + "<\h3><br>";
-        out += "<h3>用户密码:" + arr.userPass + "<\h3><br>";
-        out += "<h3>用户状态:" + arr.userStatus + "<\h3><br>";
-        document.getElementById("test").innerHTML = out;
-    }
+      $(document).ready(function(){
+        $('#testBtn').click(function(){
+            $.ajax({
+            type:'GET',
+            url:'/getBuy',
+            data:{
+                id: $('#input-test').value,
+            },
+            dataType:'json',
+
+            success:function(data){
+                var myhtml = "";
+                myhtml += '<h3>账号Id:'+ json.userId + '</h3>';
+                myhtml += '<h3>账号密码:'+ json.userPass + '</h3>';
+                myhtml += '<h3>账号名称:'+ json.userName + '</h3>';
+                myhtml += '<h3>账号状态:'+ json.userStatus + '</h3>';
+                myhtml += '<h3>账号密码盐:'+ json.passSalt + '</h3>';
+
+                $('#test').html = myhtml;
+            },
+            
+            })
+
+            
+        })
+      })
+
+     
+    }); 
 </script>
 
 </body>
