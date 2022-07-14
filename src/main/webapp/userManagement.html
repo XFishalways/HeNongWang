@@ -33,7 +33,7 @@
 				,parseData: function(res){ //res 即为原始返回的数据
 				    return {
 				      "code": 0, //解析接口状态
-				      "msg": "OK", //解析提示文本
+				      "msg": "", //解析提示文本
 				      "count": 100, //解析数据长度
 				      "data": res //解析数据列表
 				    };
@@ -97,7 +97,7 @@
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
 			  var id = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("FindOneBuyerUser/?USER_ID="+id);
+			  tableInit("FindOneBuyerUser?USER_ID="+id);
 		  })
 		});
 		
