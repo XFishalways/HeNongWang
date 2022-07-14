@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classpath="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
@@ -18,13 +18,8 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!-- 前缀（目录） -->
-        <property name="prefix" value="/WEB-INF/pages/"/>
-        <!-- 后缀 -->
-        <property name="suffix" value=".jsp"/>
-    </bean>
-
     <!-- 开启SpringMVC框架注解的支持 -->
     <mvc:annotation-driven/>
+
+    <context:property-placeholder location= "classpath:db.properties" />
 </beans>
