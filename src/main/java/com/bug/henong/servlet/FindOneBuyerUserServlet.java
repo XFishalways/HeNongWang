@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import com.alibaba.fastjson.JSON;
 import com.bug.henong.dao.BuyerUserDao;
+import com.bug.henong.entity.BuyerUser;
 
-@WebServlet(name = "findAllBuyerUserServlet", value = "/BuyerUser")
+@WebServlet(name = "findOneBuyerUserServlet", value = "/FindOneBuyerUser")
 public class FindOneBuyerUserServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -18,20 +20,20 @@ public class FindOneBuyerUserServlet {
         PrintWriter pw = resp.getWriter();
         BuyerUserDao buyerUserDao = new BuyerUserDao();
         String id = req.getParameter("USER_ID");
+        String json = null;
         try {
-            System.out.println(buyerUserDao.findOneBuyer(id).getUserId());
-            System.out.println(buyerUserDao.findOneBuyer(id).getUserName());
-            System.out.println(buyerUserDao.findOneBuyer(id).getNickName());
-            System.out.println(buyerUserDao.findOneBuyer(id).getUserIntro();
-            System.out.println(buyerUserDao.findOneBuyer(id).getPhone());
-            System.out.println(buyerUserDao.findOneBuyer(id).getAvatar());
-            System.out.println(buyerUserDao.findOneBuyer(id).getUserPass());
-            System.out.println(buyerUserDao.findOneBuyer(id).getPassSalt());
-            System.out.println(buyerUserDao.findOneBuyer(id).getTotalCostAmt());
-            System.out.println(buyerUserDao.findOneBuyer(id).getLastLoginTime());
+            BuyerUser user = buyerUserDao.findOneBuyer(id);
+            if(user != null) {
+                json = JSON.toJSONString(user);
+            }
+            else {
+                json = "{\"log\":\"Invalid id\"}";
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            json = "{\"log\":\"Error connection to database\"}";
         }
+        pw.print(json);
 
     }
 }
+
