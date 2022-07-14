@@ -40,6 +40,9 @@ public class BuyerItem implements Serializable,Cloneable{
     /** 售价 */
     @ApiModelProperty(name = "售价",notes = "")
     private Double salePrice ;
+     /** 买家商品图片 */
+     @ApiModelProperty(name = "买家商品图片",notes = "")
+     private String skuImage ;
 
     /** 返回订单ID */
     public String getOrderId(){
@@ -105,4 +108,12 @@ public class BuyerItem implements Serializable,Cloneable{
     public void setSalePrice(Double salePrice){
         this.salePrice=salePrice;
     }
+     /** 返回买家商品图片 */
+     public String getSkuImage(){
+         return this.skuImage;
+     }
+     /** 设置买家商品图片 */
+     public void setSkuImage(String skuImage){
+         this.skuImage=skuImage;
+     }
 }

@@ -8,7 +8,7 @@ com\bug\henong\dao\BuyerOrderDao.class
 com\bug\henong\servlet\HelloServlet.class
 com\bug\henong\entity\BusinessUser.class
 com\bug\henong\entity\BuyerOrder.class
-com\bug\henong\test\HelloController.class
+com\bug\henong\service\test.class
 com\bug\henong\dao\BusinessOrderDao.class
 utils\JDBCUtil.class
 com\bug\henong\dao\SalestoreDao.class
@@ -25,6 +25,7 @@ com\bug\henong\entity\BusinessAddress.class
 com\bug\henong\entity\BusinessBuyrecord.class
 com\bug\henong\entity\SaleProduct.class
 com\bug\henong\dao\AdminDao.class
+com\bug\henong\controller\test.class
 com\bug\henong\entity\BuyerAddress.class
 com\bug\henong\dao\BuyerAddressDao.class
 com\bug\henong\entity\BuyerCart.class
@@ -34,6 +35,7 @@ com\bug\henong\dao\StoreExamineDao.class
 com\bug\henong\entity\BuyerUser.class
 com\bug\henong\entity\Admin.class
 com\bug\henong\dao\BusinessAddressDao.class
+com\bug\henong\controller\HelloController.class
 com\bug\henong\dao\ProductExamineDao.class
 com\bug\henong\entity\SaleStore.class
 com\bug\henong\entity\StoreExamine.class

@@ -48,6 +48,9 @@ public class Goods implements Serializable,Cloneable{
     /** 好评度 */
     @ApiModelProperty(name = "好评度",notes = "")
     private String goodsDegree ;
+     /** 商品图片 */
+     @ApiModelProperty(name = "商品图片",notes = "")
+     private String goodsImage ;
 
     /** 返回商品ID */
     public String getGoodsId(){
@@ -129,4 +132,12 @@ public class Goods implements Serializable,Cloneable{
     public void setGoodsDegree(String goodsDegree){
         this.goodsDegree=goodsDegree;
     }
+     /** 返回商品图片 */
+     public String getGoodsImage(){
+         return this.goodsImage;
+     }
+     /** 设置商品图片 */
+     public void setGoodsImage(String goodsImage){
+         this.goodsImage=goodsImage;
+     }
 }
