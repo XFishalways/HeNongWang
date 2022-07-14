@@ -97,7 +97,7 @@
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
 			  var id = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("FindOneBuyerUser")
+			  tableInit("FindOneBuyerUser/"+id);
 		  })
 		});
 		
