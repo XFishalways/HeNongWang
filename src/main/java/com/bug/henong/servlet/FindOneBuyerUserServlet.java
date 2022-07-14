@@ -31,6 +31,7 @@ public class FindOneBuyerUserServlet extends HttpServlet {
             if(user != null) {
                 json = JSON.toJSONString(user);
                 System.out.println(json);
+                json = "[" + json + "]";
             }
             else {
                 json = "{\"log\":\"Invalid id\"}";
