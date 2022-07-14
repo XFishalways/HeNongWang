@@ -8,22 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
 /**
  * @author Tan
  */
-@Controller("user")
+@Controller
 public class LoginController {
 
     private LoginService loginService;
     @GetMapping({"/login"})
     public String login() {
         //填入返回地址
-        return "user/login";
+        return "/login";
     }
 
     @PostMapping({"/login"})
@@ -33,7 +31,7 @@ public class LoginController {
                         HttpSession session) throws SQLException {
         if (userId==null || password==null) {
             session.setAttribute("errorMsg", "用户名或密码不能为空");
-            return "user/login";
+            return "/login";
         }
         switch (type){
             case "farmer":
@@ -52,7 +50,7 @@ public class LoginController {
                     session.setAttribute("loginUserId", buyerUser.getUserId());
                     //session过期时间设置为7200秒 即两小时
                     session.setMaxInactiveInterval(60 * 60 * 2);
-                    return "redirect:/buyer/index";
+                    return "redirect:/index";
                 }
             case "business":
                 BusinessUser businessUser = loginService.businessUserLogin(userId,password);
@@ -66,6 +64,6 @@ public class LoginController {
             default:
                 break;
         }
-        return "user/login";
+        return "/login";
     }
 }
