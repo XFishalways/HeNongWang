@@ -22,7 +22,7 @@ import java.util.List;
 @Service("GoodsService")
 public class GoodsService {
 
-    private GoodsDao goodsDao = new GoodsDao();
+    private GoodsDao goodsDao ;
 
     /**添加商品*/
     public int insert (Goods goods) throws SQLException {
