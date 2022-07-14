@@ -27,9 +27,7 @@ public class GoodsService {
     /**添加商品*/
     public int insert (Goods goods) throws SQLException {
 
-        int rw = goodsDao.insert(goods);
-
-        return rw;
+        return goodsDao.insert(goods);
     }
 
     /**删除商品*/
