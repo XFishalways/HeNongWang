@@ -85,8 +85,9 @@
 
     <script src="lib/layui/layui.js"></script>
     <script>
-        layui.use(['form'],function () {
+        layui.use(['form','jquery'],function () {
             form = layui.form;
+            $ = layui.$;
 
             $(document).ready(function(){
                 $('#log-btn').click(function(){
