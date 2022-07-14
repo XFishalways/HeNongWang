@@ -32,8 +32,8 @@ public class FindOneBuyerUserServlet {
         } catch (SQLException e) {
             json = "{\"log\":\"Error connection to database\"}";
         }
-            pw.print(json);
-
+        pw.print(json);
 
     }
 }
+
