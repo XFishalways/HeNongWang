@@ -68,7 +68,7 @@ public class BuyerAddressDao {
     }
 
     //更新地址名称
-    public int updateAddressName(String addressName, String id) throws SQLException {
+    public int updateAddressName(String id, String addressName) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("ADDRESS_NAME",addressName),
@@ -79,7 +79,7 @@ public class BuyerAddressDao {
     }
 
     //更新收件人姓名
-    public int updateReceiverName(String receiverName, String id) throws SQLException {
+    public int updateReceiverName(String id, String receiverName) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("RECEIVER_NAME", receiverName),
@@ -90,7 +90,7 @@ public class BuyerAddressDao {
     }
 
     //更新收件人电话号码
-    public int updateReceiverPhone(String receiverPhone, String id) throws SQLException {
+    public int updateReceiverPhone(String id, String receiverPhone) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("RECEIVER_PHONE",receiverPhone),
@@ -101,7 +101,7 @@ public class BuyerAddressDao {
     }
 
     //更新省
-    public int updateProvince(String province, String id) throws SQLException {
+    public int updateProvince(String id, String province) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PROVINCE",province),
@@ -112,7 +112,7 @@ public class BuyerAddressDao {
     }
 
     //更新市
-    public int updateCity(String city, String id) throws SQLException {
+    public int updateCity(String id, String city) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("CITY",city),
@@ -123,7 +123,7 @@ public class BuyerAddressDao {
     }
 
     //更新区
-    public int updateCounty(String county, String id) throws SQLException {
+    public int updateCounty(String id, String county) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("COUNTY",county),
@@ -134,7 +134,7 @@ public class BuyerAddressDao {
     }
 
     //更新街道
-    public int updateStreet(String street, String id) throws SQLException {
+    public int updateStreet(String id, String street) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("STREET",street),
@@ -145,7 +145,7 @@ public class BuyerAddressDao {
     }
 
     //更新门牌号
-    public int updateLastDetail(String lastDetail, String id) throws SQLException {
+    public int updateLastDetail(String id, String lastDetail) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("LAST_DETAIL",lastDetail),
@@ -156,7 +156,7 @@ public class BuyerAddressDao {
     }
 
     //更新是否默认
-    public int updateIsDefault(String isDefault, String id) throws SQLException {
+    public int updateIsDefault(String id, String isDefault) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("IS_DEFAULT",isDefault),

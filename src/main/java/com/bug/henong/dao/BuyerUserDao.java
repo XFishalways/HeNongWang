@@ -74,7 +74,7 @@ public class BuyerUserDao {
     }
 
     /**更新昵称*/
-    public int updateNickName(String nickName, String id) throws SQLException {
+    public int updateNickName(String id, String nickName) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("NICK_NAME",nickName),
@@ -85,7 +85,7 @@ public class BuyerUserDao {
     }
 
     /**更新签名*/
-    public int updateUserIntro(String userIntro, String id) throws SQLException {
+    public int updateUserIntro(String id, String userIntro) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("USER_INTRO",userIntro),
@@ -96,7 +96,7 @@ public class BuyerUserDao {
     }
 
     /**更新头像*/
-    public int updateAvatar(String avatar, String id) throws SQLException {
+    public int updateAvatar(String id, String avatar) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("AVATAR",avatar),
@@ -107,7 +107,7 @@ public class BuyerUserDao {
     }
 
     /**更新手机号*/
-    public int updatePhone(String phone, String id) throws SQLException {
+    public int updatePhone(String id, String phone) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PHONE",phone),
@@ -118,7 +118,7 @@ public class BuyerUserDao {
     }
 
     /**更新密码*/
-    public int updateUserPass(String userPass, String id) throws SQLException {
+    public int updateUserPass(String id, String userPass) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("USER_PASS",userPass),
@@ -129,7 +129,7 @@ public class BuyerUserDao {
 
     }
     /**更新密码盐*/
-    public int updatePassSalt(String passSalt, String id) throws SQLException {
+    public int updatePassSalt(String id, String passSalt) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PASS_SALT",passSalt),
@@ -141,7 +141,7 @@ public class BuyerUserDao {
     }
 
     /**更新状态*/
-    public int updateUserStatus(String userStatus, String id) throws SQLException {
+    public int updateUserStatus(String id, String userStatus) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("USER_STATUS",userStatus),
@@ -153,7 +153,7 @@ public class BuyerUserDao {
     }
 
     /**更新累计消费金额*/
-    public int updateTotalCostAmt(Double totalCostAmt,String id) throws SQLException {
+    public int updateTotalCostAmt(String id, Double totalCostAmt) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("TOTAL_COST_AMT",totalCostAmt),
@@ -164,7 +164,7 @@ public class BuyerUserDao {
     }
 
     /**更新最后登录时间*/
-    public int updateLastLoginTime(Timestamp timestamp, String id) throws SQLException {
+    public int updateLastLoginTime(String id, Timestamp timestamp) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("LAST_LOGIN_TIME",timestamp),

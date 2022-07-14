@@ -42,7 +42,7 @@ public class BusinessItem implements Serializable,Cloneable{
     private Double salePrice ;
     /** 商品数量 */
     @ApiModelProperty(name = "商品数量",notes = "")
-    private Integer quantity ;
+    private Double quantity ;
     /** 活动ID */
     @ApiModelProperty(name = "活动ID",notes = "")
     private String eventId ;
@@ -115,11 +115,11 @@ public class BusinessItem implements Serializable,Cloneable{
         this.salePrice=salePrice;
     }
     /** 返回商品数量 */
-    public Integer getQuantity(){
+    public Double getQuantity(){
         return this.quantity;
     }
     /** 设置商品数量 */
-    public void setQuantity(Integer quantity){
+    public void setQuantity(Double quantity){
         this.quantity=quantity;
     }
     /** 返回活动ID */

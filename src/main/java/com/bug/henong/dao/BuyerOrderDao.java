@@ -68,7 +68,7 @@ public class BuyerOrderDao {
 
     //更新地址
 
-    public int updateAddressId(String addressId, String id) throws SQLException {
+    public int updateAddressId(String id, String addressId) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("ADDRESS_ID",addressId),
@@ -79,7 +79,7 @@ public class BuyerOrderDao {
     }
 
     //更新订单状态
-    public int updateInvoiceTplId(String invoiceTplId, String id) throws SQLException {
+    public int updateInvoiceTplId(String id, String invoiceTplId) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("ORDER_STATUS",invoiceTplId),
