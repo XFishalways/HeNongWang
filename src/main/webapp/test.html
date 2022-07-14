@@ -14,7 +14,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">输入框</label>
             <div class="layui-input-inline">
-                <input id="input-test" type="text" name="title" required  lay-verify="required" placeholder="请输入用户名/用户ID" autocomplete="off" class="layui-input">
+                <input id="input-test" type="text" name="USER_ID" required  lay-verify="required" placeholder="请输入用户名/用户ID" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
@@ -36,9 +36,9 @@
         $('#testBtn').click(function(){
             $.ajax({
             type:'GET',
-            url:'/getBuy',
+            url:'/getBuyerUsers',
             data:{
-                id: $('#input-test').value,
+                id: $('#input-test').val(),
             },
             dataType:'json',
 
