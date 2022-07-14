@@ -2,17 +2,17 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>商品信息</title>
-		<link rel="stylesheet" href="lib/layui/css/layui.css" media="all">
-		<script type="text/javascript" src="lib/layui/layui.js"></script>
+		<title></title>
+		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+		<script type="text/javascript" src="../lib/layui/layui.js"></script>
 	</head>
 	<body class="layui-layout-body">
 		<div>
 			<div class="layui-inline">
-				<input type="text" name="title" required lay-verify="required" placeholder="请输入商品id" autocomplete="off" class="layui-input" style="width:125px;" >
+				<input type="text" name="title" required lay-verify="required" placeholder="请输入用户id" autocomplete="off" class="layui-input" style="width:125px;" >
 			</div>
 			<div class="layui-inline">
-				<button type="button" class="layui-btn"  id="findById">查找商品</button>
+				<button type="button" class="layui-btn"  id="findById">查找用户</button>
 			</div>
 		
 		</div>
@@ -26,7 +26,7 @@
 			layui.use('table', function(){
 			  var $ = layui.$
 			  var table = layui.table;
-			  
+
 			  table.render({
 			    elem: '#test'
 			    ,url:url
@@ -40,15 +40,13 @@
 				}
 			    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 			    ,cols: [[
-			      {field:'goodsId', width:180, title: '商品ID', sort: true}
-			      ,{field:'goodsName', width:180, title: '商品名'}
-                  ,{field:'goodsPrice', width:100, title: '商品价格'}
-                  ,{field:'goodsFarmer', width:180, title: '商品所属农户'}
-                  ,{field:'goodsData', width:180, title: '商品采摘时间'}
-                  ,{field:'goodsAddr', width:280, title: '商品采摘地址'}
+			      {field:'userId', width:180, title: 'ID', sort: true}
+			      ,{field:'userName', width:180, title: '用户名'}
+			      ,{field:'userPass', width:180, title: '密码', sort: true}
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
 				,error: function(){
+					var patt = "FindOneBuyerUser";
 					if( url.search(patt) != -1) tableInit("GetBuyerUsers");
 				}
 			  });
@@ -63,7 +61,20 @@
 			      //do 
 				  window.location.href="user_register.html";
 			    } else if(layEvent === 'del'){ //删除
-			      
+			      layer.confirm('真的删除行么', function(index){
+					var id = obj.data.userId;
+					alert(id);
+			        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+			        layer.close(index);
+			        //向服务端发送删除指令
+
+					$.ajax({
+						url:"DeleteBuyerUserServlet?USER_ID=" + id,
+						success:function(res){
+							console.log(res)
+						}
+					})
+			      });
 			    } else if(layEvent === 'edit'){ //编辑
 			      //do something
 			      
@@ -89,7 +100,7 @@
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
 			  var id = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("FindGOODS?USER_ID=" +id +"&goodsPatt=");
+			  tableInit("FindOneBuyerUser?USER_ID="+id);
 		  })
 		});
 		

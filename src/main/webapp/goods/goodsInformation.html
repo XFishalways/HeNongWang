@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>商品详情</title>
-    <link rel="stylesheet" href="lib/layui/css/layui.css">
+    <link rel="stylesheet" href="..lib/layui/css/layui.css">
 </head>
 <body>
     <!-- 进度条 -->
@@ -56,15 +56,7 @@
                 <div class="layui-row">
                     <div class="layui-anim layui-anim-fadein">
                         <div class="layui-col-md3" style="margin-top:15px;">
-                            <p style="font-size: 20px;font-family:'楷体';font-weight: bold;">原价:</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layui-row">
-                    <div class="layui-anim layui-anim-fadein">
-                        <div class="layui-col-md3" style="margin-top:15px;">
-                            <p style="font-size: 20px;font-family:'楷体';font-weight: bold;">现价:</p>
+                            <p style="font-size: 20px;font-family:'楷体';font-weight: bold;">销售价:</p>
                         </div>
                     </div>
                 </div>
@@ -77,13 +69,45 @@
                     </div>
                 </div>
 
+                <div class="layui-row">
+                    <div class="layui-anim layui-anim-fadein">
+                        <div class="layui-col-md2" style="margin-top:15px;">
+                            <p style="font-size: 20px;font-family:'楷体';font-weight: bold;">购买数量:</p>
+                        </div>
+                        <div class="layui-col-md2" style="margin-top:15px;">
+                            <i class="layui-icon layui-icon-reduce-circle" style="font-size: 30px; color: #1E9FFF;"></i>
+                        </div>
+                        <div class="layui-col-md2" id="number" style="margin-top:15px;">
+                            <p style="font-size: 20px;font-family:'楷体';font-weight: bold;">1</p>
+                        </div>
+                        <div class="layui-col-md2" style="margin-top:15px;">
+                            <i class="layui-icon layui-icon-add-circle" style="font-size: 30px; color: #1E9FFF;"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="layui-row " style="margin-top:15px;">
+                    <div class="layui-input-block layui-col-md3 layui-anim layui-anim-up">
+                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即购买</button>
+                    </div>
+                    <div class="layui-input-block layui-col-md3 layui-anim layui-anim-up">
+                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">加入购物车</button>
+                    </div>
+                </div>
             </div>
+
+
 
             </div>
         </div>
 
     </div>
+    <script>
 
+
+    </script>
 
 
 </body>
