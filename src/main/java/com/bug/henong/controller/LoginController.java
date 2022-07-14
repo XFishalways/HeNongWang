@@ -7,6 +7,7 @@ import com.bug.henong.service.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
@@ -15,23 +16,24 @@ import java.sql.SQLException;
  * @author Tan
  */
 @Controller
+
 public class LoginController {
 
     private LoginService loginService;
-    @GetMapping({"/login"})
+    @GetMapping(value = "/login")
     public String login() {
         //填入返回地址
-        return "/login";
+        return "/login.html";
     }
 
-    @PostMapping({"/login"})
+    @PostMapping(value = "/login")
     public String login(@RequestParam("userId") String userId,
                         @RequestParam("password") String password,
                         @RequestParam("type") String type,
                         HttpSession session) throws SQLException {
         if (userId==null || password==null) {
             session.setAttribute("errorMsg", "用户名或密码不能为空");
-            return "/login";
+            return "/login.html";
         }
         switch (type){
             case "farmer":
@@ -64,6 +66,6 @@ public class LoginController {
             default:
                 break;
         }
-        return "/login";
+        return "/login.html";
     }
 }

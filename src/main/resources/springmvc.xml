@@ -14,12 +14,13 @@
     <!-- 视图解析器对象 -->
     <!--配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/"/>
+        <property name="prefix" value="/html"/>
         <property name="suffix" value=".html"/>
     </bean>
 
     <!-- 开启SpringMVC框架注解的支持 -->
     <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
 
     <context:property-placeholder location= "classpath:db.properties" />
 </beans>
