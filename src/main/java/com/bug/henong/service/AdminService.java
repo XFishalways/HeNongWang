@@ -4,15 +4,12 @@ import com.bug.henong.dao.AdminDao;
 import com.bug.henong.dao.ProductExamineDao;
 import com.bug.henong.entity.Admin;
 import com.bug.henong.entity.ProductExamine;
-
-import javax.annotation.Resource;
 import java.sql.SQLException;
 
 public class AdminService {
 
 
 
-    @Resource
     private AdminDao adminDao;
 
 
@@ -33,7 +30,7 @@ public class AdminService {
         //当前用户非空才可以进行更改
         if (admin != null) {
             if (originalNickName.equals(admin.getAdminName())) {
-                int rw = adminDao.updateNickName(newNickName,loginAdminId);
+                int rw = adminDao.updateName(newNickName,loginAdminId);
                 return rw > 0;
             }
 
@@ -51,7 +48,7 @@ public class AdminService {
         //当前用户非空才可以进行更改
         if (admin != null) {
             if (originalPassword.equals(admin.getAdminPasswd())) {
-                int rw = adminDao.updatePassword(newPassword,loginAdminId);
+                int rw = adminDao.updatePass(newPassword,loginAdminId);
                 return rw > 0;
             }
 

@@ -5,13 +5,12 @@ import com.bug.henong.dao.ProductExamineDao;
 import com.bug.henong.entity.Goods;
 import com.bug.henong.entity.ProductExamine;
 
-import javax.annotation.Resource;
-import java.sql.SQLException;
 
+import java.sql.SQLException;
 public class ProductExamineService {
 
 
-    @Resource
+
     private ProductExamineDao productExamineDao;
 
 
