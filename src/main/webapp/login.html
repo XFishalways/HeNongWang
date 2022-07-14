@@ -25,7 +25,7 @@
                 <p class= "layui-anim layui-anim-scaleSpring" style="font-size: 100px; color: green; text-align: center; letter-spacing: 10px; font-family: KaiTi;" >上合农网</p>
 
             </div>
-            <div class = "layui-col-md4">
+            <div class = "layui-col-md6">
                 </br> </br> </br> </br> </br> </br> </br> </br> </br> </br> </br> </br> </br> </br>
                 <form class="layui-form" action="">
                     <div class="layui-form-item layui-row layui-col-md12">
@@ -47,20 +47,29 @@
                     </div>
 
                     <div class="layui-form-item layui-row layui-col-md12 ">
+                        <div id="choice" class="">
+                            <div class="layui-input-block">
+                                <select name="city" lay-verify="">
+                                    <option value="">请选择你的身份</option>
+                                    <option value="010">用户</option>
+                                    <option value="021">农户</option>
+                                    <option value="0571">卖家</option>
+                                    <option value="0571">管理员</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-row layui-col-md12 ">
                         <div class="layui-col-md4 layui-col-md-offset4">
                             <a href="" class="layui-btn layui-btn-lg">----登录----</a>
                         </div>
-                        <div id="choice" class="layui-col-md4 layui-col-md-offset4">
-                            </br>
-                            <select name="city" lay-verify="">
-                                <option value="">请选择你的身份</option>
-                                <option value="010">用户</option>
-                                <option value="021">农户</option>
-                                <option value="0571">卖家</option>
-                                <option value="0571">管理员</option>
-                            </select>
-                        </div>
+
                     </div>
+
+
+
                 </form>
 
             </div>
@@ -70,5 +79,12 @@
         <!-- 底部固定区域 -->
         © henong.com
     </div>
+
+    <script src="lib/layui/layui.js"></script>
+    <script>
+        layui.use(['form'],function () {
+            form = layui.form;
+        })
+    </script>
     </body>
 </html>
