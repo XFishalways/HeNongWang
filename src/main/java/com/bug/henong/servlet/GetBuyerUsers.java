@@ -15,7 +15,7 @@ import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
 
 @WebServlet(name = "getBuyerUsers", value = "/BuyerUsers")
-public class getBuyerUsers extends HttpServlet {
+public class GetBuyerUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json;charset=UTF-8");
