@@ -36,21 +36,21 @@
         $('#testBtn').click(function(){
             $.ajax({
             type:'GET',
-            url:'/getBuyerUsers',
+            url:'BuyerUsers',
             data:{
-                id: $('#input-test').val(),
+                "USER_ID": $('#input-test').val(),
             },
             dataType:'json',
 
             success:function(data){
-                var myhtml = "";
-                myhtml += '<h3>账号Id:'+ json.userId + '</h3>';
-                myhtml += '<h3>账号密码:'+ json.userPass + '</h3>';
-                myhtml += '<h3>账号名称:'+ json.userName + '</h3>';
-                myhtml += '<h3>账号状态:'+ json.userStatus + '</h3>';
-                myhtml += '<h3>账号密码盐:'+ json.passSalt + '</h3>';
 
-                $('#test').html = myhtml;
+                var myhtml = "";
+                myhtml += '<h3>账号Id:'+ data.userId + '</h3>';
+                myhtml += '<h3>账号密码:'+ data.userPass + '</h3>';
+                myhtml += '<h3>账号名称:'+ data.userName + '</h3>';
+                myhtml += '<h3>账号状态:'+ data.userStatus + '</h3>';
+                myhtml += '<h3>账号密码盐:'+ data.passSalt + '</h3>';
+                $('#test').html(myhtml);
             },
 
             })
