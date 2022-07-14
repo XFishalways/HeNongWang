@@ -21,7 +21,7 @@ public class getBuyerUsers extends HttpServlet {
         resp.setContentType("application/json");
         PrintWriter pw = resp.getWriter();
         BuyerUserDao buyerUserDao = new BuyerUserDao();
-        String id = req.getParameter("id");
+        String id = req.getParameter("USER_ID");
         String json = null;
         try {
             BuyerUser user = buyerUserDao.findOneBuyer(id);
