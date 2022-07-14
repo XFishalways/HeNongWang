@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>商品详情</title>
-    <link rel="stylesheet" href="..lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../lib/layui/css/layui.css">
 </head>
 <body>
     <!-- 进度条 -->
@@ -38,7 +38,7 @@
     <div class="layui-container" id="infomation">
         <div class="layui-row">
             <div class = "layui-col-md3">
-                <img src="images/blueberry.jpg">
+                <img src="../images/blueberry.jpg">
             </div>
             <div class = "layui-col-md8 layui-bg-gray">
                 <div class="layui-row">
@@ -104,9 +104,12 @@
         </div>
 
     </div>
+    <script src="../lib/layui/layui.js"></script>
     <script>
-
-
+        layui.layui.use(['form'], function(args){
+          var form = layui.form;
+          
+        }); 
     </script>
 
 
