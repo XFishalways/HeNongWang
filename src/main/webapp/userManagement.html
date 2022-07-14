@@ -64,7 +64,10 @@
 			        //向服务端发送删除指令
 					var id = obj.data.id;
 					$.ajax({
-						url:"http://localhost:8088/user/deleteUser/"+id,
+						url:"DeleteBuyerUserServlet",
+						data:{
+							"USER_ID": id,
+						},
 						success:function(res){
 							console.log(res)
 						}
@@ -85,7 +88,7 @@
 			});
 		}
 		
-		tableInit("http://localhost:8088/user/queryAll");
+		tableInit("Find");
 		
 		//第一种：主动加载jquery模块
 		layui.use(['jquery', 'layer'], function(){ 
@@ -95,7 +98,7 @@
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
 			  var id = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("http://localhost:8088/user/queryById/"+id)
+			  tableInit("FindOne")
 		  })
 		});
 		
