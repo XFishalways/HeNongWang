@@ -46,6 +46,9 @@ public class BusinessItem implements Serializable,Cloneable{
     /** 活动ID */
     @ApiModelProperty(name = "活动ID",notes = "")
     private String eventId ;
+     /** 卖家商品图片 */
+     @ApiModelProperty(name = "卖家商品图片",notes = "")
+     private String businessImage ;
 
     /** 返回商品ID */
     public String getSkuId(){
@@ -127,4 +130,12 @@ public class BusinessItem implements Serializable,Cloneable{
     public void setEventId(String eventId){
         this.eventId=eventId;
     }
+     /** 返回卖家商品图片 */
+     public String getBusinessImage(){
+         return this.businessImage;
+     }
+     /** 设置卖家商品图片 */
+     public void setBusinessImage(String businessImage){
+         this.businessImage=businessImage;
+     }
 }
