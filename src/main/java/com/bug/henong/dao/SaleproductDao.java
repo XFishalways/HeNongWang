@@ -104,10 +104,10 @@ public class SaleproductDao {
         return rw;
     }
     /**更新开始时间*/
-    public int updateStart_time(String starttime, String id) throws SQLException {
+    public int updateStart_time(String startTime, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("START_TIME",starttime),
+                Entity.create().set("START_TIME",startTime),
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
@@ -115,10 +115,10 @@ public class SaleproductDao {
     }
 
     /**更新结束时间*/
-    public int updateEnd_time(String endtime, String id) throws SQLException {
+    public int updateEnd_time(String endTime, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("END_TIME",endtime),
+                Entity.create().set("END_TIME",endTime),
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
