@@ -60,6 +60,10 @@ public class SaleproductDao {
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
+        if(entities.isEmpty()){
+            return null;
+        }
+
         Entity e = entities.get(0);
         String productStr = JSONUtil.toJsonStr(e);
         SaleProduct saleProduct = JSONUtil.toBean(productStr,SaleProduct.class);

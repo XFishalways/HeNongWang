@@ -64,6 +64,10 @@ public class SalestoreDao {
                 Entity.create("SALE_STORE").set("STORE_ID",id)
         );
 
+        if(entities.isEmpty()){
+            return null;
+        }
+
         Entity e = entities.get(0);
         String storeStr = JSONUtil.toJsonStr(e);
         SaleStore saleStore = JSONUtil.toBean(storeStr,SaleStore.class);

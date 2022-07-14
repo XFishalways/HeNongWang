@@ -62,6 +62,9 @@ public class BusinessItemDao {
                 Entity.create("BUSINESS_ITEM").set("SKU_ID",id)
         );
 
+        if(entities.isEmpty()){
+            return null;
+        }
         Entity e = entities.get(0);
         String itemStr = JSONUtil.toJsonStr(e);
         BusinessItem businessItem = JSONUtil.toBean(itemStr,BusinessItem.class);
