@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
 
-@WebServlet(name = "findAllBuyerUserServlet", value = "/BuyerUser")
+@WebServlet(name = "findOneBuyerUserServlet", value = "/FindOneBuyerUser")
 public class FindOneBuyerUserServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
