@@ -80,7 +80,7 @@ public class FarmerDao {
         return null;
     }
     /**更新所在地**/
-    public int updatePlace(String place, String id) throws SQLException {
+    public int updatePlace(String id, String place) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("FARMER_PLACE", place),
@@ -91,7 +91,7 @@ public class FarmerDao {
     }
 
     /**更新资产**/
-    public int updateValue(int value, String id) throws SQLException {
+    public int updateValue(String id,double value) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("FARMER_VALUE", value),
@@ -103,7 +103,7 @@ public class FarmerDao {
     }
 
     /**更新信誉度**/
-    public int updateCredibility(String credit, String id) throws SQLException {
+    public int updateCredibility( String id,String credit) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("FARMER_CREDIBILITY", credit),
@@ -115,7 +115,7 @@ public class FarmerDao {
     }
 
     /**更新所属卖家ID号**/
-    public int updateBusinessId(String businessId, String id) throws SQLException {
+    public int updateBusinessId( String id,String businessId) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("BUSINESS_ID", businessId),
@@ -127,7 +127,7 @@ public class FarmerDao {
     }
 
     /**更新用户密码**/
-    public int updateUserPass(String pass, String id) throws SQLException {
+    public int updateUserPass( String id,String pass) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("USER_PASS", pass),
@@ -139,7 +139,7 @@ public class FarmerDao {
     }
 
     /**更新密码盐**/
-    public int updatePassSalt(String passSalt, String id) throws SQLException {
+    public int updatePassSalt( String id,String passSalt) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PASS_SALT", passSalt),
