@@ -8,12 +8,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-import cn.hutool.json.JSONUtil;
 import com.bug.henong.dao.BuyerUserDao;
-import com.bug.henong.entity.BuyerUser;
 
 @WebServlet(name = "findAllBuyerUserServlet", value = "/BuyerUser")
-public class findOneBuyerUserServlet {
+public class FindOneBuyerUserServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json;charset=UTF-8");
