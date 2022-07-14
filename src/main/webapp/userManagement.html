@@ -40,9 +40,9 @@
 				}
 			    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 			    ,cols: [[
-			      {field:'USER_ID', width:180, title: 'ID', sort: true}
-			      ,{field:'USER_NAME', width:180, title: '用户名'}
-			      ,{field:'USER_PASS', width:180, title: '密码', sort: true}
+			      {field:'userId', width:180, title: 'ID', sort: true}
+			      ,{field:'userName', width:180, title: '用户名'}
+			      ,{field:'userPass', width:180, title: '密码', sort: true}
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
 			  });
@@ -87,7 +87,7 @@
 			});
 		}
 		
-		tableInit("FindAll");
+		tableInit("GetBuyerUsers");
 		
 		//第一种：主动加载jquery模块
 		layui.use(['jquery', 'layer'], function(){ 
@@ -97,7 +97,7 @@
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
 			  var id = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("FindOne")
+			  tableInit("FindOneBuyerUser")
 		  })
 		});
 		

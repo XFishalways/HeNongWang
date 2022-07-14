@@ -22,12 +22,13 @@ public class GetBuyerUsersServlet extends HttpServlet {
         resp.setContentType("application/json;charset=UTF-8");
         PrintWriter pw = resp.getWriter();
         BuyerUserDao buyerUserDao = new BuyerUserDao();
-
+        String id = req.getParameter("USER_ID");
         String json = null;
         try {
             List<BuyerUser> users = buyerUserDao.findAll();
             if(users != null) {
                 json = JSON.toJSONString(users);
+                System.out.println(json);
             }
             else {
                 json = "{\"log\":\"Invalid id\"}";

@@ -25,6 +25,7 @@ public class FindOneBuyerUserServlet {
             BuyerUser user = buyerUserDao.findOneBuyer(id);
             if(user != null) {
                 json = JSON.toJSONString(user);
+                System.out.println(json);
             }
             else {
                 json = "{\"log\":\"Invalid id\"}";

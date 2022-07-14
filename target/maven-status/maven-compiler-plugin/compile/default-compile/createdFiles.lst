@@ -11,13 +11,13 @@ com\bug\henong\entity\BuyerOrder.class
 com\bug\henong\dao\BusinessOrderDao.class
 utils\JDBCUtil.class
 com\bug\henong\dao\SalestoreDao.class
+com\bug\henong\servlet\GetBuyerUsersServlet.class
 com\bug\henong\dao\test.class
 com\bug\henong\entity\BusinessOrder.class
 com\bug\henong\dao\GoodsDao.class
 com\bug\henong\dao\SaleproductDao.class
 com\bug\henong\entity\ProductExamine.class
 com\bug\henong\entity\Goods.class
-com\bug\henong\servlet\getBuyerUsers.class
 com\bug\henong\dao\BusinessUserDao.class
 com\bug\henong\dao\BusinessBuyrecordDao.class
 com\bug\henong\entity\BusinessAddress.class
