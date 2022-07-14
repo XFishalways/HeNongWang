@@ -13,10 +13,14 @@ import com.alibaba.fastjson.JSON;
 import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
 
+/**
+ * @author XFishalways
+ */
 @WebServlet(name = "findOneBuyerUserServlet", value = "/FindOneBuyerUser")
 public class FindOneBuyerUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("test");
         resp.setContentType("application/json;charset=UTF-8");
         PrintWriter pw = resp.getWriter();
         BuyerUserDao buyerUserDao = new BuyerUserDao();
