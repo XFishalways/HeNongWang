@@ -6,7 +6,7 @@ import com.bug.henong.dao.GoodsDao;
 import com.bug.henong.entity.Goods;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
