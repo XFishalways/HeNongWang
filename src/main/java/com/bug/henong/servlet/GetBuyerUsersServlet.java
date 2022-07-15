@@ -15,7 +15,7 @@ import java.util.List;
 import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
 
-@WebServlet(name = "getBuyerUsers", value = "/GetBuyerUsers")
+@WebServlet(name = "getBuyerUsers", value = "/admin/GetBuyerUsers")
 public class GetBuyerUsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
