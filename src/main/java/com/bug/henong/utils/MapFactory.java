@@ -18,4 +18,17 @@ public class MapFactory {
 
         return map;
     }
+    public Map<String, Object> getStringObjectMap(HttpSession session) {
+
+        session.setMaxInactiveInterval(60 * 60 * 2);
+        //session过期时间设置为7200秒 即两小时
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("message","ok");
+        map.put("code",0);
+        map.put("success","success");
+
+
+        return map;
+    }
 }

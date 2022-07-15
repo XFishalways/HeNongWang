@@ -32,15 +32,15 @@ public class FarmerService {
     /**
      * 修改密码
      */
-    public Boolean updatePassword(String loginUserId, String originalPassword, String newPassword) throws SQLException {
+    public Boolean updatePassword(String loginUserId,  String newPassword) throws SQLException {
         Farmer farmer = farmerDao.findOneFarmer(loginUserId);
 
         //当前用户非空才可以进行更改
         if (farmer != null) {
-            if (originalPassword.equals(farmer.getUserPass())) {
+
                 int rw = farmerDao.updateUserPass(loginUserId, newPassword);
                 return rw > 0;
-            }
+
 
         }
 
@@ -50,15 +50,15 @@ public class FarmerService {
     /**
      * 修改姓名
      */
-    public Boolean updateFarmerName(String loginUserId, String originalName, String newName) throws SQLException {
+    public Boolean updateFarmerName(String loginUserId,  String newName) throws SQLException {
         Farmer farmer = farmerDao.findOneFarmer(loginUserId);
 
         //当前用户非空才可以进行更改
         if (farmer != null) {
-            if (originalName.equals(farmer.getFarmerName())) {
+
                 int rw = farmerDao.updateName(loginUserId, newName);
                 return rw > 0;
-            }
+
 
         }
         return false;
@@ -67,15 +67,15 @@ public class FarmerService {
     /**
      * 修改年龄
      */
-    public Boolean updateFarmerAge(String loginUserId, int originalAge, int newAge) throws SQLException {
+    public Boolean updateFarmerAge(String loginUserId,  int newAge) throws SQLException {
         Farmer farmer = farmerDao.findOneFarmer(loginUserId);
 
         //当前用户非空才可以进行更改
-        if (farmer != null) {
-            if (originalAge == (farmer.getFarmerAge())) {
+
+            if (farmer.getFarmerAge() == (farmer.getFarmerAge())) {
                 int rw = farmerDao.updateAge(loginUserId, newAge);
                 return rw > 0;
-            }
+
 
         }
         return false;
@@ -85,15 +85,15 @@ public class FarmerService {
     /**
      * 修改所在地
      */
-    public Boolean updatePlace(String loginUserId, String originalPlace, String newPlace) throws SQLException {
+    public Boolean updatePlace(String loginUserId,  String newPlace) throws SQLException {
         Farmer farmer = farmerDao.findOneFarmer(loginUserId);
 
         //当前用户非空才可以进行更改
         if (farmer != null) {
-            if (originalPlace.equals(farmer.getFarmerPlace())) {
+
                 int rw = farmerDao.updatePlace(loginUserId, newPlace);
                 return rw > 0;
-            }
+
 
         }
         return false;
@@ -102,15 +102,15 @@ public class FarmerService {
     /**
      * 修改资产
      */
-    public Boolean updateValue(String loginUserId, Double originalValue, Double newValue) throws SQLException {
+    public Boolean updateValue(String loginUserId, Double newValue) throws SQLException {
         Farmer farmer = farmerDao.findOneFarmer(loginUserId);
 
         //当前用户非空才可以进行更改
         if (farmer != null) {
-            if (originalValue.equals(farmer.getFarmerValue())) {
+
                 int rw = farmerDao.updateValue(loginUserId, newValue);
                 return rw > 0;
-            }
+
 
         }
 
@@ -120,30 +120,27 @@ public class FarmerService {
     /**
      * 修改信誉度
      */
-    public Boolean updateCredibility(String loginUserId, String originalCredit, String newCredit) throws SQLException {
+    public Boolean updateCredibility(String loginUserId, String newCredit) throws SQLException {
         Farmer farmer = farmerDao.findOneFarmer(loginUserId);
 
         //当前用户非空才可以进行更改
         if (farmer != null) {
-            if (originalCredit.equals(farmer.getFarmerCredibility())) {
                 int rw = farmerDao.updateCredibility(loginUserId, newCredit);
                 return rw > 0;
-            }
-
         }
 
         return false;
     }
     /**修改密码盐 */
-    public Boolean updatePassSalt(String loginUserId, String originalPassSalt, String newPassSalt) throws SQLException {
+    public Boolean updatePassSalt(String loginUserId,  String newPassSalt) throws SQLException {
         Farmer farmer = farmerDao.findOneFarmer(loginUserId);
 
         //当前用户非空才可以进行更改
         if (farmer != null) {
-            if (originalPassSalt.equals(farmer.getPassSalt())) {
+
                 int rw = farmerDao.updatePassSalt(loginUserId, newPassSalt);
                 return rw > 0;
-            }
+
 
         }
 
@@ -151,15 +148,15 @@ public class FarmerService {
     }
 
     /**修改所属卖家ID号*/
-    public Boolean updateBusinessId(String loginUserId, String originalBusinessId, String newBusinessId) throws SQLException {
+    public Boolean updateBusinessId(String loginUserId,  String newBusinessId) throws SQLException {
         Farmer farmer = farmerDao.findOneFarmer(loginUserId);
 
         //当前用户非空才可以进行更改
         if (farmer != null) {
-            if (originalBusinessId.equals(farmer.getBusinessId())) {
+
                 int rw = farmerDao.updateCredibility(loginUserId, newBusinessId);
                 return rw > 0;
-            }
+
 
         }
 
