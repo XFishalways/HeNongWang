@@ -46,7 +46,13 @@
                   <div class="layui-input-inline">
                     <input id="account-age" type="text" name="age" value="12" required  lay-verify="number" placeholder="年龄" autocomplete="off" class="layui-input">
                   </div>
-              </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">所属卖家ID</label>
+                  <div class="layui-input-inline">
+                    <input id="business-id" type="text" name="businessId" value="" required  lay-verify="required" placeholder="ID" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
                       <button id="submit-btn" class="layui-btn" type="button" lay-submit lay-filter="submit-info">立即提交</button>
@@ -73,37 +79,18 @@
                 }
               })
 
-              $(document).ready(function(){
-                $.ajax({
-                  type:'GET',
-                  url:'',
-                  data:{
-                    userId:getCookie('userId')
-                  },
-                  dataType:'json',
-
-                  success:function(data){
-                    $('#account-name').val(data.userName);
-                    $('#account-pass').val(data.userPass);
-                    $('#account-addr').val(data.userAddr);
-                  },
-
-                  error:function(){
-                    alert('failed');
-                  }
-                })
-
-                form.on('submit(submit-info)',function(data){
-                  alert(data.field.name);
+              form.on('submit(submit-info)',function(data){
+                  alert(data.field);
                   $.ajax({
                     type:"POST",
-                    url:'',
+                    url:'farmer/update',
                     data:{
-                      id:getCookie('userId'),
-                      name:data.field.name,
-                      pass:data.field.newPass,
-                      addr:data.field.address,
-                      age:data.field.age
+                      farmerName:data.field.name,
+                      originalUserPass:data.field.oldPass,
+                      newUserPass:data.field.newPass,
+                      farmerPlace:data.field.address,
+                      farmerAge:data.field.age,
+                      businessId:data.field.businessId
                     },
                     dataType:'json',
 
@@ -118,6 +105,29 @@
                   
                   return false;
                 })
+
+              $(document).ready(function(){
+                $.ajax({
+                  type:'GET',
+                  url:'',
+                  data:{
+                    
+                  },
+                  dataType:'json',
+
+                  success:function(data){
+                    alert(data);
+                    $('#account-name').val(data.userName);
+                    $('#account-addr').val(data.userAddr);
+                    $('#business-id').val(data.businessId);
+                  },
+
+                  error:function(){
+                    alert('failed');
+                  }
+                })
+
+                
 
                 
               })

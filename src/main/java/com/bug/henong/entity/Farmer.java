@@ -19,7 +19,7 @@ public class Farmer implements Serializable,Cloneable{
     private String farmerName ;
     /** 年龄 */
     @ApiModelProperty(name = "年龄",notes = "")
-    private Integer farmerAge ;
+    private int farmerAge ;
     /** ID号 */
     @Id
     @GeneratedValue
@@ -53,11 +53,11 @@ public class Farmer implements Serializable,Cloneable{
         this.farmerName=farmerName;
     }
     /** 返回年龄 */
-    public Integer getFarmerAge(){
+    public int getFarmerAge(){
         return this.farmerAge;
     }
     /** 设置年龄 */
-    public void setFarmerAge(Integer farmerAge){
+    public void setFarmerAge(int farmerAge){
         this.farmerAge=farmerAge;
     }
     /** 返回ID号 */
