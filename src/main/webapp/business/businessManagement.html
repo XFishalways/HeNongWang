@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>卖家管理中心</title>
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
+</head>
+<body>
+<!-- 进度条 -->
+<div class="layui-progress" style="margin:auto; ">
+    <div class="layui-progress-bar layui-bg-cyan" lay-percent="100%"></div>
+</div>
+
+<div class="layui-row">
+    <ul id="homepage-head" class="layui-nav layui-col-md12 layui-bg-green">
+        <li class="layui-nav-item layui-col-md3 ">
+            <a href="" class= "layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center; font-size: 50px; font-family: KaiTi;" >合农网</a>
+        </li>
+        <li class="layui-nav-item layui-col-md2">
+            <a href="" class= "layui-this layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">首页</a>
+        </li>
+        <li class="layui-nav-item layui-col-md2">
+            <a href="" class= "layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">个人中心</a>
+        </li>
+        <form class=" layui-form layui-col-md4 layui-col-md-offset1" action="">
+            <div class="layui-form-item" style="margin-top:15px;">
+                <div class="layui-input-inline">
+                    <input type="text" name="title" required  lay-verify="required" placeholder="搜索" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-anim layui-anim-scaleSpring" style="padding:0!important;">
+                    <button type="submit" class="layui-btn layui-btn-normal" lay-submit lay-filter="demo1">搜索</button>
+                </div>
+            </div>
+
+        </form>
+
+    </ul>
+</div>
+</body>
+</html>
