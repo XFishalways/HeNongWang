@@ -59,7 +59,7 @@ public class BuyerUserDao {
 
         List<BuyerUser> buyerUsers = new ArrayList<BuyerUser>();
         //offset:跳offset数值行  limit: 取limit数值行
-        int offset = currentPage*pageSize;
+        int offset = (currentPage - 1)*pageSize;
         int limit = pageSize;
         List<Entity> entities = Db.use().query("SELECT * FROM buyer_user ORDER BY USER_ID+0 LIMIT ?,?",offset,limit);
 
