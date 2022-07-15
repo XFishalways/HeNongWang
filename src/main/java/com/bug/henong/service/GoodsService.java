@@ -1,18 +1,16 @@
 package com.bug.henong.service;
 
-
-
 import com.bug.henong.dao.GoodsDao;
 import com.bug.henong.dao.SaleStoreDao;
 import com.bug.henong.entity.Goods;
 import com.bug.henong.entity.SaleProduct;
 import com.bug.henong.entity.SaleStore;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-
-
+@Service
 public class GoodsService {
 
     private GoodsDao goodsDao;
