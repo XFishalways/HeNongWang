@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>个人信息</title>
+        <link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+        <script type="text/javascript" src="../lib/layui/layui.js"></script>
+    </head>
+    <body>
+        <div style="margin-top: 50px;">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                     <label class="layui-form-label">姓名</label>
+                     <div class="layui-input-inline">
+                       <input id="account-name" type="text" name="name" value="现姓名" required  lay-verify="required" placeholder="账号名" autocomplete="off" class="layui-input">
+                     </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">原密码</label>
+                    <div class="layui-input-inline">
+                      <input id="old-pass" type="password" name="oldPass" value="" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">新密码</label>
+                    <div class="layui-input-inline">
+                      <input id="new-pass" type="password" name="newPass" value="" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">确认密码</label>
+                    <div class="layui-input-inline">
+                      <input id="confirm-pass" type="password" name="confirmPass" value="" required  lay-verify="required|pass" placeholder="密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">地址</label>
+                    <div class="layui-input-inline">
+                      <input id="account-addr" type="text" name="address" value="原地址" required  lay-verify="required" placeholder="地址" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">年龄</label>
+                  <div class="layui-input-inline">
+                    <input id="account-age" type="text" name="age" value="年龄" required  lay-verify="number" placeholder="年龄" autocomplete="off" class="layui-input">
+                  </div>
+              </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <button id="submit-btn" class="layui-btn" lay-submit lay-filter="submit-info">立即提交</button>
+                      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            layui.use(['jquery','form'], function(args){
+              var $ = layui.$;
+              var form = layui.form;
+
+              form.render();
+
+              alert(1);
+              form.verify({
+                pass:function(value){
+                  
+                  var pass = $('#new-pass').val();
+                  if( pass != value) {
+                    return "两次输入密码不一致";
+                  }
+                }
+              })
+
+              $(document).ready(function(){
+                $.ajax({
+                  type:'GET',
+                  url:'',
+                  data:{
+                    userId:getCookie('userId')
+                  },
+                  dataType:'json',
+
+                  success:function(data){
+                    $('#account-name').val(data.userName);
+                    $('#account-pass').val(data.userPass);
+                    $('#account-addr').val(data.userAddr);
+                  },
+
+                  error:function(){
+                    alert('failed');
+                  }
+                })
+
+                form.on('submit(submit-info)',function(data){
+                  $.ajax({
+                    type:"POST",
+                    url:'',
+                    data:{
+                      id:getCookie('userId'),
+                      name:data.field.name,
+                      pass:data.field.newPass,
+                      addr:data.field.address,
+                      age:data.field.age
+                    },
+                    dataType:'json',
+
+                    success:function(){
+                      alert('success');
+                    },
+
+                    error:function(){
+                      alert('failed');
+                    }
+                  })
+                  
+                  return false;
+                })
+
+                
+              })
+
+            }); 
+            
+        </script>
+    </body>
+</html>

@@ -22,16 +22,13 @@ public class SaleStoreService {
     /**
      * 修改店铺活动标题
      */
-    public Boolean updateActivityTitle(String loginStoreId, String originalActivityTitle, String newActivityTitle) throws SQLException {
+    public Boolean updateActivityTitle(String loginStoreId, String newActivityTitle) throws SQLException {
         SaleStore saleStore = saleStoreDao.findOneStore(loginStoreId);
 
         //当前用户非空才可以进行更改
         if (saleStore != null) {
-            if (originalActivityTitle.equals(saleStore.getSaleStoreTitle())) {
-                int rw = saleStoreDao.updateActivityTitle(newActivityTitle,loginStoreId);
+                 int rw = saleStoreDao.updateActivityTitle(newActivityTitle,loginStoreId);
                 return rw > 0;
-            }
-
         }
 
         return false;
@@ -40,16 +37,13 @@ public class SaleStoreService {
     /**
      * 修改店铺活动说明
      */
-    public Boolean updateActivityIntro(String loginStoreId, String originalActivityIntro, String newActivityIntro) throws SQLException {
+    public Boolean updateActivityIntro(String loginStoreId, String newActivityIntro) throws SQLException {
         SaleStore saleStore = saleStoreDao.findOneStore(loginStoreId);
 
         //当前用户非空才可以进行更改
         if (saleStore != null) {
-            if (originalActivityIntro.equals(saleStore.getSaleStoreIntro())) {
                 int rw = saleStoreDao.updateActivityIntro(newActivityIntro,loginStoreId);
                 return rw > 0;
-            }
-
         }
 
         return false;
@@ -58,15 +52,13 @@ public class SaleStoreService {
     /**
      * 修改店铺内容说明
      */
-    public Boolean updateActivityContent(String loginStoreId, String originalActivityContent, String newActivityContent) throws SQLException {
+    public Boolean updateActivityContent(String loginStoreId, String newActivityContent) throws SQLException {
         SaleStore saleStore = saleStoreDao.findOneStore(loginStoreId);
 
         //当前用户非空才可以进行更改
         if (saleStore != null) {
-            if (originalActivityContent.equals(saleStore.getSaleStoreContent())) {
                 int rw = saleStoreDao.updateActivityContent(newActivityContent,loginStoreId);
                 return rw > 0;
-            }
 
         }
 
@@ -76,15 +68,13 @@ public class SaleStoreService {
     /**
      * 修改店铺起始时间
      */
-    public Boolean updateActivityStartTime(String loginStoreId, Timestamp originalActivityStartTime, Timestamp newActivityStartTime) throws SQLException {
+    public Boolean updateActivityStartTime(String loginStoreId, Timestamp newActivityStartTime) throws SQLException {
         SaleStore saleStore = saleStoreDao.findOneStore(loginStoreId);
 
         //当前用户非空才可以进行更改
         if (saleStore != null) {
-            if (originalActivityStartTime.equals(saleStore.getSaleStoreStartTime())) {
-                int rw = saleStoreDao.updateActivityStart_Time(newActivityStartTime,loginStoreId);
+                 int rw = saleStoreDao.updateActivityStart_Time(newActivityStartTime,loginStoreId);
                 return rw > 0;
-            }
 
         }
 
@@ -94,16 +84,13 @@ public class SaleStoreService {
     /**
      * 修改店铺截止时间
      */
-    public Boolean updateActivityEndTime(String loginStoreId, Timestamp originalActivityEndTime, Timestamp newActivityEndTime) throws SQLException {
+    public Boolean updateActivityEndTime(String loginStoreId, Timestamp newActivityEndTime) throws SQLException {
         SaleStore saleStore = saleStoreDao.findOneStore(loginStoreId);
 
         //当前用户非空才可以进行更改
         if (saleStore != null) {
-            if (originalActivityEndTime.equals(saleStore.getSaleStoreEndTime())) {
-                int rw = saleStoreDao.updateActivityEnd_time(newActivityEndTime,loginStoreId);
+               int rw = saleStoreDao.updateActivityEnd_time(newActivityEndTime,loginStoreId);
                 return rw > 0;
-            }
-
         }
 
         return false;
@@ -112,15 +99,13 @@ public class SaleStoreService {
     /**
      * 修改店铺活动范围
      */
-    public Boolean updateActivityRange(String loginStoreId, String originalActivityRange, String newActivityRange) throws SQLException {
+    public Boolean updateActivityRange(String loginStoreId, String newActivityRange) throws SQLException {
         SaleStore saleStore = saleStoreDao.findOneStore(loginStoreId);
 
         //当前用户非空才可以进行更改
         if (saleStore != null) {
-            if (originalActivityRange.equals(saleStore.getSaleStoreRange())) {
-                int rw = saleStoreDao.updateActivityRange(newActivityRange,loginStoreId);
+                 int rw = saleStoreDao.updateActivityRange(newActivityRange,loginStoreId);
                 return rw > 0;
-            }
 
         }
 
@@ -130,15 +115,13 @@ public class SaleStoreService {
     /**
      * 修改店铺活动类型
      */
-    public Boolean updateActivityType(String loginStoreId, String originalActivityType, String newActivityType) throws SQLException {
+    public Boolean updateActivityType(String loginStoreId, String newActivityType) throws SQLException {
         SaleStore saleStore = saleStoreDao.findOneStore(loginStoreId);
 
         //当前用户非空才可以进行更改
         if (saleStore != null) {
-            if (originalActivityType.equals(saleStore.getSaleStoreType())) {
                 int rw = saleStoreDao.updateActivityType(newActivityType,loginStoreId);
                 return rw > 0;
-            }
 
         }
 
@@ -148,16 +131,13 @@ public class SaleStoreService {
     /**
      * 修改店铺状态说明
      */
-    public Boolean updateActivityStatus(String loginStoreId, String originalActivityStatus, String newActivityStatus) throws SQLException {
+    public Boolean updateActivityStatus(String loginStoreId, String newActivityStatus) throws SQLException {
         SaleStore saleStore = saleStoreDao.findOneStore(loginStoreId);
 
         //当前用户非空才可以进行更改
         if (saleStore != null) {
-            if (originalActivityStatus.equals(saleStore.getSaleStoreStatus())) {
                 int rw = saleStoreDao.updateActivity_Status(newActivityStatus,loginStoreId);
                 return rw > 0;
-            }
-
         }
 
         return false;

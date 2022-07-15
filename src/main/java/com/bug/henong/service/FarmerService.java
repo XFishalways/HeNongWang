@@ -48,6 +48,41 @@ public class FarmerService {
     }
 
     /**
+     * 修改姓名
+     */
+    public Boolean updateFarmerName(String loginUserId, String originalName, String newName) throws SQLException {
+        Farmer farmer = farmerDao.findOneFarmer(loginUserId);
+
+        //当前用户非空才可以进行更改
+        if (farmer != null) {
+            if (originalName.equals(farmer.getFarmerName())) {
+                int rw = farmerDao.updateName(loginUserId, newName);
+                return rw > 0;
+            }
+
+        }
+        return false;
+    }
+
+    /**
+     * 修改年龄
+     */
+    public Boolean updateFarmerAge(String loginUserId, int originalAge, int newAge) throws SQLException {
+        Farmer farmer = farmerDao.findOneFarmer(loginUserId);
+
+        //当前用户非空才可以进行更改
+        if (farmer != null) {
+            if (originalAge == (farmer.getFarmerAge())) {
+                int rw = farmerDao.updateAge(loginUserId, newAge);
+                return rw > 0;
+            }
+
+        }
+        return false;
+    }
+
+
+    /**
      * 修改所在地
      */
     public Boolean updatePlace(String loginUserId, String originalPlace, String newPlace) throws SQLException {
