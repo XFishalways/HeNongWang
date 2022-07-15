@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapFactory {
-    public  Map<String, Object> getStringObjectMap(HttpSession session, String type) {
+    public Map<String, Object> getStringObjectMapWithType(HttpSession session, String type) {
 
         session.setMaxInactiveInterval(60 * 60 * 2);
         //session过期时间设置为7200秒 即两小时

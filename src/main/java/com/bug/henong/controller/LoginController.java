@@ -1,5 +1,6 @@
 package com.bug.henong.controller;
 
+import com.bug.henong.utils.MapFactory;
 import com.bug.henong.entity.BusinessUser;
 import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.entity.Farmer;
@@ -32,6 +33,8 @@ public class LoginController {
             return null;
         }
 
+        MapFactory mapFactory =new MapFactory();
+
         switch (type){
 
             case "farmer":
@@ -40,7 +43,7 @@ public class LoginController {
                     session.setAttribute("userId", farmer.getFarmerName());
                     session.setAttribute("loginUserId", farmer.getFarmerId());
 
-                    return getStringObjectMap(session,type);
+                    return mapFactory.getStringObjectMapWithType(session,type);
                 }
 
             case "buyer":
@@ -49,7 +52,7 @@ public class LoginController {
                     session.setAttribute("loginUser", buyerUser.getUserName());
                     session.setAttribute("loginUserId", buyerUser.getUserId());
 
-                    return getStringObjectMap(session,type);
+                    return mapFactory.getStringObjectMapWithType(session,type);
                 }
 
             case "business":
@@ -58,7 +61,7 @@ public class LoginController {
                     session.setAttribute("loginUser", businessUser.getUserName());
                     session.setAttribute("loginUserId", businessUser.getUserId());
 
-                    return getStringObjectMap(session,type);
+                    return mapFactory.getStringObjectMapWithType(session,type);
                 }
             default:
                 break;
@@ -66,17 +69,4 @@ public class LoginController {
         return null;
     }
 
-    private Map<String, Object> getStringObjectMap(HttpSession session,String type) {
-
-        session.setMaxInactiveInterval(60 * 60 * 2);
-        //session过期时间设置为7200秒 即两小时
-
-        Map<String,Object> map = new HashMap<>();
-        map.put("message","ok");
-        map.put("code",0);
-        map.put("success","success");
-        map.put("type",type);
-
-        return map;
-    }
 }
