@@ -32,8 +32,8 @@ public class FarmerInfoController {
     }
 
     @PostMapping("/farmer/update")
-    public Map<String , Object> updateInfo(@RequestParam String farmerName , @RequestParam int farmerAge, @RequestParam String farmerPlace
-                            , @RequestParam String businessId, @RequestParam String originalUserPass, @RequestParam String newUserPass,
+    public Map<String , Object> updateInfo(@RequestParam("farmerName") String farmerName , @RequestParam("farmerAge") int farmerAge, @RequestParam("farmerPlace") String farmerPlace
+                            , @RequestParam("businessId") String businessId, @RequestParam("originUserPass") String originalUserPass, @RequestParam("newUserPass") String newUserPass,
                           HttpSession session) throws SQLException {
         Object userId = session.getAttribute("userId");
         String id = (String) userId;
