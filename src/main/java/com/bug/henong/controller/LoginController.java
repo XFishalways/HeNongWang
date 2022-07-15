@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Tan
@@ -18,72 +20,66 @@ import java.sql.SQLException;
 
 public class LoginController {
 
-    private LoginService loginService;
+    private LoginService loginService = new LoginService();
     @GetMapping(value = "/login")
     public String login() {
         //填入返回地址
+        System.out.println("GetSuccess");
         return "/login";
     }
 
-//    @PostMapping(value = "/login")
-//    public String login(@RequestParam("userId") String userId,
-//                        @RequestParam("password") String password,
-//                        @RequestParam("type") String type,
-//                        HttpSession session) throws SQLException {
-//        if (userId==null || password==null) {
-//            session.setAttribute("errorMsg", "用户名或密码不能为空");
-//            return "/login";
-//        }
-//        switch (type){
-//            case "farmer":
-//                Farmer farmer = loginService.farmerLogin(userId,password);
-//                if(farmer!=null){
-//                    session.setAttribute("loginUser", farmer.getFarmerName());
-//                    session.setAttribute("loginUserId", farmer.getFarmerId());
-//                    //session过期时间设置为7200秒 即两小时
-//                    session.setMaxInactiveInterval(60 * 60 * 2);
-//                    return "redirect:/farmer/index";
-//                }
-//            case "buyer":
-//                BuyerUser buyerUser = loginService.buyerLogin(userId,password);
-//                if(buyerUser!=null){
-//                    session.setAttribute("loginUser", buyerUser.getUserName());
-//                    session.setAttribute("loginUserId", buyerUser.getUserId());
-//                    //session过期时间设置为7200秒 即两小时
-//                    session.setMaxInactiveInterval(60 * 60 * 2);
-//                    return "redirect:/index";
-//                }
-//            case "business":
-//                BusinessUser businessUser = loginService.businessUserLogin(userId,password);
-//                if(businessUser!=null){
-//                    session.setAttribute("loginUser", businessUser.getUserName());
-//                    session.setAttribute("loginUserId", businessUser.getUserId());
-//                    //session过期时间设置为7200秒 即两小时
-//                    session.setMaxInactiveInterval(60 * 60 * 2);
-//                    return "redirect:/business/index";
-//                }
-//            default:
-//                break;
-//        }
-//        return "/login";
-//    }
-    @PostMapping(value = "/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public String login(HttpServletRequest request){
-        String id = request.getParameter("userId");
-        System.out.println(id);
-        return "/login";
+    public Map<String,Object> login(@RequestParam("userId") String userId,
+                        @RequestParam("password") String password,
+                        @RequestParam("type") String type,
+                        HttpSession session) throws SQLException {
+        System.out.println("In");
+        if (userId==null || password==null) {
+            session.setAttribute("errorMsg", "用户名或密码不能为空");
+            return null;
+        }
+        switch (type){
+            case "farmer":
+                System.out.println("2");
+                Farmer farmer = loginService.farmerLogin(userId,password);
+                if(farmer!=null){
+                    System.out.println("3");
+                    session.setAttribute("userId", farmer.getFarmerName());
+                    session.setAttribute("loginUserId", farmer.getFarmerId());
+                    //session过期时间设置为7200秒 即两小时
+                    return getStringObjectMap(session);
+                }
+            case "buyer":
+                BuyerUser buyerUser = loginService.buyerLogin(userId,password);
+                if(buyerUser!=null){
+                    session.setAttribute("loginUser", buyerUser.getUserName());
+                    session.setAttribute("loginUserId", buyerUser.getUserId());
+                    //session过期时间设置为7200秒 即两小时
+                    return getStringObjectMap(session);
+                }
+            case "business":
+                BusinessUser businessUser = loginService.businessUserLogin(userId,password);
+                if(businessUser!=null){
+                    session.setAttribute("loginUser", businessUser.getUserName());
+                    session.setAttribute("loginUserId", businessUser.getUserId());
+                    //session过期时间设置为7200秒 即两小时
+                    session.setMaxInactiveInterval(60 * 60 * 2);
+                    return getStringObjectMap(session);
+                }
+            default:
+                break;
+        }
+        return null;
     }
-//    @GetMapping("/login1")
-//    @ResponseBody
-//    public String login1(HttpServletRequest request){
-//        System.out.println("success");
-//        return "/index";
-//    }
-    @PostMapping("/login1")
-    @ResponseBody
-    public String login1(HttpServletRequest request){
-        System.out.println("success");
-        return "/index";
+
+    private Map<String, Object> getStringObjectMap(HttpSession session) {
+        session.setMaxInactiveInterval(60 * 60 * 2);
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("message","ok");
+        map.put("code",0);
+        map.put("success","success");
+        return map;
     }
 }
