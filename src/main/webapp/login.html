@@ -16,7 +16,7 @@
         </ul>
     </div>
 
-    <div class="layui-container" id="advertising">
+    <div class="layui-container" >
         <div class="layui-row layui-col-md12 ">
 
             <div class = "layui-col-md6" style="margin-top:200px;">
@@ -88,7 +88,6 @@
 
     <script src="lib/layui/layui.js"></script>
     <script>
-        document.cookie = "check_cookie=1";
         
         layui.use(['form','jquery'],function () {
             var form = layui.form;
@@ -115,29 +114,30 @@
 
                         error:function(){
 
-                            function getCookie(cname){
-                                var name = cname + "=";
-                                var ca = document.cookie.split(';');
-                                for(var i=0; i<ca.length; i++) {
-                                    var c = ca[i].trim();
-                                    if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
-                                }
-                                return "";
-                            }
-
-                            document.cookie = "userId=" + $('#input-account').val();
-                            alert(document.cookie);
-
-                            function checkCookie(){
-                                var user = getCookie('userId');
-                                if(user != "") {
-                                    alert("OK");
-                                }else{
-                                    alert("NOOOOO!");
-                                }
-                            }
-                            checkCookie();
                             alert('failed');
+                            // function getCookie(cname){
+                            //     var name = cname + "=";
+                            //     var ca = document.cookie.split(';');
+                            //     for(var i=0; i<ca.length; i++) {
+                            //         var c = ca[i].trim();
+                            //         if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+                            //     }
+                            //     return "";
+                            // }
+
+                            // document.cookie = "userId=" + $('#input-account').val();
+                            // alert(document.cookie);
+
+                            // function checkCookie(){
+                            //     var user = getCookie('userId');
+                            //     if(user != "") {
+                            //         alert("OK");
+                            //     }else{
+                            //         alert("NOOOOO!");
+                            //     }
+                            // }
+                            // checkCookie();
+                            // alert('failed');
                         }
                     })
 
