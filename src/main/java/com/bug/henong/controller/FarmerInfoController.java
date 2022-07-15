@@ -34,11 +34,10 @@ public class FarmerInfoController {
     @PostMapping("/farmer/update")
     public Map<String , Object> updateInfo(@RequestParam("farmerName") String farmerName , @RequestParam("farmerAge") int farmerAge, @RequestParam("farmerPlace") String farmerPlace
                             , @RequestParam("businessId") String businessId, @RequestParam("originUserPass") String originalUserPass, @RequestParam("newUserPass") String newUserPass,
-                          HttpSession session) throws SQLException {
-        Object userId = session.getAttribute("userId");
-        String id = (String) userId;
+                          @RequestParam("userId") String userId,HttpSession session) throws SQLException {
 
-        Farmer farmer = farmerService.getFarmerDetailById(id);
+
+        Farmer farmer = farmerService.getFarmerDetailById(userId);
         if (farmer == null) {
             session.setAttribute("errorMsg", "查找不到用户id");
             return null;
@@ -48,20 +47,20 @@ public class FarmerInfoController {
             return null;
         }
         if (!farmer.getFarmerName().equals(farmerName)) {
-            farmerService.updateFarmerName(id, farmerName);
+            farmerService.updateFarmerName(userId, farmerName);
         }
         if (farmer.getFarmerAge() != farmer.getFarmerAge()) {
-            farmerService.updateFarmerAge(id, farmerAge);
+            farmerService.updateFarmerAge(userId, farmerAge);
         }
         if (!farmer.getFarmerPlace().equals(farmerPlace)) {
-            farmerService.updatePlace(id, farmerPlace);
+            farmerService.updatePlace(userId, farmerPlace);
         }
         if (!farmer.getBusinessId().equals(businessId)) {
-            farmerService.updateBusinessId(id, businessId);
+            farmerService.updateBusinessId(userId, businessId);
         }
         if (!originalUserPass.equals(newUserPass)) {
             if (newUserPass != null) {
-                farmerService.updatePassword(id, newUserPass);
+                farmerService.updatePassword(userId, newUserPass);
                 //修改密码盐
 
             }
