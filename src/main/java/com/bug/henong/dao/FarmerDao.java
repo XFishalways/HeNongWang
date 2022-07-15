@@ -94,6 +94,29 @@ public class FarmerDao {
         return rw;
     }
 
+    /**更新姓名**/
+    public int updateName(String id, String name) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("FARMER_NAME", name),
+                Entity.create("FARMER").set("FARMER_ID", id)
+        );
+
+        return rw;
+    }
+
+    /**更新年龄**/
+    public int updateAge(String id, int age) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("FARMER_AGE", age),
+                Entity.create("FARMER").set("FARMER_ID", id)
+        );
+
+        return rw;
+    }
+
+
     /**更新资产**/
     public int updateValue(String id,double value) throws SQLException {
 
