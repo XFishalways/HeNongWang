@@ -62,7 +62,7 @@
 
                     <div class="layui-form-item layui-row layui-col-md12 ">
                         <div class="layui-col-md4 layui-col-md-offset4">
-                            <button id="log-btn" href="" class="layui-btn layui-btn-lg">----登录----</button>
+                            <button id="log-btn" href="" type="button" class="layui-btn layui-btn-lg">----登录----</button>
                         </div>
                     </div>
                 </form>
@@ -109,18 +109,26 @@
                         dataType:'json',
 
                         success:function(data){
-                            document.cookie = "userId=" + $('#input-account').val();
+                            createCookie('userId',$('#input-account').val());
+                            createCookie('userType',$('#input-type').val());
                             alert('success');
                         },
 
                         error:function(){
-
                             alert('failed');
-
-                            createCookie('userId',$('#input-account').val())
-                            alert(document.cookie);
                         }
                     })
+
+                    if(getCookie('userId') != ""){
+                        var type = getCookie('userType');
+                        if(type == 'buyer'){
+                            window.location.href = "";
+                        }else if(type == 'farmer'){
+                            window.location.href = "farmer/";
+                        }else if(type == 'business'){
+                            window.location.href = "business/";
+                        }
+                    }
 
                     return false;
                 })
