@@ -121,13 +121,7 @@
             <!-- 注意，若无type为jar则报错-->
             <type>jar</type>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>5.2.9.RELEASE</version>
-            <scope>test</scope>
-        </dependency>
+
     </dependencies>
 
     <build>
