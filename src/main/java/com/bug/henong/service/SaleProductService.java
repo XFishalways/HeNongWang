@@ -26,16 +26,14 @@ public class SaleProductService {
     /**
      * 修改活动标题
      */
-    public Boolean updateTitle(String loginProductId, String originalTitle, String newTitle) throws SQLException {
+    public Boolean updateTitle(String loginProductId, String newTitle) throws SQLException {
         SaleProduct saleProduct = saleProductDao.findOneProduct(loginProductId);
 
         //当前用户非空才可以进行更改
         if (saleProduct != null) {
-            if (originalTitle.equals(saleProduct.getSaleProductTitle())) {
+
                 int rw = saleProductDao.updateTitle(newTitle,loginProductId);
                 return rw > 0;
-            }
-
         }
 
         return false;
@@ -44,16 +42,14 @@ public class SaleProductService {
     /**
      * 修改活动说明
      */
-    public Boolean updateIntro(String loginProductId, String originalIntro, String newIntro) throws SQLException {
+    public Boolean updateIntro(String loginProductId, String newIntro) throws SQLException {
         SaleProduct saleProduct = saleProductDao.findOneProduct(loginProductId);
 
         //当前用户非空才可以进行更改
         if (saleProduct != null) {
-            if (originalIntro.equals(saleProduct.getSaleProductIntro())) {
+
                 int rw = saleProductDao.updateIntro(newIntro,loginProductId);
                 return rw > 0;
-            }
-
         }
 
         return false;
@@ -62,16 +58,14 @@ public class SaleProductService {
     /**
      * 修改活动内容
      */
-    public Boolean updateContent(String loginProductId, String originalContent, String newContent) throws SQLException {
+    public Boolean updateContent(String loginProductId, String newContent) throws SQLException {
         SaleProduct saleProduct = saleProductDao.findOneProduct(loginProductId);
 
         //当前用户非空才可以进行更改
         if (saleProduct != null) {
-            if (originalContent.equals(saleProduct.getSaleProductContent())) {
+
                 int rw = saleProductDao.updateContent(newContent,loginProductId);
                 return rw > 0;
-            }
-
         }
 
         return false;
@@ -80,15 +74,14 @@ public class SaleProductService {
     /**
      * 修改活动起始时间
      */
-    public Boolean updateStart_time(String loginProductId, Timestamp originalStartTime, Timestamp newStartTime) throws SQLException {
+    public Boolean updateStart_time(String loginProductId, Timestamp newStartTime) throws SQLException {
         SaleProduct saleProduct = saleProductDao.findOneProduct(loginProductId);
 
         //当前用户非空才可以进行更改
         if (saleProduct != null) {
-            if (originalStartTime.equals(saleProduct.getSaleProductStartTime())) {
+
                 int rw = saleProductDao.updateStart_time(newStartTime,loginProductId);
                 return rw > 0;
-            }
 
         }
 
@@ -98,16 +91,14 @@ public class SaleProductService {
     /**
      * 修改活动截止时间
      */
-    public Boolean updateEndTime(String loginProductId, Timestamp originalEndTime, Timestamp newEndTime) throws SQLException {
+    public Boolean updateEndTime(String loginProductId, Timestamp newEndTime) throws SQLException {
         SaleProduct saleProduct = saleProductDao.findOneProduct(loginProductId);
 
         //当前用户非空才可以进行更改
         if (saleProduct != null) {
-            if (originalEndTime.equals(saleProduct.getSaleProductEndTime())) {
+
                 int rw = saleProductDao.updateEnd_time(newEndTime,loginProductId);
                 return rw > 0;
-            }
-
         }
 
         return false;
@@ -116,15 +107,13 @@ public class SaleProductService {
     /**
      * 修改活动范围
      */
-    public Boolean updateRange(String loginProductId, String originalRange, String newRange) throws SQLException {
+    public Boolean updateRange(String loginProductId, String newRange) throws SQLException {
         SaleProduct saleProduct = saleProductDao.findOneProduct(loginProductId);
 
         //当前用户非空才可以进行更改
         if (saleProduct != null) {
-            if (originalRange.equals(saleProduct.getSaleProductRange())) {
-                int rw = saleProductDao.updateRange(newRange,loginProductId);
+                     int rw = saleProductDao.updateRange(newRange,loginProductId);
                 return rw > 0;
-            }
 
         }
 
@@ -134,16 +123,13 @@ public class SaleProductService {
     /**
      * 修改活动类型
      */
-    public Boolean updateType(String loginProductId, String originalType, String newType) throws SQLException {
+    public Boolean updateType(String loginProductId, String newType) throws SQLException {
         SaleProduct saleProduct = saleProductDao.findOneProduct(loginProductId);
 
         //当前用户非空才可以进行更改
         if (saleProduct != null) {
-            if (originalType.equals(saleProduct.getSaleProductType())) {
                 int rw = saleProductDao.updateType(newType,loginProductId);
                 return rw > 0;
-            }
-
         }
 
         return false;
@@ -152,15 +138,13 @@ public class SaleProductService {
     /**
      * 修改活动状态
      */
-    public Boolean updateStatus(String loginProductId, String originalStatus, String newStatus) throws SQLException {
+    public Boolean updateStatus(String loginProductId, String newStatus) throws SQLException {
         SaleProduct saleProduct = saleProductDao.findOneProduct(loginProductId);
 
         //当前用户非空才可以进行更改
         if (saleProduct != null) {
-            if (originalStatus.equals(saleProduct.getSaleProductStatus())) {
-                int rw = saleProductDao.updateStatus(newStatus,loginProductId);
+                  int rw = saleProductDao.updateStatus(newStatus,loginProductId);
                 return rw > 0;
-            }
 
         }
 

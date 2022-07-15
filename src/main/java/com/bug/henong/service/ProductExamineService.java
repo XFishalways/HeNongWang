@@ -24,15 +24,13 @@ public class ProductExamineService {
     /**
      * 修改商品审批结果
      */
-    public Boolean updateProductResult(String loginProductId, String originalProductResult, String newProductResult) throws SQLException {
+    public Boolean updateProductResult(String loginProductId, String newProductResult) throws SQLException {
         ProductExamine productExamine = productExamineDao.findOneProduct(loginProductId);
 
         //当前用户非空才可以进行更改
         if (productExamine != null) {
-            if (originalProductResult.equals(productExamine.getProductResult())) {
                 int rw = productExamineDao.updateProductResult(newProductResult,loginProductId);
                 return rw > 0;
-            }
 
         }
 
@@ -43,16 +41,13 @@ public class ProductExamineService {
     /**
      * 修改商品审批批注
      */
-    public Boolean updateProductNote(String loginProductId, String originalProductNote, String newProductNote) throws SQLException {
+    public Boolean updateProductNote(String loginProductId, String newProductNote) throws SQLException {
         ProductExamine productExamine = productExamineDao.findOneProduct(loginProductId);
 
         //当前用户非空才可以进行更改
         if (productExamine != null) {
-            if (originalProductNote.equals(productExamine.getProductNotes())) {
                 int rw = productExamineDao.updateProductNote(newProductNote,loginProductId);
                 return rw > 0;
-            }
-
         }
 
         return false;

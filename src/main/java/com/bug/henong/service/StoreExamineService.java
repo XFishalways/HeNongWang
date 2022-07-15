@@ -21,16 +21,13 @@ public class StoreExamineService {
     /**
      * 修改店铺审批结果
      */
-    public Boolean updateStoreResult(String loginStoreId, String originalStoreResult, String newStoreResult) throws SQLException {
+    public Boolean updateStoreResult(String loginStoreId, String newStoreResult) throws SQLException {
         StoreExamine storeExamine = storeExamineDao.findOneStore(loginStoreId);
 
         //当前用户非空才可以进行更改
         if (storeExamine != null) {
-            if (originalStoreResult.equals(storeExamine.getStoreResult())) {
-                int rw = storeExamineDao.updateStoreResult(newStoreResult,loginStoreId);
+                  int rw = storeExamineDao.updateStoreResult(newStoreResult,loginStoreId);
                 return rw > 0;
-            }
-
         }
 
         return false;
@@ -39,16 +36,13 @@ public class StoreExamineService {
     /**
      * 修改店铺审批批注
      */
-    public Boolean updateStoreNote(String loginStoreId, String originalStoreNote, String newStoreNote) throws SQLException {
+    public Boolean updateStoreNote(String loginStoreId, String newStoreNote) throws SQLException {
         StoreExamine storeExamine = storeExamineDao.findOneStore(loginStoreId);
 
         //当前用户非空才可以进行更改
         if (storeExamine != null) {
-            if (originalStoreNote.equals(storeExamine.getStoreNotes())) {
-                int rw = storeExamineDao.updateStoreNote(newStoreNote,loginStoreId);
+                 int rw = storeExamineDao.updateStoreNote(newStoreNote,loginStoreId);
                 return rw > 0;
-            }
-
         }
 
         return false;
