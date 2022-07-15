@@ -16,15 +16,15 @@ public class BusinessItemService {
     }
 
     /**修改商品标题*/
-    public Boolean updateSkuTitle(String itemId, String originalSkuTitle, String newSkuTitle) throws SQLException {
+    public Boolean updateSkuTitle(String itemId, String newSkuTitle) throws SQLException {
         BusinessItem businessItem = businessItemDao.findOneItem(itemId);
 
         //当前用户非空才可以进行更改
         if (businessItem != null) {
-            if (originalSkuTitle.equals(businessItem.getSkuTitle())) {
+
                 int rw = businessItemDao.updateSkuTitle(itemId, newSkuTitle);
                 return rw > 0;
-            }
+
 
         }
 
@@ -32,15 +32,15 @@ public class BusinessItemService {
     }
 
     /**修改商品介绍*/
-    public Boolean updateSkuIntro(String itemId, String originalSkuIntro, String newSkuIntro) throws SQLException {
+    public Boolean updateSkuIntro(String itemId, String newSkuIntro) throws SQLException {
         BusinessItem businessItem = businessItemDao.findOneItem(itemId);
 
         //当前用户非空才可以进行更改
         if (businessItem != null) {
-            if (originalSkuIntro.equals(businessItem.getSkuIntro())) {
+
                 int rw = businessItemDao.updateSkuIntro(itemId, newSkuIntro);
                 return rw > 0;
-            }
+
 
         }
 
@@ -48,15 +48,15 @@ public class BusinessItemService {
     }
 
     /**修改售价*/
-    public Boolean updateSalePrice(String itemId, Double originalSalePrice, Double newSalePrice) throws SQLException {
+    public Boolean updateSalePrice(String itemId,  Double newSalePrice) throws SQLException {
         BusinessItem businessItem = businessItemDao.findOneItem(itemId);
 
         //当前用户非空才可以进行更改
         if (businessItem != null) {
-            if (originalSalePrice == businessItem.getSalePrice()) {
+
                 int rw = businessItemDao.updateSalePrice(itemId, newSalePrice);
                 return rw > 0;
-            }
+
 
         }
 
@@ -64,15 +64,15 @@ public class BusinessItemService {
     }
 
     /**修改商品数量*/
-    public Boolean updateQuantity(String itemId, Double originalQuantity, Double newQuantity) throws SQLException {
+    public Boolean updateQuantity(String itemId, Double newQuantity) throws SQLException {
         BusinessItem businessItem = businessItemDao.findOneItem(itemId);
 
         //当前用户非空才可以进行更改
         if (businessItem != null) {
-            if (originalQuantity == businessItem.getQuantity()) {
+
                 int rw = businessItemDao.updateQuantity(itemId, newQuantity);
                 return rw > 0;
-            }
+
 
         }
 
@@ -80,15 +80,15 @@ public class BusinessItemService {
     }
 
     /**修改活动ID*/
-    public Boolean updateEventId(String itemId, String originalEventId, String newEventId) throws SQLException {
+    public Boolean updateEventId(String itemId,  String newEventId) throws SQLException {
         BusinessItem businessItem = businessItemDao.findOneItem(itemId);
 
         //当前用户非空才可以进行更改
         if (businessItem != null) {
-            if (originalEventId.equals(businessItem.getEventId())) {
+
                 int rw = businessItemDao.updateEventID(itemId, newEventId);
                 return rw > 0;
-            }
+
 
         }
 

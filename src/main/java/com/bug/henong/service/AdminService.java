@@ -24,15 +24,13 @@ public class AdminService {
     /**
      * 修改管理员用户名
      */
-    public Boolean updateNickName(String loginAdminId, String originalNickName, String newNickName) throws SQLException {
+    public Boolean updateNickName(String loginAdminId, String newNickName) throws SQLException {
         Admin admin = adminDao.findOneAdmin(loginAdminId);
 
         //当前用户非空才可以进行更改
         if (admin != null) {
-            if (originalNickName.equals(admin.getAdminName())) {
                 int rw = adminDao.updateName(newNickName,loginAdminId);
                 return rw > 0;
-            }
 
         }
 
@@ -42,15 +40,13 @@ public class AdminService {
     /**
      * 修改管理员密码
      */
-    public Boolean updatePassword(String loginAdminId, String originalPassword, String newPassword) throws SQLException {
+    public Boolean updatePassword(String loginAdminId, String newPassword) throws SQLException {
         Admin admin = adminDao.findOneAdmin(loginAdminId);
 
         //当前用户非空才可以进行更改
         if (admin != null) {
-            if (originalPassword.equals(admin.getAdminPasswd())) {
                 int rw = adminDao.updatePass(newPassword,loginAdminId);
                 return rw > 0;
-            }
 
         }
 
@@ -59,16 +55,13 @@ public class AdminService {
     /**
      * 修改管理员手机
      */
-    public Boolean updatePhone(String loginAdminId, String originalPhone, String newPhone) throws SQLException {
+    public Boolean updatePhone(String loginAdminId, String newPhone) throws SQLException {
         Admin admin = adminDao.findOneAdmin(loginAdminId);
 
         //当前用户非空才可以进行更改
         if (admin != null) {
-            if (originalPhone.equals(admin.getAdminPhone())) {
                 int rw = adminDao.updatePhone(newPhone,loginAdminId);
                 return rw > 0;
-            }
-
         }
 
         return false;
@@ -77,15 +70,13 @@ public class AdminService {
     /**
      * 修改管理员密码盐
      */
-    public Boolean updatePassSalt(String loginAdminId, String originalPassSalt, String newPassSalt) throws SQLException {
+    public Boolean updatePassSalt(String loginAdminId, String newPassSalt) throws SQLException {
         Admin admin = adminDao.findOneAdmin(loginAdminId);
 
         //当前用户非空才可以进行更改
         if (admin != null) {
-            if (originalPassSalt.equals(admin.getPassSalt())) {
                 int rw = adminDao.updatePassSalt(newPassSalt,loginAdminId);
                 return rw > 0;
-            }
 
         }
 

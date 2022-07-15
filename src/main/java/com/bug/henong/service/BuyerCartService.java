@@ -17,15 +17,15 @@ public class BuyerCartService {
     }
 
     /**修改总金额*/
-    public Boolean updateTotalPrice(String cartId, Double originalTotalPrice, Double newTotalPrice) throws SQLException {
+    public Boolean updateTotalPrice(String cartId,  Double newTotalPrice) throws SQLException {
         BuyerCart buyerCart = buyerCartDao.findOneCart(cartId);
 
         //当前用户非空才可以进行更改
         if (buyerCart != null) {
-            if (originalTotalPrice == buyerCart.getTotalPrice()) {
+
                 int rw = buyerCartDao.updateTotalPrice(cartId, newTotalPrice);
                 return rw > 0;
-            }
+
 
         }
 
@@ -33,15 +33,15 @@ public class BuyerCartService {
     }
 
     /**修改应付金额*/
-    public Boolean updatePayablePrice(String cartId, Double originalPayablePrice, Double newPayablePrice) throws SQLException {
+    public Boolean updatePayablePrice(String cartId, Double newPayablePrice) throws SQLException {
         BuyerCart buyerCart = buyerCartDao.findOneCart(cartId);
 
         //当前用户非空才可以进行更改
         if (buyerCart != null) {
-            if (originalPayablePrice == buyerCart.getPayablePrice()) {
+
                 int rw = buyerCartDao.updatePayablePrice(cartId, newPayablePrice);
                 return rw > 0;
-            }
+
 
         }
 
@@ -49,15 +49,15 @@ public class BuyerCartService {
     }
 
     /**修改购物车状态*/
-    public Boolean updateCartStatus(String cartId, String originalCartStatus, String newCartStatus) throws SQLException {
+    public Boolean updateCartStatus(String cartId,  String newCartStatus) throws SQLException {
         BuyerCart buyerCart = buyerCartDao.findOneCart(cartId);
 
         //当前用户非空才可以进行更改
         if (buyerCart != null) {
-            if (originalCartStatus.equals(buyerCart.getCartStatus())) {
+
                 int rw = buyerCartDao.updateCartStatus(cartId, newCartStatus);
                 return rw > 0;
-            }
+
 
         }
 
