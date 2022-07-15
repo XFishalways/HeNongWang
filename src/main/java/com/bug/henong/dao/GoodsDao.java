@@ -13,7 +13,6 @@ import com.bug.henong.entity.Goods;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
 public class GoodsDao {
@@ -35,7 +34,6 @@ public class GoodsDao {
         int rw=Db.use().del(
                 Entity.create("BUYER_USER").set("USER_ID",id)
         );
-
         return rw;
 
     }
@@ -85,7 +83,7 @@ public class GoodsDao {
     }
 
     /**更新数量*/
-    public int updateQuantity(String goodsQuantity, String id) throws SQLException {
+    public int updateQuantity(Double goodsQuantity, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("GOODS_QUANTITY",goodsQuantity),
@@ -96,7 +94,7 @@ public class GoodsDao {
     }
 
     /**更新价格*/
-    public int updatePrice(String price, String id) throws SQLException {
+    public int updatePrice(Double price, String id) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PRICE",price),
@@ -106,11 +104,11 @@ public class GoodsDao {
         return rw;
     }
 
-    /**更新采摘地址*/
-    public int updatePlace(String place, String id) throws SQLException {
+    /**更新是否售罄*/
+    public int updateSale(String sellout, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("GOODS_PLACE", place),
+                Entity.create().set("IF_SEELOUT",sellout),
                 Entity.create("GOODS").set("GOODS_ID",id)
         );
 
@@ -118,48 +116,26 @@ public class GoodsDao {
     }
 
     /**更新审核是否通过*/
-    public int updatePass(String pass, String id) throws SQLException {
+    public int updateUserPass(String ifPass, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("GOODS_PASS", pass),
+                Entity.create().set("IF_PASS",ifPass),
                 Entity.create("GOODS").set("GOODS_ID",id)
         );
 
         return rw;
 
     }
-    /**更新是否售罄*/
-    public int updateSale(String sale, String id) throws SQLException {
-
-        int rw = Db.use().update(
-                Entity.create().set("GOODS_SALE",sale),
-                Entity.create("GOODS").set("GOODS_ID",id)
-        );
-
-        return rw;
-
-    }
-
-    /**更新采摘时间*/
-    public int updateTime(Timestamp time, String id)  throws SQLException {
-
-        int rw = Db.use().update(
-                Entity.create().set("GOODS_TIME",time),
-                Entity.create("GOODS").set("GOODS_ID",id)
-        );
-
-        return rw;
-    }
-
     /**更新好评度*/
-    public int updateDegree(String degree, String id) throws SQLException {
+    public int updatePassSalt(String PraiseDegree, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("GOODS_DEGREE", degree),
-                Entity.create("GOODS").set("GOODS_ID", id)
+                Entity.create().set("PRAISE_DEGREE",PraiseDegree),
+                Entity.create("GOODS").set("GOODS_ID",id)
         );
 
         return rw;
+
     }
 
 }
