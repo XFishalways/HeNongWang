@@ -31,13 +31,19 @@ public class FarmerInfoController {
         return json;
     }
 
-    @PostMapping("/farmer/update")
-    public Map<String , Object> updateInfo(@RequestParam String farmerName , @RequestParam int farmerAge, @RequestParam String farmerPlace
-                            , @RequestParam String businessId, @RequestParam String originalUserPass, @RequestParam String newUserPass,
-                          HttpSession session) throws SQLException {
-        Object userId = session.getAttribute("userId");
-        String id = (String) userId;
+    @GetMapping(value = "/farmer/update")
+    public String update(@RequestParam("farmerName") String farmerName) {
+        System.out.println("1");
+        return farmerName;
+    }
 
+    @PostMapping("/farmer/update")
+    public Map<String , Object> updateInfo(@RequestParam("userId") String userId, @RequestParam("farmerName") String farmerName , @RequestParam("farmerAge") String farmerage, @RequestParam("farmerPlace") String farmerPlace
+                            , @RequestParam("businessId") String businessId, @RequestParam("originalUserPass") String originalUserPass, @RequestParam("newUserPass") String newUserPass,
+                          HttpSession session) throws SQLException {
+//        Object userId = session.getAttribute("userId");
+        String id = (String) userId;
+        int farmerAge = Integer.parseInt(farmerage);
         Farmer farmer = farmerService.getFarmerDetailById(id);
         if (farmer == null) {
             session.setAttribute("errorMsg", "查找不到用户id");
