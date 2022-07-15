@@ -89,9 +89,12 @@
     <script src="lib/layui/layui.js"></script>
     <script>
         document.cookie = "check_cookie=1";
+        
         layui.use(['form','jquery'],function () {
             var form = layui.form;
             var $ = layui.$;
+
+            form.render();
 
             $(document).ready(function(){
                 $('#log-btn').click(function(){
