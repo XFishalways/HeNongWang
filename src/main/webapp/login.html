@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html lang="zh">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -89,9 +89,12 @@
     <script src="lib/layui/layui.js"></script>
     <script>
         document.cookie = "check_cookie=1";
+        
         layui.use(['form','jquery'],function () {
             var form = layui.form;
             var $ = layui.$;
+
+            form.render();
 
             $(document).ready(function(){
                 $('#log-btn').click(function(){
