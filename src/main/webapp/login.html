@@ -109,18 +109,26 @@
                         dataType:'json',
 
                         success:function(data){
-                            document.cookie = "userId=" + $('#input-account').val();
+                            createCookie('userId',$('#input-account').val());
+                            createCookie('userType',$('#input-type').val());
                             alert('success');
                         },
 
                         error:function(){
-
                             alert('failed');
-
-                            createCookie('userId',$('#input-account').val())
-                            alert(document.cookie);
                         }
                     })
+
+                    if(getCookie(userId) != ""){
+                        var type = getCookie('userType');
+                        if(type == 'buyer'){
+
+                        }else if(type == 'farmer'){
+                            window.location.href = "farmer/";
+                        }else if(type == 'business'){
+
+                        }
+                    }
 
                     return false;
                 })

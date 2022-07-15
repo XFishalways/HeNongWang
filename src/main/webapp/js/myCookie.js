@@ -13,16 +13,6 @@ function getCookie(cName){
     return "";
 }
 
-function checkCookie(cName){
-    var user = getCookie(cName);
-    alert(1);
-    if(user != '') {
-        alert("OK");
-    }else{
-        alert("NOOOOO!");
-    }
-}
-
 function deleteCookie(cName){
     var date = new Date();
     date.setTime(date.getTime() - 100);
