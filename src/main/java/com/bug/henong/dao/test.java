@@ -7,9 +7,13 @@ import java.sql.SQLException;
 
 public class test {
     public static  void main(String args[]) throws SQLException {
-        FarmerDao farmerDao = new FarmerDao();
-
-        System.out.println(farmerDao.findOneFarmer("1").getUserPass());
+        BuyerUserDao buyerUserDao = new BuyerUserDao();
+        for(int i =0; i<50;i++){
+            BuyerUser buyerUser =new BuyerUser();
+            buyerUser.setUserId(Integer.toString(i));
+            buyerUser.setUserName(Integer.toString(i));
+            buyerUserDao.insert(buyerUser);
+        }
 
     }
 }
