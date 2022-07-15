@@ -41,10 +41,9 @@ public class FarmerInfoController {
     public Map<String , Object> updateInfo(@RequestParam("userId") String userId, @RequestParam("farmerName") String farmerName , @RequestParam("farmerAge") String farmerage, @RequestParam("farmerPlace") String farmerPlace
                             , @RequestParam("businessId") String businessId, @RequestParam("originalUserPass") String originalUserPass, @RequestParam("newUserPass") String newUserPass,
                           HttpSession session) throws SQLException {
-//        Object userId = session.getAttribute("userId");
-        String id = (String) userId;
+
         int farmerAge = Integer.parseInt(farmerage);
-        Farmer farmer = farmerService.getFarmerDetailById(id);
+        Farmer farmer = farmerService.getFarmerDetailById((String) userId);
         if (farmer == null) {
             session.setAttribute("errorMsg", "查找不到用户id");
             return null;
@@ -54,20 +53,20 @@ public class FarmerInfoController {
             return null;
         }
         if (!farmer.getFarmerName().equals(farmerName)) {
-            farmerService.updateFarmerName(id, farmerName);
+            farmerService.updateFarmerName((String) userId, farmerName);
         }
         if (farmer.getFarmerAge() != farmer.getFarmerAge()) {
-            farmerService.updateFarmerAge(id, farmerAge);
+            farmerService.updateFarmerAge((String) userId, farmerAge);
         }
         if (!farmer.getFarmerPlace().equals(farmerPlace)) {
-            farmerService.updatePlace(id, farmerPlace);
+            farmerService.updatePlace((String) userId, farmerPlace);
         }
         if (!farmer.getBusinessId().equals(businessId)) {
-            farmerService.updateBusinessId(id, businessId);
+            farmerService.updateBusinessId((String) userId, businessId);
         }
         if (!originalUserPass.equals(newUserPass)) {
             if (newUserPass != null) {
-                farmerService.updatePassword(id, newUserPass);
+                farmerService.updatePassword((String) userId, newUserPass);
                 //修改密码盐
 
             }

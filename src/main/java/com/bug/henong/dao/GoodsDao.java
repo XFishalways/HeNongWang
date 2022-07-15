@@ -127,15 +127,23 @@ public class GoodsDao {
 
     }
     /**更新好评度*/
-    public int updatePassSalt(String PraiseDegree, String id) throws SQLException {
+    public int updateDegree(String PraiseDegree, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("PRAISE_DEGREE",PraiseDegree),
+                Entity.create().set("GOODS_DEGREE",PraiseDegree),
                 Entity.create("GOODS").set("GOODS_ID",id)
         );
 
         return rw;
-
     }
 
+    public int updateImage(String Image, String id) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("GOODS_IMAGE",Image),
+                Entity.create("GOODS").set("GOODS_ID",id)
+        );
+
+        return rw;
+    }
 }
