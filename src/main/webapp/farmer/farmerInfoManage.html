@@ -83,8 +83,9 @@
                   alert(data.field);
                   $.ajax({
                     type:"POST",
-                    url:'farmer/update',
+                    url:'update',
                     data:{
+                      userId:getCookie('userId'),
                       farmerName:data.field.name,
                       originalUserPass:data.field.oldPass,
                       newUserPass:data.field.newPass,
@@ -107,6 +108,11 @@
                 })
 
               $(document).ready(function(){
+                if(getCookie('userId') == '' ){
+                  alert("请登录!");
+                  window.location.href = "index.html";
+                }
+
                 $.ajax({
                   type:'GET',
                   url:'',
@@ -116,7 +122,6 @@
                   dataType:'json',
 
                   success:function(data){
-                    alert(data);
                     $('#account-name').val(data.userName);
                     $('#account-addr').val(data.userAddr);
                     $('#business-id').val(data.businessId);
