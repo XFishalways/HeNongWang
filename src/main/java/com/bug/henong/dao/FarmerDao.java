@@ -58,8 +58,12 @@ public class FarmerDao {
     /**通过id查找某一行数据*/
     public Farmer findOneFarmer(String id) throws SQLException {
         List<Entity> entities= Db.use().findAll(
-                Entity.create("FARMER").set("id",id)
+                Entity.create("FARMER").set("FARMER_ID",id)
         );
+
+        if(entities.isEmpty()) {
+            return null;
+        }
 
         Entity e = entities.get(0);
         String farmerStr = JSONUtil.toJsonStr(e);

@@ -122,6 +122,28 @@
             <type>jar</type>
         </dependency>
 
+        <!-- spring-test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.2.8.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <!--mockito用于spirng单元测试-->
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.2.9</version>
+            <scope>test</scope>
+        </dependency>
+        <!--mockito要依赖eljar包，这个是一定要有的，不然会报异常，见异常图-->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

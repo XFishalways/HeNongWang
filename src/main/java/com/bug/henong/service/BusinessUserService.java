@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class BusinessUserService {
 
-    private BusinessUserDao businessUserDao;
+    private BusinessUserDao businessUserDao =new BusinessUserDao();
 
     /**得到买家信息*/
     public BusinessUser getBusinessUserDetailById(String userId) throws SQLException {

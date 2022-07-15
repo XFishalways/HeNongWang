@@ -17,11 +17,11 @@ import java.sql.SQLException;
 public class LoginService {
 
 
-    private FarmerDao farmerDao;
+    private FarmerDao farmerDao =new FarmerDao();
 
-    private BuyerUserDao buyerUserDao;
+    private BuyerUserDao buyerUserDao = new BuyerUserDao();
 
-    private BusinessUserDao businessUserDao;
+    private BusinessUserDao businessUserDao = new BusinessUserDao();
 
     /**
      * 农户登录

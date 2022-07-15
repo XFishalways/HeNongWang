@@ -7,10 +7,9 @@ import java.sql.SQLException;
 
 public class test {
     public static  void main(String args[]) throws SQLException {
-        BuyerUserDao userDao = new BuyerUserDao();
+        FarmerDao farmerDao = new FarmerDao();
 
-        System.out.println(userDao.findOneBuyer("1").getUserPass());
-       // int rw = userDao.insert(user);
+        System.out.println(farmerDao.findOneFarmer("1").getUserPass());
 
     }
 }

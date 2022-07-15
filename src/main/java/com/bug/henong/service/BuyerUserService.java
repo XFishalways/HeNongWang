@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 public class BuyerUserService {
 
-    private BuyerUserDao buyerUserDao;
+    private BuyerUserDao buyerUserDao = new BuyerUserDao();
 
     /**
      * 得到买家信息

@@ -10,7 +10,7 @@ public class AdminService {
 
 
 
-    private AdminDao adminDao;
+    private AdminDao adminDao = new AdminDao();
 
 
 

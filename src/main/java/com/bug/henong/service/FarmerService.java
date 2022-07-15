@@ -13,7 +13,7 @@ import java.sql.SQLException;
 @Service("FarmerService")
 public class FarmerService {
 
-    private FarmerDao farmerDao;
+     private FarmerDao farmerDao = new FarmerDao();
 
     /**
      * 登录

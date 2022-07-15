@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class BusinessAddressService {
 
-    private BusinessAddressDao businessAddressDao;
+    private BusinessAddressDao businessAddressDao =new BusinessAddressDao();
 
     /**得到商品地址信息*/
     public BusinessAddress getBusinessAddressDetailById(String addressId) throws SQLException {

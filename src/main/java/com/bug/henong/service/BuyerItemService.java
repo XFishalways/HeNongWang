@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class BuyerItemService {
 
-    private BuyerItemDao buyerItemDao;
+    private BuyerItemDao buyerItemDao =new BuyerItemDao();
 
     /**得到商品信息*/
     public BuyerItem getBuyerItemDetailById(String itemId) throws SQLException {

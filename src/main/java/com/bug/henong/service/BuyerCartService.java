@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class BuyerCartService {
 
-    private BuyerCartDao buyerCartDao;
+    private BuyerCartDao buyerCartDao =new BuyerCartDao();
 
     /**得到购物车信息*/
     public BuyerCart getCartDetailById(String cartId) throws SQLException {

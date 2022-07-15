@@ -11,7 +11,7 @@ public class ProductExamineService {
 
 
 
-    private ProductExamineDao productExamineDao;
+    private ProductExamineDao productExamineDao = new ProductExamineDao();
 
 
     /**

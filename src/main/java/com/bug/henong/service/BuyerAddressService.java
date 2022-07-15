@@ -7,7 +7,7 @@ import com.bug.henong.entity.Farmer;
 import java.sql.SQLException;
 
 public class BuyerAddressService {
-    private BuyerAddressDao buyerAddressDao;
+    private BuyerAddressDao buyerAddressDao =new BuyerAddressDao();
 
     /**得到地址信息*/
     public BuyerAddress getBuyerAddressDetailById(String addressId) throws SQLException {
