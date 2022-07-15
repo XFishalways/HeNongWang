@@ -51,9 +51,9 @@ public class FarmerGoodsController {
 
     }
 
-    @RequestMapping(value = "/farmer", method = RequestMethod.GET)
-    public void FindAllGoods (@RequestParam(),HttpResponse response) {
-
-    }
+//    @RequestMapping(value = "/farmer", method = RequestMethod.GET)
+//    public void FindAllGoods (@RequestParam(),HttpResponse response) {
+//
+//    }
 
 }

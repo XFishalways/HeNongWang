@@ -55,6 +55,14 @@ public class BuyerUserDao {
 
         return buyerUsers;
     }
+
+    /**
+     * 通过当前页数获取下页位置
+     * @param currentPage 当前页数
+     * @param pageSize 每页容量
+     * @return
+     * @throws SQLException
+     */
     public List<BuyerUser> findUsersFromTo(int currentPage, int pageSize) throws SQLException {
 
         List<BuyerUser> buyerUsers = new ArrayList<BuyerUser>();
