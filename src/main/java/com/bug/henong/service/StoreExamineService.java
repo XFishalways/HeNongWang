@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class StoreExamineService {
 
-    private StoreExamineDao storeExamineDao;
+    private StoreExamineDao storeExamineDao =new StoreExamineDao();
 
     /**
      * 得到商品活动ID信息

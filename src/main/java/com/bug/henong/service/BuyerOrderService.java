@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class BuyerOrderService {
 
-    private BuyerOrderDao buyerOrderDao;
+    private BuyerOrderDao buyerOrderDao =new BuyerOrderDao();
 
     /**得到订单信息*/
     public BuyerOrder getBuyerOrderById(String orderId) throws SQLException {

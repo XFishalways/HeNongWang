@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 
 public class SaleProductService {
 
-    private SaleProductDao saleProductDao;
+    private SaleProductDao saleProductDao = new SaleProductDao();
     /**
      * 得到商品活动ID信息
      */

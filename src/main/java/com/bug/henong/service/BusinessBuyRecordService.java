@@ -7,7 +7,7 @@ import com.bug.henong.entity.Farmer;
 import java.sql.SQLException;
 
 public class BusinessBuyRecordService {
-    private BusinessBuyrecordDao businessBuyrecordDao;
+    private BusinessBuyrecordDao businessBuyrecordDao =new BusinessBuyrecordDao();
 
     /**得到购物记录信息*/
     public BusinessBuyrecord getBuyRecordById(String id) throws SQLException {
