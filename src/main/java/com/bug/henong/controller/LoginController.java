@@ -43,7 +43,6 @@ public class LoginController {
             case "farmer":
                 Farmer farmer = loginService.farmerLogin(userId,password);
                 if(farmer!=null){
-                    System.out.println("3");
                     session.setAttribute("userId", farmer.getFarmerName());
                     session.setAttribute("loginUserId", farmer.getFarmerId());
 
