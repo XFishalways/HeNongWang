@@ -62,7 +62,7 @@
 
                     <div class="layui-form-item layui-row layui-col-md12 ">
                         <div class="layui-col-md4 layui-col-md-offset4">
-                            <button id="log-btn" href="" class="layui-btn layui-btn-lg">----登录----</button>
+                            <button id="log-btn" href="" type="button" class="layui-btn layui-btn-lg">----登录----</button>
                         </div>
                     </div>
                 </form>
@@ -119,7 +119,7 @@
                         }
                     })
 
-                    if(getCookie(userId) != ""){
+                    if(getCookie('userId') != ""){
                         var type = getCookie('userType');
                         if(type == 'buyer'){
 

@@ -20,14 +20,8 @@ import java.util.Map;
 public class LoginController {
 
     private LoginService loginService = new LoginService();
-    @GetMapping(value = "/login")
-    public String login() {
 
-        return "/login";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping("/login")
     public Map<String,Object> login(@RequestParam("userId") String userId,
                         @RequestParam("password") String password,
                         @RequestParam("type") String type,
