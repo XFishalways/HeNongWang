@@ -84,7 +84,6 @@
 
                   success:function(data){
                     $('#account-name').val(data.userName);
-                    $('#account-pass').val(data.userPass);
                     $('#account-addr').val(data.userAddr);
                   },
 
@@ -94,7 +93,7 @@
                 })
 
                 form.on('submit(submit-info)',function(data){
-                  alert(data.field.name);
+                  alert(data.field);
                   $.ajax({
                     type:"POST",
                     url:'',
