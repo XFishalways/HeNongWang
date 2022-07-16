@@ -58,7 +58,9 @@ public class GoodsService {
 
         return goodsDao.findAll();
     }
-
+    public List<Goods> getFarmerGoods(String farmer_Id) throws SQLException {
+        return goodsDao.findFarmerAll(farmer_Id);
+    }
     /**
      * 修改商品名称
      */
@@ -193,5 +195,20 @@ public class GoodsService {
         }
 
         return false;
+    }
+
+    public List<Goods> getGoodsFromTo(int curentPage, int pageSize) throws SQLException {
+        return goodsDao.findGoodsFromTo(curentPage,pageSize);
+    }
+
+    public List<Goods> getFarmerAllGoods(String famrerId){
+        return goodsDao.findFarmerAll(famrerId);
+    }
+
+    public List<Goods> getFarmerGoodsByName(String farmerId, String goodsName){
+        return goodsDao.findFarmerGoodsByName(farmerId,goodsName);
+    }
+    public List<Goods> getFarmerGoodsByName(String goodsName){
+        return goodsDao.findGoodsByname(goodsName);
     }
 }

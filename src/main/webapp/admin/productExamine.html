@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>商品信息</title>
+		<title>商品审查</title>
 		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
 		<script type="text/javascript" src="../lib/layui/layui.js"></script>
 	</head>
@@ -30,8 +30,6 @@
 			  table.render({
 			    elem: '#test'
 			    ,url:url
-				,page:true
-				,limit:20
 				,parseData: function(res){ //res 即为原始返回的数据
 				    return {
 				      "code": 0, //解析接口状态
@@ -43,15 +41,15 @@
 			    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 			    ,cols: [[
 			      {field:'goodsId', width:180, title: '商品ID', sort: true}
-			      ,{field:'goodsName', width:180, title: '商品名',sort: true}
-                  ,{field:'goodsPrice', width:100, title: '商品价格',sort:true}
+			      ,{field:'goodsName', width:180, title: '商品名'}
+                  ,{field:'goodsPrice', width:100, title: '商品价格'}
                   ,{field:'goodsFarmer', width:180, title: '商品所属农户'}
-                  ,{field:'goodsData', width:180, title: '商品采摘时间', sort:true}
+                  ,{field:'goodsData', width:180, title: '商品采摘时间'}
                   ,{field:'goodsAddr', width:280, title: '商品采摘地址'}
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("farmerGoods/getAll");
+					if( url.search(patt) != -1) tableInit("GetBuyerUsers");
 				}
 			  });
 			  
@@ -81,7 +79,7 @@
 			});
 		}
 		
-		tableInit("farmerGoods/getAll");
+		tableInit("GetBuyerUsers");
 		
 		//第一种：主动加载jquery模块
 		layui.use(['jquery', 'layer'], function(){ 
@@ -91,7 +89,7 @@
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
 			  var id = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("farmerGoods/findOne?USER_ID=" +id +"&goodsPatt=");
+			  tableInit("FindGOODS?USER_ID=" +id +"&goodsPatt=");
 		  })
 		});
 		
