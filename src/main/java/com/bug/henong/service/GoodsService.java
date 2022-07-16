@@ -5,7 +5,7 @@ import com.bug.henong.dao.GoodsDao;
 import com.bug.henong.entity.Goods;
 
 import java.sql.SQLException;
-
+import java.util.List;
 
 
 public class GoodsService {
@@ -13,11 +13,29 @@ public class GoodsService {
     private GoodsDao goodsDao =new GoodsDao();
 
     /**
+     * 添加一个商品
+     */
+    public int Insert(Goods goods) throws SQLException {
+
+        return goodsDao.insert(goods);
+    }
+
+    /**
      * 得到商品活动ID信息
      */
     public Goods getGoodsId(String loginGoodsId) throws SQLException {
 
         return goodsDao.findOneGoods(loginGoodsId);
+    }
+
+    public void deleteGoods(String loginGoodsId) throws SQLException {
+
+        goodsDao.delete(loginGoodsId);
+    }
+
+    public List<Goods> getAllGoods() throws SQLException {
+
+        return goodsDao.findAll();
     }
 
     /**
@@ -98,12 +116,24 @@ public class GoodsService {
     /**
      * 修改商品好评度
      */
-    public Boolean updatePassSalt(String loginGoodsId, String newPraiseDegree) throws SQLException {
+    public Boolean updateDegree(String loginGoodsId, String newPraiseDegree) throws SQLException {
         Goods goods = goodsDao.findOneGoods(loginGoodsId);
 
         //当前用户非空才可以进行更改
         if (goods != null) {
-            int rw = goodsDao.updatePassSalt(newPraiseDegree,loginGoodsId);
+            int rw = goodsDao.updateDegree(newPraiseDegree,loginGoodsId);
+            return rw > 0;
+        }
+
+        return false;
+    }
+
+    public Boolean updateImage(String loginGoodsId, String Image) throws SQLException {
+        Goods goods = goodsDao.findOneGoods(loginGoodsId);
+
+        //当前用户非空才可以进行更改
+        if (goods != null) {
+            int rw = goodsDao.updateImage(Image,loginGoodsId);
             return rw > 0;
         }
 

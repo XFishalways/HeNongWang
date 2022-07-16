@@ -42,7 +42,7 @@ public class BuyerUserDao {
     /**返回所有信息*/
     public List<BuyerUser> findAll() throws SQLException {
 
-        String sql = "SELECT * FROM BUYER_USER";
+
 
         List<BuyerUser> buyerUsers = new ArrayList<BuyerUser>();
         List<Entity> entities = Db.use().findAll("BUYER_USER");
@@ -56,6 +56,29 @@ public class BuyerUserDao {
         return buyerUsers;
     }
 
+    /**
+     * 通过当前页数获取下页位置
+     * @param currentPage 当前页数
+     * @param pageSize 每页容量
+     * @return
+     * @throws SQLException
+     */
+    public List<BuyerUser> findUsersFromTo(int currentPage, int pageSize) throws SQLException {
+
+        List<BuyerUser> buyerUsers = new ArrayList<BuyerUser>();
+        //offset:跳offset数值行  limit: 取limit数值行
+        int offset = (currentPage - 1)*pageSize;
+        int limit = pageSize;
+        List<Entity> entities = Db.use().query("SELECT * FROM buyer_user ORDER BY USER_ID+0 LIMIT ?,?",offset,limit);
+
+        for(Entity e : entities){
+            String buyerStr = JSONUtil.toJsonStr(e);
+            BuyerUser buyerUser = JSONUtil.toBean(buyerStr,BuyerUser.class);
+            buyerUsers.add(buyerUser);
+        }
+
+        return buyerUsers;
+    }
     /**通过id查找某一行数据*/
     public BuyerUser findOneBuyer(String id) throws SQLException {
 

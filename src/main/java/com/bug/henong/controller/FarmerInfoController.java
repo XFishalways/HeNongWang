@@ -31,13 +31,19 @@ public class FarmerInfoController {
         return json;
     }
 
+    @GetMapping(value = "/farmer/update")
+    public String update(@RequestParam("farmerName") String farmerName) {
+        System.out.println("1");
+        return farmerName;
+    }
+
     @PostMapping("/farmer/update")
-    public Map<String , Object> updateInfo(@RequestParam("farmerName") String farmerName , @RequestParam("farmerAge") int farmerAge, @RequestParam("farmerPlace") String farmerPlace
-                            , @RequestParam("businessId") String businessId, @RequestParam("originUserPass") String originalUserPass, @RequestParam("newUserPass") String newUserPass,
-                          @RequestParam("userId") String userId,HttpSession session) throws SQLException {
+    public Map<String , Object> updateInfo(@RequestParam("userId") String userId, @RequestParam("farmerName") String farmerName , @RequestParam("farmerAge") String farmerage, @RequestParam("farmerPlace") String farmerPlace
+                            , @RequestParam("businessId") String businessId, @RequestParam("originalUserPass") String originalUserPass, @RequestParam("newUserPass") String newUserPass,
+                          HttpSession session) throws SQLException {
 
-
-        Farmer farmer = farmerService.getFarmerDetailById(userId);
+        int farmerAge = Integer.parseInt(farmerage);
+        Farmer farmer = farmerService.getFarmerDetailById((String) userId);
         if (farmer == null) {
             session.setAttribute("errorMsg", "查找不到用户id");
             return null;
@@ -47,20 +53,20 @@ public class FarmerInfoController {
             return null;
         }
         if (!farmer.getFarmerName().equals(farmerName)) {
-            farmerService.updateFarmerName(userId, farmerName);
+            farmerService.updateFarmerName((String) userId, farmerName);
         }
         if (farmer.getFarmerAge() != farmer.getFarmerAge()) {
-            farmerService.updateFarmerAge(userId, farmerAge);
+            farmerService.updateFarmerAge((String) userId, farmerAge);
         }
         if (!farmer.getFarmerPlace().equals(farmerPlace)) {
-            farmerService.updatePlace(userId, farmerPlace);
+            farmerService.updatePlace((String) userId, farmerPlace);
         }
         if (!farmer.getBusinessId().equals(businessId)) {
-            farmerService.updateBusinessId(userId, businessId);
+            farmerService.updateBusinessId((String) userId, businessId);
         }
         if (!originalUserPass.equals(newUserPass)) {
             if (newUserPass != null) {
-                farmerService.updatePassword(userId, newUserPass);
+                farmerService.updatePassword((String) userId, newUserPass);
                 //修改密码盐
 
             }

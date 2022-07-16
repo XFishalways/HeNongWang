@@ -1,4 +1,4 @@
-package utils;
+package com.bug.henong.utils;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 

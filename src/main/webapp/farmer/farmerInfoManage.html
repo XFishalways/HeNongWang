@@ -83,7 +83,7 @@
                   alert(data.field);
                   $.ajax({
                     type:"POST",
-                    url:'update',
+                    url:'/farmer/update',
                     data:{
                       userId:getCookie('userId'),
                       farmerName:data.field.name,
