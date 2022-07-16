@@ -29,41 +29,71 @@
             <div class="layui-form-item layui-bg-gray">
                 <label class="layui-form-label">姓名:</label>
                 <div class="layui-input-block">
-                    <div class="layui-form-mid layui-word-aux">dog</div>
+                    <div id="name" class="layui-form-mid layui-word-aux">dog</div>
                 </div>
             </div>
             <hr>
             <div class="layui-form-item layui-bg-gray">
                 <label class="layui-form-label">昵称:</label>
                 <div class="layui-input-block">
-                    <div class="layui-form-mid layui-word-aux">dog</div>
+                    <div id="nickname" class="layui-form-mid layui-word-aux">dog</div>
                 </div>
             </div>
             <hr>
             <div class="layui-form-item layui-bg-gray">
                 <label class="layui-form-label">用户ID:</label>
                 <div class="layui-input-block">
-                    <div class="layui-form-mid layui-word-aux">241111</div>
+                    <div id="userId" class="layui-form-mid layui-word-aux">241111</div>
                 </div>
             </div>
             <hr>
             <div class="layui-form-item layui-bg-gray">
                 <label class="layui-form-label">电话号码:</label>
                 <div class="layui-input-block">
-                    <div class="layui-form-mid layui-word-aux">323360</div>
+                    <div id="phone" class="layui-form-mid layui-word-aux">323360</div>
                 </div>
             </div>
             <hr>
             <div class="layui-form-item layui-bg-gray">
                 <label class="layui-form-label">个性签名:</label>
                 <div class="layui-input-block">
-                    <div class="layui-form-mid layui-word-aux">我是sb</div>
+                    <div id="intro" class="layui-form-mid layui-word-aux">我是sb</div>
                 </div>
             </div>
             <hr>
         </form>
     </div>
 
+    <script>
+        layui.use(['jquery'], function(args){
+            var $ = layui.$;
+
+            $(document).ready(function(){
+                $.ajax({
+                    type:'GET',
+                    url:'',
+                    data:{
+                        userId:getCookie('userId')
+                    },
+                    dataType:'json',
+
+                    success:function(data){
+                        $('#name').html(data.userName);
+                        $('#nickname').html(data.userNickname);
+                        $('#userId').html(data.userId);
+                        $('#phone').html(data.phone);
+                        $('#intro').html(data.userIntro);
+                    },
+
+                    error:function(){
+                        alert('failed');
+                    }
+                })
+            })
+
+        });
+
+    </script>
 </div>
 
 </body>

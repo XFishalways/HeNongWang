@@ -4,6 +4,7 @@ package com.bug.henong.dao;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
+import com.bug.henong.entity.SaleProduct;
 import com.bug.henong.entity.SaleStore;
 
 import java.sql.SQLException;
@@ -73,6 +74,21 @@ public class SaleStoreDao {
         SaleStore saleStore = JSONUtil.toBean(storeStr,SaleStore.class);
 
         return  saleStore;
+    }
+
+    /**
+     * 通过标题查找
+     */
+    public List<SaleStore> findSaleStoreByTitle(String saleStoreTitle) throws SQLException {
+        List<SaleStore> saleStore = new ArrayList<SaleStore>();
+        List<Entity> entities = Db.use().query("SELECT * FROM SALE_STORE Where SALE_STORE_TITLE LIKE /'%?%/'", saleStoreTitle);
+
+        for (Entity e : entities) {
+            String storeStr = JSONUtil.toJsonStr(e);
+            SaleStore saleStore1 = JSONUtil.toBean(storeStr, SaleStore.class);
+            saleStore.add(saleStore1);
+        }
+        return saleStore;
     }
 
     /**更新标题*/
