@@ -56,7 +56,6 @@
                     <a class="" href="javascript:;">活动管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">活动查询</a></dd>
-                        <dd><a href="javascript:;">新增活动</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -99,9 +98,6 @@
             }else if(text=="活动查询") {
                 $("#main").find("#ifr").remove();
                 $("#main").append('<iframe src="eventManagement.html" id="ifr" style="width:100%;height:100%"></iframe>');
-            }else if(text=="新增活动") {
-                $("#main").find("#ifr").remove();
-                $("#main").append('<iframe src="eventRegister.html" id="ifr" style="width:100%;height:100%"></iframe>');
             }else if(text=="个人信息查看") {
                 $("#main").find("#ifr").remove();
                 $("#main").append('<iframe src="businessInformation.html" id="ifr" style="width:100%;height:100%"></iframe>');

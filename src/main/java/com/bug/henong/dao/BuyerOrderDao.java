@@ -5,6 +5,7 @@ import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BuyerOrder;
 import com.bug.henong.entity.BuyerUser;
+import com.bug.henong.entity.Goods;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -87,6 +88,21 @@ public class BuyerOrderDao {
         );
 
         return rw;
+    }
+
+    /**
+     *通过userID查找
+     */
+    public List<BuyerOrder> findBuyerOrderByUserId(String userId) throws SQLException {
+        List<BuyerOrder> buyerOrders = new ArrayList<BuyerOrder>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ORDER Where USER_ID LIKE /'%?%/'", userId);
+
+        for (Entity e : entities) {
+            String userStr = JSONUtil.toJsonStr(e);
+            BuyerOrder buyerOrder = JSONUtil.toBean(userStr, BuyerOrder.class);
+            buyerOrders.add(buyerOrder);
+        }
+        return buyerOrders;
     }
 
 }

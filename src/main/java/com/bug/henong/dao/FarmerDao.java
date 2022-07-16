@@ -4,6 +4,7 @@ import cn.hutool.db.*;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.entity.Farmer;
+import com.bug.henong.entity.Goods;
 
 /**
  * @author XFishalways
@@ -175,6 +176,21 @@ public class FarmerDao {
 
         return rw;
 
+    }
+
+    /**
+     * 通过名字查找
+     */
+    public List<Farmer> findFarmerByName(String farmerName) throws SQLException {
+        List<Farmer> farmers = new ArrayList<Farmer>();
+        List<Entity> entities = Db.use().query("SELECT * FROM FARMER Where FARMER_NAME LIKE /'%?%/'", farmerName);
+
+        for (Entity e : entities) {
+            String farmerStr = JSONUtil.toJsonStr(e);
+            Farmer farmer = JSONUtil.toBean(farmerStr, Farmer.class);
+            farmers.add(farmer);
+        }
+        return farmers;
     }
 }
 
