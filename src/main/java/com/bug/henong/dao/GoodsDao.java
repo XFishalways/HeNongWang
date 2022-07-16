@@ -71,6 +71,21 @@ public class GoodsDao {
         return  goods;
     }
 
+    /**通过当前页表获取goods信息*/
+    public List<Goods> findGoodsFromTo(int currentPage, int pageSize) throws SQLException {
+        List<Goods> goods = new ArrayList<Goods>();
+        int offset = (currentPage - 1)*pageSize;
+        int limit = pageSize;
+        List<Entity> entities = Db.use().query("SELECT * FROM GOODS ORDER BY GOODS_ID+0 LIMIT ?,?",offset,limit);
+
+        for(Entity e : entities){
+            String goodsStr = JSONUtil.toJsonStr(e);
+            //Goods goods = JSONUtil.toBean(goodsStr,Goods.class);
+            //goods.add(goods);
+        }
+
+        return goods;
+    }
     /**更新名称*/
     public int updateGoodsName(String goodsName, String id) throws SQLException {
 
