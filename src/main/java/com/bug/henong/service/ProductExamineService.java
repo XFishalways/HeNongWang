@@ -4,12 +4,13 @@ import com.bug.henong.dao.GoodsDao;
 import com.bug.henong.dao.ProductExamineDao;
 import com.bug.henong.entity.Goods;
 import com.bug.henong.entity.ProductExamine;
+import org.springframework.stereotype.Service;
 
 
 import java.sql.SQLException;
+
+@Service("ProductExamineService")
 public class ProductExamineService {
-
-
 
     private ProductExamineDao productExamineDao = new ProductExamineDao();
 
