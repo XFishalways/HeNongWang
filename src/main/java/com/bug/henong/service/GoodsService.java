@@ -23,7 +23,7 @@ public class GoodsService {
 
         Goods goods = new Goods();
 
-        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
+        Snowflake snowflake = IdUtil.getSnowflake(2, 1);
         String goodsId = snowflake.nextIdStr();
 
         goods.setGoodsId(goodsId);
