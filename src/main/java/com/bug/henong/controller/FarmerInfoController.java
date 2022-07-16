@@ -33,6 +33,7 @@ public class FarmerInfoController {
 
     @GetMapping(value = "/farmer/update")
     public String update(@RequestParam("farmerName") String farmerName) {
+        System.out.println("1");
         return farmerName;
     }
 
@@ -42,34 +43,18 @@ public class FarmerInfoController {
                           HttpSession session) throws SQLException {
 
         int farmerAge = Integer.parseInt(farmerage);
-        Farmer farmer = farmerService.getFarmerDetailById((String) userId);
-        if (farmer == null) {
+        int result = farmerService.updateInfo(userId,farmerName,farmerAge,farmerPlace,businessId,originalUserPass,newUserPass);
+
+
+        if (result==0) {
             session.setAttribute("errorMsg", "查找不到用户id");
             return null;
         }
-        if (!farmer.getUserPass().equals(originalUserPass)) {
+        if (result == 1 ) {
             session.setAttribute("errorMsg", "原密码不等");
             return null;
         }
-        if (!farmer.getFarmerName().equals(farmerName)) {
-            farmerService.updateFarmerName((String) userId, farmerName);
-        }
-        if (farmer.getFarmerAge() != farmer.getFarmerAge()) {
-            farmerService.updateFarmerAge((String) userId, farmerAge);
-        }
-        if (!farmer.getFarmerPlace().equals(farmerPlace)) {
-            farmerService.updatePlace((String) userId, farmerPlace);
-        }
-        if (!farmer.getBusinessId().equals(businessId)) {
-            farmerService.updateBusinessId((String) userId, businessId);
-        }
-        if (!originalUserPass.equals(newUserPass)) {
-            if (newUserPass != null) {
-                farmerService.updatePassword((String) userId, newUserPass);
-                //修改密码盐
 
-            }
-        }
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }

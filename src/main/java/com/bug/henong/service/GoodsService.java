@@ -1,6 +1,8 @@
 package com.bug.henong.service;
 
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import com.bug.henong.dao.GoodsDao;
 import com.bug.henong.entity.Goods;
 import org.springframework.stereotype.Service;
@@ -17,11 +19,15 @@ public class GoodsService {
     /**
      * 添加一个商品
      */
-    public int Insert(Goods goods, String goodsId, String goodsName, Timestamp goodsTime, String goodsPlace) throws SQLException {
+    public int Insert( String goodsName, Timestamp goodsTime, String goodsPlace) throws SQLException {
 
-        if (goodsId != null) {
-            goods.setGoodsId(goodsId);
-        }
+        Goods goods = new Goods();
+
+        Snowflake snowflake = IdUtil.getSnowflake(2, 1);
+        String goodsId = snowflake.nextIdStr();
+
+        goods.setGoodsId(goodsId);
+
         if (goodsName != null) {
             goods.setGoodsName(goodsName);
         }
@@ -33,8 +39,6 @@ public class GoodsService {
         }
 
         return goodsDao.insert(goods);
-
-
     }
 
     /**
@@ -59,6 +63,7 @@ public class GoodsService {
      * 修改商品名称
      */
     public Boolean updateGoodsName(String loginGoodsId, String newGoodsName) throws SQLException {
+
         Goods goods = goodsDao.findOneGoods(loginGoodsId);
 
         //当前商品非空才可以进行更改
@@ -78,7 +83,7 @@ public class GoodsService {
 
         //当前商品非空才可以进行更改
         if (goods != null) {
-            int rw = goodsDao.updateQuantity(newQuantity,loginGoodsId);
+            int rw = goodsDao.updateQuantity(loginGoodsId, newQuantity);
             return rw > 0;
         }
 
@@ -93,7 +98,7 @@ public class GoodsService {
 
         //当前用户非空才可以进行更改
         if (goods != null) {
-            int rw = goodsDao.updatePrice(newPrice,loginGoodsId);
+            int rw = goodsDao.updatePrice(loginGoodsId, newPrice);
             return rw > 0;
         }
 
@@ -123,7 +128,7 @@ public class GoodsService {
 
         //当前用户非空才可以进行更改
         if (goods != null) {
-            int rw = goodsDao.updateUserPass(newGoodsStatus,loginGoodsId);
+            int rw = goodsDao.updatePass(newGoodsStatus,loginGoodsId);
             return rw > 0;
         }
 
@@ -155,5 +160,42 @@ public class GoodsService {
         }
 
         return false;
+    }
+
+    public Boolean updateInfo(Goods goods, String goodsName, Double goodsQuantity, Double goodsPrice, String goodsSale, String goodsPass, String goodsDegree, String goodsImage) throws SQLException {
+
+        //当前用户非空才可以进行更改
+        Snowflake snowflake = IdUtil.getSnowflake(2, 1);
+        String goodsId = snowflake.nextIdStr();
+
+        if (goods != null) {
+            if (!goods.getGoodsName().equals(goodsName)) {
+                goodsDao.updateGoodsName(goodsId, goodsName);
+            }
+            if (!goods.getGoodsQuantity().equals(goodsQuantity)) {
+                goodsDao.updateQuantity(goodsId, goodsQuantity);
+            }
+            if (!goods.getGoodsPrice().equals(goodsPrice)) {
+                goodsDao.updatePrice(goodsId, goodsPrice);
+            }
+            if (!goods.getGoodsSale().equals(goodsSale)) {
+                goodsDao.updateSale(goodsId, goodsSale);
+            }
+            if (!goods.getGoodsDegree().equals(goodsDegree)) {
+                goodsDao.updateDegree(goodsId,goodsDegree);
+            }
+            if (!goods.getGoodsPass().equals(goodsPass)) {
+                goodsDao.updatePass(goodsId, goodsPass);
+            }
+            if (!goods.getGoodsImage().equals(goodsImage)) {
+                goodsDao.updateImage(goodsId, goodsImage);
+            }
+        }
+
+        return false;
+    }
+
+    public List<Goods> getGoodsFromTo(int curentPage, int pageSize) throws SQLException {
+        return goodsDao.findGoodsFromTo(curentPage,pageSize);
     }
 }

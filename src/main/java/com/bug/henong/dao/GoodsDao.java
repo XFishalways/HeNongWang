@@ -71,6 +71,7 @@ public class GoodsDao {
         return  goods;
     }
 
+    /**通过名字查找
     /**通过当前页表获取goods信息*/
     public List<Goods> findGoodsFromTo(int currentPage, int pageSize) throws SQLException {
         List<Goods> goods = new ArrayList<Goods>();
@@ -87,7 +88,7 @@ public class GoodsDao {
         return goods;
     }
     /**更新名称*/
-    public int updateGoodsName(String goodsName, String id) throws SQLException {
+    public int updateGoodsName(String id, String goodsName) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("GOODS_NAME",goodsName),
@@ -98,7 +99,7 @@ public class GoodsDao {
     }
 
     /**更新数量*/
-    public int updateQuantity(Double goodsQuantity, String id) throws SQLException {
+    public int updateQuantity( String id,Double goodsQuantity) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("GOODS_QUANTITY",goodsQuantity),
@@ -109,7 +110,7 @@ public class GoodsDao {
     }
 
     /**更新价格*/
-    public int updatePrice(Double price, String id) throws SQLException {
+    public int updatePrice( String id,Double price) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PRICE",price),
@@ -120,7 +121,7 @@ public class GoodsDao {
     }
 
     /**更新是否售罄*/
-    public int updateSale(String sellout, String id) throws SQLException {
+    public int updateSale(String id,String sellout ) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("IF_SEELOUT",sellout),
@@ -131,7 +132,7 @@ public class GoodsDao {
     }
 
     /**更新审核是否通过*/
-    public int updateUserPass(String ifPass, String id) throws SQLException {
+    public int updatePass( String id,String ifPass) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("IF_PASS",ifPass),
@@ -142,20 +143,20 @@ public class GoodsDao {
 
     }
     /**更新好评度*/
-    public int updateDegree(String PraiseDegree, String id) throws SQLException {
+    public int updateDegree( String id,String praiseDegree) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("GOODS_DEGREE",PraiseDegree),
+                Entity.create().set("GOODS_DEGREE",praiseDegree),
                 Entity.create("GOODS").set("GOODS_ID",id)
         );
 
         return rw;
     }
 
-    public int updateImage(String Image, String id) throws SQLException {
+    public int updateImage(String id,String image) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("GOODS_IMAGE",Image),
+                Entity.create().set("GOODS_IMAGE",image),
                 Entity.create("GOODS").set("GOODS_ID",id)
         );
 
