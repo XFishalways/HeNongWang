@@ -32,7 +32,7 @@ public class FarmerService {
     /**
      * 修改密码
      */
-    public Boolean updatePassword(String loginUserId,  String newPassword) throws SQLException {
+    public Boolean updatePassword(String loginUserId, String newPassword) throws SQLException {
         Farmer farmer = farmerDao.findOneFarmer(loginUserId);
 
         //当前用户非空才可以进行更改
@@ -161,6 +161,43 @@ public class FarmerService {
         }
 
         return false;
+    }
+
+    /**修改信息
+     * @return  0: 无此用户ID 1：修改成功 2：密码不符
+     * */
+    public int updateInfo(String userId,String farmerName, int farmerAge, String farmerPlace,
+                              String businessId, String originalUserPass,String newUserPass) throws SQLException {
+        Farmer farmer = getFarmerDetailById((String) userId);
+
+        if (farmer == null) {
+            return 0;
+        }
+
+        if (!farmer.getUserPass().equals(originalUserPass)) {
+            return 2;
+        }
+        if (!farmer.getFarmerName().equals(farmerName)) {
+            updateFarmerName((String) userId, farmerName);
+        }
+        if (farmer.getFarmerAge() != farmer.getFarmerAge()) {
+            updateFarmerAge((String) userId, farmerAge);
+        }
+        if (!farmer.getFarmerPlace().equals(farmerPlace)) {
+            updatePlace((String) userId, farmerPlace);
+        }
+        if (!farmer.getBusinessId().equals(businessId)) {
+            updateBusinessId((String) userId, businessId);
+        }
+        if (!originalUserPass.equals(newUserPass)) {
+            if (newUserPass != null) {
+                updatePassword((String) userId, newUserPass);
+                //修改密码盐
+
+            }
+        }
+        return 1;
+
     }
 }
 
