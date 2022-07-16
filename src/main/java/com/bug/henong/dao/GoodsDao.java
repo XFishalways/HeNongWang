@@ -54,8 +54,8 @@ public class GoodsDao {
 
         for (Entity e : entities) {
             String goodsStr = JSONUtil.toJsonStr(e);
-            //Goods goods = JSONUtil.toBean(goodsStr,Goods.class);
-            //goods.add(goods);
+            Goods good = JSONUtil.toBean(goodsStr,Goods.class);
+            goods.add(good);
         }
 
         return goods;
@@ -105,8 +105,8 @@ public class GoodsDao {
 
         for (Entity e : entities) {
             String goodsStr = JSONUtil.toJsonStr(e);
-            //Goods goods = JSONUtil.toBean(goodsStr,Goods.class);
-            //goods.add(goods);
+            Goods good = JSONUtil.toBean(goodsStr,Goods.class);
+            goods.add(good);
         }
 
         return goods;
@@ -220,10 +220,10 @@ public class GoodsDao {
         return goods;
     }
 
-    public List<Goods> findFarmerGoodsByName(String famer_Id, String goodsName) throws SQLException {
+    public List<Goods> findFarmerGoodsByName(String farmerId, String goodsName) throws SQLException {
         List<Goods> goods = new ArrayList<Goods>();
 
-        List<Entity> entities = Db.use().query("\"SELECT * FROM GOODS Where FARMER_ID = ? AND GOODS_NAME LIKE /'%?%/'",famer_Id, goodsName);
+        List<Entity> entities = Db.use().query("\"SELECT * FROM GOODS Where FARMER_ID = ? AND GOODS_NAME LIKE /'%?%/'",farmerId, goodsName);
         if (entities.isEmpty()) {
             return null;
         }
