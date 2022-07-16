@@ -124,7 +124,7 @@ public class FarmerGoodsController {
         return null;
     }
     @RequestMapping(value ="farmer/farmerGoods/getFarmerGoodsByName")
-    public String getFarmerGoodsByName(@RequestParam String farmerId,@RequestParam String goodsName, HttpSession session){
+    public String getFarmerGoodsByName(@RequestParam String farmerId,@RequestParam String goodsName, HttpSession session) throws SQLException {
         List<Goods> goods = goodsService.getFarmerGoodsByName(farmerId, goodsName);
         if (goods != null) {
             String json = JSON.toJSONString(goods);
