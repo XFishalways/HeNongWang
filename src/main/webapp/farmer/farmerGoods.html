@@ -50,7 +50,7 @@
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("farmerGoods/getFarmerGoods/farmerId=" + getCookie('userId'));
+					if( url.search(patt) != -1) tableInit("farmerGoods/getFarmerGoods?farmerId=" + getCookie('userId'));
 				}
 			  });
 			  
@@ -64,7 +64,20 @@
 			      //do 
 				  window.location.href="user_register.html";
 			    } else if(layEvent === 'del'){ //删除
-			      
+					layer.confirm('真的删除行么', function(index){
+					var id = obj.data.userId;
+					alert(id);
+			        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+			        layer.close(index);
+			        //向服务端发送删除指令
+
+					$.ajax({
+						url:"DeleteBuyerUserServlet?USER_ID=" + id,
+						success:function(res){
+							console.log(res)
+						}
+					})
+			      });
 			    } else if(layEvent === 'edit'){ //编辑
 			      //do something
 			      
