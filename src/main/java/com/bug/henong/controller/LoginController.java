@@ -36,37 +36,10 @@ public class LoginController {
 
         MapFactory mapFactory =new MapFactory();
 
-        switch (type){
+        if(loginService.login(userId,password,type)){
 
-            case "farmer":
-                Farmer farmer = loginService.farmerLogin(userId,password);
-                if(farmer!=null){
-                    session.setAttribute("userId", farmer.getFarmerName());
-                    session.setAttribute("loginUserId", farmer.getFarmerId());
-
-                    System.out.println(mapFactory.getStringObjectMapWithType(session,type));
-                    return mapFactory.getStringObjectMap(session);
-                }
-
-            case "buyer":
-                BuyerUser buyerUser = loginService.buyerLogin(userId,password);
-                if(buyerUser!=null){
-                    session.setAttribute("loginUser", buyerUser.getUserName());
-                    session.setAttribute("loginUserId", buyerUser.getUserId());
-
-                    return mapFactory.getStringObjectMap(session);
-                }
-
-            case "business":
-                BusinessUser businessUser = loginService.businessUserLogin(userId,password);
-                if(businessUser!=null){
-                    session.setAttribute("loginUser", businessUser.getUserName());
-                    session.setAttribute("loginUserId", businessUser.getUserId());
-
-                    return mapFactory.getStringObjectMap(session);
-                }
-            default:
-                break;
+            session.setAttribute("loginUserId",userId );
+            return mapFactory.getStringObjectMap(session);
         }
         return null ;
     }
