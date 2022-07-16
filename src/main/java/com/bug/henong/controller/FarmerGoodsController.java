@@ -113,7 +113,7 @@ public class FarmerGoodsController {
 
         Double goodsPrice = Double.parseDouble(goodsprice);
         Timestamp goodsTime = Timestamp.valueOf(goodstime);
-
+        System.out.println(goodsTime);
         goodsService.insert(goodsName, goodsPrice, goodsTime, goodsPlace,farmerId);
 
         MapFactory mapFactory = new MapFactory();
