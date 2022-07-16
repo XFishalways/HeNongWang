@@ -81,7 +81,7 @@ public class FarmerGoodsController {
     @RequestMapping(value = "/farmer/farmerGoods", method = RequestMethod.POST)
     public String updateOneGoods(@RequestParam("goodsId") String goodsId,
                                @RequestParam("goodsName") String goodsName,
-                               @RequestParam("goodsQuantity") String goodsquatity,
+                               @RequestParam("goodsQuantity") String goodsquantity,
                                @RequestParam("goodsPrice") String goodsprice,
                                @RequestParam("goodsSale") String goodsSale,
                                @RequestParam("goodsPass") String goodsPass,
@@ -89,48 +89,26 @@ public class FarmerGoodsController {
                                @RequestParam("goodsImage") String goodsImage,
                                HttpSession session) throws SQLException {
 
-        Double goodsQuantity = Double.parseDouble(goodsquatity);
+        Double goodsQuantity = Double.parseDouble(goodsquantity);
         Double goodsPrice = Double.parseDouble(goodsprice);
 
         Goods goods = goodsService.getGoodsId(goodsId);
 
-        if (!goods.getGoodsName().equals(goodsName)) {
-            goodsService.updateGoodsName(goodsId, goodsName);
-        }
-        if (!goods.getGoodsQuantity().equals(goodsQuantity)) {
-            goodsService.updateQuantity(goodsId, goodsQuantity);
-        }
-        if (!goods.getGoodsPrice().equals(goodsPrice)) {
-            goodsService.updatePrice(goodsId, goodsPrice);
-        }
-        if (!goods.getGoodsSale().equals(goodsSale)) {
-            goodsService.updateSale(goodsId, goodsSale);
-        }
-        if (!goods.getGoodsDegree().equals(goodsDegree)) {
-            goodsService.updateDegree(goodsId,goodsDegree);
-        }
-        if (!goods.getGoodsPass().equals(goodsPass)) {
-            goodsService.updatePass(goodsId, goodsPass);
-        }
-        if (!goods.getGoodsImage().equals(goodsImage)) {
-            goodsService.updateImage(goodsId, goodsImage);
-        }
+        goodsService.updateInfo(goods, goodsName, goodsQuantity, goodsPrice, goodsSale, goodsPass, goodsDegree, goodsImage);
+
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }
 
     @RequestMapping(value = "/farmer/farmerReport", method = RequestMethod.POST)
-    public String registerGoods (@RequestParam("goodsId") String goodsId,
-                                         @RequestParam("goodsName") String goodsName,
+    public String registerGoods (@RequestParam("goodsName") String goodsName,
                                          @RequestParam("goodsTime") String goodstime,
                                          @RequestParam("goodsPlace") String goodsPlace,
                                          HttpSession session) throws SQLException {
 
         Timestamp goodsTime = Timestamp.valueOf(goodstime);
 
-        Goods goods = new Goods();
-
-        goodsService.Insert(goods, goodsId, goodsName, goodsTime, goodsPlace);
+        goodsService.Insert(goodsName, goodsTime, goodsPlace);
 
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
