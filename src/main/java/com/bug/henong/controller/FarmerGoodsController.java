@@ -5,6 +5,7 @@ import com.bug.henong.entity.Goods;
 import com.bug.henong.service.GoodsService;
 import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,7 @@ public class FarmerGoodsController {
 
     private GoodsService goodsService = new GoodsService();
 
-    @RequestMapping(value = "/farmer/FarmerGoods/findone", method = RequestMethod.GET)
+    @RequestMapping(value = "/farmer/farmerGoods/findOne", method = RequestMethod.GET)
     public void findOneGoods (@RequestParam("goodsId") String goodsId,
                                              HttpServletResponse response) throws SQLException, IOException {
 
@@ -48,7 +49,7 @@ public class FarmerGoodsController {
         printWriter.print(json);
     }
 
-    @RequestMapping(value = "/farmer/farmerGoods", method = RequestMethod.GET)
+    @RequestMapping(value = "/farmer/farmerGoods/getAll", method = RequestMethod.GET)
     public void findAllGoods (HttpServletResponse response) throws IOException, SQLException {
 
         PrintWriter printWriter = response.getWriter();
@@ -78,7 +79,7 @@ public class FarmerGoodsController {
 
     }
 
-    @RequestMapping(value = "/farmer/farmerGoods", method = RequestMethod.POST)
+    @RequestMapping(value = "/farmer/farmerGoods/update", method = RequestMethod.POST)
     public String updateOneGoods(@RequestParam("goodsId") String goodsId,
                                @RequestParam("goodsName") String goodsName,
                                @RequestParam("goodsQuantity") String goodsquantity,
@@ -100,7 +101,7 @@ public class FarmerGoodsController {
         return mapFactory.getStringObjectMap(session);
     }
 
-    @RequestMapping(value = "/farmer/farmerReport", method = RequestMethod.POST)
+    @RequestMapping(value = "/farmer/farmerGoods/farmerGoodsReport", method = RequestMethod.POST)
     public String registerGoods (@RequestParam("goodsName") String goodsName,
                                          @RequestParam("goodsTime") String goodstime,
                                          @RequestParam("goodsPlace") String goodsPlace,
@@ -113,5 +114,7 @@ public class FarmerGoodsController {
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }
+
+
 }
 
