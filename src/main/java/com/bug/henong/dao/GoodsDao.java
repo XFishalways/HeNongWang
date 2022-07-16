@@ -99,7 +99,7 @@ public class GoodsDao {
     }
 
     /**更新数量*/
-    public double updateQuantity( String id,Double goodsQuantity) throws SQLException {
+    public int updateQuantity( String id,Double goodsQuantity) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("GOODS_QUANTITY",goodsQuantity),
