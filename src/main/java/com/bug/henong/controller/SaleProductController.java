@@ -1,7 +1,6 @@
 package com.bug.henong.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.bug.henong.entity.Goods;
 import com.bug.henong.entity.SaleProduct;
 import com.bug.henong.service.SaleProductService;
 import com.bug.henong.utils.MapFactory;
@@ -24,7 +23,7 @@ public class SaleProductController {
 
     private SaleProductService saleProductService = new SaleProductService();
 
-    @RequestMapping(value = "/admin/saleProduct/findOne", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/saleProduct/{saleProductId}", method = RequestMethod.GET)
 
     public void findOneGoods (@RequestParam("saleProductId") String saleProductId,
                                             HttpServletResponse response ) throws SQLException, IOException{
@@ -114,9 +113,4 @@ public class SaleProductController {
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }
-
-
-
-
-
 }

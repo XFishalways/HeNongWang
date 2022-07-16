@@ -24,7 +24,7 @@ public class AdminSaleStoreController {
     /**
      * 查询一个商店活动
      */
-    @GetMapping("/admin/saleStore/findone")
+    @GetMapping("/admin/saleStore/{saleStoreId}")
     public void findOneSale(@RequestParam("saleStoreId") String saleStoreId,
                             HttpServletResponse response) throws SQLException, IOException {
         PrintWriter printWriter = response.getWriter();
@@ -111,7 +111,7 @@ public class AdminSaleStoreController {
                                      @RequestParam("saleStoreTitle") String saleStoreTitle,
                                      @RequestParam("saleStoreIntro") String saleStoreIntro,
                                      @RequestParam("saleStoreContent") String saleStoreContent,
-                                     @RequestParam("salestorestarttime") String salestorestarttime,
+                                     @RequestParam("saleStoreStartTime") String salestorestarttime,
                                      @RequestParam("salestoreendtime") String salestoreendtime,
                                      @RequestParam("saleStoreRange") String saleStoreRange,
                                      @RequestParam("saleStoreType") String saleStoreType,
