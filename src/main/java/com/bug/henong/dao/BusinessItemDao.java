@@ -79,7 +79,7 @@ public class BusinessItemDao {
      */
     public List<BusinessItem> findBusinessItemByTitle(String skuTitle) throws SQLException {
         List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
-        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where SKU_TITLE LIKE /'%?%/'", skuTitle);
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where SKU_TITLE LIKE ?", "%"+skuTitle+"%");
 
         for (Entity e : entities) {
             String itemStr = JSONUtil.toJsonStr(e);
@@ -94,7 +94,7 @@ public class BusinessItemDao {
      */
     public List<BusinessItem> findBusinessItemByUserID(String userId) throws SQLException {
         List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
-        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where USER_ID LIKE /'%?%/'", userId);
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where USER_ID LIKE ?", "%"+userId+"%");
 
         for (Entity e : entities) {
             String itemStr = JSONUtil.toJsonStr(e);
@@ -167,7 +167,7 @@ public class BusinessItemDao {
     public List<BusinessItem> findBusinessByTitle(String userId, String skuTitle) throws SQLException {
         List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
 
-        List<Entity> entities = Db.use().query("\"SELECT * FROM BUSINESS_ITEM Where USER_ID = ? AND SKU_TITLE LIKE /'%?%/'",userId, skuTitle);
+        List<Entity> entities = Db.use().query("\"SELECT * FROM BUSINESS_ITEM Where USER_ID = ? AND SKU_TITLE LIKE ?",userId, "%"+skuTitle+"%");
         if (entities.isEmpty()) {
             return null;
         }
