@@ -56,8 +56,9 @@ public class FarmerInfoController {
     }
     @PostMapping("/farmer/register")
     public String register(@RequestParam("userId") String farmerId,@RequestParam("farmerName") String farmerName,
-                           @RequestParam("password") String password,HttpSession session  ) throws SQLException {
-        Boolean result = farmerService.register(farmerId, farmerName, password);
+                           @RequestParam("password")String password ,@RequestParam("farmerAge") String farmerage, HttpSession session  ) throws SQLException {
+        int farmerAge = Integer.parseInt(farmerage);
+        Boolean result = farmerService.register(farmerId, farmerName, password,farmerAge);
         if(result==false){
             session.setAttribute("errorMsg", "id已被占用");
             return null;

@@ -201,7 +201,7 @@ public class FarmerService {
     }
 
     /**注册用户*/
-    public Boolean register(String userId,String farmerName,String password ) throws SQLException {
+    public Boolean register(String userId,String farmerName,String password ,int farmerAge) throws SQLException {
         Farmer farmer =farmerDao.findOneFarmer(userId);
         if(farmer==null){
             return  false;
@@ -209,6 +209,7 @@ public class FarmerService {
             farmer.setFarmerId(userId);
             farmer.setFarmerName((farmerName));
             farmer.setUserPass(password);
+            farmer.setFarmerAge(farmerAge);
             return farmerDao.insert(farmer)>0;
         }
     }
