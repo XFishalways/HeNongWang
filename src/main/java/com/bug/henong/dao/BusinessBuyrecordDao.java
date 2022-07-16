@@ -70,4 +70,17 @@ public class BusinessBuyrecordDao {
 
         return  businessBuyrecord;
     }
+
+    /**
+     *修改账单状态
+     */
+    public int updateSkuStatus(String id, String status) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("SKU_STATUS",status),
+                Entity.create("BUSINESS_BUYRECORD").set("RECORD_ID",id)
+        );
+
+        return rw;
+    }
 }

@@ -4,6 +4,7 @@ import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BuyerItem;
+import com.bug.henong.entity.Goods;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -107,6 +108,23 @@ public class BuyerItemDao {
         );
 
         return rw;
+    }
+
+    public List<BuyerItem> findBuyerItemByName(String orderId, String userId, String skuTitle) throws SQLException {
+        List<BuyerItem> buyerItems = new ArrayList<BuyerItem>();
+
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYERITEM Where ORDER_ID = ? AND USER_ID = ? AND SKU_TITLE LIKE /'%?%/'",orderId, userId, skuTitle);
+        if (entities.isEmpty()) {
+            return null;
+        }
+
+        for (Entity e : entities) {
+            String itemStr = JSONUtil.toJsonStr(e);
+            BuyerItem buyerItem = JSONUtil.toBean(itemStr, BuyerItem.class);
+            buyerItems.add(buyerItem);
+        }
+
+        return buyerItems;
     }
 
 }
