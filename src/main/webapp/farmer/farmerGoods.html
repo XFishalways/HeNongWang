@@ -31,8 +31,6 @@
 			  table.render({
 			    elem: '#test'
 			    ,url:url
-				,page:true
-				,limit:20
 				,parseData: function(res){ //res 即为原始返回的数据
 				    return {
 				      "code": 0, //解析接口状态
@@ -52,7 +50,7 @@
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("farmerGoods/getFarmerGoods");
+					if( url.search(patt) != -1) tableInit("farmerGoods/getFarmerGoods?farmerId=" + getCookie('userId'));
 				}
 			  });
 			  
@@ -66,7 +64,19 @@
 			      //do 
 				  window.location.href="user_register.html";
 			    } else if(layEvent === 'del'){ //删除
-			      
+					layer.confirm('真的删除行么', function(index){
+					var id = obj.data.goodsId;
+			        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+			        layer.close(index);
+			        //向服务端发送删除指令
+
+					$.ajax({
+						url:"farmerGoods/delete?goods=" + id,
+						success:function(res){
+							alert('success');
+						}
+					})
+			      });
 			    } else if(layEvent === 'edit'){ //编辑
 			      //do something
 			      
@@ -82,7 +92,7 @@
 			});
 		}
 		
-		tableInit("farmerGoods/getFarmerGoods");
+		tableInit("farmerGoods/getFarmerGoods?farmerId=" + getCookie('userId'));
 		
 		//第一种：主动加载jquery模块
 		layui.use(['jquery', 'layer'], function(){ 
@@ -92,7 +102,7 @@
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
 			  var goodsName = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("farmerGoods/findOnegetFarmerGoodsByName?farmerId=" + getCookie(userId) +"&goodsName=" + goodsName);
+			  tableInit("farmerGoods/getFarmerGoodsByName?farmerId=" + getCookie('userId') +"&goodsName=" + goodsName);
 		  })
 		});
 		

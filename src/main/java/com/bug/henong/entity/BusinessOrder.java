@@ -47,6 +47,9 @@ public class BusinessOrder implements Serializable,Cloneable{
     @ApiModelProperty(name = "订单状态",notes = "")
     private String orderStatus ;
 
+     @ApiModelProperty(name = "商品数量",notes = "")
+     private String skuAmount ;
+
     /** 返回账单ID */
     public String getOrderId(){
         return this.orderId;
@@ -127,4 +130,19 @@ public class BusinessOrder implements Serializable,Cloneable{
     public void setOrderStatus(String orderStatus){
         this.orderStatus=orderStatus;
     }
-}
+
+     /**
+      *返回商品数量
+      */
+     public String getSkuAmount() {
+         return skuAmount;
+     }
+
+     /**
+      *设置商品数量
+      */
+     public void setSkuAmount(String skuAmount) {
+         this.skuAmount = skuAmount;
+     }
+
+ }

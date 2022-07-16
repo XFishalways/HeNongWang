@@ -22,5 +22,13 @@
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
 
+    <!-- 拦截器配置-->
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/**"/>-->
+<!--            <bean class="com.data.job.util.interceptor.SqlInjectInterceptor"></bean>-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
+
     <context:property-placeholder location= "classpath:db.properties" />
 </beans>

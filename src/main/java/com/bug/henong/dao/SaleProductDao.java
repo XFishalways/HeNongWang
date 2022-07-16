@@ -3,6 +3,7 @@ package com.bug.henong.dao;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
+import com.bug.henong.entity.BusinessItem;
 import com.bug.henong.entity.SaleProduct;
 
 import java.sql.SQLException;
@@ -72,11 +73,26 @@ public class SaleProductDao {
         return  saleProduct;
     }
 
+    /**
+     * 通过标题查找
+     */
+    public List<SaleProduct> findSaleProductByTitle(String saleProductTitle) throws SQLException {
+        List<SaleProduct> saleProduct = new ArrayList<SaleProduct>();
+        List<Entity> entities = Db.use().query("SELECT * FROM SALE_PRODUCT Where SALE_PRODUCT_TITLE LIKE /'%?%/'", saleProductTitle);
+
+        for (Entity e : entities) {
+            String productStr = JSONUtil.toJsonStr(e);
+            SaleProduct saleProduct1 = JSONUtil.toBean(productStr, SaleProduct.class);
+            saleProduct.add(saleProduct1);
+        }
+        return saleProduct;
+    }
+
     /**更新标题*/
     public int updateTitle(String title, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("TITLE",title),
+                Entity.create().set("SALE_PRODUCT_TITLE",title),
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
@@ -87,7 +103,7 @@ public class SaleProductDao {
     public int updateIntro(String intro, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("INTRO",intro),
+                Entity.create().set("SALE_PRODUCT_INTRO",intro),
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
@@ -98,7 +114,7 @@ public class SaleProductDao {
     public int updateContent(String content, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("CONTENT",content),
+                Entity.create().set("SALE_PRODUCT_CONTENT",content),
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
@@ -108,7 +124,7 @@ public class SaleProductDao {
     public int updateStart_time(Timestamp startTime, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("START_TIME",startTime),
+                Entity.create().set("SALE_PRODUCT_START_TIME",startTime),
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
@@ -119,7 +135,7 @@ public class SaleProductDao {
     public int updateEnd_time(Timestamp endTime, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("END_TIME",endTime),
+                Entity.create().set("SALE_PRODUCT_END_TIME",endTime),
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
@@ -130,7 +146,7 @@ public class SaleProductDao {
     public int updateRange(String range, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("RANGE",range),
+                Entity.create().set("SALE_PRODUCT_RANGE",range),
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
@@ -141,7 +157,7 @@ public class SaleProductDao {
     public int updateType(String type, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("TYPE",type),
+                Entity.create().set("SALE_PRODUCT_TYPE",type),
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 
@@ -152,7 +168,7 @@ public class SaleProductDao {
     public int updateStatus(String status, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("STATUS",status),
+                Entity.create().set("SALE_PRODUCT_STATUS",status),
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
         );
 

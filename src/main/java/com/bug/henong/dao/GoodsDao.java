@@ -84,7 +84,7 @@ public class GoodsDao {
      */
     public List<Goods> findGoodsByname(String goodsName) throws SQLException {
         List<Goods> goods = new ArrayList<Goods>();
-        List<Entity> entities = Db.use().query("SELECT * FROM GOODS Where GOODS_NAME LIKE /'%?%/'", goodsName);
+        List<Entity> entities = Db.use().query("SELECT * FROM GOODS Where GOODS_NAME LIKE ?", "%"+goodsName+"%");
 
         for (Entity e : entities) {
             String goodsStr = JSONUtil.toJsonStr(e);
@@ -219,11 +219,14 @@ public class GoodsDao {
 
         return goods;
     }
+    /**
+    通过id和名字来共同寻找信息
+     */
 
     public List<Goods> findFarmerGoodsByName(String farmerId, String goodsName) throws SQLException {
         List<Goods> goods = new ArrayList<Goods>();
 
-        List<Entity> entities = Db.use().query("\"SELECT * FROM GOODS Where FARMER_ID = ? AND GOODS_NAME LIKE /'%?%/'",farmerId, goodsName);
+        List<Entity> entities = Db.use().query("SELECT * FROM GOODS Where FARMER_ID = ? AND GOODS_NAME LIKE ?",farmerId, "%"+goodsName+"%");
         if (entities.isEmpty()) {
             return null;
         }
