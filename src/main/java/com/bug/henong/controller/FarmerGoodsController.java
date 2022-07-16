@@ -5,10 +5,7 @@ import com.bug.henong.entity.Goods;
 import com.bug.henong.service.GoodsService;
 import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,8 +28,8 @@ public class FarmerGoodsController {
     private GoodsService goodsService = new GoodsService();
 
     @RequestMapping(value = "/farmer/farmerGoods/findOne", method = RequestMethod.GET)
-    public void findOneGoods (@RequestParam("goodsId") String goodsId,
-                                             HttpServletResponse response) throws SQLException, IOException {
+    public void findOneGoods(@RequestParam("goodsId") String goodsId,
+                             HttpServletResponse response) throws SQLException, IOException {
 
         PrintWriter printWriter = response.getWriter();
 
@@ -50,7 +47,7 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerGoods/getAll", method = RequestMethod.GET)
-    public void findAllGoods (HttpServletResponse response) throws IOException, SQLException {
+    public void findAllGoods(HttpServletResponse response) throws IOException, SQLException {
 
         PrintWriter printWriter = response.getWriter();
 
@@ -58,11 +55,10 @@ public class FarmerGoodsController {
 
         List<Goods> goods = goodsService.getAllGoods();
 
-        if(goods != null) {
+        if (goods != null) {
             json = JSON.toJSONString(goods);
             System.out.println(json);
-        }
-        else {
+        } else {
             json = "{\"log\":\"Invalid id\"}";
         }
 
@@ -81,14 +77,14 @@ public class FarmerGoodsController {
 
     @RequestMapping(value = "/farmer/farmerGoods/update", method = RequestMethod.POST)
     public String updateOneGoods(@RequestParam("goodsId") String goodsId,
-                               @RequestParam("goodsName") String goodsName,
-                               @RequestParam("goodsQuantity") String goodsquantity,
-                               @RequestParam("goodsPrice") String goodsprice,
-                               @RequestParam("goodsSale") String goodsSale,
-                               @RequestParam("goodsPass") String goodsPass,
-                               @RequestParam("goodsDegree") String goodsDegree,
-                               @RequestParam("goodsImage") String goodsImage,
-                               HttpSession session) throws SQLException {
+                                 @RequestParam("goodsName") String goodsName,
+                                 @RequestParam("goodsQuantity") String goodsquantity,
+                                 @RequestParam("goodsPrice") String goodsprice,
+                                 @RequestParam("goodsSale") String goodsSale,
+                                 @RequestParam("goodsPass") String goodsPass,
+                                 @RequestParam("goodsDegree") String goodsDegree,
+                                 @RequestParam("goodsImage") String goodsImage,
+                                 HttpSession session) throws SQLException {
 
         Double goodsQuantity = Double.parseDouble(goodsquantity);
         Double goodsPrice = Double.parseDouble(goodsprice);
@@ -102,10 +98,10 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerGoods/farmerGoodsReport", method = RequestMethod.POST)
-    public String registerGoods (@RequestParam("goodsName") String goodsName,
-                                         @RequestParam("goodsTime") String goodstime,
-                                         @RequestParam("goodsPlace") String goodsPlace,
-                                         HttpSession session) throws SQLException {
+    public String registerGoods(@RequestParam("goodsName") String goodsName,
+                                @RequestParam("goodsTime") String goodstime,
+                                @RequestParam("goodsPlace") String goodsPlace,
+                                HttpSession session) throws SQLException {
 
         Timestamp goodsTime = Timestamp.valueOf(goodstime);
 
@@ -115,6 +111,16 @@ public class FarmerGoodsController {
         return mapFactory.getStringObjectMap(session);
     }
 
-
+    @RequestMapping(value = "/farmer/farmerGoods/getFarmerGoods?page={page}&limit={limit}")
+    public String getGoodsFromTo(@PathVariable String page, @PathVariable String limit, HttpSession session) throws SQLException {
+        int currentPage = Integer.getInteger(page);
+        int pageSize = Integer.getInteger(limit);
+        List<Goods> goods = goodsService.getGoodsFromTo(currentPage, pageSize);
+        if (goods != null) {
+            String json = JSON.toJSONString(goods);
+            session.getAttribute("");
+            return json;
+        }
+        return null;
+    }
 }
-
