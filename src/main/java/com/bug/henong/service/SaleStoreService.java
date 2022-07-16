@@ -1,13 +1,17 @@
 package com.bug.henong.service;
 
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import com.bug.henong.dao.SaleStoreDao;
+import com.bug.henong.entity.Goods;
 import com.bug.henong.entity.SaleProduct;
 import com.bug.henong.entity.SaleStore;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service("SaleStoreService")
 public class SaleStoreService {
@@ -18,6 +22,16 @@ public class SaleStoreService {
      */
     public SaleStore getSaleStoreId(String loginStoreId) throws SQLException {
         return saleStoreDao.findOneStore(loginStoreId);
+    }
+
+    public void deleteSale(String saleId) throws SQLException {
+
+        saleStoreDao.delete(saleId);
+    }
+
+    public List<SaleStore> getAllSales() throws SQLException {
+
+        return saleStoreDao.findAll();
     }
 
     /**
@@ -141,6 +155,83 @@ public class SaleStoreService {
                 return rw > 0;
         }
 
+        return false;
+    }
+
+    public int Insert(String saleStoreTitle, String saleStoreIntro, String saleStoreContent,
+                      Timestamp saleStoreStartTime, Timestamp saleStoreEndTime, String saleStoreRange,
+                      String saleStoreType, String saleStoreStatus) throws SQLException{
+
+        SaleStore saleStore = new SaleStore();
+
+        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
+        String saleStoreId = snowflake.nextIdStr();
+
+        saleStore.setSaleStoreid(saleStoreId);
+
+        if(saleStoreTitle != null){
+            saleStore.setSaleStoreTitle(saleStoreTitle);
+        }
+        if(saleStoreIntro != null){
+            saleStore.setSaleStoreIntro(saleStoreIntro);
+        }
+        if(saleStoreContent != null){
+            saleStore.setSaleStoreContent(saleStoreContent);
+        }
+        if(saleStoreStartTime != null){
+            saleStore.setSaleStoreStartTime(saleStoreStartTime);
+        }
+        if(saleStoreEndTime != null){
+            saleStore.setSaleStoreEndTime(saleStoreEndTime);
+        }
+        if(saleStoreRange != null){
+            saleStore.setSaleStoreRange(saleStoreRange);
+        }
+        if(saleStoreType != null){
+            saleStore.setSaleStoreType(saleStoreType);
+        }
+        if(saleStoreStatus != null){
+            saleStore.setSaleStoreStatus(saleStoreStatus);
+        }
+
+        return saleStoreDao.insert(saleStore);
+
+    }
+
+    public Boolean update(SaleStore saleStore, String saleStoreTitle, String saleStoreIntro,
+                          String saleStoreContent, Timestamp saleStoreStartTime,
+                          Timestamp saleStoreEndTime, String saleStoreRange, String saleStoreType,
+                          String saleStoreStatus) throws SQLException{
+
+        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
+        String saleStoreId = snowflake.nextIdStr();
+
+        if(saleStore != null){
+            if (!saleStore.getSaleStoreTitle().equals(saleStoreTitle)) {
+                saleStoreDao.updateActivityTitle(saleStoreTitle, saleStoreId);
+            }
+            if (!saleStore.getSaleStoreIntro().equals(saleStoreIntro)) {
+                saleStoreDao.updateActivityIntro(saleStoreIntro, saleStoreId);
+            }
+            if (!saleStore.getSaleStoreContent().equals(saleStoreContent)) {
+                saleStoreDao.updateActivityContent(saleStoreContent, saleStoreId);
+            }
+            if (!saleStore.getSaleStoreStartTime().equals(saleStoreStartTime)) {
+                saleStoreDao.updateActivityStart_Time(saleStoreStartTime, saleStoreId);
+            }
+            if (!saleStore.getSaleStoreEndTime().equals(saleStoreEndTime)) {
+                saleStoreDao.updateActivityEnd_time(saleStoreEndTime, saleStoreId);
+            }
+            if (!saleStore.getSaleStoreRange().equals(saleStoreRange)) {
+                saleStoreDao.updateActivityRange(saleStoreRange, saleStoreId);
+            }
+            if (!saleStore.getSaleStoreType().equals(saleStoreType)) {
+                saleStoreDao.updateActivityType(saleStoreType, saleStoreId);
+            }
+            if (!saleStore.getSaleStoreStatus().equals(saleStoreStatus)) {
+                saleStoreDao.updateActivity_Status(saleStoreStatus, saleStoreId);
+            }
+        }
         return false;
     }
 
