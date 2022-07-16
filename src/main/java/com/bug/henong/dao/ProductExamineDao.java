@@ -88,7 +88,7 @@ public class ProductExamineDao {
     public int updateProductNote(String productNote, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("PRODUCT_Note",productNote),
+                Entity.create().set("PRODUCT_NOTES",productNote),
                 Entity.create("PRODUCT_EXAMINE").set("PRODUCT_ID",id)
         );
 
