@@ -199,6 +199,19 @@ public class FarmerService {
         return 1;
 
     }
+
+    /**注册用户*/
+    public Boolean register(String userId,String farmerName,String password ) throws SQLException {
+        Farmer farmer =farmerDao.findOneFarmer(userId);
+        if(farmer==null){
+            return  false;
+        }else{
+            farmer.setFarmerId(userId);
+            farmer.setFarmerName((farmerName));
+            farmer.setUserPass(password);
+            return farmerDao.insert(farmer)>0;
+        }
+    }
 }
 
 

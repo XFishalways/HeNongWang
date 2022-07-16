@@ -54,4 +54,17 @@ public class FarmerInfoController {
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }
+    @PostMapping("/farmer/register")
+    public String register(@RequestParam("userId") String farmerId,@RequestParam("farmerName") String farmerName,
+                           @RequestParam("password") String password,HttpSession session  ) throws SQLException {
+        Boolean result = farmerService.register(farmerId, farmerName, password);
+        if(result==false){
+            session.setAttribute("errorMsg", "id已被占用");
+            return null;
+        }else{
+            MapFactory mapFactory = new MapFactory();
+            return mapFactory.getStringObjectMap(session);
+        }
+    }
 }
+
