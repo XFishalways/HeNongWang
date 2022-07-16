@@ -47,13 +47,13 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerGoods/getAll", method = RequestMethod.GET)
-    public void findAllGoods(HttpServletResponse response) throws IOException, SQLException {
+    public void findAllGoods(@RequestParam String farmerId, HttpServletResponse response) throws IOException, SQLException {
 
         PrintWriter printWriter = response.getWriter();
 
         String json;
 
-        List<Goods> goods = goodsService.getAllGoods();
+        List<Goods> goods = goodsService.getFarmerGoods(farmerId);
 
         if (goods != null) {
             json = JSON.toJSONString(goods);
@@ -116,6 +116,16 @@ public class FarmerGoodsController {
         int currentPage = Integer.getInteger(page);
         int pageSize = Integer.getInteger(limit);
         List<Goods> goods = goodsService.getGoodsFromTo(currentPage, pageSize);
+        if (goods != null) {
+            String json = JSON.toJSONString(goods);
+            session.getAttribute("");
+            return json;
+        }
+        return null;
+    }
+    @RequestMapping(value ="farmer/farmerGoods/getFarmerGoodsByName")
+    public String getFarmerGoodsByName(@RequestParam String farmerId,@RequestParam String goodsName, HttpSession session){
+        List<Goods> goods = goodsService.getFarmerGoodsByName(farmerId, goodsName);
         if (goods != null) {
             String json = JSON.toJSONString(goods);
             session.getAttribute("");
