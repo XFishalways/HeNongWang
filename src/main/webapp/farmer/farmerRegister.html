@@ -41,6 +41,12 @@
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
+                                        <label class="layui-form-label">地址:</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" placeholder="请输入地址" id="input-farmerAddr" value="" class="layui-input" lay-verify="required" required>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
                                         <label class="layui-form-label">密码:</label>
                                         <div class="layui-input-block">
                                             <input type="password" placeholder="请输入密码" id="input-password" value="" class="layui-input" lay-verify="required" required>
@@ -75,6 +81,12 @@
                                         <label class="layui-form-label">年龄:</label>
                                         <div class="layui-input-block">
                                             <div class="layui-form-mid layui-word-aux" id="confirm-farmerAge" name="farmerAge">dog</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">地址:</label>
+                                        <div class="layui-input-block">
+                                            <div class="layui-form-mid layui-word-aux" id="confirm-farmerAddr" name="farmerAddr">dog</div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -158,6 +170,7 @@
         form.on('submit(formStep)', function (data) {
             step.next('#stepForm');
 
+            $('#confirm-farmerAddr').html($('#input-farmerAddr').val());
             $('#confirm-farmerName').html($('#input-farmerName').val());
             $('#confirm-farmerAge').html($('#input-farmerAge').val());
             $('#confirm-farmerId').html($('#input-farmerId').val());
@@ -169,6 +182,7 @@
                 type:"POST",
                 url:'register',
                 data:{
+                    farmerPlace:$('#input-farmerAddr').val(),
                     farmerName:$('#input-farmerName').val(),
                     farmerAge:$('#input-farmerAge').val(),
                     farmerId:$('#input-farmerId').val(),
