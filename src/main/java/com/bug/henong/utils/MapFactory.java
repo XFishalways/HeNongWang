@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapFactory {
+
     public Map<String , Object> getStringObjectMapWithType(HttpSession session, String type) {
 
         session.setMaxInactiveInterval(60 * 60 * 2);
@@ -18,9 +19,9 @@ public class MapFactory {
         map.put("data","success");
         map.put("type",type);
 
-
         return map;
     }
+
     public String getStringObjectMap(HttpSession session) {
 
         session.setMaxInactiveInterval(60 * 60 * 2);
@@ -32,8 +33,10 @@ public class MapFactory {
         map.put("data","success");
 
         String json = JSONUtil.toJsonStr(map);
+
         return json;
     }
+
     public Map<String,Object> error() {
         Map<String, Object> map = new HashMap<>();
         map.put("data","error");

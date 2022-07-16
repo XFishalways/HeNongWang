@@ -32,6 +32,10 @@
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item">
           <a href="javascript:;" id="infomation">个人信息</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">个人信息查看</a></dd>
+            <dd><a href="javascript:;">个人信息更改</a></dd>
+          </dl>
         </li>
         <li class="layui-nav-item">
           <a href="javascript:;">我的购物车</a>
@@ -76,13 +80,16 @@ layui.use('element', function(){
 	$("a").click(function(){
 		//alert($(this).text());
 		var text = $(this).text()
-		if(text=="个人信息"){
+		if(text=="个人信息查看"){
 			$("#main").find("#ifr").remove();
-			$("#main").append('<iframe src="buyerInfomation.html" id="ifr" style="width:100%;height:100%"></iframe>');
+			$("#main").append('<iframe src="buyerInformation.html" id="ifr" style="width:100%;height:100%"></iframe>');
+		}else if(text=="个人信息更改"){
+			$("#main").find("#ifr").remove();
+			$("#main").append('<iframe src="buyerInfoManage.html" id="ifr" style="width:100%;height:100%"></iframe>');
 		}else if(text=="消息推送"){
-			$("#main").find("#ifr").remove();
-			$("#main").append('<iframe src="user/user_register.html" id="ifr" style="width:100%;height:100%"></iframe>');
-		}else if(text=="客服消息") {
+          $("#main").find("#ifr").remove();
+          $("#main").append('<iframe src="user/user_register.html" id="ifr" style="width:100%;height:100%"></iframe>');
+        }else if(text=="客服消息") {
           $("#main").find("#ifr").remove();
           $("#main").append('<iframe src="eventManagement.html" id="ifr" style="width:100%;height:100%"></iframe>');
         }else if(text=="活动推送") {

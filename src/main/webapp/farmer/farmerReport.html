@@ -16,24 +16,18 @@
                 <div class="layui-form-item">
                      <label class="layui-form-label">商品名</label>
                      <div class="layui-input-inline">
-                       <input id="account-name" type="text" name="name" value="" required  lay-verify="required" placeholder="商品名" autocomplete="off" class="layui-input">
+                       <input id="goods-name" type="text" name="name" value="" required  lay-verify="required" placeholder="商品名" autocomplete="off" class="layui-input">
                      </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">昵称</label>
-                    <div class="layui-input-inline">
-                      <input id="account-nick" type="text" name="nickname" value="" required  lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
-                    </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">采摘时间</label>
                     <div class="layui-input-inline">
-                      <input id="account-nick" type="text" name="nickname" value="" required  lay-verify="required" placeholder="采摘时间" autocomplete="off" class="layui-input">
+                      <input id="pick-date" type="text" name="date" value="" required  lay-verify="required" placeholder="采摘时间" autocomplete="off" class="layui-input">
                     </div>
                 </div><div class="layui-form-item">
                     <label class="layui-form-label">采摘地址</label>
                     <div class="layui-input-inline">
-                      <input id="account-nick" type="text" name="nickname" value="" required  lay-verify="required" placeholder="采摘地址" autocomplete="off" class="layui-input">
+                      <input id="pick-place" type="text" name="place" value="" required  lay-verify="required" placeholder="采摘地址" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -54,15 +48,21 @@
                 console.log(data.elem); //原始DOM对象
                 console.log(data.value); //被选中的值
 
-                alert('ok');
-
                 $.ajax({
-                    url:"",
+                    url:"farmerReport",
                     type:"POST",
-                    data:data,
+                    data: {
+                        goodsName:data.field.name,
+                        goodsTime:data.field.date,
+                        goodsPlace:data.field.place
+                    },
                     dataType:"json",
-                    success:function(rec){
+                    success:function(data){
                         alert("OK");
+                    },
+
+                    error:function () {
+                        alert('failed');
                     }
 
                 })
