@@ -51,7 +51,7 @@
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("farmerGoods/getAll");
+					if( url.search(patt) != -1) tableInit("farmerGoods/getFarmerGoods");
 				}
 			  });
 			  
@@ -81,7 +81,7 @@
 			});
 		}
 		
-		tableInit("farmerGoods/getAll");
+		tableInit("farmerGoods/getFarmerGoods");
 		
 		//第一种：主动加载jquery模块
 		layui.use(['jquery', 'layer'], function(){ 
@@ -91,7 +91,7 @@
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
 			  var id = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("farmerGoods/findOne?USER_ID=" +id +"&goodsPatt=");
+			  tableInit("farmerGoods/findOne" +id +"&goodsPatt=");
 		  })
 		});
 		

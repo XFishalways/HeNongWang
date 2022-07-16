@@ -44,6 +44,7 @@
             </form>
         </div>
 
+        <script src="../js/myCookie.js"></script>
         <script>
             layui.use(['jquery','form'], function(args){
               var $ = layui.$;
@@ -54,16 +55,18 @@
                 console.log(data.value); //被选中的值
 
                 $.ajax({
-                    url:"farmerReport",
+                    url:"farmerGoods/farmerGoodsReport",
                     type:"POST",
                     data: {
+                        farmerId:getCookie('userId'),
+                        goodsPrice:data.field.price,
                         goodsName:data.field.name,
                         goodsTime:data.field.date,
                         goodsPlace:data.field.place
                     },
                     dataType:"json",
                     success:function(data){
-                        alert("OK");
+                        alert("已上传");
                     },
 
                     error:function () {
