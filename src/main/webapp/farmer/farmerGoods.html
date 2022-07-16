@@ -102,9 +102,8 @@
 		  
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
-			alert(1);
 			  var goodsName = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("farmerGoods/getFarmerGoodsByName?farmerId=" + getCookie(userId) +"&goodsName=" + goodsName);
+			  tableInit("farmerGoods/getFarmerGoodsByName?farmerId=" + getCookie('userId') +"&goodsName=" + goodsName);
 		  })
 		});
 		
