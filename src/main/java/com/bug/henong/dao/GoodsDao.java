@@ -219,6 +219,9 @@ public class GoodsDao {
 
         return goods;
     }
+    /**
+    通过id和名字来共同寻找信息
+     */
 
     public List<Goods> findFarmerGoodsByName(String farmerId, String goodsName) throws SQLException {
         List<Goods> goods = new ArrayList<Goods>();

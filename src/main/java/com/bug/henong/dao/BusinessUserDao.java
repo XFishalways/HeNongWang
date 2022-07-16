@@ -5,6 +5,7 @@ import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BusinessUser;
 import com.bug.henong.entity.BuyerUser;
+import com.bug.henong.entity.Goods;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -82,6 +83,21 @@ public class BusinessUserDao {
         BusinessUser businessUser = JSONUtil.toBean(businessStr,BusinessUser.class);
 
         return  businessUser;
+    }
+
+    /**
+     * 通过名字查找
+     */
+    public List<BusinessUser> findBusinessUserByName(String userName) throws SQLException {
+        List<BusinessUser> businessUser = new ArrayList<BusinessUser>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_USER Where USER_NAME LIKE /'%?%/'", userName);
+
+        for (Entity e : entities) {
+            String userStr = JSONUtil.toJsonStr(e);
+            BusinessUser businessUser1 = JSONUtil.toBean(userStr, BusinessUser.class);
+            businessUser.add(businessUser1);
+        }
+        return businessUser;
     }
 
     /**更新昵称*/

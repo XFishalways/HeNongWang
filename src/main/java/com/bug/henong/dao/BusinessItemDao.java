@@ -4,6 +4,8 @@ import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BusinessItem;
+import com.bug.henong.entity.BusinessUser;
+import com.bug.henong.entity.Goods;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -72,6 +74,36 @@ public class BusinessItemDao {
         return  businessItem;
     }
 
+    /**
+     * 通过标题查找
+     */
+    public List<BusinessItem> findBusinessItemByTitle(String skuTitle) throws SQLException {
+        List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where SKU_TITLE LIKE /'%?%/'", skuTitle);
+
+        for (Entity e : entities) {
+            String itemStr = JSONUtil.toJsonStr(e);
+            BusinessItem businessItem1 = JSONUtil.toBean(itemStr, BusinessItem.class);
+            businessItem.add(businessItem1);
+        }
+        return businessItem;
+    }
+
+    /**
+     * 通过用户ID查找
+     */
+    public List<BusinessItem> findBusinessItemByUserID(String userId) throws SQLException {
+        List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where USER_ID LIKE /'%?%/'", userId);
+
+        for (Entity e : entities) {
+            String itemStr = JSONUtil.toJsonStr(e);
+            BusinessItem businessItem1 = JSONUtil.toBean(itemStr, BusinessItem.class);
+            businessItem.add(businessItem1);
+        }
+        return businessItem;
+    }
+
     /**更新商品标题*/
     public int updateSkuTitle(String id, String skuTitle) throws SQLException {
 
@@ -126,6 +158,27 @@ public class BusinessItemDao {
 
         return rw;
 
+    }
+
+    /**
+     通过id和名字来共同寻找信息
+     */
+
+    public List<BusinessItem> findBusinessByTitle(String userId, String skuTitle) throws SQLException {
+        List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
+
+        List<Entity> entities = Db.use().query("\"SELECT * FROM BUSINESS_ITEM Where USER_ID = ? AND SKU_TITLE LIKE /'%?%/'",userId, skuTitle);
+        if (entities.isEmpty()) {
+            return null;
+        }
+
+        for (Entity e : entities) {
+            String itemStr = JSONUtil.toJsonStr(e);
+            BusinessItem businessItem1 = JSONUtil.toBean(itemStr, BusinessItem.class);
+            businessItem.add(businessItem1);
+        }
+
+        return businessItem;
     }
 
 }
