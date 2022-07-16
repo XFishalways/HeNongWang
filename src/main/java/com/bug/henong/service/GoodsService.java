@@ -19,7 +19,7 @@ public class GoodsService {
     /**
      * 添加一个商品
      */
-    public int Insert( String goodsName, Timestamp goodsTime, String goodsPlace) throws SQLException {
+    public int Insert( String goodsName, Double goodsPrice, Timestamp goodsTime, String goodsPlace) throws SQLException {
 
         Goods goods = new Goods();
 
@@ -30,6 +30,9 @@ public class GoodsService {
 
         if (goodsName != null) {
             goods.setGoodsName(goodsName);
+        }
+        if (goodsName != null) {
+            goods.setGoodsPrice(goodsPrice);
         }
         if (goodsTime != null) {
             goods.setGoodsTime(goodsTime);
