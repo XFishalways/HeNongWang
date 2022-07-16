@@ -3,11 +3,12 @@ package com.bug.henong.service;
 
 import com.bug.henong.dao.GoodsDao;
 import com.bug.henong.entity.Goods;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
-
+@Service("GoodsService")
 public class GoodsService {
 
     private GoodsDao goodsDao =new GoodsDao();

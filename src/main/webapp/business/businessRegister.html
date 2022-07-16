@@ -23,7 +23,7 @@
                                 <form class="layui-form" style="margin: 0 auto; margin-top: 100px; max-width: 460px;padding-top: 40px;">
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">手机号码:</label>
-                                        <div class="layui-input-block">
+                                        <div class="layui-input-block" id="phonenumber">
                                             <input type="number" placeholder="请填写手机号码" class="layui-input" lay-verify="number" required />
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
 
                                     <div class="layui-form-item">
                                         <div class="layui-input-block">
-                                            <button class="layui-btn" lay-submit lay-filter="formStep">
+                                            <button class="layui-btn" id="register-btn-1" lay-submit lay-filter="registerStep">
                                                 &emsp;下一步&emsp;
                                             </button>
                                         </div>
@@ -49,31 +49,37 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">姓名:</label>
                                         <div class="layui-input-block">
-                                            <input type="text" placeholder="请填写姓名" class="layui-input" lay-verify="required" required />
+                                            <input type="text" name="username" placeholder="请填写姓名" class="layui-input" lay-verify="required" required />
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">昵称:</label>
                                         <div class="layui-input-block">
-                                            <input type="text" placeholder="请输入昵称" value="" class="layui-input" lay-verify="required" required>
+                                            <input type="text" name="nickname" placeholder="请输入昵称" value="" class="layui-input" lay-verify="required" required>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">用户ID:</label>
+                                        <div class="layui-input-block">
+                                            <input type="number" name="ID" placeholder="请输入昵称" value="" class="layui-input" lay-verify="required" required>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">密码:</label>
                                         <div class="layui-input-block">
-                                            <input type="password" placeholder="请输入密码" value="" class="layui-input" lay-verify="required" required>
+                                            <input type="password" name="password" placeholder="请输入密码" value="" class="layui-input" lay-verify="required|password" required>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">确认密码:</label>
                                         <div class="layui-input-block">
-                                            <input type="password" placeholder="请确认密码" value="" class="layui-input" lay-verify="required" required>
+                                            <input type="password" name="surepassword" id="surepassword" placeholder="请确认密码" value="" class="layui-input" lay-verify="required" required>
                                         </div>
                                     </div>
 
                                     <div class="layui-form-item">
                                         <div class="layui-input-block">
-                                            <button class="layui-btn" lay-submit lay-filter="formStep">
+                                            <button class="layui-btn" id="register-btn-2" lay-submit lay-filter="registerStep2">
                                                 &emsp;下一步&emsp;
                                             </button>
                                         </div>
@@ -86,7 +92,7 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">姓名:</label>
                                         <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">dog</div>
+                                            <div class="layui-form-mid layui-word-aux" >dog</div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -104,7 +110,7 @@
                                     <div class="layui-form-item">
                                         <div class="layui-input-block">
                                             <button type="button" class="layui-btn layui-btn-primary pre">上一步</button>
-                                            <button class="layui-btn" lay-submit lay-filter="formStep2">
+                                            <button class="layui-btn" lay-submit lay-filter="registerStep3">
                                                 &emsp;确认&emsp;
                                             </button>
                                         </div>
@@ -160,12 +166,17 @@
         });
 
 
-        form.on('submit(formStep)', function (data) {
+        form.on('submit(registerStep)', function (data) {
             step.next('#stepForm');
             return false;
         });
 
-        form.on('submit(formStep2)', function (data) {
+        form.on('submit(registerStep2)', function (data) {
+            step.next('#stepForm');
+            return false;
+        });
+
+        form.on('submit(registerStep3)', function (data) {
             step.next('#stepForm');
             return false;
         });
@@ -177,6 +188,84 @@
         $('.next').click(function () {
             step.next('#stepForm');
         });
+    })
+</script>
+
+<script src="../js/myCookie.js"></script>
+<script>
+    /*
+    layui.use(['form','jquery'],function () {
+        var form = layui.form;
+        var $ = layui.$;
+
+        form.render();
+
+        $(document).ready(function(){
+            $('#register-btn-1').click(function(){
+                $.ajax({
+                    type:'POST',
+                    url:'',
+                    data:{
+                        phonenumber:$('#phonenumber').val()
+                    },
+                    dataType:'json',
+
+                    success:function(data){
+                        alert('success');
+                    },
+
+                    error:function(){
+                        alert('注册失败，请检查该电话号码是否被注册');
+                    }
+                })
+
+                return false;
+            })
+        })
+    })*/
+</script>
+<script>
+    layui.use(['form','jquery'],function () {
+        var form = layui.form;
+        var $ = layui.$;
+
+        form.render();
+
+        form.verify({
+            password:function(value){
+
+                var pass = $('#surepassword').val();
+                if( pass != value) {
+                    return "两次输入密码不一致";
+                }
+            }
+        })
+        form.on('submit(registerStep2)',function(data){
+            alert(data.field);
+            $.ajax({
+                type:"POST",
+                url:'farmer/update',
+                data:{
+                    farmerName:data.field.name,
+                    originalUserPass:data.field.nickname,
+                    ID:data.field.ID,
+                    newUserPass:data.field.password,
+                    farmerPlace:data.field.surepassword,
+                },
+                dataType:'json',
+
+                success:function(){
+                    alert('success');
+                },
+
+                error:function(){
+                    alert('failed');
+                }
+            })
+            return false;
+        })
+
+
     })
 </script>
 </body>

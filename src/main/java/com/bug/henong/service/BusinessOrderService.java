@@ -3,9 +3,11 @@ package com.bug.henong.service;
 import com.bug.henong.dao.BusinessOrderDao;
 import com.bug.henong.entity.BusinessOrder;
 import com.bug.henong.entity.Farmer;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
+@Service("BusinessOrderService")
 public class BusinessOrderService {
 
     private BusinessOrderDao businessOrderDao = new BusinessOrderDao();
