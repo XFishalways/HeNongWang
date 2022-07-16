@@ -56,7 +56,7 @@ public class FarmerInfoController {
     }
     @PostMapping("/farmer/register")
     @ResponseBody
-    public String register(@RequestParam("userId") String farmerId,@RequestParam("farmerName") String farmerName,
+    public String register(@RequestParam("farmerId") String farmerId,@RequestParam("farmerName") String farmerName,
                            @RequestParam("password")String password ,@RequestParam("farmerAge") String farmerage,
                            @RequestParam("farmerPlace")String farmerPlace, HttpSession session  ) throws SQLException {
         int farmerAge = Integer.parseInt(farmerage);

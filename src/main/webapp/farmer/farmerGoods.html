@@ -45,7 +45,7 @@
 			      ,{field:'goodsName', width:180, title: '商品名',sort: true}
                   ,{field:'goodsPrice', width:100, title: '商品价格',sort:true}
                   ,{field:'farmerId', width:180, title: '商品所属农户'}
-                  ,{field:'goodsTime', width:180, title: '商品采摘时间', sort:true,templet:"<div>{{layui.util.toDateString(d.create_time)}}</div>"}
+                  ,{field:'goodsTime', width:180, title: '商品采摘时间', sort:true,templet:"<div>{{layui.util.toDateString(d.goodsTime)}}</div>"}
                   ,{field:'goodsPlace', width:280, title: '商品采摘地址'}
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
