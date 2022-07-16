@@ -201,14 +201,14 @@ public class GoodsService {
         return goodsDao.findGoodsFromTo(curentPage,pageSize);
     }
 
-    public List<Goods> getFarmerAllGoods(String famrerId){
+    public List<Goods> getFarmerAllGoods(String famrerId) throws SQLException {
         return goodsDao.findFarmerAll(famrerId);
     }
 
-    public List<Goods> getFarmerGoodsByName(String farmerId, String goodsName){
+    public List<Goods> getFarmerGoodsByName(String farmerId, String goodsName) throws SQLException {
         return goodsDao.findFarmerGoodsByName(farmerId,goodsName);
     }
-    public List<Goods> getFarmerGoodsByName(String goodsName){
+    public List<Goods> getFarmerGoodsByName(String goodsName) throws SQLException {
         return goodsDao.findGoodsByname(goodsName);
     }
 }
