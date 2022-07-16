@@ -113,7 +113,7 @@ public class BuyerItemDao {
     public List<BuyerItem> findBuyerItemByName(String orderId, String userId, String skuTitle) throws SQLException {
         List<BuyerItem> buyerItems = new ArrayList<BuyerItem>();
 
-        List<Entity> entities = Db.use().query("SELECT * FROM BUYERITEM Where ORDER_ID = ? AND USER_ID = ? AND SKU_TITLE LIKE /'%?%/'",orderId, userId, skuTitle);
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ITEM Where ORDER_ID = ? AND USER_ID = ? AND SKU_TITLE LIKE /'%?%/'",orderId, userId, skuTitle);
         if (entities.isEmpty()) {
             return null;
         }
