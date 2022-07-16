@@ -83,8 +83,9 @@
                   alert(data.field);
                   $.ajax({
                     type:"POST",
-                    url:'farmer/update',
+                    url:'/farmer/update',
                     data:{
+                      userId:getCookie('userId'),
                       farmerName:data.field.name,
                       originalUserPass:data.field.oldPass,
                       newUserPass:data.field.newPass,
@@ -107,16 +108,17 @@
                 })
 
               $(document).ready(function(){
+                
+
                 $.ajax({
                   type:'GET',
                   url:'',
                   data:{
-                    
+                    userId:getCookie('userId')
                   },
                   dataType:'json',
 
                   success:function(data){
-                    alert(data);
                     $('#account-name').val(data.userName);
                     $('#account-addr').val(data.userAddr);
                     $('#business-id').val(data.businessId);
@@ -125,11 +127,7 @@
                   error:function(){
                     alert('failed');
                   }
-                })
-
-                
-
-                
+                })  
               })
 
             }); 

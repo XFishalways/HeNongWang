@@ -4,11 +4,12 @@ package com.bug.henong.service;
 import com.bug.henong.dao.SaleStoreDao;
 import com.bug.henong.entity.SaleProduct;
 import com.bug.henong.entity.SaleStore;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-
+@Service("SaleStoreService")
 public class SaleStoreService {
 
     private SaleStoreDao saleStoreDao = new SaleStoreDao();

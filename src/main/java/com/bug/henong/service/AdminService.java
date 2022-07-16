@@ -4,8 +4,11 @@ import com.bug.henong.dao.AdminDao;
 import com.bug.henong.dao.ProductExamineDao;
 import com.bug.henong.entity.Admin;
 import com.bug.henong.entity.ProductExamine;
+import org.springframework.stereotype.Service;
+
 import java.sql.SQLException;
 
+@Service("AdminService")
 public class AdminService {
 
 

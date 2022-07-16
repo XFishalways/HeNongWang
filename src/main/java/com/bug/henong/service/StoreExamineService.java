@@ -3,10 +3,12 @@ package com.bug.henong.service;
 import com.bug.henong.dao.StoreExamineDao;
 import com.bug.henong.entity.ProductExamine;
 import com.bug.henong.entity.StoreExamine;
+import org.springframework.stereotype.Service;
 
 
 import java.sql.SQLException;
 
+@Service("StoreExamineService")
 public class StoreExamineService {
 
     private StoreExamineDao storeExamineDao =new StoreExamineDao();

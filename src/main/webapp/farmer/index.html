@@ -66,6 +66,14 @@
 layui.use('element', function(){
   var element = layui.element;
   var $ = layui.jquery;
+
+  $(document).ready(function(){
+    if(getCookie('userId') == '' ){
+      alert("请登录!");
+      window.location.href = "index.html";
+      }
+  })
+
 	$("a").click(function(){
 		//alert($(this).text());
 		var text = $(this).text()
