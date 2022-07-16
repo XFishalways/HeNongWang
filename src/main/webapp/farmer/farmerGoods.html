@@ -51,7 +51,7 @@
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("GetBuyerUsers");
+					if( url.search(patt) != -1) tableInit("farmerGoods/getAll");
 				}
 			  });
 			  
@@ -81,7 +81,7 @@
 			});
 		}
 		
-		tableInit("GetBuyerUsers");
+		tableInit("farmerGoods/getAll");
 		
 		//第一种：主动加载jquery模块
 		layui.use(['jquery', 'layer'], function(){ 
