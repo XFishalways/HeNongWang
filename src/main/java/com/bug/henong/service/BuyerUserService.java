@@ -3,10 +3,12 @@ package com.bug.henong.service;
 import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.entity.Farmer;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+@Service("BuyerUserService")
 public class BuyerUserService {
 
     private BuyerUserDao buyerUserDao = new BuyerUserDao();

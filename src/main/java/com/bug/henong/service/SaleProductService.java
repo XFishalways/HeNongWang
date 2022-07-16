@@ -13,6 +13,7 @@ import java.sql.Timestamp;
  * @version 1.0.0
  */
 
+@Service("SaleProductService")
 public class SaleProductService {
 
     private SaleProductDao saleProductDao = new SaleProductDao();

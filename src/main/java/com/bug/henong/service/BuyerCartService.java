@@ -4,9 +4,11 @@ import com.bug.henong.dao.BuyerAddressDao;
 import com.bug.henong.dao.BuyerCartDao;
 import com.bug.henong.entity.BuyerCart;
 import com.bug.henong.entity.Farmer;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
+@Service("BuyerCartService")
 public class BuyerCartService {
 
     private BuyerCartDao buyerCartDao =new BuyerCartDao();
