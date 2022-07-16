@@ -49,31 +49,31 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">姓名:</label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="username" placeholder="请填写姓名" class="layui-input" lay-verify="required" required />
+                                            <input id='input-name' type="text" name="username" placeholder="请填写姓名" class="layui-input" lay-verify="required" required />
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">昵称:</label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="nickname" placeholder="请输入昵称" value="" class="layui-input" lay-verify="required" required>
+                                            <input id='input-nickname' type="text" name="nickname" placeholder="请输入昵称" value="" class="layui-input" lay-verify="required" required>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">用户ID:</label>
                                         <div class="layui-input-block">
-                                            <input type="number" name="ID" placeholder="请输入昵称" value="" class="layui-input" lay-verify="required" required>
+                                            <input id='input-userId' type="number" name="ID" placeholder="请自拟用户id" value="" class="layui-input" lay-verify="required" required>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">密码:</label>
                                         <div class="layui-input-block">
-                                            <input type="password" name="password" placeholder="请输入密码" value="" class="layui-input" lay-verify="required|password" required>
+                                            <input type="password" name="password" id="input-password" placeholder="请输入密码" value="" class="layui-input" lay-verify="required|password" required>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">确认密码:</label>
                                         <div class="layui-input-block">
-                                            <input type="password" name="surepassword" id="surepassword" placeholder="请确认密码" value="" class="layui-input" lay-verify="required" required>
+                                            <input type="password" name="surepassword" id="input-surepassword" placeholder="请确认密码" value="" class="layui-input" lay-verify="required" required>
                                         </div>
                                     </div>
 
@@ -88,23 +88,23 @@
                             </div>
 
                             <div>
-                                <form class="layui-form" style="margin: 0 auto;margin-top: 20px; max-width: 460px;padding-top: 40px;">
+                                <form lay-filter="form3" class="layui-form" style="margin: 0 auto;margin-top: 20px; max-width: 460px;padding-top: 40px;">
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">姓名:</label>
                                         <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux" >dog</div>
+                                            <div class="layui-form-mid layui-word-aux" id="confirm-name" >dog</div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">昵称:</label>
                                         <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">dog</div>
+                                            <div class="layui-form-mid layui-word-aux" id="confirm-nickname">dog</div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">密码:</label>
+                                        <label class="layui-form-label">用户ID:</label>
                                         <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">323360</div>
+                                            <div class="layui-form-mid layui-word-aux" id="confirm-userId">323360</div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -172,12 +172,46 @@
         });
 
         form.on('submit(registerStep2)', function (data) {
+
+            form.verify({
+                password:function(value){
+
+                    var pass = $('#surepassword').val();
+                    if( pass != value) {
+                        return "两次输入密码不一致";
+                    }
+                }
+            })
+
             step.next('#stepForm');
+            $('#confirm-name').html($('#input-name').val());
+            $('#confirm-nickname').html($('#input-nickname').val());
+            $('#confirm-userId').html($('#input-userId').val());
             return false;
         });
 
         form.on('submit(registerStep3)', function (data) {
-            step.next('#stepForm');
+            $.ajax({
+                type:"POST",
+                url:'farmer/update',
+                data:{
+                    userName:$('#input-name').val(),
+                    nickName:$('#input-nickname').val(),
+                    userId:$('#input-userId').val(),
+                    password:$('#password').val(),
+                },
+                dataType:'json',
+
+                success:function(){
+                    alert('success');
+                    step.next('#stepForm');
+                },
+
+                error:function(){
+                    alert('注册失败，用户ID可能已经被注册');
+                }
+            })
+
             return false;
         });
 
@@ -193,7 +227,6 @@
 
 <script src="../js/myCookie.js"></script>
 <script>
-    /*
     layui.use(['form','jquery'],function () {
         var form = layui.form;
         var $ = layui.$;
@@ -222,50 +255,6 @@
                 return false;
             })
         })
-    })*/
-</script>
-<script>
-    layui.use(['form','jquery'],function () {
-        var form = layui.form;
-        var $ = layui.$;
-
-        form.render();
-
-        form.verify({
-            password:function(value){
-
-                var pass = $('#surepassword').val();
-                if( pass != value) {
-                    return "两次输入密码不一致";
-                }
-            }
-        })
-        form.on('submit(registerStep2)',function(data){
-            alert(data.field);
-            $.ajax({
-                type:"POST",
-                url:'farmer/update',
-                data:{
-                    farmerName:data.field.name,
-                    originalUserPass:data.field.nickname,
-                    ID:data.field.ID,
-                    newUserPass:data.field.password,
-                    farmerPlace:data.field.surepassword,
-                },
-                dataType:'json',
-
-                success:function(){
-                    alert('success');
-                },
-
-                error:function(){
-                    alert('failed');
-                }
-            })
-            return false;
-        })
-
-
     })
 </script>
 </body>
