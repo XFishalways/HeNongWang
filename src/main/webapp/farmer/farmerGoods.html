@@ -65,16 +65,15 @@
 				  window.location.href="user_register.html";
 			    } else if(layEvent === 'del'){ //删除
 					layer.confirm('真的删除行么', function(index){
-					var id = obj.data.userId;
-					alert(id);
+					var id = obj.data.goodsId;
 			        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
 			        layer.close(index);
 			        //向服务端发送删除指令
 
 					$.ajax({
-						url:"DeleteBuyerUserServlet?USER_ID=" + id,
+						url:"farmerGoods/delete?goods=" + id,
 						success:function(res){
-							console.log(res)
+							alert('success');
 						}
 					})
 			      });
