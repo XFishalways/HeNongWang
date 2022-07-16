@@ -20,15 +20,21 @@
                      </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">采摘时间</label>
+                  <label class="layui-form-label">价格</label>
+                  <div class="layui-input-inline">
+                  <input id="goods-price" type="text" name="price" value="" required  lay-verify="required" placeholder="价格" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">采摘日期</label>
                     <div class="layui-input-inline">
-                      <input id="pick-date" type="text" name="date" value="" required  lay-verify="required" placeholder="采摘时间" autocomplete="off" class="layui-input">
+                      <input id="date" type="text" name="date" lay-verify="" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                     </div>
-                </div><div class="layui-form-item">
-                    <label class="layui-form-label">采摘地址</label>
-                    <div class="layui-input-inline">
-                      <input id="pick-place" type="text" name="place" value="" required  lay-verify="required" placeholder="采摘地址" autocomplete="off" class="layui-input">
-                    </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">采摘地址</label>
+                  <div class="layui-input-inline">
+                    <input id="pick-place" type="text" name="place" value="" required  lay-verify="required" placeholder="采摘地址" autocomplete="off" class="layui-input">
+                  </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
@@ -39,26 +45,37 @@
             </form>
         </div>
 
+        <script src="../js/myCookie.js"></script>
         <script>
-            layui.use(['jquery','form'], function(args){
+            layui.use(['jquery','form','laydate'], function(args){
               var $ = layui.$;
               var form = layui.form;
+              var laydate = layui.laydate;
+
+              laydate.render({
+                elem:'#date',
+                type:'datetime'
+              })
+
+              form.render();
 
               form.on('submit(submit-info)', function(data){
                 console.log(data.elem); //原始DOM对象
                 console.log(data.value); //被选中的值
 
                 $.ajax({
-                    url:"farmerReport",
+                    url:"farmerGoods/farmerGoodsReport",
                     type:"POST",
                     data: {
+                        farmerId:getCookie('userId'),
+                        goodsPrice:data.field.price,
                         goodsName:data.field.name,
                         goodsTime:data.field.date,
                         goodsPlace:data.field.place
                     },
                     dataType:"json",
                     success:function(data){
-                        alert("OK");
+                        alert("已上传");
                     },
 
                     error:function () {

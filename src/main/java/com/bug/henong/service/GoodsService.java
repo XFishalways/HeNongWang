@@ -19,7 +19,7 @@ public class GoodsService {
     /**
      * 添加一个商品
      */
-    public int Insert( String goodsName, Timestamp goodsTime, String goodsPlace) throws SQLException {
+    public int insert( String goodsName, Double goodsPrice, Timestamp goodsTime, String goodsPlace,String farmerId) throws SQLException {
 
         Goods goods = new Goods();
 
@@ -31,11 +31,17 @@ public class GoodsService {
         if (goodsName != null) {
             goods.setGoodsName(goodsName);
         }
+        if (goodsName != null) {
+            goods.setGoodsPrice(goodsPrice);
+        }
         if (goodsTime != null) {
             goods.setGoodsTime(goodsTime);
         }
         if (goodsPlace != null) {
             goods.setGoodsPlace(goodsPlace);
+        }
+        if(farmerId !=null){
+            goods.setFarmerId(farmerId);
         }
 
         return goodsDao.insert(goods);
@@ -58,7 +64,9 @@ public class GoodsService {
 
         return goodsDao.findAll();
     }
-
+    public List<Goods> getFarmerGoods(String farmer_Id) throws SQLException {
+        return goodsDao.findFarmerAll(farmer_Id);
+    }
     /**
      * 修改商品名称
      */
@@ -197,5 +205,16 @@ public class GoodsService {
 
     public List<Goods> getGoodsFromTo(int curentPage, int pageSize) throws SQLException {
         return goodsDao.findGoodsFromTo(curentPage,pageSize);
+    }
+
+    public List<Goods> getFarmerAllGoods(String famrerId) throws SQLException {
+        return goodsDao.findFarmerAll(famrerId);
+    }
+
+    public List<Goods> getFarmerGoodsByName(String farmerId, String goodsName) throws SQLException {
+        return goodsDao.findFarmerGoodsByName(farmerId,goodsName);
+    }
+    public List<Goods> getFarmerGoodsByName(String goodsName) throws SQLException {
+        return goodsDao.findGoodsByname(goodsName);
     }
 }
