@@ -114,8 +114,10 @@ public class FarmerGoodsController {
         Double goodsPrice = Double.parseDouble(goodsprice);
         Timestamp goodsTime = Timestamp.valueOf(goodstime);
         System.out.println(goodsTime);
-        goodsService.insert(goodsName, goodsPrice, goodsTime, goodsPlace,farmerId);
-
+        int result =goodsService.insert(goodsName, goodsPrice, goodsTime, goodsPlace,farmerId);
+        if(result==0){
+            return null;
+        }
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }
