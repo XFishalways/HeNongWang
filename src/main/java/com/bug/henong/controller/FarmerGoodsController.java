@@ -28,6 +28,7 @@ public class FarmerGoodsController {
     private GoodsService goodsService = new GoodsService();
 
     @RequestMapping(value = "/farmer/farmerGoods/findOne", method = RequestMethod.GET)
+    @ResponseBody
     public void findOneGoods(@RequestParam("goodsId") String goodsId,
                              HttpServletResponse response) throws SQLException, IOException {
 
@@ -46,7 +47,8 @@ public class FarmerGoodsController {
         printWriter.print(json);
     }
 
-    @RequestMapping(value = "/farmer/farmerGoods/getAll", method = RequestMethod.GET)
+    @RequestMapping(value = "/farmer/farmerGoods/getFarmerGoods", method = RequestMethod.GET)
+    @ResponseBody
     public void findAllGoods(@RequestParam String farmerId, HttpServletResponse response) throws IOException, SQLException {
 
         PrintWriter printWriter = response.getWriter();
@@ -67,6 +69,7 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerGoods/delete", method = RequestMethod.GET)
+    @ResponseBody
     public void deleteOneGoods(@RequestParam("goodsId") String goodsId) throws SQLException {
 
         Goods goods = goodsService.getGoodsId(goodsId);
@@ -76,6 +79,7 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerGoods/update", method = RequestMethod.POST)
+    @ResponseBody
     public String updateOneGoods(@RequestParam("goodsId") String goodsId,
                                  @RequestParam("goodsName") String goodsName,
                                  @RequestParam("goodsQuantity") String goodsquantity,
@@ -98,22 +102,25 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerGoods/farmerGoodsReport", method = RequestMethod.POST)
+    @ResponseBody
     public String registerGoods(@RequestParam("goodsName") String goodsName,
                                 @RequestParam("goodsPrice") String goodsprice,
                                 @RequestParam("goodsTime") String goodstime,
                                 @RequestParam("goodsPlace") String goodsPlace,
+                                @RequestParam("farmerId") String farmerId,
                                 HttpSession session) throws SQLException {
 
         Double goodsPrice = Double.parseDouble(goodsprice);
         Timestamp goodsTime = Timestamp.valueOf(goodstime);
 
-        goodsService.Insert(goodsName, goodsPrice, goodsTime, goodsPlace);
+        goodsService.insert(goodsName, goodsPrice, goodsTime, goodsPlace,farmerId);
 
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }
 
     @RequestMapping(value = "/farmer/farmerGoods/getFarmerGoods?page={page}&limit={limit}")
+    @ResponseBody
     public String getGoodsFromTo(@PathVariable String page, @PathVariable String limit, HttpSession session) throws SQLException {
         int currentPage = Integer.getInteger(page);
         int pageSize = Integer.getInteger(limit);
@@ -126,6 +133,7 @@ public class FarmerGoodsController {
         return null;
     }
     @RequestMapping(value ="farmer/farmerGoods/getFarmerGoodsByName")
+    @ResponseBody
     public String getFarmerGoodsByName(@RequestParam String farmerId,@RequestParam String goodsName, HttpSession session) throws SQLException {
         List<Goods> goods = goodsService.getFarmerGoodsByName(farmerId, goodsName);
         if (goods != null) {
