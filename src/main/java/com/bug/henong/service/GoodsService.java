@@ -194,4 +194,8 @@ public class GoodsService {
 
         return false;
     }
+
+    public List<Goods> getGoodsFromTo(int curentPage, int pageSize) throws SQLException {
+        return goodsDao.findGoodsFromTo(curentPage,pageSize);
+    }
 }
