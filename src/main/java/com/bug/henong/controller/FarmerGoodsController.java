@@ -30,7 +30,7 @@ public class FarmerGoodsController {
     private GoodsService goodsService = new GoodsService();
 
     @RequestMapping(value = "/farmer/FarmerGoods/findone", method = RequestMethod.GET)
-    public void FindOneGoods (@RequestParam("goodsId") String goodsId,
+    public void findOneGoods (@RequestParam("goodsId") String goodsId,
                                              HttpServletResponse response) throws SQLException, IOException {
 
         PrintWriter printWriter = response.getWriter();
@@ -49,7 +49,7 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerGoods", method = RequestMethod.GET)
-    public void FindAllGoods (HttpServletResponse response) throws IOException, SQLException {
+    public void findAllGoods (HttpServletResponse response) throws IOException, SQLException {
 
         PrintWriter printWriter = response.getWriter();
 
@@ -69,7 +69,7 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerGoods/delete", method = RequestMethod.GET)
-    public void DeleteOneGoods(@RequestParam("goodsId") String goodsId) throws SQLException {
+    public void deleteOneGoods(@RequestParam("goodsId") String goodsId) throws SQLException {
 
         Goods goods = goodsService.getGoodsId(goodsId);
 
@@ -119,7 +119,7 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerReport", method = RequestMethod.POST)
-    public Map<String, Object> Register (@RequestParam("goodsId") String goodsId,
+    public Map<String, Object> registerGoods (@RequestParam("goodsId") String goodsId,
                                          @RequestParam("goodsName") String goodsName,
                                          @RequestParam("goodsTime") String goodstime,
                                          @RequestParam("goodsPlace") String goodsPlace,
