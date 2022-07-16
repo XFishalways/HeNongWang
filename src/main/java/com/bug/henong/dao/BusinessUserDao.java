@@ -90,7 +90,7 @@ public class BusinessUserDao {
      */
     public List<BusinessUser> findBusinessUserByName(String userName) throws SQLException {
         List<BusinessUser> businessUser = new ArrayList<BusinessUser>();
-        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_USER Where USER_NAME LIKE /'%?%/'", userName);
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_USER Where USER_NAME LIKE ?", "%"+userName+"%");
 
         for (Entity e : entities) {
             String userStr = JSONUtil.toJsonStr(e);

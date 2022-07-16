@@ -36,7 +36,7 @@ public class SaleStoreDao {
     public int delete(String id) throws SQLException {
 
         int rw=Db.use().del(
-                Entity.create("SALE_STORE").set("STORE_ID",id)
+                Entity.create("SALE_STORE").set("STOREID",id)
         );
         return rw;
 
@@ -81,7 +81,7 @@ public class SaleStoreDao {
      */
     public List<SaleStore> findSaleStoreByTitle(String saleStoreTitle) throws SQLException {
         List<SaleStore> saleStore = new ArrayList<SaleStore>();
-        List<Entity> entities = Db.use().query("SELECT * FROM SALE_STORE Where SALE_STORE_TITLE LIKE /'%?%/'", saleStoreTitle);
+        List<Entity> entities = Db.use().query("SELECT * FROM SALE_STORE Where SALE_STORE_TITLE LIKE ?", "%"+saleStoreTitle+"%");
 
         for (Entity e : entities) {
             String storeStr = JSONUtil.toJsonStr(e);
@@ -139,7 +139,7 @@ public class SaleStoreDao {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_STORE_END_TIME",activityEndTime),
-                Entity.create("SALE_STORE").set("SALE_STORE_ID",id)
+                Entity.create("SALE_STORE").set("SALE_STOREID",id)
         );
 
         return rw;

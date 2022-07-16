@@ -78,7 +78,7 @@ public class SaleProductDao {
      */
     public List<SaleProduct> findSaleProductByTitle(String saleProductTitle) throws SQLException {
         List<SaleProduct> saleProduct = new ArrayList<SaleProduct>();
-        List<Entity> entities = Db.use().query("SELECT * FROM SALE_PRODUCT Where SALE_PRODUCT_TITLE LIKE /'%?%/'", saleProductTitle);
+        List<Entity> entities = Db.use().query("SELECT * FROM SALE_PRODUCT Where SALE_PRODUCT_TITLE LIKE ?", "%"+saleProductTitle+"%");
 
         for (Entity e : entities) {
             String productStr = JSONUtil.toJsonStr(e);

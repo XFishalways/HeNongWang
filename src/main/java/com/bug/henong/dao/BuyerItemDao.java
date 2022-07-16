@@ -4,6 +4,7 @@ import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BuyerItem;
+import com.bug.henong.entity.Farmer;
 import com.bug.henong.entity.Goods;
 
 import java.sql.SQLException;
@@ -110,10 +111,10 @@ public class BuyerItemDao {
         return rw;
     }
 
-    public List<BuyerItem> findBuyerItemByName(String orderId, String userId, String skuTitle) throws SQLException {
+    public List<BuyerItem> findBuyerItemByAll(String orderId, String userId, String skuTitle) throws SQLException {
         List<BuyerItem> buyerItems = new ArrayList<BuyerItem>();
 
-        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ITEM Where ORDER_ID = ? AND USER_ID = ? AND SKU_TITLE LIKE /'%?%/'",orderId, userId, skuTitle);
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ITEM Where ORDER_ID = ? AND USER_ID = ? AND SKU_TITLE LIKE ?",orderId, userId, "%"+skuTitle+"%");
         if (entities.isEmpty()) {
             return null;
         }
@@ -124,6 +125,51 @@ public class BuyerItemDao {
             buyerItems.add(buyerItem);
         }
 
+        return buyerItems;
+    }
+
+    /**
+     *通过订单ID查找
+     */
+    public List<BuyerItem> findBuyerItemByOrderId(String orderId) throws SQLException {
+        List<BuyerItem> buyerItems = new ArrayList<BuyerItem>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ITEM Where ORDER_ID = ?", orderId);
+
+        for (Entity e : entities) {
+            String buyerItemStr = JSONUtil.toJsonStr(e);
+            BuyerItem buyerItem = JSONUtil.toBean(buyerItemStr, BuyerItem.class);
+            buyerItems.add(buyerItem);
+        }
+        return buyerItems;
+    }
+
+    /**
+     *通过用户ID查找
+     */
+    public List<BuyerItem> findBuyerItemByUserId(String userId) throws SQLException {
+        List<BuyerItem> buyerItems = new ArrayList<BuyerItem>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ITEM Where USER_ID = ?", userId);
+
+        for (Entity e : entities) {
+            String buyerItemStr = JSONUtil.toJsonStr(e);
+            BuyerItem buyerItem = JSONUtil.toBean(buyerItemStr, BuyerItem.class);
+            buyerItems.add(buyerItem);
+        }
+        return buyerItems;
+    }
+
+    /**
+     *通过商品标题查找
+     */
+    public List<BuyerItem> findBuyerItemBySkuTitle(String skuTitle) throws SQLException {
+        List<BuyerItem> buyerItems = new ArrayList<BuyerItem>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ITEM Where SKU_TITLE LIKE ?", "%"+skuTitle+"%");
+
+        for (Entity e : entities) {
+            String buyerItemStr = JSONUtil.toJsonStr(e);
+            BuyerItem buyerItem = JSONUtil.toBean(buyerItemStr, BuyerItem.class);
+            buyerItems.add(buyerItem);
+        }
         return buyerItems;
     }
 

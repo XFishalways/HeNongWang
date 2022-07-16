@@ -95,7 +95,7 @@ public class BuyerOrderDao {
      */
     public List<BuyerOrder> findBuyerOrderByUserId(String userId) throws SQLException {
         List<BuyerOrder> buyerOrders = new ArrayList<BuyerOrder>();
-        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ORDER Where USER_ID LIKE /'%?%/'", userId);
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ORDER Where USER_ID LIKE ? ", userId);
 
         for (Entity e : entities) {
             String userStr = JSONUtil.toJsonStr(e);
