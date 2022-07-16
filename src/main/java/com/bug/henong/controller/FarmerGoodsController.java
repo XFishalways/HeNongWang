@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.bug.henong.entity.Goods;
 import com.bug.henong.service.GoodsService;
 import com.bug.henong.utils.MapFactory;
+import io.swagger.annotations.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ import java.util.Map;
  */
 
 @Controller
+
 public class FarmerGoodsController {
 
     private GoodsService goodsService = new GoodsService();
@@ -59,7 +61,6 @@ public class FarmerGoodsController {
 
         if (goods != null) {
             json = JSON.toJSONString(goods);
-            System.out.println(json);
         } else {
             json = "{\"log\":\"Invalid id\"}";
         }
