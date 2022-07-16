@@ -27,7 +27,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">采摘日期</label>
                     <div class="layui-input-inline">
-                      <input id="date" type="text" name="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                      <input id="date" type="text" name="date" lay-verify="" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -54,7 +54,7 @@
 
               laydate.render({
                 elem:'#date',
-                format:'yyyy-MM-dd HH:mm:ss'
+                type:'datetime'
               })
 
               form.render();
