@@ -9,7 +9,7 @@
 	<body class="layui-layout-body">
 		<div>
 			<div class="layui-inline">
-				<input type="text" name="title" required lay-verify="required" placeholder="请输入商品id" autocomplete="off" class="layui-input" style="width:125px;" >
+				<input type="text" name="title" required lay-verify="required" placeholder="请输入商品名称" autocomplete="off" class="layui-input" style="width:125px;" >
 			</div>
 			<div class="layui-inline">
 				<button type="button" class="layui-btn"  id="findById">查找商品</button>
@@ -18,6 +18,7 @@
 		</div>
 		<table class="layui-hide" id="test" lay-filter="test"></table>
 
+		<script src="../js/myCookie.js"></script>
 		<script type="text/javascript">
 
 		
@@ -90,8 +91,8 @@
 		  
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
-			  var id = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("farmerGoods/findOne" +id +"&goodsPatt=");
+			  var goodsName = $(this).parent().parent().find(".layui-input").val();
+			  tableInit("farmerGoods/findOnegetFarmerGoodsByName?farmerId=" + getCookie(userId) +"&goodsName=" + goodsName);
 		  })
 		});
 		
