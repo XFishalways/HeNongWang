@@ -37,7 +37,7 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">年龄:</label>
                                         <div class="layui-input-block">
-                                            <input type="text" placeholder="请输入昵称" id="input-farmerAge" value="" class="layui-input" lay-verify="required" required>
+                                            <input type="text" placeholder="请输入年龄" id="input-farmerAge" value="" class="layui-input" lay-verify="required" required>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -49,7 +49,7 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">确认密码:</label>
                                         <div class="layui-input-block">
-                                            <input type="password" placeholder="请确认密码" value="" class="layui-input" lay-verify="required" required>
+                                            <input type="password" placeholder="请确认密码" value="" class="layui-input" lay-verify="required|pass" required>
                                         </div>
                                     </div>
 
@@ -112,10 +112,8 @@
                     <hr>
                     <div style="color: #666;margin-top: 30px;margin-bottom: 40px;padding-left: 30px;">
                         <h3>说明</h3><br>
-                        <h4>入款到保险箱</h4>
-                        <p>如果需要，这里可以放一些关于产品的常见问题说明。</p>
-                        <br><h4>入款到现金</h4>
-                        <p>如果需要，这里可以放一些关于产品的常见问题说明。</p>
+                        <h4>注册农户账号</h4>
+                        <p>请注意，您现在正在注册农户账号</p>
                     </div>
                 </div>
             </div>
@@ -146,6 +144,16 @@
             }]
         });
 
+        form.verify({
+            pass:function(value){
+                  
+            var pass = $('#input-password').val();
+              if( pass != value) {
+                return "两次输入密码不一致";
+              }
+            }
+        })
+
 
         form.on('submit(formStep)', function (data) {
             step.next('#stepForm');
@@ -163,7 +171,7 @@
                 data:{
                     farmerName:$('#input-farmerName').val(),
                     farmerAge:$('#input-farmerAge').val(),
-                    ID:$('#input-farmerId').val(),
+                    farmerId:$('#input-farmerId').val(),
                     password:$('#input-password').val(),
                 },
                 dataType:'json',
