@@ -102,12 +102,13 @@ public class FarmerGoodsController {
                                 @RequestParam("goodsPrice") String goodsprice,
                                 @RequestParam("goodsTime") String goodstime,
                                 @RequestParam("goodsPlace") String goodsPlace,
+                                @RequestParam("farmerId") String farmerId,
                                 HttpSession session) throws SQLException {
 
         Double goodsPrice = Double.parseDouble(goodsprice);
         Timestamp goodsTime = Timestamp.valueOf(goodstime);
 
-        goodsService.Insert(goodsName, goodsPrice, goodsTime, goodsPlace);
+        goodsService.insert(goodsName, goodsPrice, goodsTime, goodsPlace,farmerId);
 
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
