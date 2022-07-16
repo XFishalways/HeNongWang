@@ -100,21 +100,27 @@
                 $('#log-btn').click(function(){
                     $.ajax({
                         type:'POST',
-                        url:'login',
+                        url:'/login',
+                        async:false,
                         data:{
                             userId:$('#input-account').val(),
                             password:$('#input-pass').val(),
                             type:$('#input-type').val()
                         },
-                        dataType:'json',
+                        dataType:"json",
 
                         success:function(data){
+                            alert(data);
+                            console.log(data);
+                            alert("setCookie");
                             createCookie('userId',$('#input-account').val());
                             createCookie('userType',$('#input-type').val());
-                            alert('success');
-                        },
 
-                        error:function(){
+                            alert('请求success');
+                        },
+                        error:function(xhr){
+                            alert(xhr.status);
+                            alert(xhr.statusText);
                             alert('failed');
                         }
                     })
