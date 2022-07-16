@@ -62,7 +62,7 @@ public class SaleStoreDao {
     public SaleStore findOneStore(String id) throws SQLException {
 
         List<Entity> entities= Db.use().findAll(
-                Entity.create("SALE_STORE").set("STORE_ID",id)
+                Entity.create("SALE_STORE").set("SALE_STOREID",id)
         );
 
         if(entities.isEmpty()){
@@ -95,8 +95,8 @@ public class SaleStoreDao {
     public int updateActivityTitle(String activityTitle, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_TITLE",activityTitle),
-                Entity.create("SALE_STORE").set("STORE_ID",id)
+                Entity.create().set("SALE_STORE_TITLE",activityTitle),
+                Entity.create("SALE_STORE").set("SALE_STOREID",id)
         );
 
         return rw;
@@ -105,8 +105,8 @@ public class SaleStoreDao {
     public int updateActivityIntro(String activityIntro, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_INTRO",activityIntro),
-                Entity.create("SALE_STORE").set("PRODUCT_ID",id)
+                Entity.create().set("SALE_STORE_INTRO",activityIntro),
+                Entity.create("SALE_STORE").set("SALE_STOREID",id)
         );
 
         return rw;
@@ -116,8 +116,8 @@ public class SaleStoreDao {
     public int updateActivityContent(String activityContent, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_CONTENT",activityContent),
-                Entity.create("SALE_STORE").set("PRODUCT_ID",id)
+                Entity.create().set("SALE_STORE_CONTENT",activityContent),
+                Entity.create("SALE_STORE").set("SALE_STOREID",id)
         );
 
         return rw;
@@ -127,8 +127,8 @@ public class SaleStoreDao {
     public int updateActivityStart_Time(Timestamp activityStartTime, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITYSTART_TIME",activityStartTime),
-                Entity.create("SALE_STORE").set("PRODUCT_ID",id)
+                Entity.create().set("SALE_STORE_START_TIME",activityStartTime),
+                Entity.create("SALE_STORE").set("SALE_STOREID",id)
         );
 
         return rw;
@@ -138,8 +138,8 @@ public class SaleStoreDao {
     public int updateActivityEnd_time(Timestamp activityEndTime, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_END_TIME",activityEndTime),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create().set("SALE_STORE_END_TIME",activityEndTime),
+                Entity.create("SALE_STORE").set("SALE_STORE_ID",id)
         );
 
         return rw;
@@ -149,8 +149,8 @@ public class SaleStoreDao {
     public int updateActivityRange(String activityRange, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_RANGE",activityRange),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create().set("SALE_STORE_RANGE",activityRange),
+                Entity.create("SALE_STORE").set("SALE_STOREID",id)
         );
 
         return rw;
@@ -159,8 +159,8 @@ public class SaleStoreDao {
     public int updateActivityType(String activityType, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_TYPE",activityType),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create().set("SALE_STORE_TYPE",activityType),
+                Entity.create("SALE_STORE").set("SALE_STOREID",id)
         );
 
         return rw;
@@ -169,8 +169,8 @@ public class SaleStoreDao {
     public int updateActivity_Status(String activityStatus, String id) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ACTIVITY_STATUS",activityStatus),
-                Entity.create("SALE_PRODUCT").set("PRODUCT_ID",id)
+                Entity.create().set("SALE_STORE_STATUS",activityStatus),
+                Entity.create("SALE_STORE").set("SALE_STOREID",id)
         );
 
         return rw;

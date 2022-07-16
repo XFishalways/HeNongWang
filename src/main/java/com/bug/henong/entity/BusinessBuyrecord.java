@@ -34,8 +34,14 @@ public class BusinessBuyrecord implements Serializable,Cloneable{
     /** 商品ID */
     @ApiModelProperty(name = "商品ID",notes = "")
     private String skuId ;
+     /**
+      * 账单状态
+      */
+     @ApiModelProperty(name = "账单状态",notes = "")
+     private String skuStatus ;
 
-    /** 返回账单ID */
+
+     /** 返回账单ID */
     public String getRecordId(){
         return this.recordId;
     }
@@ -83,4 +89,18 @@ public class BusinessBuyrecord implements Serializable,Cloneable{
     public void setSkuId(String skuId){
         this.skuId=skuId;
     }
-}
+
+     /**
+      *返回账单状态
+      */
+     public String getSkuStatus() {
+         return skuStatus;
+     }
+
+     /**
+      *设置账单状态
+      */
+     public void setSkuStatus(String skuStatus) {
+         this.skuStatus = skuStatus;
+     }
+ }
