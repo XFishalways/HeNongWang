@@ -66,8 +66,8 @@ public class BuyerOrderDao {
         return  buyerOrder;
     }
 
-    //更新地址
 
+    //更新地址
     public int updateAddressId(String id, String addressId) throws SQLException {
 
         int rw = Db.use().update(

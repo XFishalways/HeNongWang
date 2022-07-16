@@ -130,20 +130,7 @@ public class FarmerGoodsController {
 
         Goods goods = new Goods();
 
-        goodsService.Insert(goods);
-
-        if (goodsId != null) {
-            goods.setGoodsId(goodsId);
-        }
-        if (goodsName != null) {
-            goods.setGoodsName(goodsName);
-        }
-        if (goodsTime != null) {
-            goods.setGoodsTime(goodsTime);
-        }
-        if (goodsPlace != null) {
-            goods.setGoodsPlace(goodsPlace);
-        }
+        goodsService.Insert(goods, goodsId, goodsName, goodsTime, goodsPlace);
 
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
