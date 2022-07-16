@@ -183,7 +183,7 @@ public class FarmerDao {
      */
     public List<Farmer> findFarmerByName(String farmerName) throws SQLException {
         List<Farmer> farmers = new ArrayList<Farmer>();
-        List<Entity> entities = Db.use().query("SELECT * FROM FARMER Where FARMER_NAME LIKE /'%?%/'", farmerName);
+        List<Entity> entities = Db.use().query("SELECT * FROM FARMER Where FARMER_NAME LIKE ?", "%"+farmerName+"%");
 
         for (Entity e : entities) {
             String farmerStr = JSONUtil.toJsonStr(e);

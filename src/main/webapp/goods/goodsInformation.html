@@ -14,13 +14,13 @@
     <div class="layui-row">
         <ul id="homepage-head" class="layui-nav layui-col-md12 layui-bg-green">
             <li class="layui-nav-item layui-col-md3 ">
-                <a href="" class= "layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center; font-size: 50px; font-family: KaiTi;" >合农网</a>
+                <a href="../index.html" class= "layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center; font-size: 50px; font-family: KaiTi;" >合农网</a>
             </li>
             <li class="layui-nav-item layui-col-md2">
                 <a href="" class= "layui-this layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">首页</a>
             </li>
             <li class="layui-nav-item layui-col-md2">
-                <a href="" class= "layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">个人中心</a>
+                <a href="../buyer/index.html" class= "layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">个人中心</a>
             </li>
             <form class=" layui-form layui-col-md4 layui-col-md-offset1" action="">
                 <div class="layui-form-item" style="margin-top:15px;">
@@ -48,7 +48,10 @@
                 <div class="layui-row">
                     <div class="layui-anim layui-anim-fadein">
                         <div class="layui-col-md3" style="margin-top:15px;">
-                            <p style="font-size: 20px;font-family:'楷体';font-weight: bold;">商品ID:</p>
+                            <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">商品ID:</div>
+                        </div>
+                        <div class="layui-col-md3" style="margin-top:15px;">
+                            <div id="skiId" style="font-size: 20px;font-family:'楷体';font-weight: bold;">1433223</div>
                         </div>
                     </div>
                 </div>
@@ -56,7 +59,26 @@
                 <div class="layui-row">
                     <div class="layui-anim layui-anim-fadein">
                         <div class="layui-col-md3" style="margin-top:15px;">
-                            <p style="font-size: 20px;font-family:'楷体';font-weight: bold;">销售价:</p>
+                            <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">原价：</div>
+                        </div>
+                        <div class="layui-col-md3" style="margin-top:15px;">
+                            <div id="price" style="font-size: 20px;font-family:'楷体';font-weight: bold;">1433223</div>
+                        </div>
+                        <div class="layui-col-md3" style="margin-top:15px;">
+                            <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">元</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-anim layui-anim-fadein">
+                        <div class="layui-col-md3" style="margin-top:15px;">
+                            <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">销售价：</div>
+                        </div>
+                        <div class="layui-col-md3" style="margin-top:15px;">
+                            <div id="sallPrice" style="font-size: 20px;font-family:'楷体';font-weight: bold;">1433223</div>
+                        </div>
+                        <div class="layui-col-md3" style="margin-top:15px;">
+                            <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">元</div>
                         </div>
                     </div>
                 </div>
@@ -64,7 +86,10 @@
                 <div class="layui-row">
                     <div class="layui-anim layui-anim-fadein">
                         <div class="layui-col-md3" style="margin-top:15px;">
-                            <p style="font-size: 20px;font-family:'楷体';font-weight: bold;">种类:</p>
+                            <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">种类：</div>
+                        </div>
+                        <div class="layui-col-md3" style="margin-top:15px;">
+                            <div id="catagory" style="font-size: 20px;font-family:'楷体';font-weight: bold;">果类</div>
                         </div>
                     </div>
                 </div>
@@ -115,9 +140,9 @@
                         <li>商品评论</li>
                     </ul>
                     <div class="layui-tab-content">
-                        <div class="layui-tab-item layui-show">内容1</div>
-                        <div class="layui-tab-item">内容2</div>
-                        <div class="layui-tab-item">内容3</div>
+                        <div id="content1" class="layui-tab-item layui-show">内容1</div>
+                        <div id="content2" class="layui-tab-item">内容2</div>
+                        <div id="content3" class="layui-tab-item">内容3</div>
                     </div>
                 </div>
             </div>
@@ -135,6 +160,7 @@
           var form = layui.form;
           var $ = layui.$;
 
+
           $('#minus').click(function(){
             $('#input-num').val($('#input-num').val()/1 - 1);
           })
@@ -144,6 +170,31 @@
           })
           
           form.render();
+
+            $(document).ready(function(){
+
+                $.ajax({
+                    type:'GET',
+                    url:'',
+                    data:{
+                        userId:getCookie('userId'),
+                        skiId:getCookie('skiId')
+                    },
+                    dataType:'json',
+
+                    success:function(data){
+                        $('#skiId').val(getCookie('skiId'));
+                        $('#price').val(data.price);
+                        $('#sallPrice').val(data.sallPrice);
+                        $('#catagory').val(data.catalog);
+                        $('#content1').val(data.intro);
+                    },
+
+                    error:function(){
+                        alert('failed');
+                    }
+                })
+            })
 
           
         }); 
