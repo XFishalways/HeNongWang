@@ -29,7 +29,7 @@ public class FarmerGoodsController {
 
     private GoodsService goodsService = new GoodsService();
 
-    @RequestMapping(value = "/farmer/FarmerGoods/findone", method = RequestMethod.GET)
+    @RequestMapping(value = "/farmer/FarmerGoods/findOne", method = RequestMethod.GET)
     public void findOneGoods (@RequestParam("goodsId") String goodsId,
                                              HttpServletResponse response) throws SQLException, IOException {
 
