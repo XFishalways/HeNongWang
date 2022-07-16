@@ -45,7 +45,6 @@
           <dl class="layui-nav-child">
             <dd><a href="javascript:;">消息推送</a></dd>
             <dd><a href="javascript:;">客服消息</a></dd>
-            <dd><a href="javascript:;">活动推送</a></dd>
           </dl>
         </li>
 
@@ -53,7 +52,6 @@
           <a class="" href="javascript:;">活动管理</a>
           <dl class="layui-nav-child">
             <dd><a href="javascript:;">活动查询</a></dd>
-            <dd><a href="javascript:;">新增活动</a></dd>
           </dl>
         </li>
 
@@ -92,15 +90,9 @@ layui.use('element', function(){
         }else if(text=="客服消息") {
           $("#main").find("#ifr").remove();
           $("#main").append('<iframe src="eventManagement.html" id="ifr" style="width:100%;height:100%"></iframe>');
-        }else if(text=="活动推送") {
-          $("#main").find("#ifr").remove();
-          $("#main").append('<iframe src="eventManagement.html" id="ifr" style="width:100%;height:100%"></iframe>');
         }else if(text=="活动查询") {
           $("#main").find("#ifr").remove();
           $("#main").append('<iframe src="eventManagement.html" id="ifr" style="width:100%;height:100%"></iframe>');
-        }else if(text=="新增活动") {
-        $("#main").find("#ifr").remove();
-        $("#main").append('<iframe src="eventRegister.html" id="ifr" style="width:100%;height:100%"></iframe>');
         }else if(text=="我的购物车") {
           $("#main").find("#ifr").remove();
           $("#main").append('<iframe src="eventRegister.html" id="ifr" style="width:100%;height:100%"></iframe>');
