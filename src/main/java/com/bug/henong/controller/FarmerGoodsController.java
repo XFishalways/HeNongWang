@@ -59,6 +59,7 @@ public class FarmerGoodsController {
 
         if(goods != null) {
             json = JSON.toJSONString(goods);
+            System.out.println(json);
         }
         else {
             json = "{\"log\":\"Invalid id\"}";
@@ -78,7 +79,7 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerGoods", method = RequestMethod.POST)
-    public Map<String, Object> updateOneGoods(@RequestParam("goodsId") String goodsId,
+    public String updateOneGoods(@RequestParam("goodsId") String goodsId,
                                @RequestParam("goodsName") String goodsName,
                                @RequestParam("goodsQuantity") String goodsquatity,
                                @RequestParam("goodsPrice") String goodsprice,
@@ -119,7 +120,7 @@ public class FarmerGoodsController {
     }
 
     @RequestMapping(value = "/farmer/farmerReport", method = RequestMethod.POST)
-    public Map<String, Object> registerGoods (@RequestParam("goodsId") String goodsId,
+    public String registerGoods (@RequestParam("goodsId") String goodsId,
                                          @RequestParam("goodsName") String goodsName,
                                          @RequestParam("goodsTime") String goodstime,
                                          @RequestParam("goodsPlace") String goodsPlace,

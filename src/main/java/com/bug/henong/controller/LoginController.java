@@ -22,11 +22,12 @@ public class LoginController {
 
     private LoginService loginService = new LoginService();
 
-    @PostMapping("/login")
-    public Map<String,Object> login(@RequestParam("userId") String userId,
-                        @RequestParam("password") String password,
-                        @RequestParam("type") String type,
-                        HttpSession session) throws SQLException {
+    @PostMapping(value = "/login" )
+    @ResponseBody
+    public String login(@RequestParam("userId") String userId,
+                                     @RequestParam("password") String password,
+                                     @RequestParam("type") String type,
+                                     HttpSession session) throws SQLException {
 
         if (userId==null || password==null) {
             session.setAttribute("errorMsg", "用户名或密码不能为空");
@@ -43,7 +44,8 @@ public class LoginController {
                     session.setAttribute("userId", farmer.getFarmerName());
                     session.setAttribute("loginUserId", farmer.getFarmerId());
 
-                    return mapFactory.getStringObjectMapWithType(session,type);
+                    System.out.println(mapFactory.getStringObjectMapWithType(session,type));
+                    return mapFactory.getStringObjectMap(session);
                 }
 
             case "buyer":
@@ -52,7 +54,7 @@ public class LoginController {
                     session.setAttribute("loginUser", buyerUser.getUserName());
                     session.setAttribute("loginUserId", buyerUser.getUserId());
 
-                    return mapFactory.getStringObjectMapWithType(session,type);
+                    return mapFactory.getStringObjectMap(session);
                 }
 
             case "business":
@@ -61,12 +63,12 @@ public class LoginController {
                     session.setAttribute("loginUser", businessUser.getUserName());
                     session.setAttribute("loginUserId", businessUser.getUserId());
 
-                    return mapFactory.getStringObjectMapWithType(session,type);
+                    return mapFactory.getStringObjectMap(session);
                 }
             default:
                 break;
         }
-        return null;
+        return null ;
     }
 
 }
