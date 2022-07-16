@@ -25,25 +25,25 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">账号ID:</label>
                                         <div class="layui-input-block">
-                                            <input type="text" placeholder="请填写账号" class="layui-input" lay-verify="required" required />
+                                            <input type="text" placeholder="请填写账号" id="input-farmerId" class="layui-input" lay-verify="required" required />
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">姓名:</label>
                                         <div class="layui-input-block">
-                                            <input type="text" placeholder="请填写姓名" class="layui-input" lay-verify="required" required />
+                                            <input type="text" placeholder="请填写姓名" id="input-farmerName" class="layui-input" lay-verify="required" required />
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">年龄:</label>
                                         <div class="layui-input-block">
-                                            <input type="text" placeholder="请输入昵称" value="" class="layui-input" lay-verify="required" required>
+                                            <input type="text" placeholder="请输入昵称" id="input-farmerAge" value="" class="layui-input" lay-verify="required" required>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">密码:</label>
                                         <div class="layui-input-block">
-                                            <input type="password" placeholder="请输入密码" value="" class="layui-input" lay-verify="required" required>
+                                            <input type="password" placeholder="请输入密码" id="input-password" value="" class="layui-input" lay-verify="required" required>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -68,13 +68,19 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">姓名:</label>
                                         <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">dog</div>
+                                            <div class="layui-form-mid layui-word-aux" id="confirm-farmerName" name="farmerName">dog</div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">年龄:</label>
                                         <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">dog</div>
+                                            <div class="layui-form-mid layui-word-aux" id="confirm-farmerAge" name="farmerAge">dog</div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">账号ID:</label>
+                                        <div class="layui-input-block">
+                                            <div class="layui-form-mid layui-word-aux" id="confirm-farmerId" name="farmerId">123</div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -143,11 +149,34 @@
 
         form.on('submit(formStep)', function (data) {
             step.next('#stepForm');
+
+            $('#confirm-farmerName').html($('#input-farmerName').val());
+            $('#confirm-farmerAge').html($('#input-farmerAge').val());
+            $('#confirm-farmerId').html($('#input-farmerId').val());
             return false;
         });
 
         form.on('submit(formStep2)', function (data) {
-            step.next('#stepForm');
+            $.ajax({
+                type:"POST",
+                url:'farmer/update',
+                data:{
+                    farmerName:$('#input-farmerName').val(),
+                    farmerAge:$('#input-farmerAge').val(),
+                    ID:$('#input-farmerId').val(),
+                    password:$('#input-password').val(),
+                },
+                dataType:'json',
+
+                success:function(){
+                    alert('success');
+                    step.next('#stepForm');
+                },
+
+                error:function(){
+                    alert('注册失败，用户ID可能已经被注册');
+                }
+            })
             return false;
         });
 
