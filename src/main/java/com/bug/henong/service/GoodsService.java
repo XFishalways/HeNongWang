@@ -6,6 +6,7 @@ import com.bug.henong.entity.Goods;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service("GoodsService")
@@ -16,9 +17,24 @@ public class GoodsService {
     /**
      * 添加一个商品
      */
-    public int Insert(Goods goods) throws SQLException {
+    public int Insert(Goods goods, String goodsId, String goodsName, Timestamp goodsTime, String goodsPlace) throws SQLException {
+
+        if (goodsId != null) {
+            goods.setGoodsId(goodsId);
+        }
+        if (goodsName != null) {
+            goods.setGoodsName(goodsName);
+        }
+        if (goodsTime != null) {
+            goods.setGoodsTime(goodsTime);
+        }
+        if (goodsPlace != null) {
+            goods.setGoodsPlace(goodsPlace);
+        }
 
         return goodsDao.insert(goods);
+
+
     }
 
     /**

@@ -18,9 +18,15 @@
                      </div>
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-form-label">昵称</label>
+                    <div class="layui-input-inline">
+                      <input id="account-nickname" type="text" name="nickname" value="" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <label class="layui-form-label">原密码</label>
                     <div class="layui-input-inline">
-                      <input id="old-pass" type="password" name="oldPass" value="" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+                        <input id="old-pass" type="password" name="confirmPass" value="" required  lay-verify="required|pass" placeholder="密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -30,33 +36,21 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">确认密码</label>
+                    <label class="layui-form-label">确认密码密码</label>
                     <div class="layui-input-inline">
                       <input id="confirm-pass" type="password" name="confirmPass" value="" required  lay-verify="required|pass" placeholder="密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">地址</label>
+                    <label class="layui-form-label">个性签名</label>
                     <div class="layui-input-inline">
-                      <input id="account-addr" type="text" name="address" value="原地址" required  lay-verify="required" placeholder="地址" autocomplete="off" class="layui-input">
+                      <input id="account-intro" type="text" name="address" value="原地址" required  lay-verify="required" placeholder="地址" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                  <label class="layui-form-label">年龄</label>
-                  <div class="layui-input-inline">
-                    <input id="account-age" type="text" name="age" value="12" required  lay-verify="number" placeholder="年龄" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-                <div class="layui-form-item">
-                  <label class="layui-form-label">所属卖家ID</label>
-                  <div class="layui-input-inline">
-                    <input id="business-id" type="text" name="businessId" value="" required  lay-verify="required" placeholder="ID" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-                <div class="layui-form-item">
                     <div class="layui-input-block">
-                      <button id="submit-btn" class="layui-btn" type="button" lay-submit lay-filter="submit-info">立即提交</button>
-                      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <button id="submit-btn" class="layui-btn" type="button" lay-submit lay-filter="submit-info">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
             </form>
@@ -86,12 +80,12 @@
                     url:'/farmer/update',
                     data:{
                       userId:getCookie('userId'),
-                      farmerName:data.field.name,
+                      Name:data.field.name,
+                      nickname:data.field.nickname,
                       originalUserPass:data.field.oldPass,
                       newUserPass:data.field.newPass,
-                      farmerPlace:data.field.address,
-                      farmerAge:data.field.age,
-                      businessId:data.field.businessId
+                      confirmUserPass:data.field.confirmPass,
+                      intro:data.field.intro,
                     },
                     dataType:'json',
 
@@ -119,8 +113,8 @@
 
                   success:function(data){
                     $('#account-name').val(data.userName);
-                    $('#account-addr').val(data.userAddr);
-                    $('#business-id').val(data.businessId);
+                    $('#account-nickname').val(data.userNickname);
+                    $('#account-intro').val(data.userIntro);
                   },
 
                   error:function(){

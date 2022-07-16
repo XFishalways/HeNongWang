@@ -32,6 +32,10 @@
             <ul class="layui-nav layui-nav-tree layui-bg-green"  lay-filter="test">
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">个人中心</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">个人信息查看</a></dd>
+                        <dd><a href="javascript:;">个人信息更改</a></dd>
+                    </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">消息管理</a>
@@ -98,9 +102,12 @@
             }else if(text=="新增活动") {
                 $("#main").find("#ifr").remove();
                 $("#main").append('<iframe src="eventRegister.html" id="ifr" style="width:100%;height:100%"></iframe>');
-            }else if(text=="个人中心") {
+            }else if(text=="个人信息查看") {
                 $("#main").find("#ifr").remove();
-                $("#main").append('<iframe src="businessInfomation.html" id="ifr" style="width:100%;height:100%"></iframe>');
+                $("#main").append('<iframe src="businessInformation.html" id="ifr" style="width:100%;height:100%"></iframe>');
+            }else if(text=="个人信息更改") {
+                $("#main").find("#ifr").remove();
+                $("#main").append('<iframe src="businessInfoManage.html" id="ifr" style="width:100%;height:100%"></iframe>');
             }else if(text=="展示商品") {
                 $("#main").find("#ifr").remove();
                 $("#main").append('<iframe src="businessInfomation.html" id="ifr" style="width:100%;height:100%"></iframe>');

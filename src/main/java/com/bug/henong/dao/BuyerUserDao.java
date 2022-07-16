@@ -57,7 +57,7 @@ public class BuyerUserDao {
     }
 
     /**
-     * 通过当前页数获取下页位置
+     * 通过当前页数获取buyer信息
      * @param currentPage 当前页数
      * @param pageSize 每页容量
      * @return
