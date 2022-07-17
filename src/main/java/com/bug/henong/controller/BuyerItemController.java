@@ -54,6 +54,16 @@ public class BuyerItemController {
         return mapFactory.getStringObjectMap(session);
     }
 
+    @RequestMapping(value = "/business/displayGoods", method = RequestMethod.GET)
+    public String insertItem (@RequestParam("skuId") String skuId,
+                              HttpSession session) throws SQLException {
+
+        Boolean result = buyerItemService.itemInsert(skuId);
+
+        MapFactory mapFactory = new MapFactory();
+        return mapFactory.getStringObjectMap(session);
+    }
+
     @RequestMapping(value = "/goods/goodsView", method = RequestMethod.GET)
     public String findAllItem(@RequestParam("itemId") String itemId,
                               HttpSession session) throws SQLException {

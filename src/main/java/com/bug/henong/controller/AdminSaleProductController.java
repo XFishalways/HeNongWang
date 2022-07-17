@@ -46,7 +46,7 @@ public class AdminSaleProductController {
         if (saleProducts == null){
             session.setAttribute("errorMsg","数据为空");
             return JSON.toJSONString(saleProducts);
-        }else{
+        } else{
             return JSON.toJSONString(saleProducts);
         }
 
