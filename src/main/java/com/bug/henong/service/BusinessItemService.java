@@ -63,7 +63,6 @@ public class BusinessItemService {
                 int rw = businessItemDao.updateSkuIntro(itemId, newSkuIntro);
                 return rw > 0;
 
-
         }
 
         return false;

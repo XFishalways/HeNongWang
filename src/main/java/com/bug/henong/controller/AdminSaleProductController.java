@@ -23,7 +23,7 @@ public class AdminSaleProductController {
 
     private AdminSaleProductService saleProductService = new AdminSaleProductService();
 
-    @RequestMapping(value = "/admin/saleProduct", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/saleProduct/findOne", method = RequestMethod.GET)
 
     public String findOneGoods (@RequestParam("saleProductTitle") String saleProductTitle,
                                             HttpSession session ) throws SQLException, IOException{
@@ -38,7 +38,7 @@ public class AdminSaleProductController {
         }
     }
 
-    @RequestMapping(value = "/admin/saleProduct", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/saleProduct/findAll", method = RequestMethod.GET)
     public String findAllProducts (@RequestParam("adminId")String adminID, HttpSession session)  throws IOException, SQLException{
 
         List<SaleProduct> saleProducts = saleProductService.getAllProducts(adminID);
@@ -64,7 +64,7 @@ public class AdminSaleProductController {
 
     }
 
-    @RequestMapping(value = "/admin/saleProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/saleProduct/update", method = RequestMethod.POST)
     public String updateOneProduct(@RequestParam("saleProductId") String saleProductId,
                                    @RequestParam("saleProductTitle") String saleProductTitle,
                                    @RequestParam("saleProductIntro") String saleProductIntro,

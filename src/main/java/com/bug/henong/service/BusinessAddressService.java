@@ -23,7 +23,14 @@ public class BusinessAddressService {
     }
 
     /**
-     * 得到一个商品信息
+     * 得到一个商品信息title
+     */
+    public BusinessAddress findOneAddressDetailByTitle(String addressTitle) throws SQLException{
+        return businessAddressDao.findOneAddress(addressTitle);
+    }
+
+    /**
+     * 得到一个商品信息id
      */
     public BusinessAddress findOneAddress(String addressId) throws SQLException{
         return businessAddressDao.findOneAddress(addressId);

@@ -32,9 +32,16 @@ public class SaleStoreService {
     /**
      *查找所有商店活动
      */
-    public List<SaleStore> getAllSalesById(String saleStoreId) throws SQLException {
+    public List<SaleStore> getAllSalesById(String adminId) throws SQLException {
 
-        return saleStoreDao.findAll(saleStoreId);
+        return saleStoreDao.findAll(adminId);
+    }
+
+    /**
+     * 通过标题查找商店活动
+     */
+    public List<SaleStore> getOneSaleByTitle(String title) throws SQLException{
+        return saleStoreDao.findSaleStoreByTitle(title);
     }
 
     /**
