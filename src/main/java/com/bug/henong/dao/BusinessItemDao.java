@@ -77,9 +77,11 @@ public class BusinessItemDao {
     /**
      * 通过标题查找
      */
-    public List<BusinessItem> findBusinessItemByTitle(String skuTitle) throws SQLException {
+    public List<BusinessItem> findBusinessItemByTitle(String skuTitle,int currentPage,int pageSize) throws SQLException {
         List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
-        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where SKU_TITLE LIKE ?", "%"+skuTitle+"%");
+        int m = (currentPage-1)*pageSize;
+        int n = pageSize;
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where SKU_TITLE LIKE ? LIMIT ?,?", "%"+skuTitle+"%",m,n);
 
         for (Entity e : entities) {
             String itemStr = JSONUtil.toJsonStr(e);

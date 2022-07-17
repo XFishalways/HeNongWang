@@ -53,8 +53,8 @@
                 done:function(page,next){
                     var lis = [];
                     $.ajax({
-                        url:url + '?page=' + page,
-                        type:'POST',
+                        url:url + '&page=' + page,
+                        type:'GET',
                         dataType:'json',
                         success:function(res){
                             
@@ -116,12 +116,10 @@
             })
         }
 
-        myLoad('url');
-
         //后面就跟你平时使用jQuery一样
         $('#search').on('click',function(res){
             var name = $('#search-input').val();
-            myLoad('searchUrl');
+            myLoad('../business/businessItem/getBusinessItemsByName?skuName'+name);
         })
     });
 </script>

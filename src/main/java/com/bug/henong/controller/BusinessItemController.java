@@ -22,8 +22,11 @@ public class BusinessItemController {
 
     @RequestMapping("/business/businessItem/getBusinessItemsByName")
     @ResponseBody
-    public String getItems(@RequestParam("skuName")String skuName ,HttpSession session) throws SQLException {
-        List<BusinessItem> businessItems = businessItemService.getBusinessItemsByName(skuName);
+    public String getItemsFromTo(@RequestParam("skuName")String skuName ,@RequestParam("page")String page, HttpSession session) throws SQLException {
+        int currentPage =Integer.getInteger(page);
+        //前端规定为一页10个
+        int size = 10;
+        List<BusinessItem> businessItems = businessItemService.getBusinessItemsByName(skuName,currentPage,size);
         if(businessItems==null){
             session.setAttribute("errorMsg","未找到");
             return JSON.toJSONString(businessItems);
