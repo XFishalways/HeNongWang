@@ -2,19 +2,21 @@ package com.bug.henong.service;
 
 import com.bug.henong.dao.BusinessUserDao;
 import com.bug.henong.entity.BusinessUser;
-import com.bug.henong.entity.Farmer;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service("BusinessUserService")
 public class BusinessUserService {
 
     private BusinessUserDao businessUserDao = new BusinessUserDao();
 
-    /** 得到买家信息 */
-    public BusinessUser getBusinessUserDetailById(String userId) throws SQLException {
-        return businessUserDao.findOneBusiness(userId);
+    /**
+     * 得到买家信息
+     */
+    public List<BusinessUser> getBusinessUserDetailById(String userId) throws SQLException {
+        return businessUserDao.findAll(userId);
     }
 
     /** 修改昵称 */
