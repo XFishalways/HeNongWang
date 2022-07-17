@@ -22,10 +22,10 @@ public class BuyerAddressController {
 
 
     /**
-     * 查询卖家地址
+     * 查询卖家所有地址
      */
-    @GetMapping("/buyer/address/findAddressInfo")
-    public String findAddressInfo(@RequestParam("buyerUserId") String buyerUserId,
+    @GetMapping("/buyer/address/findAllAddress")
+    public String findAllAddress(@RequestParam("buyerUserId") String buyerUserId,
             HttpSession session) throws SQLException {
 
         String json;
@@ -39,6 +39,25 @@ public class BuyerAddressController {
 
         json = JSON.toJSONString(buyerAddresses);
         return json;
+    }
+
+    /**
+     * 查询一个卖家地址
+     */
+    @GetMapping("/buyer/address/findOneAddress")
+    public String findOneAddress(@RequestParam("addressTitle") String addressTitle,
+                                 HttpSession session) throws SQLException{
+        String json;
+        BuyerAddress buyerAddress = buyerAddressService.findOneBuyerAddressByTitle(addressTitle);
+
+        if(buyerAddress == null){
+            session.setAttribute("errorMsg", "查找不到买家地址id");
+            return JSONUtil.toJsonStr(buyerAddress);
+        }
+
+        json = JSON.toJSONString(buyerAddress);
+        return json;
+
     }
 
     /**
