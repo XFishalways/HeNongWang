@@ -22,7 +22,7 @@ public class BusinessUserInfoController {
     /**
      * 查询卖家所有信息
      */
-    @GetMapping(value = "/businessUser/showAllInfo")
+    @GetMapping(value = "/business/showAllInfo")
     @ResponseBody
     public String showAllInfo(@RequestParam("userId") String userId,
                                 HttpSession session) throws SQLException{
