@@ -94,6 +94,31 @@ public class ProductExamineDao {
 
         return rw;
     }
+    /**更新审批的管理员Id*/
+    public int updateAdminId(String id, String adminId) throws SQLException {
 
+        int rw = Db.use().update(
+                Entity.create().set("ADMIN_ID",adminId),
+                Entity.create("PRODUCT_EXAMINE").set("PRODUCT_ID",id)
+        );
+
+        return rw;
+    }
+    /**通过商品名查找*/
+    public List<ProductExamine> findProductsByProductName(String productName) throws SQLException {
+
+        String sql = "SELECT * FROM PRODUCT_EXAMINE JOIN GOODS ON GOODS_ID = PRODUCT_ID WHERE GOODS.GOODS_NAME = ?";
+
+        List<ProductExamine> productExamines = new ArrayList<ProductExamine>();
+        List<Entity> entities = Db.use().query("SELECT * FROM PRODUCT_EXAMINE JOIN GOODS ON GOODS_ID = PRODUCT_ID WHERE GOODS.GOODS_NAME = ?", "%"+productName+"%");
+
+        for(Entity e : entities){
+            String productStr = JSONUtil.toJsonStr(e);
+            ProductExamine productExamine = JSONUtil.toBean(productStr,ProductExamine.class);
+            productExamines.add(productExamine);
+        }
+
+        return productExamines;
+    }
 
 }

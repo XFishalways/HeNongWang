@@ -61,7 +61,7 @@ public class GoodsService {
         businessBuyrecord.setRecordId(recordId);
         businessBuyrecord.setFarmerId(farmerId);
         businessBuyrecord.setUserId(businessId);
-        businessBuyrecord.setTotalPrice(goodsPrice);
+        businessBuyrecord.setTotalPrice(goodsPrice * goodsQuantity);
         businessBuyrecord.setSkuId(goodsId);
         businessBuyrecord.setSkuStatus("non-examined");
         BusinessBuyrecordDao businessBuyrecordDao = new BusinessBuyrecordDao();

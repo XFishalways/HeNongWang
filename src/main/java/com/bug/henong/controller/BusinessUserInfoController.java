@@ -42,7 +42,6 @@ public class BusinessUserInfoController {
     public String updateInfo(@RequestParam("userId") String userId,
                              @RequestParam("nickName") String nickName,
                              @RequestParam("userIntro") String userIntro,
-                             @RequestParam("avatar") String avatar,
                              @RequestParam("phone") String phone,
                              @RequestParam("originalUserPass") String originalUserPass,
                              @RequestParam("newUserPass") String newUserPass,
