@@ -10,172 +10,168 @@ import java.sql.SQLException;
 @Service("BusinessUserService")
 public class BusinessUserService {
 
-    private BusinessUserDao businessUserDao =new BusinessUserDao();
+    private BusinessUserDao businessUserDao = new BusinessUserDao();
 
-    /**得到买家信息*/
+    /** 得到买家信息 */
     public BusinessUser getBusinessUserDetailById(String userId) throws SQLException {
         return businessUserDao.findOneBusiness(userId);
     }
 
-    /**修改昵称*/
+    /** 修改昵称 */
     public Boolean updateNickName(String userId, String newNickName) throws SQLException {
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
-        //当前用户非空才可以进行更改
+        // 当前用户非空才可以进行更改
         if (businessUser != null) {
 
-                int rw = businessUserDao.updateNickName(userId, newNickName);
-                return rw > 0;
-
+            int rw = businessUserDao.updateNickName(userId, newNickName);
+            return rw > 0;
 
         }
 
         return false;
     }
 
-    /**修改签名*/
-    public Boolean updateUserIntro(String userId,  String newUserIntro) throws SQLException {
+    /** 修改签名 */
+    public Boolean updateUserIntro(String userId, String newUserIntro) throws SQLException {
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
-        //当前用户非空才可以进行更改
+        // 当前用户非空才可以进行更改
         if (businessUser != null) {
 
-                int rw = businessUserDao.updateUserIntro(userId, newUserIntro);
-                return rw > 0;
-
+            int rw = businessUserDao.updateUserIntro(userId, newUserIntro);
+            return rw > 0;
 
         }
 
         return false;
     }
 
-    /**修改头像*/
-    public Boolean updateAvatar(String userId,String newAvatar) throws SQLException {
+    /** 修改头像 */
+    public Boolean updateAvatar(String userId, String newAvatar) throws SQLException {
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
-        //当前用户非空才可以进行更改
+        // 当前用户非空才可以进行更改
         if (businessUser != null) {
 
-                int rw = businessUserDao.updateAvatar(userId, newAvatar);
-                return rw > 0;
-
+            int rw = businessUserDao.updateAvatar(userId, newAvatar);
+            return rw > 0;
 
         }
 
         return false;
     }
 
-    /**修改手机号*/
+    /** 修改手机号 */
     public Boolean updatePhone(String userId, String newPhone) throws SQLException {
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
-        //当前用户非空才可以进行更改
+        // 当前用户非空才可以进行更改
         if (businessUser != null) {
 
-                int rw = businessUserDao.updatePhone(userId, newPhone);
-                return rw > 0;
-
+            int rw = businessUserDao.updatePhone(userId, newPhone);
+            return rw > 0;
 
         }
 
         return false;
     }
 
-    /**修改密码*/
+    /** 修改密码 */
     public Boolean updateUserPass(String userId, String newUserPass) throws SQLException {
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
-        //当前用户非空才可以进行更改
+        // 当前用户非空才可以进行更改
         if (businessUser != null) {
 
-                int rw = businessUserDao.updateUserPass(userId, newUserPass);
-                return rw > 0;
-
+            int rw = businessUserDao.updateUserPass(userId, newUserPass);
+            return rw > 0;
 
         }
 
         return false;
     }
 
-    /**修改密码盐*/
-    public Boolean updatePassSalt(String userId,  String newPassSalt) throws SQLException {
+    /** 修改密码盐 */
+    public Boolean updatePassSalt(String userId, String newPassSalt) throws SQLException {
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
-        //当前用户非空才可以进行更改
+        // 当前用户非空才可以进行更改
         if (businessUser != null) {
 
-                int rw = businessUserDao.updatePassSalt(userId, newPassSalt);
-                return rw > 0;
-
+            int rw = businessUserDao.updatePassSalt(userId, newPassSalt);
+            return rw > 0;
 
         }
 
         return false;
     }
 
-    /**修改状态*/
-    public Boolean updateUserStatus(String userId,  String newUserStatus) throws SQLException {
+    /** 修改状态 */
+    public Boolean updateUserStatus(String userId, String newUserStatus) throws SQLException {
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
-        //当前用户非空才可以进行更改
+        // 当前用户非空才可以进行更改
         if (businessUser != null) {
 
-                int rw = businessUserDao.updateUserStatus(userId, newUserStatus);
-                return rw > 0;
-
+            int rw = businessUserDao.updateUserStatus(userId, newUserStatus);
+            return rw > 0;
 
         }
 
         return false;
     }
 
-    /**修改信息
-     * @return  0: 无此用户ID 1：修改成功 2：密码不符
-     * */
-    public int updateInfo(String userId, String nickName, String userIntro, String phone, String originalUserPass, String newUserPass, String passSalt, String userStatus) throws SQLException{
+    /**
+     * 修改信息
+     * 
+     * @return 0: 无此用户ID 1：修改成功 2：密码不符
+     */
+    public int updateInfo(String userId, String nickName, String userIntro, String phone, String originalUserPass,
+            String newUserPass, String userStatus) throws SQLException {
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
         if (businessUser == null) {
             return 0;
         }
-        if (!businessUser.getUserPass().equals(originalUserPass)){
-            return  2;
+        if (!businessUser.getUserPass().equals(originalUserPass)) {
+            return 2;
         }
-        if (!businessUser.getNickName().equals(nickName)){
+        if (!businessUser.getNickName().equals(nickName)) {
             businessUserDao.updateNickName(userId, nickName);
         }
         if (!businessUser.getUserIntro().equals(userIntro)) {
             businessUserDao.updateUserIntro(userId, userIntro);
         }
-        if (!businessUser.getPhone().equals(phone)){
+        if (!businessUser.getPhone().equals(phone)) {
             businessUserDao.updatePhone(userId, phone);
         }
-            if (!originalUserPass.equals(newUserPass)){
-                if (newUserPass != null) {
-                    businessUserDao.updateUserPass(userId, newUserPass);
-                }
+        if (!originalUserPass.equals(newUserPass)) {
+            if (newUserPass != null) {
+                businessUserDao.updateUserPass(userId, newUserPass);
+            }
         }
-        if (!businessUser.getPassSalt().equals(passSalt)){
-            businessUserDao.updatePassSalt(userId, passSalt);
-        }
-        if (!businessUser.getUserStatus().equals(userStatus)){
-            businessUserDao.updateUserStatus(userId,userStatus);
+
+        if (!businessUser.getUserStatus().equals(userStatus)) {
+            businessUserDao.updateUserStatus(userId, userStatus);
         }
         return 1;
 
     }
-    /**注册用户*/
-    public Boolean BusinessUserRegister(String userId, String userName, String nickName, String phone, String userPass) throws SQLException{
+
+    /** 注册用户 */
+    public Boolean BusinessUserRegister(String userId, String userName, String nickName, String phone, String userPass)
+            throws SQLException {
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
-        if (businessUser==null){
-            return  false;
-        }else {
+        if (businessUser == null) {
+            return false;
+        } else {
             businessUser.setUserId(userId);
             businessUser.setUserName(userName);
             businessUser.setNickName(nickName);
             businessUser.setUserPass(userPass);
             businessUser.setPhone(phone);
-            return businessUserDao.insert(businessUser)>0;
+            return businessUserDao.insert(businessUser) > 0;
         }
 
     }
