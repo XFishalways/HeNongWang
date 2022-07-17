@@ -45,7 +45,7 @@ public class FileUploadController {
     }
 
     @RequestMapping(value = "/buyer/upload", method = RequestMethod.POST)
-    public String buyerFileUpload(@RequestParam("avatar") CommonsMultipartFile avatar,
+    public String buyerFileUpload(@RequestParam("file") CommonsMultipartFile avatar,
                                   HttpServletResponse response,
                                   HttpServletRequest request) throws IOException {
 
