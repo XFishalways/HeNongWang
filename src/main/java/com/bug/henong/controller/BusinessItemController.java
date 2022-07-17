@@ -5,6 +5,7 @@ import com.bug.henong.entity.BusinessItem;
 import com.bug.henong.service.BusinessItemService;
 import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,7 +18,7 @@ import java.util.List;
 public class BusinessItemController {
     BusinessItemService businessItemService =new BusinessItemService();
 
-    @RequestMapping("/business/businessItem/getBusinessItemsByName")
+    @GetMapping("/business/businessItem/getBusinessItemsByName")
     @ResponseBody
     public String getItemsFromTo(@RequestParam("skuName")String skuName ,@RequestParam("page")String page, HttpSession session) throws SQLException {
         int currentPage =Integer.getInteger(page);
@@ -31,7 +32,7 @@ public class BusinessItemController {
             return JSON.toJSONString(businessItems);
         }
     }
-    @RequestMapping("/business/businessItem/getBusinessItems")
+    @GetMapping("/business/businessItem/getBusinessItems")
     @ResponseBody
     public String getBusinessItems(@RequestParam("businessId")String businessId, HttpSession session) throws SQLException {
         List<BusinessItem> businessItems = businessItemService.getBusinessItemsByBusinessId(businessId);
@@ -43,7 +44,7 @@ public class BusinessItemController {
         }
     }
 
-    @RequestMapping("/business/businessItem/getBusinessItemsByName")
+    @GetMapping("/business/businessItem/getBusinessItemByName")
     @ResponseBody
     public String getBusinessItemsByName(@RequestParam("businessId")String businessId,@RequestParam("itemName")String itemName,HttpSession session) throws SQLException {
         List<BusinessItem> businessItems= businessItemService.getBusinessItemsByNameAndBusinessId(businessId,itemName);
@@ -55,7 +56,7 @@ public class BusinessItemController {
         }
     }
 
-    @RequestMapping("/business/businessItem/getBusinessOnsaleItems")
+    @GetMapping("/business/businessItem/getBusinessOnsaleItems")
     @ResponseBody
     public String getBusinessOnsaleItems(@RequestParam("businessId")String businessId,HttpSession session) throws SQLException {
         List<BusinessItem> businessItems = businessItemService.getBusinessItemsOnsale(businessId);
@@ -66,7 +67,7 @@ public class BusinessItemController {
             return JSON.toJSONString(businessItems);
         }
     }
-    @RequestMapping("/business/businessItem/getBusinessOffsaleItems")
+    @GetMapping("/business/businessItem/getBusinessOffsaleItems")
     @ResponseBody
     public String getBusinessOffsaleItems(@RequestParam("businessId")String businessId,HttpSession session) throws SQLException {
         List<BusinessItem> businessItems = businessItemService.getBusinessItemsOffsale(businessId);
@@ -77,7 +78,7 @@ public class BusinessItemController {
             return JSON.toJSONString(businessItems);
         }
     }
-    @RequestMapping("/business/businessItem/putItemOnsale")
+    @GetMapping("/business/businessItem/putItemOnsale")
     @ResponseBody
     public String putItemOnSale(@RequestParam("skuId")String skuId,HttpSession session) throws SQLException {
         Boolean rs = businessItemService.putItemOnSale(skuId);
@@ -88,7 +89,7 @@ public class BusinessItemController {
             return mapFactory.getStringObjectMap(session);
         }
     }
-    @RequestMapping("/business/businessItem/putItemOffsale")
+    @GetMapping("/business/businessItem/putItemOffsale")
     @ResponseBody
     public String putItemOffSale(@RequestParam("skuId")String skuId,HttpSession session) throws SQLException {
         Boolean rs = businessItemService.putItemOffSale(skuId);

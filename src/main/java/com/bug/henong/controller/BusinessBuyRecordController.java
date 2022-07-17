@@ -16,7 +16,7 @@ import java.util.Map;
 public class BusinessBuyRecordController {
     BusinessBuyRecordService businessBuyRecordService = new BusinessBuyRecordService();
 
-    @RequestMapping("business/buyrecord/getRecordsByName")
+    @RequestMapping("business/buyrecord/getRecordsByBusinessId")
     @ResponseBody
     public String getRecordsByBusinessId(@RequestParam("userId")String userId, HttpSession session) throws SQLException {
         List<BusinessBuyrecord>businessBuyrecords = businessBuyRecordService.getBuyRecordByByBusinessId(userId);
