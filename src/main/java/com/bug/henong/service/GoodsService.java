@@ -3,8 +3,10 @@ package com.bug.henong.service;
 
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
+import com.bug.henong.dao.BusinessBuyrecordDao;
 import com.bug.henong.dao.FarmerDao;
 import com.bug.henong.dao.GoodsDao;
+import com.bug.henong.entity.BusinessBuyrecord;
 import com.bug.henong.entity.Farmer;
 import com.bug.henong.entity.Goods;
 import org.springframework.stereotype.Service;
@@ -26,8 +28,8 @@ public class GoodsService {
         Goods goods = new Goods();
         FarmerDao farmerDao =new FarmerDao();
         Farmer farmer = farmerDao.findOneFarmer(farmerId);
-
-        if(farmer.getBusinessId()!=null){
+        String businessId= farmer.getBusinessId();
+        if(businessId ==null){
             return 0;
         }
         Snowflake snowflake = IdUtil.getSnowflake(2, 1);
@@ -50,6 +52,16 @@ public class GoodsService {
         if(farmerId !=null){
             goods.setFarmerId(farmerId);
         }
+        BusinessBuyrecord businessBuyrecord =new BusinessBuyrecord();
+
+        String recordId = snowflake.nextIdStr();
+        businessBuyrecord.setRecordId(recordId);
+        businessBuyrecord.setFarmerId(farmerId);
+        businessBuyrecord.setUserId(businessId);
+        businessBuyrecord.setTotalPrice(goodsPrice);
+        businessBuyrecord.setSkuId(goodsId);
+        BusinessBuyrecordDao businessBuyrecordDao = new BusinessBuyrecordDao();
+        businessBuyrecordDao.insert(businessBuyrecord);
 
         return goodsDao.insert(goods);
     }
@@ -210,12 +222,12 @@ public class GoodsService {
         return false;
     }
 
-    public List<Goods> getGoodsFromTo(int curentPage, int pageSize) throws SQLException {
-        return goodsDao.findGoodsFromTo(curentPage,pageSize);
+    public List<Goods> getGoodsFromTo(int currentPage, int pageSize) throws SQLException {
+        return goodsDao.findGoodsFromTo(currentPage,pageSize);
     }
 
-    public List<Goods> getFarmerAllGoods(String famrerId) throws SQLException {
-        return goodsDao.findFarmerAll(famrerId);
+    public List<Goods> getFarmerAllGoods(String farmerId) throws SQLException {
+        return goodsDao.findFarmerAll(farmerId);
     }
 
     public List<Goods> getFarmerGoodsByName(String farmerId, String goodsName) throws SQLException {
