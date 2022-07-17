@@ -1,6 +1,7 @@
 package com.bug.henong.controller;
 
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.bug.henong.entity.BusinessAddress;
 import com.bug.henong.entity.BuyerAddress;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class BuyerAddressController {
@@ -23,17 +25,19 @@ public class BuyerAddressController {
      * 查询卖家地址
      */
     @GetMapping("/buyer/address/findAddressInfo")
-    public String findAddressInfo(HttpSession session) throws SQLException {
-        Object buyerAddressId = session.getAttribute("buyerAddressId");
-        String id = (String) buyerAddressId;
-        BuyerAddress buyerAddress = buyerAddressService.getBuyerAddressDetailById(id);
+    public String findAddressInfo(@RequestParam("buyerUserId") String buyerUserId,
+            HttpSession session) throws SQLException {
 
-        if(buyerAddress == null){
+        String json;
+
+        List<BuyerAddress> buyerAddresses = buyerAddressService.getBuyerAddressDetailById(buyerUserId);
+
+        if(buyerAddresses == null){
             session.setAttribute("errorMsg", "查找不到买家地址id");
-            return null;
+            return JSONUtil.toJsonStr(buyerAddresses);
         }
 
-        String json = JSON.toJSONString(buyerAddress);
+        json = JSON.toJSONString(buyerAddresses);
         return json;
     }
 
@@ -87,13 +91,14 @@ public class BuyerAddressController {
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }
+
     /**
      * 删除卖家地址
      */
     @GetMapping("/buyer/address/delete")
     public void deleteOneAddress(@RequestParam("addressId") String addressId) throws SQLException{
 
-        BuyerAddress buyerAddress = buyerAddressService.getBuyerAddressDetailById(addressId);
+        BuyerAddress buyerAddress = buyerAddressService.findOneBuyerAddress(addressId);
 
         buyerAddressService.deleteAddress(addressId);
 
