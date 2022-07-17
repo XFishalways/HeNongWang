@@ -12,39 +12,39 @@
         <div style="margin-top: 50px;">
             <form class="layui-form" method="post">
                 <div class="layui-form-item">
-                     <label class="layui-form-label">姓名</label>
+                     <label class="layui-form-label">地址名称</label>
                      <div class="layui-input-inline">
-                       <input id="account-name" type="text" name="name" value="现姓名" required  lay-verify="required" placeholder="账号名" autocomplete="off" class="layui-input">
+                       <input id="addr-name" type="text" name="addrName" value="" required  lay-verify="required" placeholder="地址名" autocomplete="off" class="layui-input">
                      </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">昵称</label>
+                    <label class="layui-form-label">省</label>
                     <div class="layui-input-inline">
-                      <input id="account-nickname" type="text" name="nickname" value="" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+                      <input id="province" type="text" name="province" value="" required  lay-verify="required" placeholder="省" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">原密码</label>
+                    <label class="layui-form-label">市</label>
                     <div class="layui-input-inline">
-                        <input id="old-pass" type="password" name="oldPass" value="" required  lay-verify="required|pass" placeholder="密码" autocomplete="off" class="layui-input">
+                        <input id="city" type="text" name="city" value="" required  lay-verify="required" placeholder="市" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">新密码</label>
+                    <label class="layui-form-label">区</label>
                     <div class="layui-input-inline">
-                      <input id="new-pass" type="password" name="newPass" value="" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+                      <input id="block" type="text" name="block" value="" required  lay-verify="required" placeholder="区" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">确认密码</label>
+                    <label class="layui-form-label">街道</label>
                     <div class="layui-input-inline">
-                      <input id="confirm-pass" type="password" name="confirmPass" value="" required  lay-verify="required|pass" placeholder="密码" autocomplete="off" class="layui-input">
+                      <input id="street" type="text" name="street" value="" required  lay-verify="required" placeholder="街道" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">个性签名</label>
+                    <label class="layui-form-label">门牌号</label>
                     <div class="layui-input-inline">
-                      <input id="account-intro" type="text" name="address" value="原地址" required  lay-verify="required" placeholder="地址" autocomplete="off" class="layui-input">
+                      <input id="houseNum" type="text" name="houseNum" value="" required  lay-verify="required" placeholder="门牌号" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -63,34 +63,24 @@
 
               form.render();
 
-              form.verify({
-                pass:function(value){
-                  
-                  var pass = $('#new-pass').val();
-                  if( pass != value) {
-                    return "两次输入密码不一致";
-                  }
-                }
-              })
-
               form.on('submit(submit-info)',function(data){
                   alert(data.field);
                   $.ajax({
                     type:"POST",
-                    url:'/business/register',
+                    url:'/business/addrRegister',
                     data:{
                       userId:getCookie('userId'),
-                      userName:data.field.name,
-                      nickname:data.field.nickname,
-                      originalUserPass:data.field.oldPass,
-                      newUserPass:data.field.newPass,
-                      confirmUserPass:data.field.confirmPass,
-                      intro:data.field.intro,
+                      addrName:data.field.addrName,
+                      province:data.field.province,
+                      city:data.field.city,
+                      block:data.field.block,
+                      street:data.field.street,
+                      houseNum:data.field.houseNum,
                     },
                     dataType:'json',
 
                     success:function(){
-                      alert('success');
+                      alert('地址成功注册');
                     },
 
                     error:function(){
@@ -100,28 +90,6 @@
                   
                   return false;
                 })
-
-              $(document).ready(function(){
-
-                $.ajax({
-                  type:'GET',
-                  url:'',
-                  data:{
-                    userId:getCookie('userId')
-                  },
-                  dataType:'json',
-
-                  success:function(data){
-                    $('#account-name').val(data.userName);
-                    $('#account-nickname').val(data.userNickname);
-                    $('#account-intro').val(data.userIntro);
-                  },
-
-                  error:function(){
-                    alert('failed');
-                  }
-                })  
-              })
 
             }); 
             
