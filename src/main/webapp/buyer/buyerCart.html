@@ -20,7 +20,7 @@
 <script type="text/html" id="toolbarDemo">
 	<div class="layui-btn-container">
 	  <button class="layui-btn layui-btn-sm" lay-event="getCheckData">提交选中</button>
-	  <button class="layui-btn layui-btn-sm" lay-event="deleteAll">清空</button>
+	  <button class="layui-btn layui-btn-sm" lay-event="deleteCheckData">删除选中</button>
 	</div>
 </script>
 
@@ -69,9 +69,48 @@
 				var event = obj.event;
 				if(event == 'getCheckData'){
 					var data = checkStatus.data;
-					(layui.util.escape(JSON.stringify(data)));
-				}else if(event == 'deleteAll'){
-
+					var myData = [];
+					for(var index = 0;index < data.length;index++){
+						myData[index] = data[index].goodsId;
+					}
+					
+					$.ajax({
+						url:'buyerCart/confirmItems',
+						type:'POST',
+						data:{
+							skuIds:myData,
+							userId:getCookie('userId')
+						},
+						dataType:'json',
+						success: function(){
+							alert('成功上传');
+						},
+						error: function(){
+							alert('Failed');
+						}
+					})
+				}else if(event == 'deleteCheckData'){
+					var data = checkStatus.data;
+					var myData = [];
+					for(var index = 0;index < data.length;index++){
+						myData[index] = data[index].goodsId;
+					}
+					
+					$.ajax({
+						url:'buyerCart/deleteItems',
+						type:'POST',
+						data:{
+							skuIds:myData,
+							userId:getCookie('userId')
+						},
+						dataType:'json',
+						success: function(){
+							alert('成功删除');
+						},
+						error: function(){
+							alert('Failed');
+						}
+					})
 				}
 			})
 
@@ -82,8 +121,27 @@
 				var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
 
 				if(layEvent === 'detail'){ //查看
-					//do
-					window.location.href="user_register.html";
+					layer.open({
+					type:1,
+					area:['360px','500px'],
+					title:'商品信息',
+					content:'<div id="goodsName"></div><div id="goodsDate"></div><div id="goodsPlace"></div>'
+
+				  })
+
+				  $.ajax({
+					url:'../farmer/farmerGoods/findOne?goodsId='+id,
+					dataType:'json',
+					success:function(res){
+						$('#goodsName').html(res.goodsName);
+						$('#goodsDate').html(res.goodsDate);
+						$('#goodsPlace').html(res.goodsPlace);
+					},
+
+					error:function(){
+						alert('error!');
+					}
+				  })
 				} else if(layEvent === 'del'){ //删除
 
 				} else if(layEvent === 'edit'){ //编辑
