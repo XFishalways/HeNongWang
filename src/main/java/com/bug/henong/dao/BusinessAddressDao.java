@@ -39,10 +39,14 @@ public class BusinessAddressDao {
     }
 
     /**返回所有信息*/
-    public List<BusinessAddress> findAll() throws SQLException {
+    public List<BusinessAddress> findAll(String userId) throws SQLException {
 
         List<BusinessAddress> businessAddresses = new ArrayList<BusinessAddress>();
-        List<Entity> entities = Db.use().findAll("BUSINESS_ADDRESS");
+        List<Entity> entities = Db.use().findAll(Entity.create("BUSINESS_ADDRESS").set("USER_ID", userId));
+
+        if (entities.isEmpty()) {
+            return null;
+        }
 
         for(Entity e : entities){
             String addressStr = JSONUtil.toJsonStr(e);
