@@ -1,8 +1,10 @@
 package com.bug.henong.service;
 
+import cn.hutool.core.util.RandomUtil;
 import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.entity.Farmer;
+import com.bug.henong.utils.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -185,8 +187,9 @@ public class BuyerUserService {
         }
         if (!originalPass.equals(newPass)) {
             if (newPass != null) {
-                buyerUserDao.updatePassSalt(userId, newPass);
-                //修改密码盐
+                String passSalt= RandomUtil.randomString(10);
+                String encyptPassWord = EncryptUtil.getDigestHex(newPass,passSalt);
+                buyerUserDao.updateUserPass(userId, encyptPassWord);
 
             }
         }
@@ -207,7 +210,9 @@ public class BuyerUserService {
             buyerUser.setUserName(userName);
             buyerUser.setNickName(nickName);
             buyerUser.setPhone(phone);
-            buyerUser.setUserPass(userPass);
+            String  passSalt= RandomUtil.randomString(10);
+            String encryptPassword = EncryptUtil.getDigestHex(userPass,passSalt);
+            buyerUser.setUserPass(encryptPassword);
             return buyerUserDao.insert(buyerUser)>0;
         }
     }
