@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>个人信息</title>
+    <link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+    <script type="text/javascript" src="../lib/layui/layui.js"></script>
+    <script src="../js/myCookie.js"></script>
+</head>
+<body>
+<div style="margin-top: 50px;">
+    <form class="layui-form" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label"style="color: white">活动标题</label>
+            <div class="layui-input-inline">
+                <input id="title" type="text" name="addrName" value="" required  lay-verify="required" placeholder="地址名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="color: white">活动说明</label>
+            <div class="layui-input-inline">
+                <input id="intro" type="text" name="province" value="" required  lay-verify="required" placeholder="省" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="color: white">活动内容</label>
+            <div class="layui-input-inline">
+                <input id="content" type="text" name="city" value="" required  lay-verify="required" placeholder="市" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="color: white">开始时间</label>
+            <div class="layui-input-inline">
+                <input id="" type="text" name="county" value="" required  lay-verify="required" placeholder="区" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="color: white">
+            <label class="layui-form-label">截至时间</label>
+            <div class="layui-input-inline">
+                <input id="street" type="text" name="street" value="" required  lay-verify="required" placeholder="街道" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="color: white">
+            <label class="layui-form-label">活动范围</label>
+            <div class="layui-input-inline">
+                <input id="lastDetail" type="text" name="lastDetail" value="" required  lay-verify="required" placeholder="门牌号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="color: white">
+            <label class="layui-form-label">活动类型</label>
+            <div class="layui-input-inline">
+                <input id="lastDetail" type="text" name="lastDetail" value="" required  lay-verify="required" placeholder="门牌号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="color: white">
+            <label class="layui-form-label">活动状态</label>
+            <div class="layui-input-inline">
+                <input id="lastDetail" type="text" name="lastDetail" value="" required  lay-verify="required" placeholder="门牌号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button id="submit-btn" class="layui-btn" type="button" lay-submit lay-filter="submit-info">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="js/myCookie.js"></script>
+<script>
+    layui.use(['jquery','form'], function(args){
+        var $ = layui.$;
+        var form = layui.form;
+
+        form.render();
+
+        form.on('submit(submit-info)',function(data){
+            alert(data.field);
+            $.ajax({
+                type:"POST",
+                url:'/business/address/register',
+                data:{
+                    userId:getCookie('userId'),
+                    addressName:data.field.addressName,
+                    province:data.field.province,
+                    city:data.field.city,
+                    county:data.field.county,
+                    street:data.field.street,
+                    lastDetail:data.field.lastDetail,
+                    isDefault:$('#isDefault').val()
+                },
+                dataType:'json',
+
+                success:function(){
+                    alert('地址成功注册');
+                },
+
+                error:function(){
+                    alert('failed');
+                }
+            })
+
+            return false;
+        })
+
+    });
+
+</script>
+</body>
+</html>

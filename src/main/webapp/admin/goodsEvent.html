@@ -7,6 +7,7 @@
 		<script type="text/javascript" src="../lib/layui/layui.js"></script>
 	</head>
 	<body class="layui-layout-body">
+
 		<div>
 			<div class="layui-inline">
 				<input type="text" name="title" required lay-verify="required" placeholder="请输入用户id" autocomplete="off" class="layui-input" style="width:125px;" >
@@ -17,7 +18,7 @@
 		
 		</div>
 		<table class="layui-hide" id="test" lay-filter="test"></table>
-
+		<script src="js/myCookie.js"></script>
 		<script type="text/javascript">
 
 		
@@ -41,8 +42,14 @@
 			    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 			    ,cols: [[
 			      {field:'userId', width:180, title: 'ID', sort: true}
-			      ,{field:'userName', width:180, title: '用户名'}
-			      ,{field:'userPass', width:180, title: '密码', sort: true}
+			      ,{field:'userName', width:180, title: '标题'}
+			      ,{field:'userPass', width:180, title: '说明',}
+				  ,{field:'userPass', width:180, title: '内容',}
+				  ,{field:'userPass', width:180, title: '开始时间',}
+				  ,{field:'userPass', width:180, title: '截至时间',}
+				  ,{field:'userPass', width:180, title: '活动范围',}
+				  ,{field:'userPass', width:180, title: '活动类型',}
+				  ,{field:'userPass', width:180, title: '活动状态',}
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
 				,error: function(){
@@ -58,31 +65,26 @@
 			    var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
 			   
 			    if(layEvent === 'detail'){ //查看
-			      //do 
-				  window.location.href="user_register.html";
+
 			    } else if(layEvent === 'del'){ //删除
-			      layer.confirm('真的删除行么', function(index){
-					var id = obj.data.userId;
+			      layer.confirm('确认删除吗', function(index){
+					var id = obj.data.saleProductId;
 					alert(id);
 			        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
 			        layer.close(index);
 			        //向服务端发送删除指令
 
 					$.ajax({
-						url:"DeleteBuyerUserServlet?USER_ID=" + id,
+						url:"/admin/saleProduct/delete?saleStoreId=" + id,
 						success:function(res){
 							console.log(res)
 						}
 					})
 			      });
 			    } else if(layEvent === 'edit'){ //编辑
-			      //do something
-			      
-			      //同步更新缓存对应的值
-			      obj.update({
-			        username: '123'
-			        ,title: 'xxx'
-			      });
+					var id = obj.data.saleProductId;
+					createCookie('saleStoreId',id);
+					window.location.href="update&insertEvent.html";
 			    } else if(layEvent === 'LAYTABLE_TIPS'){
 			      layer.alert('Hi，头部工具栏扩展的右侧图标。');
 			    }
@@ -99,21 +101,15 @@
 		  
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
-			  var id = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("FindOneBuyerUser?USER_ID="+id);
+			  var title = $(this).parent().parent().find(".layui-input").val();
+			  tableInit("?saleProductTitle="+title);
 		  })
 		});
 		
 		</script>
 		<script type="text/html" id="barDemo">
-		  <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
 		  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 		  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-		  
-		  <!-- 这里同样支持 laytpl 语法，如： -->
-		  {{#  if(d.auth > 2){ }}
-		    <a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
-		  {{#  } }}
 		</script>
 	</body>
 </html>

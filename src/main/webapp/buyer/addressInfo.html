@@ -53,7 +53,7 @@
 					,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 				]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("farmerGoods/getAll");
+					if( url.search(patt) != -1) tableInit("");
 				}
 			});
 
@@ -78,14 +78,6 @@
 					})
 				} else if(layEvent === 'del'){ //删除
 
-				} else if(layEvent === 'edit'){ //编辑
-					//do something
-
-					//同步更新缓存对应的值
-					obj.update({
-						username: '123'
-						,title: 'xxx'
-					});
 				} else if(layEvent === 'LAYTABLE_TIPS'){
 					layer.alert('Hi，头部工具栏扩展的右侧图标。');
 				}
@@ -93,7 +85,7 @@
 		});
 	}
 
-	tableInit("farmerGoods/getAll");
+	tableInit("");
 
 	//第一种：主动加载jquery模块
 	layui.use(['jquery', 'layer'], function(){
@@ -103,20 +95,14 @@
 		//后面就跟你平时使用jQuery一样
 		$('#findById').on('click',function(res){
 			var id = $(this).parent().parent().find(".layui-input").val();
-			tableInit("FindGOODS?USER_ID=" +id +"&goodsPatt=");
+			tableInit();
 		})
 	});
 
 </script>
 <script type="text/html" id="barDemo">
 	<a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
-	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-
-	<!-- 这里同样支持 laytpl 语法，如： -->
-	{{#  if(d.auth > 2){ }}
-	<a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
-	{{#  } }}
 </script>
 </body>
 </html>
