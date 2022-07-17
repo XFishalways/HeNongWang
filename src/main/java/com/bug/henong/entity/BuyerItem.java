@@ -43,6 +43,9 @@ public class BuyerItem implements Serializable,Cloneable{
      /** 买家商品图片 */
      @ApiModelProperty(name = "买家商品图片",notes = "")
      private String skuImage ;
+     /** 数量 */
+     @ApiModelProperty(name = "数量",notes = "")
+     private Double quantity ;
 
     /** 返回订单ID */
     public String getOrderId(){
@@ -115,5 +118,13 @@ public class BuyerItem implements Serializable,Cloneable{
      /** 设置买家商品图片 */
      public void setSkuImage(String skuImage){
          this.skuImage=skuImage;
+     }
+     /** 返回商品数量 */
+     public Double getQuantity(){
+         return this.quantity;
+     }
+     /** 设置商品数量 */
+     public void setQuantity(Double quantity){
+         this.quantity=quantity;
      }
 }

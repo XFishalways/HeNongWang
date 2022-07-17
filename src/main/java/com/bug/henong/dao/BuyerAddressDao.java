@@ -68,6 +68,24 @@ public class BuyerAddressDao {
 
         return  buyerAddress;
     }
+    //通过用户id查找某一行数据
+    public List<BuyerAddress> findAddressByBuyerId(String buyerId) throws SQLException {
+        List<BuyerAddress> buyerAddresses = new ArrayList<BuyerAddress>();
+        List<Entity> entities= Db.use().findAll(
+                Entity.create("BUYER_ADDRESS").set("USER_ID",buyerId)
+        );
+
+        if(entities.isEmpty()){
+            return null;
+        }
+        for(Entity e : entities){
+            String buyerStr = JSONUtil.toJsonStr(e);
+            BuyerAddress buyerAddress = JSONUtil.toBean(buyerStr,BuyerAddress.class);
+            buyerAddresses.add(buyerAddress);
+        }
+
+        return buyerAddresses;
+    }
 
     //更新地址名称
     public int updateAddressName(String id, String addressName) throws SQLException {

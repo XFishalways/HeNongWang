@@ -21,12 +21,6 @@
             </from>
             <form class="layui-form" method="post">
                 <div class="layui-form-item">
-                     <label class="layui-form-label">姓名</label>
-                     <div class="layui-input-inline">
-                       <input id="account-name" type="text" name="name" value="现姓名" required  lay-verify="required" placeholder="账号名" autocomplete="off" class="layui-input">
-                     </div>
-                </div>
-                <div class="layui-form-item">
                     <label class="layui-form-label">昵称</label>
                     <div class="layui-input-inline">
                       <input id="account-nickname" type="text" name="nickname" value="" required  lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
@@ -117,7 +111,6 @@
                     url:'/buyer/update',
                     data:{
                       userId:getCookie('userId'),
-                      userName:data.field.name,
                       nickName:data.field.nickname,
                       originalPass:data.field.oldPass,
                       newPass:data.field.newPass,
@@ -143,14 +136,13 @@
 
                 $.ajax({
                   type:'GET',
-                  url:'',
+                  url:'/buyer/showAllInfo',
                   data:{
                     userId:getCookie('userId')
                   },
                   dataType:'json',
 
                   success:function(data){
-                    $('#account-name').val(data.userName);
                     $('#account-nickname').val(data.nickName);
                     $('#account-intro').val(data.userIntro);
                     $('#phone').val(data.phone);

@@ -67,10 +67,10 @@ public class BuyerCartDao {
     }
 
     //更新总金额
-    public int updateTotalPrice(String id, Double totalPrice) throws SQLException {
+    public int updatePrice(String id, Double price) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("TOTAL_PRICE",totalPrice),
+                Entity.create().set("TOTAL_PRICE",price),
                 Entity.create("BUYER_CART").set("USER_ID",id)
         );
 

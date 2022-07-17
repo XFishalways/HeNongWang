@@ -33,10 +33,10 @@
           zlt
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">个人信息查看</a></dd>
+          <dd><a id="log-out" href="">退出</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="../index.html">退出</a></li>
     </ul>
   </div>
   
@@ -86,12 +86,19 @@
   </div>
 </div>
 
+<script src="../js/myCookie.js"></script>
 <script>
 //JavaScript代码区域
 layui.use('element', function(){
   var element = layui.element;
   var $ = layui.jquery;
 
+  $('#log-out').click(function(){
+    deleteCookie('userId');
+    deleteCookie('userType');
+    window.location.href = '../login.html';
+    return false;
+  })
 
 	$("a").click(function(){
 		//alert($(this).text());
