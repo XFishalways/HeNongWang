@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cn.hutool.core.util.ObjectUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -27,12 +28,15 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         HttpSession session = request.getSession();
         String checkByForm = request.getParameter("check");
-        String checkBySession = String.valueOf(session.getAttribute("check"));
-        session.removeAttribute("check");
+        String checkBySession = String.valueOf(session.getAttribute("userId"));
+        session.removeAttribute("userId");  //使用之后从session中删掉
 
+        if (StringUtils.isNotBlank(checkBySession)) {
+            return true;
+        }
         if(StringUtils.isNotBlank(checkByForm) && StringUtils.isNotBlank(checkBySession) && checkByForm.equals(checkBySession)){
             return true;
-        }else{
+        } else{
             response.setContentType("text/html;charset=utf-8");
 
             OutputStream oStream = response.getOutputStream();
