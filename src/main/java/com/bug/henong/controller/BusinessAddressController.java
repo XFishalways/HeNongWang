@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ public class BusinessAddressController {
      * 查询所有卖家地址
      */
     @GetMapping("/business/address/findAddressInfo")
+    @ResponseBody
     public String findAddressInfo(@RequestParam("userId") String userId,
                                   HttpSession session) throws SQLException{
 
@@ -41,6 +43,7 @@ public class BusinessAddressController {
      * 查找一个卖家地址
      */
     @GetMapping("/business/address/findOneAddress")
+    @ResponseBody
     public String findOneAddress(@RequestParam("addressTitle") String addressTitle,
                                  HttpSession session) throws SQLException{
 
@@ -63,6 +66,7 @@ public class BusinessAddressController {
      * 更新卖家地址
      */
     @PostMapping("/business/address/update")
+    @ResponseBody
     public String update(@RequestParam("addressId") String addressId,
                          @RequestParam("addressName") String addressName,
                          @RequestParam("province") String province,
@@ -91,6 +95,7 @@ public class BusinessAddressController {
      * 注册卖家地址
      */
     @PostMapping("/business/address/register")
+    @ResponseBody
     public String register(@RequestParam("addressName") String addressName,
                            @RequestParam("province") String province,
                            @RequestParam("city") String city,
@@ -111,6 +116,7 @@ public class BusinessAddressController {
      * 删除卖家地址
      */
     @GetMapping("/business/address/delete")
+    @ResponseBody
     public String deleteOneAddress(@RequestParam("addressId") String addressId,
                                  HttpSession session) throws SQLException{
 
@@ -121,6 +127,4 @@ public class BusinessAddressController {
         return mapFactory.getStringObjectMap(session);
 
     }
-
-
 }

@@ -9,7 +9,7 @@
 <body class="layui-layout-body">
 <div>
 	<div class="layui-inline">
-		<input type="text" name="title" required lay-verify="required" placeholder="输入地址id" autocomplete="off" class="layui-input" style="width:125px;" >
+		<input type="text" name="title" required lay-verify="required" placeholder="输入地址名称" autocomplete="off" class="layui-input" style="width:125px;" >
 	</div>
 	<div class="layui-inline">
 		<button type="button" class="layui-btn"  id="findById">搜寻地址</button>
@@ -17,7 +17,7 @@
 
 </div>
 <table class="layui-hide" id="test" lay-filter="test"></table>
-
+<script src="../js/myCookie.js"></script>
 <script type="text/javascript">
 
 
@@ -49,11 +49,11 @@
 					,{field:'city', width:100, title: '市'}
 					,{field:'county', width:180, title: '区'}
 					,{field:'street', width:180, title: '街道'}
-					,{field:'isDefault', width:200, title: '是否为默认地址'}
+					,{field:'isDefault', width:150, title: '是否为默认地址'}
 					,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 				]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("farmerGoods/getAll");
+					if( url.search(patt) != -1) tableInit("/address/findAllAddress?buyerUserId="+getCookie('userId'));
 				}
 			});
 
@@ -77,14 +77,18 @@
 						}
 					})
 				} else if(layEvent === 'del'){ //删除
+					layer.confirm('确认删除该地址？', function(index){
+						var id = obj.data.addressId;
+						obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+						layer.close(index);
+						//向服务端发送删除指令
 
-				} else if(layEvent === 'edit'){ //编辑
-					//do something
-
-					//同步更新缓存对应的值
-					obj.update({
-						username: '123'
-						,title: 'xxx'
+						$.ajax({
+							url:"/address/delete" + id,
+							success:function(res){
+								alert('success');
+							}
+						})
 					});
 				} else if(layEvent === 'LAYTABLE_TIPS'){
 					layer.alert('Hi，头部工具栏扩展的右侧图标。');
@@ -93,7 +97,7 @@
 		});
 	}
 
-	tableInit("farmerGoods/getAll");
+	tableInit("/address/findAllAddress?buyerUserId="+getCookie('userId'));
 
 	//第一种：主动加载jquery模块
 	layui.use(['jquery', 'layer'], function(){
@@ -102,21 +106,15 @@
 
 		//后面就跟你平时使用jQuery一样
 		$('#findById').on('click',function(res){
-			var id = $(this).parent().parent().find(".layui-input").val();
-			tableInit("FindGOODS?USER_ID=" +id +"&goodsPatt=");
+			var title = $(this).parent().parent().find(".layui-input").val();
+			tableInit('/address/findOneAddress?addressTitle='+title);
 		})
 	});
 
 </script>
 <script type="text/html" id="barDemo">
 	<a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
-	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-
-	<!-- 这里同样支持 laytpl 语法，如： -->
-	{{#  if(d.auth > 2){ }}
-	<a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
-	{{#  } }}
 </script>
 </body>
 </html>

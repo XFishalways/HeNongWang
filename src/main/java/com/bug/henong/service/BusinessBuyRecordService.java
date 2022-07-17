@@ -94,4 +94,16 @@ public class BusinessBuyRecordService {
         }
 
     }
+
+    /**
+     * 通过农户id查找农户
+     */
+    public List<BusinessBuyrecord> findFarmerById(String farmerId) throws SQLException{
+        List<BusinessBuyrecord> businessBuyrecords = businessBuyrecordDao.findFarmerByFarmerId(farmerId);
+        if(businessBuyrecords.isEmpty()){
+            return null;
+        }else{
+            return businessBuyrecords;
+        }
+    }
 }

@@ -15,15 +15,15 @@
                     <label class="layui-form-label" style="color: white">是否默认</label>
                     <div class="layui-input-inline">
                         <select id="isDefault" name="isDefault" lay-verify="">
-                            <option value="online">否</option>
-                            <option value="offline">是</option>
+                            <option value="0">否</option>
+                            <option value="1">是</option>
                         </select>
                     </div>
                 </div>
                 <div class="layui-form-item">
                      <label class="layui-form-label"style="color: white">地址名称</label>
                      <div class="layui-input-inline">
-                       <input id="addr-name" type="text" name="addrName" value="" required  lay-verify="required" placeholder="地址名" autocomplete="off" class="layui-input">
+                       <input id="addr-name" type="text" name="addressName" value="" required  lay-verify="required" placeholder="地址名" autocomplete="off" class="layui-input">
                      </div>
                 </div>
                 <div class="layui-form-item">
@@ -76,7 +76,7 @@
                   alert(data.field);
                   $.ajax({
                     type:"POST",
-                    url:'/business/address/register',
+                    url:'/address/register',
                     data:{
                       userId:getCookie('userId'),
                       addressName:data.field.addressName,
