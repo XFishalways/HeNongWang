@@ -13,7 +13,9 @@
             <from class="layui-form" method="post" enctype="multipart/form-data">
                 <div  class="layui-form-item">
                     <div class="layui-input-block">
-                        <button id="loadImg" class="layui-btn" type="button" lay-submit lay-filter="submit-info">更改头像</button>
+                        <button type="button" class="layui-btn" id="uploadImg">
+                            <i class="layui-icon">&#xe67c;</i>更改头像
+                        </button>
                     </div>
                 </div>
             </from>
@@ -69,6 +71,18 @@
               var form = layui.form;
               var upload = layui.upload;
 
+                //执行实例
+                var uploadInst = upload.render({
+                    elem: '#uploadImg' //绑定元素
+                    ,url: '/buyer/upload' //上传接口
+                    ,done: function(res){
+                        //上传完毕回调
+                    }
+                    ,error: function(){
+                        //请求异常回调
+                    }
+                });
+
               form.render();
 
               form.verify({
@@ -85,7 +99,7 @@
                   alert(data.field);
                   $.ajax({
                     type:"POST",
-                    url:'/farmer/update',
+                    url:'/buyer/update',
                     data:{
                       userId:getCookie('userId'),
                       userName:data.field.name,
@@ -133,17 +147,7 @@
 
             });
 
-            //执行实例
-            var uploadInst = upload.render({
-                elem: 'uploadImg' //绑定元素
-                ,url: 'upload' //上传接口
-                ,done: function(res){
-                    //上传完毕回调
-                }
-                ,error: function(){
-                    //请求异常回调
-                }
-            });
+
         </script>
     </body>
 </html>
