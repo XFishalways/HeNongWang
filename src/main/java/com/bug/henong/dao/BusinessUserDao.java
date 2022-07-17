@@ -178,5 +178,8 @@ public class BusinessUserDao {
         return rw;
 
     }
-
+    /**通过id查找密码盐*/
+    public String getBusinessPassSalt(String userId) throws SQLException {
+        return findOneBusiness(userId).getPassSalt();
+    }
 }
