@@ -173,6 +173,7 @@
           form.render();
 
             $(document).ready(function(){
+                var price;
                 $.ajax({
                     type:'GET',
                     url:'',
@@ -188,6 +189,7 @@
                         $('#salePrice').val(data.salePrice);
                         $('#catagory').val(data.catalog);
                         $('#content1').val(data.intro);
+                        price = val(data.salePrice)
                     },
 
                     error:function(){
@@ -202,7 +204,7 @@
                             userId:getCookie('userId'),
                             goodsId:getCookie('goodsId'),
                             quantity:$('#input-num').val(),
-                            type:'buyNow'
+                            price:price
                         },
                         dataType:"json",
 
@@ -224,7 +226,7 @@
                             userId:getCookie('userId'),
                             goodsId:getCookie('goodsId'),
                             quantity:$('#input-num').val(),
-                            type:'inCart'
+                            price:price
                         },
                         dataType:"json",
 
