@@ -147,7 +147,7 @@ public class BuyerAddressService {
         return false;
     }
     public int update(String addressId, String addressName, String receiverName, String receiverPhone, String province, String city,
-                      String county, String street, String lastDetail, String isDefault) throws SQLException{
+                      String county, String street, String lastDetail, String isDefault, String userId) throws SQLException{
 
         BuyerAddress buyerAddress = buyerAddressDao.findOneAddress(addressId);
 
@@ -181,12 +181,15 @@ public class BuyerAddressService {
         if(!buyerAddress.getIsDefault().equals(isDefault)){
             buyerAddressDao.updateIsDefault(addressId, isDefault);
         }
+        if(!buyerAddress.getUserId().equals(userId)){
+            buyerAddressDao.updateIsDefault(addressId, userId);
+        }
         return 1;
 
     }
 
     public int Insert(String addressName, String receiverName, String receiverPhone, String province, String city, String county, String street,
-                      String lastDetail, String isDefault) throws SQLException{
+                      String lastDetail, String isDefault, String userId) throws SQLException{
 
         BuyerAddress buyerAddress = new BuyerAddress();
 
@@ -204,6 +207,7 @@ public class BuyerAddressService {
         buyerAddress.setStreet(street);
         buyerAddress.setLastDetail(lastDetail);
         buyerAddress.setIsDefault(isDefault);
+        buyerAddress.setUserId(userId);
 
         return buyerAddressDao.insert(buyerAddress);
     }

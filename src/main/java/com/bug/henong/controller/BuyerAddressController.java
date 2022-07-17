@@ -51,10 +51,11 @@ public class BuyerAddressController {
                          @RequestParam("street") String street,
                          @RequestParam("lastDetail") String lastDetail,
                          @RequestParam("isDefault") String isDefault,
+                         @RequestParam("userId") String userId,
                          HttpSession session) throws SQLException{
 
         int result = buyerAddressService.update(addressId, addressName, receiverName, receiverPhone, province, city,
-                county, street, lastDetail, isDefault);
+                county, street, lastDetail, isDefault, userId);
         if (result==0) {
             session.setAttribute("errorMsg", "查找不到地址id");
             return null;
@@ -78,9 +79,10 @@ public class BuyerAddressController {
                            @RequestParam("street") String street,
                            @RequestParam("lastDetail") String lastDetail,
                            @RequestParam("isDefault") String isDefault,
+                           @RequestParam("userId") String userId,
                            HttpSession session) throws SQLException{
 
-        buyerAddressService.Insert(addressName, receiverName, receiverPhone,province,city, county, street, lastDetail, isDefault);
+        buyerAddressService.Insert(addressName, receiverName, receiverPhone,province,city, county, street, lastDetail, isDefault, userId);
 
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
