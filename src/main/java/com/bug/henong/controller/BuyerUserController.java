@@ -41,7 +41,7 @@ public class BuyerUserController {
     /**
      *更新买家信息
      */
-    @RequestMapping(value = "/buyer/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/buyer/updateUser", method = RequestMethod.POST)
     @ResponseBody
     public String updateInfo(@RequestParam("userId") String userId,
                              @RequestParam("nickName") String nickName,
