@@ -21,7 +21,7 @@
                   <a href="" class= "layui-this layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">首页</a>
                 </li>
                 <li class="layui-nav-item layui-col-md2">
-                  <a href="buyer/index.html" class= "layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">个人中心</a>
+                  <a id="person" onclick="return false" href="" class= "layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">个人中心</a>
                 </li>
                 <form class=" layui-form layui-col-md4 layui-col-md-offset1" action="">
                     <div class="layui-form-item" style="margin-top:15px;">
@@ -227,12 +227,30 @@
            </div>
 
            <script src="lib/layui/layui.js"></script>
+           <script src="js/myCookie.js"></script>
            <script>
-            layui.use(['layer','carousel','form'], function(){
+            layui.use(['layer','carousel','form','jquery'], function(){
 
                 var layer = layui.layer;
                 var carousel = layui.carousel;
                 var form = layui.form;
+                var $ = layui.$;
+
+                $('#person').click(function(){
+                    if(getCookie('userId') == ''){
+                        alert('请先登录');
+                        window.location.href = 'login.html';
+                    }else{
+                        var type = getCookie('userType');
+                        if(type == 'buyer'){
+                            window.location.href = 'buyer/index.html';
+                        }else if(type == 'farmer'){
+                            window.location.href = 'farmer/index.html';
+                        }else if(type == 'business'){
+                            window.location.href = 'business/index.html';
+                        }
+                    }
+                })
 
                 carousel.render({
                 elem: '#test1'
