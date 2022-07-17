@@ -162,7 +162,7 @@ public class BuyerUserService {
 
     public int updateInfo(String userId,String nickName, String userIntro, String avatar,
                           String phone, String userStatus, String originalPass, String newPass) throws SQLException {
-        BuyerUser buyerUser = getUserDetailById((String) userId);
+        BuyerUser buyerUser = buyerUserDao.findOneBuyer(userId);
 
         if (buyerUser == null) {
             return 0;
@@ -172,23 +172,23 @@ public class BuyerUserService {
             return 2;
         }
         if (!buyerUser.getNickName().equals(nickName)) {
-            updateNickName((String) userId, nickName);
+            buyerUserDao.updateNickName(userId, nickName);
         }
         if (!buyerUser.getUserIntro().equals(userIntro)) {
-            updateUserIntro((String) userId, userIntro);
+            buyerUserDao.updateUserIntro(userId, userIntro);
         }
         if (!buyerUser.getAvatar().equals(avatar)) {
-            updateAvatar((String) userId, avatar);
+            buyerUserDao.updateAvatar(userId, avatar);
         }
         if (!buyerUser.getPhone().equals(phone)) {
-            updatePhone((String) userId, phone);
+            buyerUserDao.updatePhone(userId, phone);
         }
         if (!buyerUser.getUserStatus().equals(userStatus)) {
-            updateUserStatus((String) userId, userStatus);
+            buyerUserDao.updateUserStatus(userId, userStatus);
         }
         if (!originalPass.equals(newPass)) {
             if (newPass != null) {
-                updateUserPass((String) userId, newPass);
+                buyerUserDao.updatePassSalt(userId, newPass);
                 //修改密码盐
 
             }

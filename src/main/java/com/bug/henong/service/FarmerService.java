@@ -168,7 +168,7 @@ public class FarmerService {
      * */
     public int updateInfo(String userId,String farmerName, int farmerAge, String farmerPlace,
                               String businessId, String originalUserPass,String newUserPass) throws SQLException {
-        Farmer farmer = getFarmerDetailById((String) userId);
+        Farmer farmer = farmerDao.findOneFarmer(userId);
 
         if (farmer == null) {
             return 0;
@@ -178,16 +178,16 @@ public class FarmerService {
             return 2;
         }
         if (!farmer.getFarmerName().equals(farmerName)) {
-            updateFarmerName((String) userId, farmerName);
+            farmerDao.updateName(userId, farmerName);
         }
         if (farmer.getFarmerAge() != farmer.getFarmerAge()) {
-            updateFarmerAge((String) userId, farmerAge);
+            farmerDao.updateAge(userId, farmerAge);
         }
         if (!farmer.getFarmerPlace().equals(farmerPlace)) {
-            updatePlace((String) userId, farmerPlace);
+            farmerDao.updatePlace(userId, farmerPlace);
         }
         if (!farmer.getBusinessId().equals(businessId)) {
-            updateBusinessId((String) userId, businessId);
+            farmerDao.updateBusinessId(userId, businessId);
         }
         if (!originalUserPass.equals(newUserPass)) {
             if (newUserPass != null) {
