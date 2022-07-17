@@ -128,4 +128,61 @@ public class BusinessUserService {
 
         return false;
     }
+
+    /**修改信息
+     * @return  0: 无此用户ID 1：修改成功 2：密码不符
+     * */
+    public int updateInfo(String userId, String nickName, String userIntro, String avatar, String phone, String originalUserPass, String newUserPass, String passSalt, String userStatus) throws SQLException{
+        BusinessUser businessUser = getBusinessUserDetailById((String) userId);
+
+        if (businessUser == null) {
+            return 0;
+        }
+        if (!businessUser.getUserPass().equals(originalUserPass)){
+            return  2;
+        }
+        if (!businessUser.getNickName().equals(nickName)){
+            updateNickName((String) userId , nickName );
+        }
+        if (!businessUser.getUserIntro().equals(userIntro)){
+            updateUserIntro((String) userId , userIntro );
+        }
+        if (!businessUser.getAvatar().equals(avatar)){
+            updateAvatar((String) userId , avatar );
+        }
+        if (!businessUser.getPhone().equals(phone)){
+            updatePhone((String) userId , phone );
+        }
+            if (!originalUserPass.equals(newUserPass)){
+                if (newUserPass != null) {
+                    updateUserPass((String) userId, newUserPass);
+                }
+        }
+        if (!businessUser.getPassSalt().equals(passSalt)){
+            updatePassSalt((String) userId , passSalt );
+        }
+        if (!businessUser.getUserStatus().equals(userStatus)){
+            updateUserStatus((String) userId , userStatus );
+        }
+        return 1;
+
+    }
+    /**注册用户*/
+    public Boolean BusinessUserRegister(String userId, String userName, String nickName, String userIntro, String avatar, String phone, String userPass) throws SQLException{
+        BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
+        if (businessUser==null){
+            return  false;
+        }else {
+            businessUser.setUserId(userId);
+            businessUser.setUserName(userName);
+            businessUser.setNickName(nickName);
+            businessUser.setUserIntro(userIntro);
+            businessUser.setAvatar(avatar);
+            businessUser.setUserPass(userPass);
+            businessUser.setPhone(phone);
+            return businessUserDao.insert(businessUser)>0;
+        }
+
+    }
+
 }
