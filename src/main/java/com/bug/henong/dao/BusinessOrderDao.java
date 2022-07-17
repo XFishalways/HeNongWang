@@ -94,4 +94,14 @@ public class BusinessOrderDao {
         return rw;
     }
 
+    public int updateSkuAmount(String id, Double skuAmount) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("SKU_AMOUNT",skuAmount),
+                Entity.create("BUSINESS_ORDER").set("ORDER_ID",id)
+        );
+
+        return rw;
+    }
+
 }
