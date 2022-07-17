@@ -8,6 +8,7 @@ import com.bug.henong.utils.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service("BusinessUserService")
 public class BusinessUserService {
@@ -15,8 +16,8 @@ public class BusinessUserService {
     private BusinessUserDao businessUserDao = new BusinessUserDao();
 
     /** 得到买家信息 */
-    public BusinessUser getBusinessUserDetailById(String userId) throws SQLException {
-        return businessUserDao.findOneBusiness(userId);
+    public List<BusinessUser> getBusinessUserDetailById(String userId) throws SQLException {
+        return businessUserDao.findAll(userId);
     }
 
     /** 修改昵称 */

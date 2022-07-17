@@ -53,11 +53,10 @@ public class BuyerAddressDao {
     }
 
     //通过id查找某一行数据
-    public BuyerAddress findOneAddress(String id) throws SQLException {
+    public BuyerAddress findOneAddress(String addressTitle) throws SQLException {
 
         List<Entity> entities= Db.use().findAll(
-                Entity.create("BUYER_ADDRESS").set("ADDRESS_ID",id)
-        );
+                Entity.create("BUYER_ADDRESS").set("ADDRESS_TITLE",addressTitle));
 
         if(entities.isEmpty()){
             return null;
