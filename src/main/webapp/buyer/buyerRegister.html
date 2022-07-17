@@ -23,7 +23,7 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">手机号码:</label>
                                         <div class="layui-input-block" id="phonenumber">
-                                            <input type="number" placeholder="请填写手机号码" class="layui-input" lay-verify="number" required />
+                                            <input id="input-phone" type="number" placeholder="请填写手机号码" class="layui-input" lay-verify="number" required />
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -42,51 +42,6 @@
                                     </div>
                                 </form>
                             </div>
-
-
-                            <div>
-                                <form class="layui-form" style="margin: 0 auto; margin-top: 20px; max-width: 460px;padding-top: 40px;">
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">省:</label>
-                                        <div class="layui-input-block">
-                                            <input id='input-province' type="text" name="province" placeholder="请填写所在省份" class="layui-input" lay-verify="required" required />
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">市:</label>
-                                        <div class="layui-input-block">
-                                            <input id='input-city' type="text" name="city" placeholder="请输入所在市" value="" class="layui-input" lay-verify="required" required>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">区:</label>
-                                        <div class="layui-input-block">
-                                            <input id='input-county' type="number" name="ID" placeholder="请输入所在区" value="" class="layui-input" lay-verify="required" required>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">街道:</label>
-                                        <div class="layui-input-block">
-                                            <input id='input-street' type="text" name="street" placeholder="请输入所在街道" value="" class="layui-input" lay-verify="required|password" required>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">门牌号:</label>
-                                        <div class="layui-input-block">
-                                            <input id='input-lastDetall' type="text" name="lastDetall" placeholder="请输入门牌号" value="" class="layui-input" lay-verify="required" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="layui-form-item">
-                                        <div class="layui-input-block">
-                                            <button class="layui-btn" id="register-btn-X" lay-submit lay-filter="registerStepX">
-                                                &emsp;下一步&emsp;
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
                             <div>
                                 <form class="layui-form" style="margin: 0 auto; margin-top: 20px; max-width: 460px;padding-top: 40px;">
                                     <div class="layui-form-item">
@@ -116,10 +71,15 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">确认密码:</label>
                                         <div class="layui-input-block">
-                                            <input type="password" name="surepassword" id="input-surepassword" placeholder="请确认密码" value="" class="layui-input" lay-verify="required" required>
+                                            <input type="password" name="surepassword" id="input-surePassword" placeholder="请确认密码" value="" class="layui-input" lay-verify="required" required>
                                         </div>
                                     </div>
-
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">个性签名:</label>
+                                        <div class="layui-input-block">
+                                            <input id='input-intro' type="text" name="province" placeholder="请填写个性签名" class="layui-input" lay-verify="required" required />
+                                        </div>
+                                    </div>
                                     <div class="layui-form-item">
                                         <div class="layui-input-block">
                                             <button type="button" class="layui-btn layui-btn-primary pre">上一步</button>
@@ -130,8 +90,6 @@
                                     </div>
                                 </form>
                             </div>
-
-
                             <div>
                                 <form lay-filter="form3" class="layui-form" style="margin: 0 auto; max-width: 460px;padding-top: 20px;">
                                     <div class="layui-form-item">
@@ -153,33 +111,9 @@
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">省:</label>
+                                        <label class="layui-form-label">个性签名:</label>
                                         <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux" id="confirm-province" >dog</div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">市:</label>
-                                        <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux" id="confirm-city" >dog</div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">区:</label>
-                                        <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux" id="confirm-county" >dog</div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">街道:</label>
-                                        <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux" id="confirm-street" >dog</div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">门牌号:</label>
-                                        <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux" id="confirm-lastDetall" >dog</div>
+                                            <div class="layui-form-mid layui-word-aux" id="confirm-intro" >dog</div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -231,9 +165,7 @@
             height: '600px',
             stepItems: [{
                 title: '填写手机信息'
-            }, {
-                title: '填写用户地址'
-            }, {
+            },{
                 title: '填写用户信息'
             }, {
                 title: '确认用户信息'
@@ -247,32 +179,23 @@
             step.next('#stepForm');
             return false;
         });
-
-        form.on('submit(registerStepX)', function (data) {
-            step.next('#stepForm');
-            return false;
-        });
-
         form.on('submit(registerStep2)', function (data) {
 
             form.verify({
                 password:function(value){
-                    var pass = $('#input-surepassword').val();
+                    var pass = $('#input-surePassword').val();
                     if( pass != value) {
                         return "两次输入密码不一致";
+                    }else{
+                        step.next('#stepForm');
                     }
                 }
             })
 
-            step.next('#stepForm');
             $('#confirm-name').html($('#input-name').val());
             $('#confirm-nickname').html($('#input-nickname').val());
             $('#confirm-userId').html($('#input-userId').val());
-            $('#confirm-province').html($('#input-province').val(),);
-            $('#confirm-city').html($('#input-city').val(),);
-            $('#confirm-county').html($('#input-county').val());
-            $('#confirm-street').html($('#input-street').val());
-            $('#confirm-lastDetall').html($('#input-lastDetall').val());
+            $('#confirm-intro').html($('#input-intro').val(),);
             return false;
         });
 
@@ -284,12 +207,10 @@
                     userName:$('#input-name').val(),
                     nickName:$('#input-nickname').val(),
                     userId:$('#input-userId').val(),
-                    password:$('#password').val(),
-                    province:$('#input-province').val(),
-                    city:$('#input-city').val(),
-                    county:$('#input-county').val(),
-                    street:$('#input-street').val(),
-                    lastDetall:$('#input-lastDetall').val(),
+                    usePass:$('#password').val(),
+                    userIntro:$('#input-intro').val(),
+                    avatar:null,
+                    phone:$('#input-phone').val(),
                 },
                 dataType:'json',
 
@@ -317,36 +238,5 @@
 </script>
 
 <script src="../js/myCookie.js"></script>
-<script>
-    layui.use(['form','jquery'],function () {
-        var form = layui.form;
-        var $ = layui.$;
-
-        form.render();
-
-        $(document).ready(function(){
-            $('#register-btn-1').click(function(){
-                $.ajax({
-                    type:'POST',
-                    url:'',
-                    data:{
-                        phonenumber:$('#phonenumber').val()
-                    },
-                    dataType:'json',
-
-                    success:function(data){
-                        alert('success');
-                    },
-
-                    error:function(){
-                        alert('注册失败，请检查该电话号码是否被注册');
-                    }
-                })
-
-                return false;
-            })
-        })
-    })
-</script>
 </body>
 </html>
