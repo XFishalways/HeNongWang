@@ -69,7 +69,7 @@ public class FarmerGoodsController {
 
     }
 
-    @RequestMapping(value = "/farmer/farmerGoods/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/farmer/farmerGoods/delete/{goodsId}", method = RequestMethod.GET)
     @ResponseBody
     public void deleteOneGoods(@RequestParam("goodsId") String goodsId) throws SQLException {
 
@@ -114,8 +114,10 @@ public class FarmerGoodsController {
         Double goodsPrice = Double.parseDouble(goodsprice);
         Timestamp goodsTime = Timestamp.valueOf(goodstime);
         System.out.println(goodsTime);
-        goodsService.insert(goodsName, goodsPrice, goodsTime, goodsPlace,farmerId);
-
+        int result =goodsService.insert(goodsName, goodsPrice, goodsTime, goodsPlace,farmerId);
+        if(result==0){
+            return null;
+        }
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }

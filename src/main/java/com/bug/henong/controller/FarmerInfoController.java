@@ -60,10 +60,12 @@ public class FarmerInfoController {
         return mapFactory.getStringObjectMap(session);
     }
     @PostMapping("/farmer/register")
-    public String register(@RequestParam("userId") String farmerId,@RequestParam("farmerName") String farmerName,
-                           @RequestParam("password")String password ,@RequestParam("farmerAge") String farmerage, HttpSession session  ) throws SQLException {
+    @ResponseBody
+    public String register(@RequestParam("farmerId") String farmerId,@RequestParam("farmerName") String farmerName,
+                           @RequestParam("password")String password ,@RequestParam("farmerAge") String farmerage,
+                           @RequestParam("farmerPlace")String farmerPlace, HttpSession session  ) throws SQLException {
         int farmerAge = Integer.parseInt(farmerage);
-        Boolean result = farmerService.register(farmerId, farmerName, password,farmerAge);
+        Boolean result = farmerService.register(farmerId, farmerName, password,farmerAge,farmerPlace);
         if(result==false){
             session.setAttribute("errorMsg", "id已被占用");
             return null;

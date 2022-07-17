@@ -97,6 +97,17 @@ public class BuyerUserDao {
         return  buyerUser;
     }
 
+    /**更新姓名*/
+    public int updateUserName(String id, String userName) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("USER_NAME",userName),
+                Entity.create("BUYER_USER").set("USER_ID",id)
+        );
+
+        return rw;
+    }
+
     /**更新昵称*/
     public int updateNickName(String id, String nickName) throws SQLException {
 
@@ -208,7 +219,6 @@ public class BuyerUserDao {
         }
         return null;
     }
-
     /**
      *通过用户ID查找
      */
