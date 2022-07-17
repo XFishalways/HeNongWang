@@ -28,6 +28,7 @@ public class LoginController {
     public String login(@RequestParam("userId") String userId,
                         @RequestParam("password") String password,
                         @RequestParam("type") String type,
+                        @RequestParam("check") String check,
                         HttpSession session) throws SQLException {
 
         if (userId==null || password==null) {
@@ -39,7 +40,8 @@ public class LoginController {
 
         if(loginService.login(userId,password,type)){
 
-            session.setAttribute("loginUserId",userId );
+            session.setAttribute("check", check);
+            session.setAttribute("userId",userId );
             return mapFactory.getStringObjectMap(session);
         }
         return null ;

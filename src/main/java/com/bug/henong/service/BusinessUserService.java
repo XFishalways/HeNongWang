@@ -132,7 +132,7 @@ public class BusinessUserService {
     /**修改信息
      * @return  0: 无此用户ID 1：修改成功 2：密码不符
      * */
-    public int updateInfo(String userId, String nickName, String userIntro, String avatar, String phone, String originalUserPass, String newUserPass, String passSalt, String userStatus) throws SQLException{
+    public int updateInfo(String userId, String nickName, String userIntro, String phone, String originalUserPass, String newUserPass, String passSalt, String userStatus) throws SQLException{
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
         if (businessUser == null) {
@@ -144,11 +144,8 @@ public class BusinessUserService {
         if (!businessUser.getNickName().equals(nickName)){
             businessUserDao.updateNickName(userId, nickName);
         }
-        if (!businessUser.getUserIntro().equals(userIntro)){
+        if (!businessUser.getUserIntro().equals(userIntro)) {
             businessUserDao.updateUserIntro(userId, userIntro);
-        }
-        if (!businessUser.getAvatar().equals(avatar)){
-            businessUserDao.updateAvatar(userId, avatar);
         }
         if (!businessUser.getPhone().equals(phone)){
             businessUserDao.updatePhone(userId, phone);

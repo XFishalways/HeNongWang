@@ -211,11 +211,10 @@ public class SaleProductService {
 
         return false;
     }
-    public Boolean updateInfo(SaleProduct saleProduct, String saleProductTitle, String saleProductIntro, String saleProductContent, Timestamp saleProductStartTime, Timestamp saleProductEndTime, String saleProductRange, String saleProductType, String saleProductStatus) throws SQLException{
+    public Boolean updateInfo(String productId, String saleProductTitle, String saleProductIntro, String saleProductContent, Timestamp saleProductStartTime, Timestamp saleProductEndTime, String saleProductRange, String saleProductType, String saleProductStatus) throws SQLException{
 
+        SaleProduct saleProduct = saleProductDao.findOneProduct(productId);
         //当前用户非空才可以进行更改
-        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
-        String productId = snowflake.nextIdStr();
 
         if (saleProduct != null) {
             if (!saleProduct.getSaleProductTitle().equals(saleProductTitle)) {

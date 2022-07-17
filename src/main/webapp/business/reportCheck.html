@@ -66,7 +66,7 @@
 			      //do 
 				  
 				  layer.open({
-					type:2,
+					type:1,
 					area:['360px','500px'],
 					title:'商品信息',
 					content:'<div id="goodsName"></div><div id="goodsDate"></div><div id="goodsPlace"></div>'
@@ -88,20 +88,68 @@
 				  })
 			    } else if(layEvent === 'del'){ //删除
 					layer.confirm('真的删除行么', function(index){
-					var id = obj.data.goodsId;
+					var id = obj.data.reportId;
 			        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
 			        layer.close(index);
 			        //向服务端发送删除指令
 
 					$.ajax({
-						url:"farmerGoods/delete/" + id,
+						url:"buyrecord/deny",
+						type:'POST',
+						data:{
+							recordId:id
+						},
 						success:function(res){
 							alert('success');
 						}
 					})
 			      });
-			    } else if(layEvent === 'pass'){ //编辑
-			      //do something
+			    } else if(layEvent === 'pass'){ //通过
+				  	
+			      	layer.open({
+					type: 1,//1 dom或文本，2 iframe,3 加载层,4 tips
+					shadeClose:true,
+					content: '<div class="layui-inline" id="openGoodsInfo"><input placeholder="请选择地址ID" class="layui-input"></div>'
+					,success: function(layero){
+						 $.ajax({
+							url:'buyrecord/getAddressId?userId=' + getCookie('userId'),
+							success:function(data){
+								//成功后删除该行
+								var id = obj.data.reportId;
+								obj.del();
+
+								//请求数据成功
+								var myData = [];
+								var index = 0;
+								for (key in data) {
+									myData[index] = {title:data[key],id:index};
+									index += 1;
+								}
+
+								//渲染下拉菜单
+								layui.use(['dropdown'], function(args){
+								  var dropdown = layui.dropdown;
+								  dropdown.render({
+									elem:'#openGoodsInfo',
+									data:myData,
+									click:function(select){
+										$.ajax({
+											url:'buyrecord/confirm',
+											type:'POST',
+											data:{
+												recordId:id,
+												addressId:select.title
+											}
+										})
+									}
+								  })
+								}); 
+							}
+						 })
+					 }
+				  });
+
+
 			      
 			      //同步更新缓存对应的值
 			      obj.update({
