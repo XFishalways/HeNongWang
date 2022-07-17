@@ -6,16 +6,21 @@ import com.bug.henong.dao.BuyerAddressDao;
 import com.bug.henong.entity.BusinessAddress;
 import com.bug.henong.entity.BuyerAddress;
 import com.bug.henong.entity.Farmer;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service("BuyerAddressService")
 public class BuyerAddressService {
     private BuyerAddressDao buyerAddressDao =new BuyerAddressDao();
 
     /**得到地址信息*/
-    public BuyerAddress getBuyerAddressDetailById(String addressId) throws SQLException {
+    public List<BuyerAddress> getBuyerAddressDetailById(String userId) throws SQLException {
+        return buyerAddressDao.findAll(userId);
+    }
+    public BuyerAddress findOneBuyerAddress(String addressId) throws SQLException {
         return buyerAddressDao.findOneAddress(addressId);
     }
 
