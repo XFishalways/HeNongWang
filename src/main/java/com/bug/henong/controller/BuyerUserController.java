@@ -43,15 +43,13 @@ public class BuyerUserController {
     public String updateInfo(@RequestParam("userId") String userId,
                              @RequestParam("nickName") String nickName,
                              @RequestParam("userIntro") String userIntro,
-                             @RequestParam("avatar") String avatar,
                              @RequestParam("phone") String phone,
                              @RequestParam("userStatus") String userStatus,
                              @RequestParam("originalPass") String originalPass,
                              @RequestParam("newPass") String newPass,
                              HttpSession session)throws SQLException{
 
-        int result = buyerUserService.updateInfo(userId,nickName, userIntro, avatar,
-                 phone,  userStatus, originalPass, newPass);
+        int result = buyerUserService.updateInfo(userId, nickName, userIntro, phone, userStatus, originalPass, newPass);
 
         if (result==0) {
             session.setAttribute("errorMsg", "查找不到用户id");
