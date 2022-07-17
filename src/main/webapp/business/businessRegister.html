@@ -131,7 +131,7 @@
                                 </div>
                                 <div style="text-align: center;margin-top: 50px;">
                                     <button class="layui-btn next">再次注册</button>
-                                    <button class="layui-btn layui-btn-primary">立刻登录</button>
+                                    <button id="to-login" class="layui-btn layui-btn-primary">立刻登录</button>
                                 </div>
                             </div>
                         </div>
@@ -197,12 +197,12 @@
         form.on('submit(registerStep3)', function (data) {
             $.ajax({
                 type:"POST",
-                url:'/register',
+                url:'register',
                 data:{
                     userName:$('#input-name').val(),
                     nickName:$('#input-nickname').val(),
                     userId:$('#input-userId').val(),
-                    usePass:$('#password').val(),
+                    userPass:$('#input-password').val(),
                     phone:$('#input-phone').val(),
                 },
                 dataType:'json',
@@ -219,6 +219,10 @@
 
             return false;
         });
+
+        $('#to-login').click(function(){
+            window.location.href = '../login.html';
+        })
 
         $('.pre').click(function () {
             step.pre('#stepForm');

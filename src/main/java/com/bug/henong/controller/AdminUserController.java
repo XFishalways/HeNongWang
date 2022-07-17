@@ -2,57 +2,53 @@ package com.bug.henong.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
-import com.bug.henong.entity.BusinessAddress;
+import com.bug.henong.entity.Admin;
 import com.bug.henong.entity.BuyerUser;
-import com.bug.henong.service.BuyerUserService;
+import com.bug.henong.service.AdminUserService;
 import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
-public class BuyerUserController {
-
-    private BuyerUserService buyerUserService = new BuyerUserService();
+public class AdminUserController {
+    private AdminUserService adminUserService = new AdminUserService();
 
     /**
-     * 查询买家信息
+     * 查询管理员信息
      */
-    @GetMapping("/buyer/findAllUser")
-    public String findAllUser(@RequestParam("userId") String userId,
+    @GetMapping("/admin/findAdmin")
+    public String findOneAdmin(@RequestParam("userId") String userId,
                               HttpSession session) throws SQLException {
         String json;
 
-        List<BuyerUser> buyerUsers = buyerUserService.getUserDetailById(userId);
+        List<Admin> admins = adminUserService.getAdminDetailById(userId);
 
-        if(buyerUsers == null){
-            session.setAttribute("errorMsg", "查找不到卖家地址id");
-            return JSONUtil.toJsonStr(buyerUsers);
+        if(admins == null){
+            session.setAttribute("errorMsg", "查找不到管理员地址id");
+            return JSONUtil.toJsonStr(admins);
         }
 
-        json = JSON.toJSONString(buyerUsers);
+        json = JSON.toJSONString(admins);
         return json;
     }
 
     /**
-     *更新买家信息
+     *更新管理员信息
      */
-    @RequestMapping(value = "/buyer/updateUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/update", method = RequestMethod.POST)
     @ResponseBody
-    public String updateInfo(@RequestParam("userId") String userId,
-                             @RequestParam("nickName") String nickName,
-                             @RequestParam("userIntro") String userIntro,
+    public String updateInfo(@RequestParam("adminId") String adminId,
+                             @RequestParam("adminName") String adminName,
                              @RequestParam("phone") String phone,
-                             @RequestParam("userStatus") String userStatus,
                              @RequestParam("originalPass") String originalPass,
                              @RequestParam("newPass") String newPass,
                              HttpSession session)throws SQLException{
 
-        int result = buyerUserService.updateInfo(userId, nickName, userIntro, phone, userStatus, originalPass, newPass);
+        int result = adminUserService.updateInfo(adminId, adminName, phone, originalPass, newPass);
 
         if (result == 0 ) {
             session.setAttribute("errorMsg", "查找不到用户id");
@@ -71,15 +67,13 @@ public class BuyerUserController {
     /**
      * 注册买家信息
      */
-    @PostMapping("/buyer/register")
-    @ResponseBody
-    public String register(@RequestParam("userId") String userId,
-                           @RequestParam("userName") String userName,
-                           @RequestParam("nickName") String nickName,
+    @PostMapping("/admin/register")
+    public String register(@RequestParam("adminId") String adminId,
+                           @RequestParam("adminName") String adminName,
                            @RequestParam("phone") String phone,
-                           @RequestParam("userPass") String userPass,
+                           @RequestParam("adminPass") String adminPass,
                            HttpSession session) throws SQLException{
-        Boolean result = buyerUserService.register(userId, userName, nickName, phone, userPass); if(result==false){
+        Boolean result = adminUserService.register(adminId, adminName, phone, adminPass); if(result==false){
             session.setAttribute("errorMsg", "id已被占用");
             return null;
         }else{

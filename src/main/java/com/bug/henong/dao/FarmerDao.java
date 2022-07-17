@@ -55,6 +55,41 @@ public class FarmerDao {
 
         return farmers;
     }
+   /**通过商家id查找农户*/
+    public List<Farmer> findFarmersByBusinessId(String businessId) throws SQLException {
+
+
+
+        List<Farmer> farmers = new ArrayList<Farmer>();
+        List<Entity> entities= Db.use().findAll(
+                Entity.create("FARMER").set("BUSINESS_ID",businessId)
+        );
+        if(entities.isEmpty()){
+            return null;
+        }
+        for(Entity e : entities){
+            String farmerStr = JSONUtil.toJsonStr(e);
+            Farmer farmer = JSONUtil.toBean(farmerStr,Farmer.class);
+            farmers.add(farmer);
+        }
+
+        return farmers;
+    }
+    /**通过名字商户id查找*/
+    public List<Farmer> findFarmersByNameAndBusinessId(String businessId,String name) throws SQLException {
+        List<Farmer> farmers = new ArrayList<Farmer>();
+        List<Entity> entities = Db.use().query("SELECT * FROM farmer  WHERE BUSINESS_ID = ? AND FARMER_NAME LIKE ? ",businessId,"%"+name+"%");
+        if(entities.isEmpty()){
+            return null;
+        }
+        for(Entity e : entities){
+            String farmerStr = JSONUtil.toJsonStr(e);
+            Farmer farmer = JSONUtil.toBean(farmerStr,Farmer.class);
+            farmers.add(farmer);
+        }
+
+        return farmers;
+    }
 
     /**通过id查找某一行数据*/
     public Farmer findOneFarmer(String id) throws SQLException {

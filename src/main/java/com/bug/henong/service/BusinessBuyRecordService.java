@@ -1,9 +1,6 @@
 package com.bug.henong.service;
 
-import com.bug.henong.dao.BusinessAddressDao;
-import com.bug.henong.dao.BusinessBuyrecordDao;
-import com.bug.henong.dao.GoodsDao;
-import com.bug.henong.dao.ProductExamineDao;
+import com.bug.henong.dao.*;
 import com.bug.henong.entity.BusinessAddress;
 import com.bug.henong.entity.BusinessBuyrecord;
 import com.bug.henong.entity.Farmer;
@@ -104,6 +101,26 @@ public class BusinessBuyRecordService {
             return null;
         }else{
             return businessBuyrecords;
+        }
+    }
+    /**查找商家所有所属农户*/
+    public List<Farmer> findFarmers(String userId) throws SQLException {
+        FarmerDao farmerDao = new FarmerDao();
+        List<Farmer> farmers = farmerDao.findFarmersByBusinessId(userId);
+        if(farmers.isEmpty()){
+            return null;
+        }else {
+            return farmers;
+        }
+    }
+    /**通过名字查找农户*/
+    public List<Farmer> findFarmerByName(String userId,String name) throws SQLException {
+        FarmerDao farmerDao = new FarmerDao();
+        List<Farmer>farmers = farmerDao.findFarmersByNameAndBusinessId(userId,name);
+        if(farmers.isEmpty()){
+            return null;
+        }else {
+            return farmers;
         }
     }
 }

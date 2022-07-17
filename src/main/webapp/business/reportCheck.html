@@ -70,23 +70,26 @@
 					type:1,
 					area:['360px','500px'],
 					title:'商品信息',
-					content:'<div id="goodsName"></div><div id="goodsDate"></div><div id="goodsPlace"></div>'
+					content:'<div id="goodsName"></div><div id="goodsDate"></div><div id="goodsPlace"></div>',
 
+					  success:function (){
+						  $.ajax({
+							  url:'../farmer/farmerGoods/findOne?goodsId='+id,
+							  dataType:'json',
+							  success:function(res){
+								  $('#goodsName').html(res.goodsName);
+								  $('#goodsDate').html(res.goodsDate);
+								  $('#goodsPlace').html(res.goodsPlace);
+							  },
+
+							  error:function(){
+								  alert('error!');
+							  }
+						  })
+					  }
 				  })
 
-				  $.ajax({
-					url:'../farmer/farmerGoods/findOne?goodsId='+id,
-					dataType:'json',
-					success:function(res){
-						$('#goodsName').html(res.goodsName);
-						$('#goodsDate').html(res.goodsDate);
-						$('#goodsPlace').html(res.goodsPlace);
-					},
 
-					error:function(){
-						alert('error!');
-					}
-				  })
 			    } else if(layEvent === 'del'){ //删除
 					layer.confirm('真的删除行么', function(index){
 					var id = obj.data.reportId;
@@ -117,13 +120,14 @@
 							success:function(data){
 								//成功后删除该行
 								var id = obj.data.reportId;
+								var jsonData = JSON.parse(data);
 								obj.del();
 
 								//请求数据成功
 								var myData = [];
 								var index = 0;
 								for (key in data) {
-									myData[index] = {title:data[key],id:index};
+									myData[index] = {title:jsonData[key],id:index};
 									index += 1;
 								}
 

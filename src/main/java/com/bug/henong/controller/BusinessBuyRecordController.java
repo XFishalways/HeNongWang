@@ -2,6 +2,7 @@ package com.bug.henong.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.bug.henong.entity.BusinessBuyrecord;
+import com.bug.henong.entity.Farmer;
 import com.bug.henong.service.BusinessBuyRecordService;
 import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class BusinessBuyRecordController {
     BusinessBuyRecordService businessBuyRecordService = new BusinessBuyRecordService();
 
-    @RequestMapping("/business/buyrecord/getRecordsByName")
+    @RequestMapping("/business/buyrecord/getRecordsByBusinessId")
     @ResponseBody
     public String getRecordsByBusinessId(@RequestParam("userId")String userId, HttpSession session) throws SQLException {
         List<BusinessBuyrecord>businessBuyrecords = businessBuyRecordService.getBuyRecordByByBusinessId(userId);
@@ -82,17 +83,34 @@ public class BusinessBuyRecordController {
     }
 
     /**
-     * 通过农户id查找农户
+     * 通过农户id查找所有农户
      */
-    @GetMapping("/business/buyRecord/getFarmerById")
-    public String getFarmerById(@RequestParam("farmerId") String farmerId,
+    @GetMapping("/business/farmerManage/getFarmers")
+    @ResponseBody
+    public String getFarmers(@RequestParam("userId") String userId,
                                 HttpSession session) throws SQLException{
-        List<BusinessBuyrecord> businessBuyrecords = businessBuyRecordService.findFarmerById(farmerId);
-        if(businessBuyrecords==null){
+        List<Farmer> farmers = businessBuyRecordService.findFarmers(userId);
+        if(farmers==null){
             session.setAttribute("errorMsg","无对应记录");
             return  null;
         }else{
-            String json = JSON.toJSONString(businessBuyrecords);
+            String json = JSON.toJSONString(farmers);
+            return json;
+        }
+    }
+
+    /**
+     * 查找一个农户
+     */
+    @GetMapping("/business/farmerManage/getFarmerByName")
+    @ResponseBody
+    public String getFramerByFarmerName(@RequestParam("userId")String userId,@RequestParam("farmerName")String farmerName,HttpSession session) throws SQLException {
+        List<Farmer> farmers = businessBuyRecordService.findFarmerByName(userId,farmerName);
+        if(farmers==null){
+            session.setAttribute("errorMsg","无对应记录");
+            return  null;
+        }else{
+            String json = JSON.toJSONString(farmers);
             return json;
         }
     }
