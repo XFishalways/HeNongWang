@@ -56,7 +56,7 @@ public class BusinessBuyRecordService {
 
         String goodsId = businessBuyrecord.getSkuId();
         GoodsDao goodsDao =new GoodsDao();
-        int rw =goodsDao.updatePass(goodsId,"false");
+        int rw =goodsDao.updatePass(goodsId,"refused");
         if(rw==0){
             return false;
         }
