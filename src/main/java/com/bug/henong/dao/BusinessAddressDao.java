@@ -41,7 +41,7 @@ public class BusinessAddressDao {
     /**返回所有信息*/
     public List<BusinessAddress> findAll() throws SQLException {
 
-        String sql = "SELECT * FROM BUSINESS_ADDRESS";
+
 
         List<BusinessAddress> businessAddresses = new ArrayList<BusinessAddress>();
         List<Entity> entities = Db.use().findAll("BUSINESS_ADDRESS");
@@ -71,7 +71,24 @@ public class BusinessAddressDao {
 
         return  businessAddress;
     }
+    /**通过用户Id找数据*/
+    public List<BusinessAddress> findAddressByBusinessId(String userId) throws SQLException {
+        List<BusinessAddress> businessAddresses = new ArrayList<BusinessAddress>();
+        List<Entity> entities= Db.use().findAll(
+                Entity.create("BUSINESS_ADDRESS").set("USER_ID",userId)
+        );
 
+        if(entities.isEmpty()){
+            return null;
+        }
+        for(Entity e : entities){
+            String addressStr = JSONUtil.toJsonStr(e);
+            BusinessAddress businessAddress = JSONUtil.toBean(addressStr,BusinessAddress.class);
+            businessAddresses.add(businessAddress);
+        }
+
+        return businessAddresses;
+    }
     /**更新地址名称*/
     public int updateAddressName(String id, String addressName) throws SQLException {
 
