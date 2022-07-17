@@ -1,4 +1,4 @@
-package com.bug.henong.service;
+package com.bug.henong.entity.service;
 
 import com.bug.henong.dao.BusinessUserDao;
 import com.bug.henong.entity.BusinessUser;
@@ -132,7 +132,7 @@ public class BusinessUserService {
     /**修改信息
      * @return  0: 无此用户ID 1：修改成功 2：密码不符
      * */
-    public int updateInfo(String userId, String nickName, String userIntro, String phone, String originalUserPass, String newUserPass, String passSalt, String userStatus) throws SQLException{
+    public int updateInfo(String userId, String nickName, String userIntro, String phone, String originalUserPass, String newUserPass, String userStatus) throws SQLException{
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
         if (businessUser == null) {
@@ -155,9 +155,7 @@ public class BusinessUserService {
                     businessUserDao.updateUserPass(userId, newUserPass);
                 }
         }
-        if (!businessUser.getPassSalt().equals(passSalt)){
-            businessUserDao.updatePassSalt(userId, passSalt);
-        }
+
         if (!businessUser.getUserStatus().equals(userStatus)){
             businessUserDao.updateUserStatus(userId,userStatus);
         }
