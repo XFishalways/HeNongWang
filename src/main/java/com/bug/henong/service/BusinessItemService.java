@@ -22,7 +22,7 @@ public class BusinessItemService {
         return businessItemDao.findOneItem(itemId);
     }
     /**通过名字得到商品*/
-    public List<BusinessItem> getBusinessItemsByName(String businessId,String itemName) throws SQLException {
+    public List<BusinessItem> getBusinessItemsByName(String itemName) throws SQLException {
         return businessItemDao.findBusinessItemByTitle(itemName);
     }
     /**通过名字*/

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service("BuyerUserService")
 public class BuyerUserService {
@@ -16,8 +17,8 @@ public class BuyerUserService {
     /**
      * 得到买家信息
      */
-    public BuyerUser getUserDetailById(String UserId) throws SQLException {
-        return buyerUserDao.findOneBuyer(UserId);
+    public List<BuyerUser> getUserDetailById(String UserId) throws SQLException {
+        return buyerUserDao.findAll(UserId);
     }
 
     /**

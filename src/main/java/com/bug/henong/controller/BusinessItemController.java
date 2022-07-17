@@ -20,6 +20,17 @@ import java.util.Map;
 public class BusinessItemController {
     BusinessItemService businessItemService =new BusinessItemService();
 
+    @RequestMapping("/business/businessItem/getBusinessItemsByName")
+    @ResponseBody
+    public String getItems(@RequestParam("skuName")String skuName ,HttpSession session) throws SQLException {
+        List<BusinessItem> businessItems = businessItemService.getBusinessItemsByName(skuName);
+        if(businessItems==null){
+            session.setAttribute("errorMsg","未找到");
+            return JSON.toJSONString(businessItems);
+        }else{
+            return JSON.toJSONString(businessItems);
+        }
+    }
     @RequestMapping("/business/businessItem/getBusinessItems")
     @ResponseBody
     public String getBusinessItems(@RequestParam("businessId")String businessId, HttpSession session) throws SQLException {
