@@ -4,6 +4,8 @@ import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BusinessBuyrecord;
+import com.bug.henong.entity.Goods;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +73,30 @@ public class BusinessBuyrecordDao {
         return  businessBuyrecord;
     }
 
+    /**通过卖家ID找数据*/
+    public List<BusinessBuyrecord> findRecordsByBusinessId(String businessId) throws SQLException {
+        List<BusinessBuyrecord> businessBuyrecords = new ArrayList<BusinessBuyrecord>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_BUYRECORD Where USER_ID = ?", businessId);
+
+        for (Entity e : entities) {
+            String recordStr = JSONUtil.toJsonStr(e);
+            BusinessBuyrecord businessBuyrecord = JSONUtil.toBean(recordStr,BusinessBuyrecord.class);
+            businessBuyrecords.add(businessBuyrecord);
+        }
+        return businessBuyrecords;
+    }
+    /**通过卖家ID和农户名字查找数据*/
+    public List<BusinessBuyrecord> findRecordsByBusinessIdAndFarmerName(String businessId,String farmerName) throws SQLException {
+        List<BusinessBuyrecord> businessBuyrecords = new ArrayList<BusinessBuyrecord>();
+        List<Entity> entities = Db.use().query("SELECT * FROM business_buyrecord JOIN farmer ON business_buyrecord.FARMER_ID = farmer.FARMER_ID WHERE business_id = ？ AND farmer.FARMER_NAME LIKE ？", businessId,"%"+farmerName+"%");
+
+        for (Entity e : entities) {
+            String recordStr = JSONUtil.toJsonStr(e);
+            BusinessBuyrecord businessBuyrecord = JSONUtil.toBean(recordStr,BusinessBuyrecord.class);
+            businessBuyrecords.add(businessBuyrecord);
+        }
+        return businessBuyrecords;
+    }
     /**
      *修改账单状态
      */
@@ -78,6 +104,17 @@ public class BusinessBuyrecordDao {
 
         int rw = Db.use().update(
                 Entity.create().set("SKU_STATUS",status),
+                Entity.create("BUSINESS_BUYRECORD").set("RECORD_ID",id)
+        );
+
+        return rw;
+    }
+    /**
+     * 修改地址ID
+     */
+    public int updateAddressId(String id, String addressId) throws SQLException {
+        int rw = Db.use().update(
+                Entity.create().set("SKU_STATUS",addressId),
                 Entity.create("BUSINESS_BUYRECORD").set("RECORD_ID",id)
         );
 
