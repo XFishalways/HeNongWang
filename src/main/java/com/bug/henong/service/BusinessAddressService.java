@@ -115,7 +115,7 @@ public class BusinessAddressService {
     }
 
     public int update(String addressId, String addressName, String province, String city,
-                      String county, String street, String lastDetail, String isDefault) throws SQLException{
+                      String county, String street, String lastDetail, String isDefault, String userId) throws SQLException{
 
         BusinessAddress businessAddress = businessAddressDao.findOneAddress(addressId);
 
@@ -143,12 +143,15 @@ public class BusinessAddressService {
         if(!businessAddress.getIsDefault().equals(isDefault)){
             businessAddressDao.updateIsDefault(addressId, isDefault);
         }
+        if(!businessAddress.getUserId().equals(userId)){
+            businessAddressDao.updateIsDefault(addressId, userId);
+        }
         return 1;
 
     }
 
     public int Insert(String addressName, String province, String city, String county, String street,
-                      String lastDetail, String isDefault) throws SQLException{
+                      String lastDetail, String isDefault, String userId) throws SQLException{
 
         BusinessAddress businessAddress = new BusinessAddress();
 
@@ -164,6 +167,7 @@ public class BusinessAddressService {
         businessAddress.setStreet(street);
         businessAddress.setLastDetail(lastDetail);
         businessAddress.setIsDefault(isDefault);
+        businessAddress.setUserId(userId);
 
         return businessAddressDao.insert(businessAddress);
 
