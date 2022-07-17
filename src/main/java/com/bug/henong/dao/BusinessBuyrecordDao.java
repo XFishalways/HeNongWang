@@ -73,6 +73,21 @@ public class BusinessBuyrecordDao {
         return  businessBuyrecord;
     }
 
+    /**
+     * 通过农户id查找农户
+     */
+    public List<BusinessBuyrecord> findFarmerByFarmerId(String farmerId) throws SQLException{
+        List<BusinessBuyrecord> businessBuyrecords = new ArrayList<>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_BUYRECORD Where FARMER_ID = ?", farmerId);
+
+        for (Entity e : entities) {
+            String recordStr = JSONUtil.toJsonStr(e);
+            BusinessBuyrecord businessBuyrecord = JSONUtil.toBean(recordStr,BusinessBuyrecord.class);
+            businessBuyrecords.add(businessBuyrecord);
+        }
+        return businessBuyrecords;
+    }
+
     /**通过卖家ID找数据*/
     public List<BusinessBuyrecord> findRecordsByBusinessId(String businessId) throws SQLException {
         List<BusinessBuyrecord> businessBuyrecords = new ArrayList<BusinessBuyrecord>();

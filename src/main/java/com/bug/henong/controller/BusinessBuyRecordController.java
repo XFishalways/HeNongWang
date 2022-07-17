@@ -16,7 +16,7 @@ import java.util.Map;
 public class BusinessBuyRecordController {
     BusinessBuyRecordService businessBuyRecordService = new BusinessBuyRecordService();
 
-    @RequestMapping("business/buyrecord/getRecordsByName")
+    @RequestMapping("/business/buyrecord/getRecordsByName")
     @ResponseBody
     public String getRecordsByBusinessId(@RequestParam("userId")String userId, HttpSession session) throws SQLException {
         List<BusinessBuyrecord>businessBuyrecords = businessBuyRecordService.getBuyRecordByByBusinessId(userId);
@@ -29,7 +29,7 @@ public class BusinessBuyRecordController {
         }
     }
 
-    @PostMapping("business/buyrecord/confirm")
+    @PostMapping("/business/buyrecord/confirm")
     @ResponseBody
     public String confirm(@RequestParam("recordId")String recordId,@RequestParam("addressId")String addressId, HttpSession session) throws SQLException {
         boolean result = businessBuyRecordService.confirmRecord(recordId,addressId);
@@ -41,7 +41,7 @@ public class BusinessBuyRecordController {
             return mapFactory.getStringObjectMap(session);
         }
     }
-    @PostMapping("business/buyrecord/deny")
+    @PostMapping("/business/buyrecord/deny")
     @ResponseBody
     public String deny(@RequestParam("recordId")String recordId,HttpSession session) throws SQLException {
         boolean result = businessBuyRecordService.denyRecord(recordId);
@@ -53,7 +53,7 @@ public class BusinessBuyRecordController {
             return mapFactory.getStringObjectMap(session);
         }
     }
-    @GetMapping("business/buyrecord/getAddressId")
+    @GetMapping("/business/buyrecord/getAddressId")
     @ResponseBody
     public String getAddressId(@RequestParam("userId")String businessId,HttpSession session) throws SQLException {
         Map<String,String> addressIds = businessBuyRecordService.getAddressByBusinessId(businessId);
@@ -66,10 +66,28 @@ public class BusinessBuyRecordController {
             return json;
         }
     }
-    @GetMapping("business/buyrecord/getRecordsByFarmerName")
+    @GetMapping("/business/buyrecord/getRecordsByFarmerName")
     @ResponseBody
     public String getRecordsByFarmerName(@RequestParam("userId")String businessId,@RequestParam("farmerName")String farmerName,HttpSession session) throws SQLException {
         List<BusinessBuyrecord> businessBuyrecords = businessBuyRecordService.getBusinessBuyRecordByFarmerName(businessId,farmerName);
+        if(businessBuyrecords==null){
+            session.setAttribute("errorMsg","无对应记录");
+            return  null;
+        }else{
+            String json = JSON.toJSONString(businessBuyrecords);
+            return json;
+        }
+
+
+    }
+
+    /**
+     * 通过农户id查找农户
+     */
+    @GetMapping("/business/buyRecord/getFarmerById")
+    public String getFarmerById(@RequestParam("farmerId") String farmerId,
+                                HttpSession session) throws SQLException{
+        List<BusinessBuyrecord> businessBuyrecords = businessBuyRecordService.findFarmerById(farmerId);
         if(businessBuyrecords==null){
             session.setAttribute("errorMsg","无对应记录");
             return  null;
