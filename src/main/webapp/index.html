@@ -29,7 +29,7 @@
                             <input type="text" name="title" required  lay-verify="required" placeholder="搜索" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-form-mid layui-anim layui-anim-scaleSpring" style="padding:0!important;">
-                            <button type="submit" class="layui-btn layui-btn-normal" lay-submit lay-filter="demo1">搜索</button>
+                            <button id="search" type="submit" class="layui-btn layui-btn-normal" lay-submit lay-filter="demo1">搜索</button>
                         </div>
                     </div>
 
@@ -264,7 +264,18 @@
                 })
 
 
-            }); 
+            });
+
+            layui.use(['jquery', 'layer'], function(){
+                var $ = layui.$ //重点处
+                    ,layer = layui.layer;
+
+                //后面就跟你平时使用jQuery一样
+                $('#search').on('click',function(res){
+                    var name = $('#search-input').val();
+
+                })
+            });
            </script>
         <div class="layui-footer" >
             <!-- 底部固定区域 -->
