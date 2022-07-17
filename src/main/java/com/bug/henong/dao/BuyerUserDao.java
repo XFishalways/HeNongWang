@@ -237,4 +237,8 @@ public class BuyerUserDao {
         }
         return buyerUsers;
     }
+    /**通过id查找密码盐*/
+    public String getBuyerPassSalt(String userId) throws SQLException {
+        return findOneBuyer(userId).getPassSalt();
+    }
 }
