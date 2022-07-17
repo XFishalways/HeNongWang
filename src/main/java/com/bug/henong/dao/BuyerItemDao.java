@@ -110,6 +110,16 @@ public class BuyerItemDao {
 
         return rw;
     }
+    //更新数量
+    public int updateQuantity(String id, double quantity) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("QUANTITY",quantity),
+                Entity.create("BUYER_ITEM").set("SKU_ID",id)
+        );
+
+        return rw;
+    }
 
     public List<BuyerItem> findBuyerItemByAll(String orderId, String userId, String skuTitle) throws SQLException {
         List<BuyerItem> buyerItems = new ArrayList<BuyerItem>();
@@ -172,5 +182,6 @@ public class BuyerItemDao {
         }
         return buyerItems;
     }
+
 
 }
