@@ -59,7 +59,9 @@ public class BuyerOrderService {
     }
 
     /**确认订单*/
-    public Boolean confirmOrder(String orderId) throws SQLException {
+    public Boolean confirmOrder(String orderId,String addressId,String payMethod) throws SQLException {
+        updateAddressId(orderId,addressId);
+        updatePayMethod(orderId,payMethod);
         Boolean rs= updateStatus(orderId,"confirmed");
         if(rs==false){
             return false;
