@@ -11,6 +11,7 @@ import com.bug.henong.entity.Farmer;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service("BuyerItemService")
 public class BuyerItemService {
@@ -18,8 +19,8 @@ public class BuyerItemService {
     private BuyerItemDao buyerItemDao =new BuyerItemDao();
 
     /**得到商品信息*/
-    public BuyerItem getBuyerItemDetailById(String itemId) throws SQLException {
-        return buyerItemDao.findOneItem(itemId);
+    public List<BuyerItem> getBuyerItemDetailById(String itemId) throws SQLException {
+        return buyerItemDao.findAllItem(itemId);
     }
 
     public Boolean cartInsert (String userId, Double price, Double payablePrice, String cartStatus) throws SQLException {
