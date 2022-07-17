@@ -28,8 +28,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         HttpSession session = request.getSession();
         String checkByForm = request.getParameter("check");
-        String checkBySession = String.valueOf(session.getAttribute("userId"));
-        session.removeAttribute("userId");  //使用之后从session中删掉
+        String checkBySession = String.valueOf(session.getAttribute("check"));
+        session.removeAttribute("check");  //使用之后从session中删掉
 
         if (StringUtils.isNotBlank(checkBySession)) {
             return true;
@@ -38,11 +38,10 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         } else{
             response.setContentType("text/html;charset=utf-8");
+            response.setStatus(403);
 
             OutputStream oStream = response.getOutputStream();
             oStream.write("不要重复提交请求！返回原始页面刷新后再次尝试！！".getBytes("UTF-8"));
-
-            response.setStatus(403);
 
             return false;
         }
