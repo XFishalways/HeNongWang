@@ -75,7 +75,7 @@ public class StoreExamineDao {
     }
 
     /**更新审批结果*/
-    public int updateStoreResult(String storeResult, String id) throws SQLException {
+    public int updateStoreResult( String id, String storeResult) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("STORE_RESULT",storeResult),
@@ -85,7 +85,7 @@ public class StoreExamineDao {
         return rw;
     }
     /**更新审批批注*/
-    public int updateStoreNote(String storeNote, String id) throws SQLException {
+    public int updateStoreNote( String id, String storeNote) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("STORE_NOTES",storeNote),

@@ -35,6 +35,8 @@
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">个人信息查看</a></dd>
                         <dd><a href="javascript:;">个人信息更改</a></dd>
+                        <dd><a href="javascript:;">地址查看</a></dd>
+                        <dd><a href="javascript:;">注册新地址</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -104,6 +106,12 @@
             }else if(text=="个人信息更改") {
                 $("#main").find("#ifr").remove();
                 $("#main").append('<iframe src="businessInfoManage.html" id="ifr" style="width:100%;height:100%"></iframe>');
+            }else if(text=="地址查看") {
+                $("#main").find("#ifr").remove();
+                $("#main").append('<iframe src="addressInfo.html" id="ifr" style="width:100%;height:100%"></iframe>');
+            }else if(text=="注册新地址") {
+                $("#main").find("#ifr").remove();
+                $("#main").append('<iframe src="addressRegister.html" id="ifr" style="width:100%;height:100%"></iframe>');
             }else if(text=="展示商品") {
                 $("#main").find("#ifr").remove();
                 $("#main").append('<iframe src="displayGoods.html" id="ifr" style="width:100%;height:100%"></iframe>');
