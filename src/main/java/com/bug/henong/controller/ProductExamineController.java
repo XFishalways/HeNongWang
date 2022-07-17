@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * @author Tan
+ */
 @Controller
 public class ProductExamineController {
     ProductExamineService productExamineService = new ProductExamineService();
