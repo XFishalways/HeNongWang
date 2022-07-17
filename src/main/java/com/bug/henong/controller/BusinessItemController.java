@@ -20,6 +20,20 @@ import java.util.Map;
 public class BusinessItemController {
     BusinessItemService businessItemService =new BusinessItemService();
 
+    @RequestMapping("/business/businessItem/getBusinessItemsByName")
+    @ResponseBody
+    public String getItemsFromTo(@RequestParam("skuName")String skuName ,@RequestParam("page")String page, HttpSession session) throws SQLException {
+        int currentPage =Integer.getInteger(page);
+        //前端规定为一页10个
+        int size = 10;
+        List<BusinessItem> businessItems = businessItemService.getBusinessItemsByName(skuName,currentPage,size);
+        if(businessItems==null){
+            session.setAttribute("errorMsg","未找到");
+            return JSON.toJSONString(businessItems);
+        }else{
+            return JSON.toJSONString(businessItems);
+        }
+    }
     @RequestMapping("/business/businessItem/getBusinessItems")
     @ResponseBody
     public String getBusinessItems(@RequestParam("businessId")String businessId, HttpSession session) throws SQLException {

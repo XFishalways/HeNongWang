@@ -22,8 +22,8 @@ public class BusinessItemService {
         return businessItemDao.findOneItem(itemId);
     }
     /**通过名字得到商品*/
-    public List<BusinessItem> getBusinessItemsByName(String businessId,String itemName) throws SQLException {
-        return businessItemDao.findBusinessItemByTitle(itemName);
+    public List<BusinessItem> getBusinessItemsByName(String itemName,int currentPage,int size) throws SQLException {
+        return businessItemDao.findBusinessItemByTitle(itemName,currentPage,size);
     }
     /**通过名字*/
     public List<BusinessItem> getBusinessItemsByNameAndBusinessId(String businessId,String itemName) throws SQLException {
