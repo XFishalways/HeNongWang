@@ -90,9 +90,7 @@ public class SaleProductController {
         Timestamp saleProductStartTime = Timestamp.valueOf(saleProductstartTime);
         Timestamp saleProductEndTime = Timestamp.valueOf(saleProductendTime);
 
-        SaleProduct saleProduct = saleProductService.getSaleProductId(saleProductId);
-
-        saleProductService.updateInfo(saleProduct, saleProductTitle, saleProductIntro, saleProductContent, saleProductStartTime, saleProductEndTime, saleProductRange, saleProductType, saleProductStatus);
+        saleProductService.updateInfo(saleProductId, saleProductTitle, saleProductIntro, saleProductContent, saleProductStartTime, saleProductEndTime, saleProductRange, saleProductType, saleProductStatus);
 
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
