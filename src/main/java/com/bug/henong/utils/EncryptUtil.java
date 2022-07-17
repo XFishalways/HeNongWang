@@ -7,7 +7,7 @@ public class EncryptUtil {
     private Digester digester = DigestUtil.digester("sm3");
 
     //返回Hash值
-    public String getSM3DigestHex(String password, String salt) {
+    public String getDigestHex(String password, String salt) {
 
         String digestHex_1 = digester.digestHex(password);
 
