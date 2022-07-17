@@ -57,10 +57,10 @@
         </div>
 
         <script>
-            layui.use(['jquery','form'], function(args){
+            layui.use(['jquery','upload','form'], function(args){
               var $ = layui.$;
               var form = layui.form;
-
+              var upload = layui.upload;
               form.render();
 
               form.verify({
@@ -122,7 +122,17 @@
                   }
                 })  
               })
-
+                //执行实例
+                var uploadInst = upload.render({
+                    elem: 'uploadImg' //绑定元素
+                    ,url: 'upload' //上传接口
+                    ,done: function(res){
+                        //上传完毕回调
+                    }
+                    ,error: function(){
+                        //请求异常回调
+                    }
+                });
             }); 
             
         </script>
