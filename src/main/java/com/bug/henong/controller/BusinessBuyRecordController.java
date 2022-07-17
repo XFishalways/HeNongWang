@@ -4,12 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.bug.henong.entity.BusinessBuyrecord;
 import com.bug.henong.service.BusinessBuyRecordService;
 import com.bug.henong.utils.MapFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
+@Controller
 public class BusinessBuyRecordController {
     BusinessBuyRecordService businessBuyRecordService = new BusinessBuyRecordService();
 
@@ -53,7 +56,7 @@ public class BusinessBuyRecordController {
     @GetMapping("business/buyrecord/getAddressId")
     @ResponseBody
     public String getAddressId(@RequestParam("userId")String businessId,HttpSession session) throws SQLException {
-        List<String> addressIds = businessBuyRecordService.getAddressByBusinessId(businessId);
+        Map<String,String> addressIds = businessBuyRecordService.getAddressByBusinessId(businessId);
 
         if(addressIds==null){
             session.setAttribute("errorMsg","请求失败");

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("BusinessBuyerRecordService")
 public class BusinessBuyRecordService {
@@ -67,18 +69,20 @@ public class BusinessBuyRecordService {
     }
 
     /**得到当前用户所有地址Id*/
-    public List<String> getAddressByBusinessId(String businessId) throws SQLException {
+    public Map<String,String> getAddressByBusinessId(String businessId) throws SQLException {
         BusinessAddressDao businessAddressDao =new BusinessAddressDao();
         List<BusinessAddress>businessAddresses=businessAddressDao.findAddressByBusinessId(businessId);
         if(businessAddresses.isEmpty()){
             return null;
         }
+        int i=1;
+        Map<String ,String>map = new HashMap<>();
         List<String> businessAddressIds=new ArrayList<String>();
         for(BusinessAddress businessAddress :businessAddresses){
             String id =businessAddress.getAddressId();
-            businessAddressIds.add(id);
+            map.put("address"+i,id);
         }
-        return businessAddressIds;
+        return map;
     }
     /**通过农户名字查找记录*/
     public List<BusinessBuyrecord> getBusinessBuyRecordByFarmerName(String businessId,String farmerName) throws SQLException {
