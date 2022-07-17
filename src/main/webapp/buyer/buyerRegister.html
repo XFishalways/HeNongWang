@@ -131,7 +131,7 @@
                                 </div>
                                 <div style="text-align: center;margin-top: 50px;">
                                     <button class="layui-btn next">再次注册</button>
-                                    <button href='../login.html' class="layui-btn layui-btn-primary">立刻登录</button>
+                                    <button id="to-login" class="layui-btn layui-btn-primary">立刻登录</button>
                                 </div>
                             </div>
                         </div>
@@ -219,6 +219,10 @@
 
             return false;
         });
+
+        $('#to-login').click(function(){
+            window.location.href = '../login.html';
+        })
 
         $('.pre').click(function () {
             step.pre('#stepForm');
