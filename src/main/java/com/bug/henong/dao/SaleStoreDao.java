@@ -36,7 +36,7 @@ public class SaleStoreDao {
     public int delete(String id) throws SQLException {
 
         int rw=Db.use().del(
-                Entity.create("SALE_STORE").set("STOREID",id)
+                Entity.create("SALE_STORE").set("STORE_ID",id)
         );
         return rw;
 

@@ -111,11 +111,14 @@ public class BusinessAddressController {
      * 删除卖家地址
      */
     @GetMapping("/business/address/delete")
-    public void deleteOneAddress(@RequestParam("addressId") String addressId) throws SQLException{
+    public String deleteOneAddress(@RequestParam("addressId") String addressId,
+                                 HttpSession session) throws SQLException{
 
         BusinessAddress businessAddress = businessAddressService.findOneAddress(addressId);
 
         businessAddressService.deleteAddress(addressId);
+        MapFactory mapFactory=new MapFactory();
+        return mapFactory.getStringObjectMap(session);
 
     }
 

@@ -115,11 +115,14 @@ public class BuyerAddressController {
      * 删除卖家地址
      */
     @GetMapping("/buyer/address/delete")
-    public void deleteOneAddress(@RequestParam("addressId") String addressId) throws SQLException{
+    public String deleteOneAddress(@RequestParam("addressId") String addressId,
+                                 HttpSession session) throws SQLException{
 
         BuyerAddress buyerAddress = buyerAddressService.findOneBuyerAddress(addressId);
 
         buyerAddressService.deleteAddress(addressId);
+        MapFactory mapFactory=new MapFactory();
+        return mapFactory.getStringObjectMap(session);
 
     }
 

@@ -69,11 +69,14 @@ public class AdminSaleStoreController {
      * 删除商店活动
      */
     @GetMapping("/admin/saleStore/delete")
-    public void deleteOneSale(@RequestParam("saleStoreId") String saleStoreId) throws SQLException{
+    public String deleteOneSale(@RequestParam("saleStoreId") String saleStoreId,
+                                HttpSession session) throws SQLException{
 
         SaleStore saleStore = saleStoreService.getSaleStoreId(saleStoreId);
 
         saleStoreService.deleteSale(saleStoreId);
+        MapFactory mapFactory=new MapFactory();
+        return mapFactory.getStringObjectMap(session);
     }
 
     /**
