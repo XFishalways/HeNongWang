@@ -24,6 +24,7 @@
 	</div>
 </script>
 
+<script src="../js/myCookie.js"></script>
 <script type="text/javascript">
 
 
@@ -49,18 +50,28 @@
 				,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 				,cols: [[
 					{type:'checkbox',fixed: 'left'},
-					{field:'goodsId', width:180, title: '商品ID', sort: true}
-					,{field:'goodsName', width:180, title: '商品名',sort: true}
-					,{field:'goodsPrice', width:100, title: '商品价格',sort:true}
-					,{field:'goodsFarmer', width:180, title: '商品所属农户'}
-					,{field:'goodsData', width:180, title: '商品采摘时间', sort:true}
-					,{field:'goodsAddr', width:280, title: '商品采摘地址'}
+					{field:'skuId', width:180, title: '商品ID', sort: true}
+					,{field:'skuTitle', width:180, title: '商品名',sort: true}
+					,{field:'price', width:100, title: '商品原价',sort:true}
+					,{field:'salPrice', width:100, title: '商品售价',sort:true}
+					,{field:'skuIntro', width:180, title: '商品描述',}
+					,{field:'leaveComment', width:280, title: '留言备注',edit:'text'}
 					,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 				]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("farmerGoods/getAll");
+					alert('table init error')
 				}
 			});
+
+			table.on('edit(test)', function(obj){
+    			var field = obj.field //得到字段
+    			,value = obj.value //得到修改后的值
+    			,data = obj.data; //得到所在行所有键值
+ 
+    			var update = {};
+    			update[field] = value;
+    			obj.update(update);
+  			});
 
 			table.on('toolbar(test)',function(obj){
 				var id = obj.config.id;
@@ -159,19 +170,7 @@
 		});
 	}
 
-	tableInit("farmerGoods/getAll");
-
-	//第一种：主动加载jquery模块
-	layui.use(['jquery', 'layer'], function(){
-		var $ = layui.$ //重点处
-				,layer = layui.layer;
-
-		//后面就跟你平时使用jQuery一样
-		$('#findById').on('click',function(res){
-			var id = $(this).parent().parent().find(".layui-input").val();
-			tableInit("FindGOODS?USER_ID=" +id +"&goodsPatt=");
-		})
-	});
+	tableInit("farmerGoods/getBuyerCart?userId=" + getCookie('userId'));
 
 </script>
 <script type="text/html" id="barDemo">
