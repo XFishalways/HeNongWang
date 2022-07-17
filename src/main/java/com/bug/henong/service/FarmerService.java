@@ -1,7 +1,9 @@
 package com.bug.henong.service;
 
+import cn.hutool.core.util.RandomUtil;
 import com.bug.henong.dao.FarmerDao;
 import com.bug.henong.entity.Farmer;
+import com.bug.henong.utils.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -209,13 +211,16 @@ public class FarmerService {
             farmer = new Farmer();
             farmer.setFarmerId(userId);
             farmer.setFarmerName((farmerName));
-            farmer.setUserPass(password);
+            String  passSalt= RandomUtil.randomString(10);
+            String encryptPassword = EncryptUtil.getDigestHex(password,passSalt);
+
+            farmer.setUserPass(encryptPassword);
+            farmer.setPassSalt(passSalt);
             farmer.setFarmerAge(farmerAge);
             farmer.setFarmerPlace(farmerPlace);
             return farmerDao.insert(farmer)>0;
         }
     }
 }
-
 
 

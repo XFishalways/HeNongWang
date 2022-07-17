@@ -1,8 +1,10 @@
 package com.bug.henong.service;
 
+import cn.hutool.core.util.RandomUtil;
 import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.entity.Farmer;
+import com.bug.henong.utils.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -207,7 +209,9 @@ public class BuyerUserService {
             buyerUser.setUserName(userName);
             buyerUser.setNickName(nickName);
             buyerUser.setPhone(phone);
-            buyerUser.setUserPass(userPass);
+            String  passSalt= RandomUtil.randomString(10);
+            String encryptPassword = EncryptUtil.getDigestHex(userPass,passSalt);
+            buyerUser.setUserPass(encryptPassword);
             return buyerUserDao.insert(buyerUser)>0;
         }
     }
