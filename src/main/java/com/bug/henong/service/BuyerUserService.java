@@ -187,8 +187,9 @@ public class BuyerUserService {
         }
         if (!originalPass.equals(newPass)) {
             if (newPass != null) {
-                buyerUserDao.updatePassSalt(userId, newPass);
-                //修改密码盐
+                String passSalt= RandomUtil.randomString(10);
+                String encyptPassWord = EncryptUtil.getDigestHex(newPass,passSalt);
+                buyerUserDao.updateUserPass(userId, encyptPassWord);
 
             }
         }

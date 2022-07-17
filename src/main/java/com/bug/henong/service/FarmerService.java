@@ -193,7 +193,9 @@ public class FarmerService {
         }
         if (!originalUserPass.equals(newUserPass)) {
             if (newUserPass != null) {
-                updatePassword((String) userId, newUserPass);
+                String passSalt= RandomUtil.randomString(10);
+                String encyptPassWord = EncryptUtil.getDigestHex(newUserPass,passSalt);
+                updatePassword(userId, encyptPassWord);
                 //修改密码盐
 
             }

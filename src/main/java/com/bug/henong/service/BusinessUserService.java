@@ -150,7 +150,9 @@ public class BusinessUserService {
         }
         if (!originalUserPass.equals(newUserPass)) {
             if (newUserPass != null) {
-                businessUserDao.updateUserPass(userId, newUserPass);
+                String passSalt= RandomUtil.randomString(10);
+                String encyptPassWord = EncryptUtil.getDigestHex(newUserPass,passSalt);
+                businessUserDao.updateUserPass(userId, encyptPassWord);
             }
         }
 
