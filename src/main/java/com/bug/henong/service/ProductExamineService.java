@@ -98,6 +98,7 @@ public class ProductExamineService {
                 businessItem.setFarmerId(goods.getFarmerId());
                 businessItem.setUserId(businessBuyrecord.getUserId());
                 businessItem.setQuantity(goods.getGoodsQuantity());
+                businessItem.setSkuStatus("offsale");
 
                 BusinessItemDao businessItemDao = new BusinessItemDao();
                 businessItemDao.insert(businessItem);

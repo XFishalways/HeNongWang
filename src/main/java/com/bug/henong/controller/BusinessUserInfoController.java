@@ -2,8 +2,9 @@ package com.bug.henong.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.bug.henong.entity.BusinessUser;
-import com.bug.henong.entity.service.BusinessUserService;
+import com.bug.henong.service.BusinessUserService;
 import com.bug.henong.utils.MapFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.SQLException;
 
+@Controller
 public class BusinessUserInfoController {
 
     private BusinessUserService businessUserService = new BusinessUserService();
