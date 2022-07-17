@@ -4,19 +4,28 @@ import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
 import com.bug.henong.dao.BusinessAddressDao;
 import com.bug.henong.entity.BusinessAddress;
-import com.bug.henong.entity.Farmer;
 import org.springframework.stereotype.Service;
 
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service("BusinessAddressService")
 public class BusinessAddressService {
 
     private BusinessAddressDao businessAddressDao =new BusinessAddressDao();
 
-    /**得到商品地址信息*/
-    public BusinessAddress getBusinessAddressDetailById(String addressId) throws SQLException {
+    /**
+     * 得到所有商品地址信息
+     */
+    public List<BusinessAddress> getBusinessAddressDetailById(String userId) throws SQLException {
+        return businessAddressDao.findAll(userId);
+    }
+
+    /**
+     * 得到一个商品信息
+     */
+    public BusinessAddress findOneAddress(String addressId) throws SQLException{
         return businessAddressDao.findOneAddress(addressId);
     }
 

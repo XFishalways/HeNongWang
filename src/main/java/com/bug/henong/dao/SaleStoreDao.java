@@ -42,12 +42,16 @@ public class SaleStoreDao {
 
     }
     /**返回所有信息*/
-    public List<SaleStore> findAll() throws SQLException {
+    public List<SaleStore> findAll(String saleStoreId) throws SQLException {
 
-        String sql = "SELECT * FROM SALE_STORE";
+
 
         List<SaleStore> saleStores = new ArrayList<SaleStore>();
-        List<Entity> entities = Db.use().findAll("SALE_STORE");
+        List<Entity> entities = Db.use().findAll(Entity.create("SALE_STORE").set("SALE_STOREID", saleStoreId));
+
+        if (entities.isEmpty()) {
+            return null;
+        }
 
         for(Entity e : entities){
             String storeStr = JSONUtil.toJsonStr(e);
