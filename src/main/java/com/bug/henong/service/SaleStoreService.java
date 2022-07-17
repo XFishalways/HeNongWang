@@ -29,9 +29,12 @@ public class SaleStoreService {
         saleStoreDao.delete(saleId);
     }
 
-    public List<SaleStore> getAllSales() throws SQLException {
+    /**
+     *查找所有商店活动
+     */
+    public List<SaleStore> getAllSalesById(String saleStoreId) throws SQLException {
 
-        return saleStoreDao.findAll();
+        return saleStoreDao.findAll(saleStoreId);
     }
 
     /**
