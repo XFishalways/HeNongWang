@@ -112,4 +112,36 @@ public class BusinessAddressService {
         return false;
     }
 
+    public int update(String addressId, String addressName, String province, String city,
+                      String county, String street, String lastDetail, String isDefault) throws SQLException{
+
+        BusinessAddress businessAddress = businessAddressDao.findOneAddress(addressId);
+
+        if(businessAddress == null){
+            return 0;
+        }
+        if(!businessAddress.getAddressName().equals(addressId)){
+            updateAddress((String) addressId, addressName);
+        }
+        if(!businessAddress.getProvince().equals(province)){
+            updateProvince((String) addressId, province);
+        }
+        if(!businessAddress.getCity().equals(city)){
+            updateCity((String) addressId, city);
+        }
+        if(!businessAddress.getCounty().equals(county)){
+            updateCounty((String) addressId, county);
+        }
+        if(!businessAddress.getStreet().equals(street)){
+            updateStreet((String) addressId, street);
+        }
+        if(!businessAddress.getLastDetail().equals(lastDetail)){
+            updateLastDetail((String) addressId, lastDetail);
+        }   if(!businessAddress.getIsDefault().equals(isDefault)){
+
+        }
+        return 1;
+
+    }
+
 }

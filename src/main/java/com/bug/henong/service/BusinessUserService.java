@@ -133,7 +133,7 @@ public class BusinessUserService {
      * @return  0: 无此用户ID 1：修改成功 2：密码不符
      * */
     public int updateInfo(String userId, String nickName, String userIntro, String avatar, String phone, String originalUserPass, String newUserPass, String passSalt, String userStatus) throws SQLException{
-        BusinessUser businessUser = getBusinessUserDetailById((String) userId);
+        BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
 
         if (businessUser == null) {
             return 0;
@@ -142,27 +142,27 @@ public class BusinessUserService {
             return  2;
         }
         if (!businessUser.getNickName().equals(nickName)){
-            updateNickName((String) userId , nickName );
+            businessUserDao.updateNickName(userId, nickName);
         }
         if (!businessUser.getUserIntro().equals(userIntro)){
-            updateUserIntro((String) userId , userIntro );
+            businessUserDao.updateUserIntro(userId, userIntro);
         }
         if (!businessUser.getAvatar().equals(avatar)){
-            updateAvatar((String) userId , avatar );
+            businessUserDao.updateAvatar(userId, avatar);
         }
         if (!businessUser.getPhone().equals(phone)){
-            updatePhone((String) userId , phone );
+            businessUserDao.updatePhone(userId, phone);
         }
             if (!originalUserPass.equals(newUserPass)){
                 if (newUserPass != null) {
-                    updateUserPass((String) userId, newUserPass);
+                    businessUserDao.updateUserPass(userId, newUserPass);
                 }
         }
         if (!businessUser.getPassSalt().equals(passSalt)){
-            updatePassSalt((String) userId , passSalt );
+            businessUserDao.updatePassSalt(userId, passSalt);
         }
         if (!businessUser.getUserStatus().equals(userStatus)){
-            updateUserStatus((String) userId , userStatus );
+            businessUserDao.updateUserStatus(userId,userStatus);
         }
         return 1;
 
