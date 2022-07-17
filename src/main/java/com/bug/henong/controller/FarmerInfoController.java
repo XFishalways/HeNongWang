@@ -14,10 +14,8 @@ public class FarmerInfoController {
     private FarmerService farmerService = new FarmerService();
 
     @RequestMapping("/farmer/showAllInfo")
-    public String showAllInfo(HttpSession session) throws SQLException{
-        Object userId = session.getAttribute("userId");
-        String id = (String) userId;
-        Farmer farmer = farmerService.getFarmerDetailById(id);
+    public String showAllInfo(@RequestParam String userId, HttpSession session) throws SQLException{
+        Farmer farmer = farmerService.getFarmerDetailById(userId);
         if(farmer == null){
             session.setAttribute("errorMsg", "查找不到用户id");
             return null;
