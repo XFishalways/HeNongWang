@@ -134,4 +134,13 @@ public class BusinessBuyrecordDao {
 
         return rw;
     }
+
+    public int updateRrcordStatus(String id, String recordStatus) throws SQLException {
+        int rw = Db.use().update(
+                Entity.create().set("RECORD_STATUS",recordStatus),
+                Entity.create("BUSINESS_BUYRECORD").set("RECORD_ID",id)
+        );
+
+        return rw;
+    }
 }
