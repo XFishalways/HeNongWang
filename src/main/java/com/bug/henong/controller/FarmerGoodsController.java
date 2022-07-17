@@ -47,6 +47,8 @@ public class FarmerGoodsController {
         }
 
         printWriter.print(json);
+        printWriter.flush();
+        printWriter.close();
     }
 
     @RequestMapping(value = "/farmer/farmerGoods/getFarmerGoods", method = RequestMethod.GET)
@@ -66,6 +68,8 @@ public class FarmerGoodsController {
         }
 
         printWriter.print(json);
+        printWriter.flush();
+        printWriter.close();
 
     }
 

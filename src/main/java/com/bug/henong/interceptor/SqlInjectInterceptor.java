@@ -19,29 +19,27 @@ import java.util.Enumeration;
 public class SqlInjectInterceptor implements HandlerInterceptor{
 
     @Override
-    public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-        // TODO Auto-generated method stub
+
+        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+
     }
+
     @Override
-    public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
-            throws Exception {
-        // TODO Auto-generated method stub
-    }
-    @Override
-    public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {
-        Enumeration<String> names = arg0.getParameterNames();
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        Enumeration<String> names = request.getParameterNames();
         while(names.hasMoreElements()){
             String name = names.nextElement();
-            String[] values = arg0.getParameterValues(name);
+            String[] values = request.getParameterValues(name);
             for(String value: values){
-                //sql注入直接拦截
+
                 if(judgeSQLInject(value.toLowerCase())){
-                    arg1.setContentType("text/html;charset=UTF-8");
-                    arg1.getWriter().print("参数含有非法攻击字符,已禁止继续访问！");
+                    response.setContentType("text/html;charset=UTF-8");
+                    response.getWriter().print("小黑子！参数含有非法攻击字符！");
                     return false;
                 }
-                //跨站xss清理
+
                 clearXss(value);
             }
         }
@@ -56,7 +54,7 @@ public class SqlInjectInterceptor implements HandlerInterceptor{
         if(value == null || "".equals(value)){
             return false;
         }
-        String xssStr = "and|or|select|update|delete|drop|truncate|%20|=|-|--|;|'|%|#|+|,|//|/| |\\|!=|(|)";
+        String xssStr = "and|or|select|order|update|delete|drop|truncate|%20|=|-|--|;|'|%|#|+|,|//|/| |\\|!=|(|)";
         String[] xssArr = xssStr.split("\\|");
         for(int i=0;i<xssArr.length;i++){
             if(value.indexOf(xssArr[i])>-1){

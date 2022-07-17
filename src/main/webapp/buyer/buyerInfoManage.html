@@ -10,6 +10,13 @@
     </head>
     <body>
         <div style="margin-top: 50px;">
+            <from class="layui-form" method="post" enctype="multipart/form-data">
+                <div  class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button id="loadImg" class="layui-btn" type="button" lay-submit lay-filter="submit-info">更改头像</button>
+                    </div>
+                </div>
+            </from>
             <form class="layui-form" method="post">
                 <div class="layui-form-item">
                      <label class="layui-form-label">姓名</label>
@@ -57,10 +64,10 @@
         </div>
 
         <script>
-            layui.use(['jquery','form'], function(args){
+            layui.use(['jquery','upload','form'], function(args){
               var $ = layui.$;
               var form = layui.form;
-
+              var upload = layui.upload;
 
               form.render();
 
@@ -114,7 +121,7 @@
 
                   success:function(data){
                     $('#account-name').val(data.userName);
-                    $('#account-nickname').val(data.userNickname);
+                    $('#account-nickname').val(data.nickname);
                     $('#account-intro').val(data.userIntro);
                   },
 
@@ -124,8 +131,19 @@
                 })  
               })
 
-            }); 
-            
+            });
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: 'uploadImg' //绑定元素
+                ,url: 'upload' //上传接口
+                ,done: function(res){
+                    //上传完毕回调
+                }
+                ,error: function(){
+                    //请求异常回调
+                }
+            });
         </script>
     </body>
 </html>

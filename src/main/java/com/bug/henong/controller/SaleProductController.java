@@ -40,6 +40,8 @@ public class SaleProductController {
         }
 
         printWriter.print(json);
+        printWriter.flush();
+        printWriter.close();
     }
 
     @RequestMapping(value = "/admin/saleProduct", method = RequestMethod.GET)
@@ -59,6 +61,8 @@ public class SaleProductController {
         }
 
         printWriter.print(json);
+        printWriter.flush();
+        printWriter.close();
 
     }
 

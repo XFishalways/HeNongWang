@@ -1,121 +1,110 @@
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>商品信息</title>
-		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
-		<script type="text/javascript" src="../lib/layui/layui.js"></script>
-	</head>
-	<body class="layui-layout-body">
-		<div>
-			<div class="layui-inline">
-				<input type="text" name="title" required lay-verify="required" placeholder="请输入商品名称" autocomplete="off" class="layui-input" style="width:125px;" >
-			</div>
-			<div class="layui-inline">
-				<button type="button" class="layui-btn"  id="findById">查找商品</button>
-			</div>
-		
-		</div>
-		<table class="layui-hide" id="test" lay-filter="test"></table>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>个人地址</title>
+	<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+	<script type="text/javascript" src="../lib/layui/layui.js"></script>
+</head>
+<body class="layui-layout-body">
+<div>
+	<div class="layui-inline">
+		<input type="text" name="title" required lay-verify="required" placeholder="输入地址id" autocomplete="off" class="layui-input" style="width:125px;" >
+	</div>
+	<div class="layui-inline">
+		<button type="button" class="layui-btn"  id="findById">搜寻地址</button>
+	</div>
 
-		<script src="../js/myCookie.js"></script>
-		<script type="text/javascript">
+</div>
+<table class="layui-hide" id="test" lay-filter="test"></table>
 
-		
-			
-		var tableInit = function(url){
-			layui.use('table', function(){
-			  var $ = layui.$
-			  var table = layui.table;
-			  
-			  table.render({
-			    elem: '#test'
-			    ,url:url
+<script type="text/javascript">
+
+
+
+	var tableInit = function(url){
+		layui.use('table', function(){
+			var $ = layui.$
+			var table = layui.table;
+
+
+			table.render({
+				elem: '#test'
+				,url:url
+				,page:true
+				,limit:20
 				,parseData: function(res){ //res 即为原始返回的数据
-				    return {
-				      "code": 0, //解析接口状态
-				      "msg": "", //解析提示文本
-				      "count": 100, //解析数据长度
-				      "data": res //解析数据列表
-				    };
+					return {
+						"code": 0, //解析接口状态
+						"msg": "", //解析提示文本
+						"count": 100, //解析数据长度
+						"data": res //解析数据列表
+					};
 				}
-			    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-			    ,cols: [[
-			      {field:'goodsId', width:180, title: '商品ID', sort: true}
-			      ,{field:'goodsName', width:180, title: '商品名',sort: true}
-                  ,{field:'goodsPrice', width:100, title: '商品价格',sort:true}
-                  ,{field:'farmerId', width:180, title: '商品所属农户'}
-                  ,{field:'goodsTime', width:180, title: '商品采摘时间', sort:true,templet:"<div>{{layui.util.toDateString(d.goodsTime)}}</div>"}
-                  ,{field:'goodsPlace', width:280, title: '商品采摘地址'}
-				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
-			    ]]
+				,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+				,cols: [[
+					{field:'addressId', width:180, title: '地址ID', sort: true}
+					,{field:'addressName', width:180, title: '地址名'}
+					,{field:'seqNumber', width:180, title: '地址顺序',sort:true}
+					,{field:'isDefault', width:180, title: '是否默认'}
+					,{field:'addressContent', width:450, title: '地址内容'}
+					,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+				]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("farmerGoods/getFarmerGoods?farmerId=" + getCookie('userId'));
+					if( url.search(patt) != -1) tableInit("farmerGoods/getAll");
 				}
-			  });
-			  
-			  //监听工具条 
-			  table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
-			    var data = obj.data; //获得当前行数据
-			    var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-			    var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
-			   
-			    if(layEvent === 'detail'){ //查看
-			      //do 
-				  window.location.href="user_register.html";
-			    } else if(layEvent === 'del'){ //删除
-					layer.confirm('真的删除行么', function(index){
-					var id = obj.data.goodsId;
-			        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-			        layer.close(index);
-			        //向服务端发送删除指令
-
-					$.ajax({
-						url:"farmerGoods/delete/" + id,
-						success:function(res){
-							alert('success');
-						}
-					})
-			      });
-			    } else if(layEvent === 'edit'){ //编辑
-			      //do something
-			      
-			      //同步更新缓存对应的值
-			      obj.update({
-			        username: '123'
-			        ,title: 'xxx'
-			      });
-			    } else if(layEvent === 'LAYTABLE_TIPS'){
-			      layer.alert('Hi，头部工具栏扩展的右侧图标。');
-			    }
-			  });
 			});
-		}
-		
-		tableInit("farmerGoods/getFarmerGoods?farmerId=" + getCookie('userId'));
-		
-		//第一种：主动加载jquery模块
-		layui.use(['jquery', 'layer'], function(){ 
-		  var $ = layui.$ //重点处
-		  ,layer = layui.layer;
-		  
-		  //后面就跟你平时使用jQuery一样
-		  $('#findById').on('click',function(res){
-			  var goodsName = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("farmerGoods/getFarmerGoodsByName?farmerId=" + getCookie('userId') +"&goodsName=" + goodsName);
-		  })
+
+			//监听工具条
+			table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+				var data = obj.data; //获得当前行数据
+				var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+				var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+
+				if(layEvent === 'detail'){ //查看
+					//do
+					window.location.href="user_register.html";
+				} else if(layEvent === 'del'){ //删除
+
+				} else if(layEvent === 'edit'){ //编辑
+					//do something
+
+					//同步更新缓存对应的值
+					obj.update({
+						username: '123'
+						,title: 'xxx'
+					});
+				} else if(layEvent === 'LAYTABLE_TIPS'){
+					layer.alert('Hi，头部工具栏扩展的右侧图标。');
+				}
+			});
 		});
-		
-		</script>
-		<script type="text/html" id="barDemo">
-		  <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
-		  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-		  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-		  
-		  <!-- 这里同样支持 laytpl 语法，如： -->
-		  {{#  if(d.auth > 2){ }}
-		    <a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
-		  {{#  } }}
-		</script>
-	</body>
+	}
+
+	tableInit("farmerGoods/getAll");
+
+	//第一种：主动加载jquery模块
+	layui.use(['jquery', 'layer'], function(){
+		var $ = layui.$ //重点处
+				,layer = layui.layer;
+
+		//后面就跟你平时使用jQuery一样
+		$('#findById').on('click',function(res){
+			var id = $(this).parent().parent().find(".layui-input").val();
+			tableInit("FindGOODS?USER_ID=" +id +"&goodsPatt=");
+		})
+	});
+
+</script>
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+
+	<!-- 这里同样支持 laytpl 语法，如： -->
+	{{#  if(d.auth > 2){ }}
+	<a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
+	{{#  } }}
+</script>
+</body>
 </html>
