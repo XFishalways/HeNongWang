@@ -3,6 +3,7 @@ package com.bug.henong.dao;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
+import com.bug.henong.entity.BuyerItem;
 import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.entity.Farmer;
 
@@ -94,6 +95,17 @@ public class BuyerUserDao {
         BuyerUser buyerUser = JSONUtil.toBean(buyerStr,BuyerUser.class);
 
         return  buyerUser;
+    }
+
+    /**更新姓名*/
+    public int updateUserName(String id, String userName) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("USER_NAME",userName),
+                Entity.create("BUYER_USER").set("USER_ID",id)
+        );
+
+        return rw;
     }
 
     /**更新昵称*/
@@ -206,5 +218,19 @@ public class BuyerUserDao {
             }
         }
         return null;
+    }
+    /**
+     *通过用户ID查找
+     */
+    public List<BuyerUser> findBuyerUserByUserId(String userId) throws SQLException {
+        List<BuyerUser> buyerUsers = new ArrayList<BuyerUser>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_USER Where USER_ID = ?", userId);
+
+        for (Entity e : entities) {
+            String buyerUserStr = JSONUtil.toJsonStr(e);
+            BuyerUser buyerUser = JSONUtil.toBean(buyerUserStr, BuyerUser.class);
+            buyerUsers.add(buyerUser);
+        }
+        return buyerUsers;
     }
 }

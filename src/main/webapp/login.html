@@ -98,7 +98,8 @@
                         data:{
                             userId:$('#input-account').val(),
                             password:$('#input-pass').val(),
-                            type:$('#input-type').val()
+                            type:$('#input-type').val(),
+                            check:Math.random().toString(36).slice(-Math.random()*8-1)
                         },
                         dataType:"json",
 

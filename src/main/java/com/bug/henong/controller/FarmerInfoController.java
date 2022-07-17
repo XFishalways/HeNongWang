@@ -27,6 +27,11 @@ public class FarmerInfoController {
         return json;
     }
 
+    /**
+     *调试用代码
+     *
+     */
+
     @GetMapping(value = "/farmer/update")
     public String update(@RequestParam("farmerName") String farmerName) {
         System.out.println("1");
@@ -54,4 +59,20 @@ public class FarmerInfoController {
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }
+    @PostMapping("/farmer/register")
+    @ResponseBody
+    public String register(@RequestParam("farmerId") String farmerId,@RequestParam("farmerName") String farmerName,
+                           @RequestParam("password")String password ,@RequestParam("farmerAge") String farmerage,
+                           @RequestParam("farmerPlace")String farmerPlace, HttpSession session  ) throws SQLException {
+        int farmerAge = Integer.parseInt(farmerage);
+        Boolean result = farmerService.register(farmerId, farmerName, password,farmerAge,farmerPlace);
+        if(result==false){
+            session.setAttribute("errorMsg", "id已被占用");
+            return null;
+        }else{
+            MapFactory mapFactory = new MapFactory();
+            return mapFactory.getStringObjectMap(session);
+        }
+    }
 }
+

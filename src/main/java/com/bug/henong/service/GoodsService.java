@@ -3,7 +3,9 @@ package com.bug.henong.service;
 
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
+import com.bug.henong.dao.FarmerDao;
 import com.bug.henong.dao.GoodsDao;
+import com.bug.henong.entity.Farmer;
 import com.bug.henong.entity.Goods;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,12 @@ public class GoodsService {
     public int insert( String goodsName, Double goodsPrice, Timestamp goodsTime, String goodsPlace,String farmerId) throws SQLException {
 
         Goods goods = new Goods();
+        FarmerDao farmerDao =new FarmerDao();
+        Farmer farmer = farmerDao.findOneFarmer(farmerId);
 
+        if(farmer.getBusinessId()!=null){
+            return 0;
+        }
         Snowflake snowflake = IdUtil.getSnowflake(2, 1);
         String goodsId = snowflake.nextIdStr();
 
