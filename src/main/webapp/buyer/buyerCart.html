@@ -84,6 +84,11 @@
 					for(var index = 0;index < data.length;index++){
 						myData[index] = data[index].goodsId;
 					}
+
+					layer.open({
+						type:1,
+						content: '<div class="layui-inline" id="openGoodsInfo"><input placeholder="请选择地址ID" class="layui-input"></div>',
+					})
 					
 					$.ajax({
 						url:'buyerCart/confirmItems',
