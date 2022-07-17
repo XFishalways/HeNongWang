@@ -108,7 +108,7 @@
                   alert(data.field);
                   $.ajax({
                     type:"POST",
-                    url:'/update',
+                    url:'updateUser',
                     data:{
                       userId:getCookie('userId'),
                       nickName:data.field.nickname,
