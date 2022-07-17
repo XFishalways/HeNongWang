@@ -40,10 +40,6 @@
 </div>
 
 
-
-
-
-
 <script>
 
     layui.use(['jquery', 'layer','flow'], function(){
@@ -57,7 +53,7 @@
                 done:function(page,next){
                     var lis = [];
                     $.ajax({
-                        url:url + (url == '' ? '&' : '?') + 'page=' + page,
+                        url:url + '?page=' + page,
                         type:'POST',
                         dataType:'json',
                         success:function(res){
@@ -71,7 +67,7 @@
                                 myHtml += '<img src="' + res.img +'">';
                                 myHtml += '</div>';
                                 myHtml += '<div class="layui-col-md3">';
-                                    
+
                                 myHtml += '<div class="layui-row">';
                                 myHtml += '<div class="layui-anim layui-anim-fadein">';
                                 myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
@@ -130,3 +126,5 @@
     });
 </script>
 </body>
+
+</html>
