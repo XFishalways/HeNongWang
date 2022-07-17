@@ -85,7 +85,7 @@
                   alert(data.field);
                   $.ajax({
                     type:"POST",
-                    url:'/farmer/update',
+                    url:'/buyer/update',
                     data:{
                       userId:getCookie('userId'),
                       userName:data.field.name,
@@ -136,7 +136,7 @@
             //执行实例
             var uploadInst = upload.render({
                 elem: 'uploadImg' //绑定元素
-                ,url: 'upload' //上传接口
+                ,url: '/buyer/upload' //上传接口
                 ,done: function(res){
                     //上传完毕回调
                 }
