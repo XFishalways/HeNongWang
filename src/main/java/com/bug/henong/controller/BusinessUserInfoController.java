@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.sql.SQLException;
 
 public class BusinessUserInfoController {
@@ -39,16 +42,14 @@ public class BusinessUserInfoController {
     public String updateInfo(@RequestParam("userId") String userId,
                              @RequestParam("nickName") String nickName,
                              @RequestParam("userIntro") String userIntro,
-                             @RequestParam("avatar") String avatar,
                              @RequestParam("phone") String phone,
                              @RequestParam("originalUserPass") String originalUserPass,
                              @RequestParam("newUserPass") String newUserPass,
                              @RequestParam("passSalt") String passSalt,
                              @RequestParam("userStatus") String userStatus,
-                             HttpSession session) throws SQLException{
+                             HttpSession session) throws SQLException, FileNotFoundException {
 
-        int result = businessUserService.updateInfo(userId, nickName, userIntro, avatar, phone, originalUserPass, newUserPass, passSalt, userStatus);
-
+        int result = businessUserService.updateInfo(userId, nickName, userIntro, phone, originalUserPass, newUserPass, passSalt, userStatus);
 
         if (result==0) {
             session.setAttribute("errorMsg", "查找不到用户id");
@@ -62,6 +63,7 @@ public class BusinessUserInfoController {
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }
+
     @PostMapping("/business/register")
     public String businessUserRegister (@RequestParam("userId") String userId,
                                         @RequestParam("userName")String userName,
