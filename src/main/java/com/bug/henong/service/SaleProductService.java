@@ -141,7 +141,7 @@ public class SaleProductService {
         //当前用户非空才可以进行更改
         if (saleProduct != null) {
 
-                int rw = saleProductDao.updateStart_time(newStartTime,loginProductId);
+                int rw = saleProductDao.updateStart_time(loginProductId,newStartTime);
                 return rw > 0;
 
         }
@@ -158,7 +158,7 @@ public class SaleProductService {
         //当前用户非空才可以进行更改
         if (saleProduct != null) {
 
-                int rw = saleProductDao.updateEnd_time(newEndTime,loginProductId);
+                int rw = saleProductDao.updateEnd_time(loginProductId,newEndTime);
                 return rw > 0;
         }
 
@@ -228,10 +228,10 @@ public class SaleProductService {
                 saleProductDao.updateContent(saleProductContent,productId);
             }
             if (!saleProduct.getSaleProductStartTime().equals(saleProductStartTime)) {
-                saleProductDao.updateStart_time(saleProductStartTime,productId);
+                saleProductDao.updateStart_time(productId,saleProductStartTime);
             }
             if (!saleProduct.getSaleProductEndTime().equals(saleProductEndTime)) {
-                saleProductDao.updateEnd_time(saleProductEndTime,productId);
+                saleProductDao.updateEnd_time(productId,saleProductEndTime);
             }
             if (!saleProduct.getSaleProductRange().equals(saleProductRange)) {
                 saleProductDao.updateRange(saleProductRange,productId);
