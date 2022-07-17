@@ -66,13 +66,11 @@ public class BusinessUserInfoController {
     public String businessUserRegister (@RequestParam("userId") String userId,
                                         @RequestParam("userName")String userName,
                                         @RequestParam("nickName")String nickName,
-                                        @RequestParam("userIntro")String userIntro,
-                                        @RequestParam("avatar")String avatar,
                                         @RequestParam("phone")String phone,
                                         @RequestParam("userPass")String userPass,
                                         HttpSession session) throws SQLException{
 
-        Boolean result = businessUserService.BusinessUserRegister(userId, userName, nickName, userIntro, avatar, phone, userPass);
+        Boolean result = businessUserService.BusinessUserRegister(userId, userName, nickName, phone, userPass);
         if(result==false){
             session.setAttribute("errorMsg", "id已被占用");
             return null;
