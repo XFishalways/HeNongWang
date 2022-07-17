@@ -50,11 +50,11 @@
 					,{field:'city', width:100, title: '市'}
 					,{field:'county', width:180, title: '区'}
 					,{field:'street', width:180, title: '街道'}
-					,{field:'isDefault', width:100, title: '是否为默认地址'}
+					,{field:'isDefault', width:150, title: '是否为默认地址'}
 					,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 				]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("/address/findAddressInfo？userId="+getCookie('userId'));
+					if( url.search(patt) != -1) tableInit("/address/findAddressInfo?userId="+getCookie('userId'));
 				}
 			});
 
@@ -77,16 +77,20 @@
 						}
 					})
 				} else if(layEvent === 'del'){ //删除
+					layer.confirm('确认删除该地址？', function(index){
+						var id = obj.data.addressId;
+						obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+						layer.close(index);
+						//向服务端发送删除指令
 
-				} else if(layEvent === 'edit'){ //编辑
-					//do something
-
-					//同步更新缓存对应的值
-					obj.update({
-						username: '123'
-						,title: 'xxx'
+						$.ajax({
+							url:"/address/delete" + id,
+							success:function(res){
+								alert('success');
+							}
+						})
 					});
-				} else if(layEvent === 'LAYTABLE_TIPS'){
+				}else if(layEvent === 'LAYTABLE_TIPS'){
 					layer.alert('Hi，头部工具栏扩展的右侧图标。');
 				}
 			});
@@ -110,13 +114,7 @@
 </script>
 <script type="text/html" id="barDemo">
 	<a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
-	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-
-	<!-- 这里同样支持 laytpl 语法，如： -->
-	{{#  if(d.auth > 2){ }}
-	<a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
-	{{#  } }}
 </script>
 </body>
 </html>

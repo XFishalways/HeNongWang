@@ -16,7 +16,7 @@ import java.util.Map;
 public class BusinessBuyRecordController {
     BusinessBuyRecordService businessBuyRecordService = new BusinessBuyRecordService();
 
-    @RequestMapping("/business/buyrecord/getRecordsByName")
+    @RequestMapping("/business/buyrecord/getRecordsByBusinessId")
     @ResponseBody
     public String getRecordsByBusinessId(@RequestParam("userId")String userId, HttpSession session) throws SQLException {
         List<BusinessBuyrecord>businessBuyrecords = businessBuyRecordService.getBuyRecordByByBusinessId(userId);
@@ -84,7 +84,8 @@ public class BusinessBuyRecordController {
     /**
      * 通过农户id查找农户
      */
-    @GetMapping("/business/buyRecord/getFarmerById")
+    @GetMapping("/business/farmerGoods/getFarmerGoods")
+    @ResponseBody
     public String getFarmerById(@RequestParam("farmerId") String farmerId,
                                 HttpSession session) throws SQLException{
         List<BusinessBuyrecord> businessBuyrecords = businessBuyRecordService.findFarmerById(farmerId);
