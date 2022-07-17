@@ -40,12 +40,12 @@ public class SaleProductDao {
 
     }
     /**返回所有信息*/
-    public List<SaleProduct> findAll() throws SQLException {
+    public List<SaleProduct> findAll(String adminId) throws SQLException {
 
         String sql = "SELECT * FROM SALE_PRODUCT";
 
         List<SaleProduct> saleProducts = new ArrayList<SaleProduct>();
-        List<Entity> entities = Db.use().findAll("SALE_PRODUCT");
+        List<Entity> entities = Db.use().findAll(Entity.create("SALE_PRODUCT").set("ADMIN_ID",adminId));
 
         for(Entity e : entities){
             String productStr = JSONUtil.toJsonStr(e);
@@ -56,7 +56,24 @@ public class SaleProductDao {
         return saleProducts;
     }
     /**通过id查找某一行数据*/
-    public SaleProduct findOneProduct(String id) throws SQLException {
+    public SaleProduct findOneProductByTitle(String saleProductTitle) throws SQLException {
+
+        List<Entity> entities= Db.use().findAll(
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_TITLE",saleProductTitle)
+        );
+
+        if(entities.isEmpty()){
+            return null;
+        }
+
+        Entity e = entities.get(0);
+        String productStr = JSONUtil.toJsonStr(e);
+        SaleProduct saleProduct = JSONUtil.toBean(productStr,SaleProduct.class);
+
+        return  saleProduct;
+    }
+
+    public SaleProduct findOneProductById(String id) throws SQLException {
 
         List<Entity> entities= Db.use().findAll(
                 Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
@@ -74,11 +91,11 @@ public class SaleProductDao {
     }
 
     /**
-     * 通过标题查找
+     *通过
      */
-    public List<SaleProduct> findSaleProductByTitle(String saleProductTitle) throws SQLException {
+    public List<SaleProduct> findSaleProductByTitle(String adminId) throws SQLException {
         List<SaleProduct> saleProduct = new ArrayList<SaleProduct>();
-        List<Entity> entities = Db.use().query("SELECT * FROM SALE_PRODUCT Where SALE_PRODUCT_TITLE LIKE ?", "%"+saleProductTitle+"%");
+        List<Entity> entities = Db.use().query("SELECT * FROM SALE_PRODUCT Where ADMIN_ID LIKE ?", "%"+adminId+"%");
 
         for (Entity e : entities) {
             String productStr = JSONUtil.toJsonStr(e);
@@ -89,87 +106,87 @@ public class SaleProductDao {
     }
 
     /**更新标题*/
-    public int updateTitle( String id, String title) throws SQLException {
+    public int updateTitle( String Title, String title) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_TITLE",title),
-                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",Title)
         );
 
         return rw;
     }
 
     /**更新说明*/
-    public int updateIntro( String id, String intro) throws SQLException {
+    public int updateIntro( String Title, String intro) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_INTRO",intro),
-                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",Title)
         );
 
         return rw;
     }
 
     /**更新内容*/
-    public int updateContent(String id, String content) throws SQLException {
+    public int updateContent(String Title, String content) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_CONTENT",content),
-                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",Title)
         );
 
         return rw;
     }
     /**更新开始时间*/
-    public int updateStart_time(String id, Timestamp startTime) throws SQLException {
+    public int updateStart_time(String Title, Timestamp startTime) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_START_TIME",startTime),
-                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",Title)
         );
 
         return rw;
     }
 
     /**更新结束时间*/
-    public int updateEnd_time(String id, Timestamp endTime) throws SQLException {
+    public int updateEnd_time(String Title, Timestamp endTime) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_END_TIME",endTime),
-                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",Title)
         );
 
         return rw;
     }
 
     /**更新范围*/
-    public int updateRange( String id, String range) throws SQLException {
+    public int updateRange( String Title, String range) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_RANGE",range),
-                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",Title)
         );
 
         return rw;
     }
 
     /**更新类型*/
-    public int updateType( String id,String type) throws SQLException {
+    public int updateType( String Title,String type) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_TYPE",type),
-                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",Title)
         );
 
         return rw;
     }
 
     /**更新状态*/
-    public int updateStatus(String id, String status) throws SQLException {
+    public int updateStatus(String Title, String status) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_STATUS",status),
-                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",id)
+                Entity.create("SALE_PRODUCT").set("SALE_PRODUCT_ID",Title)
         );
 
         return rw;

@@ -59,7 +59,7 @@ public class BusinessUserInfoController {
             session.setAttribute("errorMsg", "查找不到用户id");
             return null;
         }
-        if (result == 1 ) {
+        if (result == 2 ) {
             session.setAttribute("errorMsg", "原密码不等");
             return null;
         }

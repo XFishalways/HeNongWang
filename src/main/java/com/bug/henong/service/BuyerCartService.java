@@ -75,14 +75,14 @@ public class BuyerCartService {
     }
 
     /**清空购物车购买其中所有*/
-    public Boolean cleanCart(String cartId) throws SQLException {
-        BuyerCart buyerCart = buyerCartDao.findOneCart(cartId);
+    public Boolean cleanCart(String userId) throws SQLException {
+        BuyerCart buyerCart = buyerCartDao.findOneCart(userId);
         if(buyerCart == null){
             return false;
         }
         buyerCart.setCartStatus("N");
         BuyerItemDao buyerItemDao = new BuyerItemDao();
-        List<BuyerItem> buyerItems = buyerItemDao.findBuyerItemByUserId(buyerCart.getUserId());
+        List<BuyerItem> buyerItems = getItemsInCart(buyerCart.getUserId());
         //4代表买家端
         Snowflake snowflake = IdUtil.getSnowflake(4, 1);
         String orderId = snowflake.nextIdStr();
@@ -94,7 +94,7 @@ public class BuyerCartService {
         }
         BuyerOrder buyerOrder = new BuyerOrder();
         buyerOrder.setOrderId(orderId);
-        buyerOrder.setUserId(buyerCart.getUserId());
+        buyerOrder.setUserId(userId);
         buyerOrder.setOrderStatus("uncofirmed");
         buyerOrder.setTotalPrice(totalPrice);
         BuyerOrderDao buyerOrderDao = new BuyerOrderDao();
@@ -102,5 +102,57 @@ public class BuyerCartService {
         int rs=buyerOrderDao.insert(buyerOrder);
         return rs>0;
     }
+    /**得到购物车所有商品*/
+    public List<BuyerItem> getItemsInCart(String userId) throws SQLException {
+        BuyerItemDao buyerItemDao = new BuyerItemDao();
+        List<BuyerItem> buyerItems = buyerItemDao.findBuyerItemByUserId(userId);
+        for(BuyerItem item : buyerItems){
+           if(item.getOrderId()==null){
+               buyerItems.add(item);
+           }
 
+        }
+        return buyerItems;
+    }
+    /**删除购物车中商品*/
+    public Boolean delete(String skuId,String userId) throws SQLException {
+        BuyerItemDao buyerItemDao = new BuyerItemDao();
+        BuyerItem buyerItem = buyerItemDao.findBuyerItemByUserIdAndSkuID(userId,skuId);
+        if(buyerItem.getOrderId()!=null){
+            return false;
+        }
+        int rs= buyerItemDao.delete(skuId);
+        if(getItemsInCart(userId)==null){
+            buyerCartDao.updateCartStatus(userId,"N");
+        }
+        return rs>0;
+
+    }
+    /**确认生成订单*/
+    public Boolean confirm(List<String> skuIds,String userId) throws SQLException {
+        BuyerItemDao buyerItemDao = new BuyerItemDao();
+        //4代表买家端
+        Snowflake snowflake = IdUtil.getSnowflake(4, 1);
+        String orderId = snowflake.nextIdStr();
+        Double totalPrice = 0.0;
+        for(String id:skuIds){
+            BuyerItem buyerItem = buyerItemDao.findBuyerItemByUserIdAndSkuID(userId,id);
+            if(buyerItem.getOrderId()!=null){
+                return false;
+            }else {
+                buyerItemDao.updateOrderID(buyerItem.getSkuId(),orderId);
+                totalPrice+=buyerItem.getPrice()* buyerItem.getQuantity();
+            }
+
+        }
+        BuyerOrder buyerOrder = new BuyerOrder();
+        buyerOrder.setOrderId(orderId);
+        buyerOrder.setUserId(userId);
+        buyerOrder.setOrderStatus("uncofirmed");
+        buyerOrder.setTotalPrice(totalPrice);
+        BuyerOrderDao buyerOrderDao = new BuyerOrderDao();
+
+        int rs=buyerOrderDao.insert(buyerOrder);
+        return rs>0;
+    }
 }

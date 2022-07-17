@@ -181,7 +181,23 @@ public class BuyerItemDao {
         }
         return buyerItems;
     }
+    /**
+     *通过用户ID与商品id查找
+     */
+    public BuyerItem findBuyerItemByUserIdAndSkuID(String userId,String skuId) throws SQLException {
 
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ITEM Where USER_ID = ? AND SKU_ID", userId,skuId);
+
+        if(entities.isEmpty()){
+            return null;
+        }
+            Entity e =entities.get(0);
+            String buyerItemStr = JSONUtil.toJsonStr(e);
+            BuyerItem buyerItem = JSONUtil.toBean(buyerItemStr, BuyerItem.class);
+
+
+        return buyerItem;
+    }
     /**
      *通过商品标题查找
      */
