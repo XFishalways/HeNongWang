@@ -16,12 +16,13 @@ import java.util.List;
 
 @Controller
 public class BuyerUserController {
+
     private BuyerUserService buyerUserService = new BuyerUserService();
 
     /**
      * 查询买家信息
      */
-    @GetMapping("/buyer/showAllInfo")
+    @GetMapping("/buyer/findAllInfo")
     public String showAllInfo(@RequestParam("userId") String userId,
                               HttpSession session) throws SQLException {
         String json;
