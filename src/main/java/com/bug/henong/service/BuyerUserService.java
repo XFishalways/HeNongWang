@@ -214,6 +214,7 @@ public class BuyerUserService {
             String  passSalt= RandomUtil.randomString(10);
             String encryptPassword = EncryptUtil.getDigestHex(userPass,passSalt);
             buyerUser.setUserPass(encryptPassword);
+            buyerUser.setPassSalt(passSalt);
             return buyerUserDao.insert(buyerUser)>0;
         }
     }
