@@ -68,7 +68,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">个性签名</label>
                     <div class="layui-input-inline">
-                      <input id="account-intro" type="text" name="address" value="原地址" required  lay-verify="required" placeholder="个性签名" autocomplete="off" class="layui-input">
+                      <input id="account-intro" type="text" name="intro" value="原地址" required  lay-verify="required" placeholder="个性签名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -151,7 +151,7 @@
 
                   success:function(data){
                     $('#account-name').val(data.userName);
-                    $('#account-nickname').val(data.nickname);
+                    $('#account-nickname').val(data.nickName);
                     $('#account-intro').val(data.userIntro);
                     $('#phone').val(data.phone);
                   },
