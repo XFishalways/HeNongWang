@@ -16,10 +16,21 @@ import java.util.List;
 public class BuyerAddressService {
     private BuyerAddressDao buyerAddressDao =new BuyerAddressDao();
 
-    /**得到地址信息*/
+    /**得到所有地址信息*/
     public List<BuyerAddress> getBuyerAddressDetailById(String userId) throws SQLException {
         return buyerAddressDao.findAll(userId);
     }
+
+    /**
+     *得到一个地址信息title
+     */
+    public BuyerAddress findOneBuyerAddressByTitle(String addressTitle) throws SQLException {
+        return buyerAddressDao.findOneAddress(addressTitle);
+    }
+
+    /**
+     *得到一个地址信息id
+     */
     public BuyerAddress findOneBuyerAddress(String addressId) throws SQLException {
         return buyerAddressDao.findOneAddress(addressId);
     }

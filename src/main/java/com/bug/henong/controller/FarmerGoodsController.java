@@ -31,24 +31,18 @@ public class FarmerGoodsController {
 
     @RequestMapping(value = "/farmer/farmerGoods/findOne", method = RequestMethod.GET)
     @ResponseBody
-    public void findOneGoods(@RequestParam("goodsId") String goodsId,
-                             HttpServletResponse response) throws SQLException, IOException {
+    public String findOneGoods(@RequestParam("goodsId") String goodsId,
+                             HttpSession session) throws SQLException, IOException {
 
-        PrintWriter printWriter = response.getWriter();
+        Goods goods = goodsService.getOneGoods(goodsId);
 
-        String json;
-
-        Goods goods = goodsService.getGoodsId(goodsId);
-        if (goodsId != null) {
-            json = JSON.toJSONString(goods);
-            json = "[" + json + "]";
-        } else {
-            json = "{\"log\":\"Please input goods id!\"}";
+        if (goods == null) {
+            session.setAttribute("errorMsg","数据为空");
+            return JSON.toJSONString(goods);
+        }else {
+            return JSON.toJSONString(goods);
         }
 
-        printWriter.print(json);
-        printWriter.flush();
-        printWriter.close();
     }
 
     @RequestMapping(value = "/farmer/farmerGoods/getFarmerGoods", method = RequestMethod.GET)
@@ -73,11 +67,14 @@ public class FarmerGoodsController {
 
     @RequestMapping(value = "/farmer/farmerGoods/delete/{goodsId}", method = RequestMethod.GET)
     @ResponseBody
-    public void deleteOneGoods(@RequestParam("goodsId") String goodsId) throws SQLException {
+    public String deleteOneGoods(@RequestParam("goodsId") String goodsId,HttpSession session) throws SQLException {
 
         Goods goods = goodsService.getGoodsId(goodsId);
 
         goodsService.deleteGoods(goodsId);
+
+        MapFactory mapFactory = new MapFactory();
+        return mapFactory.getStringObjectMap(session);
 
     }
 

@@ -81,6 +81,17 @@ public class BuyerItemDao {
 
         return rw;
     }
+
+    public int updateSkuImage(String id, String skuImage) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("SKU_IMAGE",skuImage),
+                Entity.create("BUYER_ITEM").set("SKU_ID",id)
+        );
+
+        return rw;
+    }
+
     //更新商品标题
     public int updateSkuTitle(String id, String skuTitle) throws SQLException {
 

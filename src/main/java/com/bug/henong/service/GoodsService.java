@@ -87,6 +87,10 @@ public class GoodsService {
 
         return goodsDao.findAll();
     }
+    public Goods getOneGoods (String loginGoodsId) throws SQLException{
+        return goodsDao.findOneGoods(loginGoodsId);
+
+    }
     public List<Goods> getFarmerGoods(String farmer_Id) throws SQLException {
         return goodsDao.findFarmerAll(farmer_Id);
     }

@@ -41,11 +41,11 @@ public class BusinessAddressController {
      * 查找一个卖家地址
      */
     @GetMapping("/business/address/findOneAddress")
-    public String findOneAddress(@RequestParam("businessAddressId") String businessAddressId,
+    public String findOneAddress(@RequestParam("addressTitle") String addressTitle,
                                  HttpSession session) throws SQLException{
 
         String json;
-        BusinessAddress businessAddress = businessAddressService.findOneAddress(businessAddressId);
+        BusinessAddress businessAddress = businessAddressService.findOneAddressDetailByTitle(addressTitle);
 
         if(businessAddress == null){
             session.setAttribute("errorMsg", "查找不到卖家地址id");
@@ -111,11 +111,14 @@ public class BusinessAddressController {
      * 删除卖家地址
      */
     @GetMapping("/business/address/delete")
-    public void deleteOneAddress(@RequestParam("addressId") String addressId) throws SQLException{
+    public String deleteOneAddress(@RequestParam("addressId") String addressId,
+                                 HttpSession session) throws SQLException{
 
-        BusinessAddress businessAddress = (BusinessAddress) businessAddressService.getBusinessAddressDetailById(addressId);
+        BusinessAddress businessAddress = businessAddressService.findOneAddress(addressId);
 
         businessAddressService.deleteAddress(addressId);
+        MapFactory mapFactory=new MapFactory();
+        return mapFactory.getStringObjectMap(session);
 
     }
 

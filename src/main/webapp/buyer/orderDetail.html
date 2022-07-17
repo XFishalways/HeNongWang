@@ -71,21 +71,9 @@
 				</div>
 			</div>
 			<div class="layui-form-item layui-bg-gray">
-				<label class="layui-form-label">买家留言:</label>
-				<div class="layui-input-block">
-					<div id="leaveCommit" class="layui-form-mid layui-word-aux">我是sb</div>
-				</div>
-			</div>
-			<div class="layui-form-item layui-bg-gray">
 				<label class="layui-form-label">订单状态:</label>
 				<div class="layui-input-block">
 					<div id="orderStatus" class="layui-form-mid layui-word-aux">我是sb</div>
-				</div>
-			</div>
-			<div class="layui-form-item layui-bg-gray">
-				<label class="layui-form-label">商品数量:</label>
-				<div class="layui-input-block">
-					<div id="skuAmount" class="layui-form-mid layui-word-aux">我是sb</div>
 				</div>
 			</div>
 			<hr>
@@ -99,7 +87,7 @@
 			$(document).ready(function(){
 				$.ajax({
 					type:'GET',
-					url:'/business/address/findAddressInfo?addressId=' + getCookie('addressId'),
+					url:'/buyer/buyerOrder/getOrder?orderId=' + getCookie('orderId'),
 					dataType:'json',
 
 					success:function(data){
@@ -111,9 +99,7 @@
 						$('#payablePrice').html(data.payablePrice);
 						$('#payMethod').html(data.payMethod);
 						$('#invoiceTqlId').html(data.invoiceTqlId);
-						$('#leaveCommit').html(data.leaveCommit);
-						$('#orderStatus').html(data.orderStatus);
-						$('#skuAmount').html(data.skuAmount);
+						$('#orderStatus').html(data.orderStatus)
 					},
 
 					error:function(){
