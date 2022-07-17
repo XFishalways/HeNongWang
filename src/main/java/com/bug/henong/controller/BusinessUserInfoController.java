@@ -42,7 +42,6 @@ public class BusinessUserInfoController {
     public String updateInfo(@RequestParam("userId") String userId,
                              @RequestParam("nickName") String nickName,
                              @RequestParam("userIntro") String userIntro,
-                             @RequestParam("avatar") String avatar,
                              @RequestParam("phone") String phone,
                              @RequestParam("originalUserPass") String originalUserPass,
                              @RequestParam("newUserPass") String newUserPass,
@@ -50,7 +49,7 @@ public class BusinessUserInfoController {
                              @RequestParam("userStatus") String userStatus,
                              HttpSession session) throws SQLException, FileNotFoundException {
 
-        int result = businessUserService.updateInfo(userId, nickName, userIntro, avatar, phone, originalUserPass, newUserPass, passSalt, userStatus);
+        int result = businessUserService.updateInfo(userId, nickName, userIntro, phone, originalUserPass, newUserPass, passSalt, userStatus);
 
         if (result==0) {
             session.setAttribute("errorMsg", "查找不到用户id");
