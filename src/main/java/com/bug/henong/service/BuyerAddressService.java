@@ -1,6 +1,9 @@
 package com.bug.henong.service;
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import com.bug.henong.dao.BuyerAddressDao;
+import com.bug.henong.entity.BusinessAddress;
 import com.bug.henong.entity.BuyerAddress;
 import com.bug.henong.entity.Farmer;
 import org.springframework.stereotype.Service;
@@ -142,6 +145,72 @@ public class BuyerAddressService {
         }
 
         return false;
+    }
+    public int update(String addressId, String addressName, String receiverName, String receiverPhone, String province, String city,
+                      String county, String street, String lastDetail, String isDefault) throws SQLException{
+
+        BuyerAddress buyerAddress = buyerAddressDao.findOneAddress(addressId);
+
+        if(buyerAddress == null){
+            return 0;
+        }
+        if(!buyerAddress.getAddressName().equals(addressId)){
+            buyerAddressDao.updateAddressName(addressId, addressName);
+        }
+        if(!buyerAddress.getReceiverName().equals(addressId)){
+            buyerAddressDao.updateReceiverName(addressId, receiverName);
+        }
+        if(!buyerAddress.getReceiverPhone().equals(addressId)){
+            buyerAddressDao.updateReceiverPhone(addressId, receiverPhone);
+        }
+        if(!buyerAddress.getProvince().equals(province)){
+            buyerAddressDao.updateProvince(addressId, province);
+        }
+        if(!buyerAddress.getCity().equals(city)){
+            buyerAddressDao.updateCity(addressId, city);
+        }
+        if(!buyerAddress.getCounty().equals(county)){
+            buyerAddressDao.updateCounty(addressId, county);
+        }
+        if(!buyerAddress.getStreet().equals(street)){
+            buyerAddressDao.updateStreet(addressId, street);
+        }
+        if(!buyerAddress.getLastDetail().equals(lastDetail)){
+            buyerAddressDao.updateLastDetail(addressId, lastDetail);
+        }
+        if(!buyerAddress.getIsDefault().equals(isDefault)){
+            buyerAddressDao.updateIsDefault(addressId, isDefault);
+        }
+        return 1;
+
+    }
+
+    public int Insert(String addressName, String receiverName, String receiverPhone, String province, String city, String county, String street,
+                      String lastDetail, String isDefault) throws SQLException{
+
+        BuyerAddress buyerAddress = new BuyerAddress();
+
+        Snowflake snowflake = IdUtil.getSnowflake(4, 1);
+        String buyerAddressId = snowflake.nextIdStr();
+
+        buyerAddress.setAddressId(buyerAddressId);
+
+        buyerAddress.setAddressName(addressName);
+        buyerAddress.setReceiverName(receiverName);
+        buyerAddress.setReceiverPhone(receiverPhone);
+        buyerAddress.setProvince(province);
+        buyerAddress.setCity(city);
+        buyerAddress.setCounty(county);
+        buyerAddress.setStreet(street);
+        buyerAddress.setLastDetail(lastDetail);
+        buyerAddress.setIsDefault(isDefault);
+
+        return buyerAddressDao.insert(buyerAddress);
+    }
+    public void deleteAddress(String addressId) throws SQLException {
+
+        buyerAddressDao.delete(addressId);
+
     }
 
 }
