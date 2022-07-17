@@ -53,23 +53,23 @@ public class FarmerGoodsController {
 
     @RequestMapping(value = "/farmer/farmerGoods/getFarmerGoods", method = RequestMethod.GET)
     @ResponseBody
-    public void findAllGoods(@RequestParam String farmerId, HttpServletResponse response) throws IOException, SQLException {
+    public String findAllGoods(@RequestParam String farmerId,HttpSession session) throws IOException, SQLException {
 
-        PrintWriter printWriter = response.getWriter();
+
 
         String json;
 
         List<Goods> goods = goodsService.getFarmerGoods(farmerId);
 
-        if (goods != null) {
-            json = JSON.toJSONString(goods);
+        if (goods == null) {
+           session.setAttribute("errorMsg","查找失败");
+            return JSON.toJSONString(goods);
         } else {
-            json = "{\"log\":\"Invalid id\"}";
+           json=JSON.toJSONString(goods);
+           return json;
         }
 
-        printWriter.print(json);
-        printWriter.flush();
-        printWriter.close();
+
 
     }
 

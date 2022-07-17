@@ -1,152 +1,170 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>个人信息</title>
-        <link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
-        <script type="text/javascript" src="../lib/layui/layui.js"></script>
-        <script src="../js/myCookie.js"></script>
-    </head>
-    <body>
-        <div style="margin-top: 50px;">
-            <from class="layui-form" method="post" enctype="multipart/form-data">
-                <div  class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button type="button" class="layui-btn" id="uploadImg">
-                            <i class="layui-icon">&#xe67c;</i>更改头像
-                        </button>
-                    </div>
-                </div>
-            </from>
-            <form class="layui-form" method="post">
-                <div class="layui-form-item">
-                     <label class="layui-form-label">姓名</label>
-                     <div class="layui-input-inline">
-                       <input id="account-name" type="text" name="name" value="现姓名" required  lay-verify="required" placeholder="账号名" autocomplete="off" class="layui-input">
-                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">昵称</label>
-                    <div class="layui-input-inline">
-                      <input id="account-nickname" type="text" name="nickname" value="" required  lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">原密码</label>
-                    <div class="layui-input-inline">
-                        <input id="old-pass" type="password" name="oldPass" value="" required  lay-verify="required|pass" placeholder="原密码" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">新密码</label>
-                    <div class="layui-input-inline">
-                      <input id="new-pass" type="password" name="newPass" value="" required  lay-verify="required" placeholder="新密码" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">确认密码</label>
-                    <div class="layui-input-inline">
-                      <input id="confirm-pass" type="password" name="confirmPass" value="" required  lay-verify="required|pass" placeholder="确认密码" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">个性签名</label>
-                    <div class="layui-input-inline">
-                      <input id="account-intro" type="text" name="address" value="原地址" required  lay-verify="required" placeholder="个性签名" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button id="submit-btn" class="layui-btn" type="button" lay-submit lay-filter="submit-info">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>
-            </form>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>个人信息</title>
+    <link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+    <script type="text/javascript" src="../lib/layui/layui.js"></script>
+    <script src="../js/myCookie.js"></script>
+</head>
+<body>
+<div style="margin-top: 50px;">
+    <from class="layui-form" method="post" enctype="multipart/form-data">
+        <div  class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" id="uploadImg">
+                    <i class="layui-icon">&#xe67c;</i>更改头像
+                </button>
+            </div>
         </div>
+    </from>
+    <form class="layui-form" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-inline">
+                <input id="account-name" type="text" name="name" value="现姓名" required  lay-verify="required" placeholder="账号名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-inline">
+                <input id="account-nickname" type="text" name="nickname" value="" required  lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话号码</label>
+            <div class="layui-input-inline">
+                <input id="phone" type="text" name="phone" value="" required  lay-verify="required" placeholder="电话号码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户状态</label>
+            <div class="layui-input-inline">
+                <select id="status" name="status" lay-verify="">
+                    <option value="online">在线</option>
+                    <option value="offline">离线</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">原密码</label>
+            <div class="layui-input-inline">
+                <input id="old-pass" type="password" name="oldPass" value="" required  lay-verify="required" placeholder="原密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新密码</label>
+            <div class="layui-input-inline">
+                <input id="new-pass" type="password" name="newPass" value="" required  lay-verify="required" placeholder="新密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-inline">
+                <input id="confirm-pass" type="password" name="confirmPass" value="" required  lay-verify="required|pass" placeholder="确认密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">个性签名</label>
+            <div class="layui-input-inline">
+                <input id="account-intro" type="text" name="address" value="原地址" required  lay-verify="required" placeholder="个性签名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button id="submit-btn" class="layui-btn" type="button" lay-submit lay-filter="submit-info">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
 
-        <script>
-            layui.use(['jquery','upload','form'], function(args){
-              var $ = layui.$;
-              var form = layui.form;
-              var upload = layui.upload;
+<script>
+    layui.use(['jquery','upload','form'], function(args){
+        var $ = layui.$;
+        var form = layui.form;
+        var upload = layui.upload;
 
-                //执行实例
-            var uploadInst = upload.render({
-                elem: '#uploadImg' //绑定元素
-                ,url: '/business/upload' //上传接口
-                ,done: function(res){
-                    //上传完毕回调
-                }
-                ,error: function(){
-                    //请求异常回调
-                }
-            });
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#uploadImg' //绑定元素
+            ,url: '/buyer/upload' //上传接口
+            ,done: function(res){
+                //上传完毕回调
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
 
-              form.render();
+        form.render();
 
-              form.verify({
-                pass:function(value){
-                  
-                  var pass = $('#new-pass').val();
-                  if( pass != value) {
+        form.verify({
+            pass:function(value){
+
+                var pass = $('#new-pass').val();
+                if( pass != value) {
                     return "两次输入密码不一致";
-                  }
                 }
-              })
+            }
+        })
 
-              form.on('submit(submit-info)',function(data){
-                  alert(data.field);
-                  $.ajax({
-                    type:"POST",
-                    url:'/business/update',
-                    data:{
-                      userId:getCookie('userId'),
-                      userName:data.field.name,
-                      nickname:data.field.nickname,
-                      originalUserPass:data.field.oldPass,
-                      newUserPass:data.field.newPass,
-                      confirmUserPass:data.field.confirmPass,
-                      intro:data.field.intro,
-                    },
-                    dataType:'json',
+        form.on('submit(submit-info)',function(data){
+            alert(data.field);
+            $.ajax({
+                type:"POST",
+                url:'/buyer/update',
+                data:{
+                    userId:getCookie('userId'),
+                    userName:data.field.name,
+                    nickName:data.field.nickname,
+                    originalPass:data.field.oldPass,
+                    newPass:data.field.newPass,
+                    userIntro:data.field.intro,
+                    phone:data.field.phone,
+                    userStatus:$('#status').val()
+                },
+                dataType:'json',
 
-                    success:function(){
-                      alert('success');
-                    },
+                success:function(){
+                    alert('success');
+                },
 
-                    error:function(){
-                      alert('failed');
-                    }
-                  })
-                  
-                  return false;
-                })
-
-              $(document).ready(function(){
-
-                $.ajax({
-                  type:'GET',
-                  url:'',
-                  data:{
-                    userId:getCookie('userId')
-                  },
-                  dataType:'json',
-
-                  success:function(data){
-                    $('#account-name').val(data.userName);
-                    $('#account-nickname').val(data.userNickname);
-                    $('#account-intro').val(data.userIntro);
-                  },
-
-                  error:function(){
+                error:function(){
                     alert('failed');
-                  }
-                })  
-              })
+                }
+            })
 
-            }); 
-            
-        </script>
-    </body>
+            return false;
+        })
+
+        $(document).ready(function(){
+
+            $.ajax({
+                type:'GET',
+                url:'',
+                data:{
+                    userId:getCookie('userId')
+                },
+                dataType:'json',
+
+                success:function(data){
+                    $('#account-name').val(data.userName);
+                    $('#account-nickname').val(data.nickname);
+                    $('#account-intro').val(data.userIntro);
+                    $('#phone').val(data.phone);
+                },
+
+                error:function(){
+                    alert('failed');
+                }
+            })
+        })
+
+    });
+
+
+</script>
+</body>
 </html>

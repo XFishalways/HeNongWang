@@ -33,9 +33,24 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-form-label">电话号码</label>
+                    <div class="layui-input-inline">
+                        <input id="phone" type="text" name="phone" value="" required  lay-verify="required" placeholder="电话号码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户状态</label>
+                    <div class="layui-input-inline">
+                        <select id="status" name="status" lay-verify="">
+                            <option value="online">在线</option>
+                            <option value="offline">离线</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <label class="layui-form-label">原密码</label>
                     <div class="layui-input-inline">
-                        <input id="old-pass" type="password" name="oldPass" value="" required  lay-verify="required|pass" placeholder="原密码" autocomplete="off" class="layui-input">
+                        <input id="old-pass" type="password" name="oldPass" value="" required  lay-verify="required" placeholder="原密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -103,11 +118,12 @@
                     data:{
                       userId:getCookie('userId'),
                       userName:data.field.name,
-                      nickname:data.field.nickname,
-                      originalUserPass:data.field.oldPass,
-                      newUserPass:data.field.newPass,
-                      confirmUserPass:data.field.confirmPass,
-                      intro:data.field.intro,
+                      nickName:data.field.nickname,
+                      originalPass:data.field.oldPass,
+                      newPass:data.field.newPass,
+                      userIntro:data.field.intro,
+                      phone:data.field.phone,
+                      userStatus:$('#status').val()
                     },
                     dataType:'json',
 
@@ -137,6 +153,7 @@
                     $('#account-name').val(data.userName);
                     $('#account-nickname').val(data.nickname);
                     $('#account-intro').val(data.userIntro);
+                    $('#phone').val(data.phone);
                   },
 
                   error:function(){
