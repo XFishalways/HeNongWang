@@ -169,42 +169,25 @@ public class SaleStoreService {
 
         saleStore.setSaleStoreid(saleStoreId);
 
-        if(saleStoreTitle != null){
-            saleStore.setSaleStoreTitle(saleStoreTitle);
-        }
-        if(saleStoreIntro != null){
-            saleStore.setSaleStoreIntro(saleStoreIntro);
-        }
-        if(saleStoreContent != null){
-            saleStore.setSaleStoreContent(saleStoreContent);
-        }
-        if(saleStoreStartTime != null){
-            saleStore.setSaleStoreStartTime(saleStoreStartTime);
-        }
-        if(saleStoreEndTime != null){
-            saleStore.setSaleStoreEndTime(saleStoreEndTime);
-        }
-        if(saleStoreRange != null){
-            saleStore.setSaleStoreRange(saleStoreRange);
-        }
-        if(saleStoreType != null){
-            saleStore.setSaleStoreType(saleStoreType);
-        }
-        if(saleStoreStatus != null){
-            saleStore.setSaleStoreStatus(saleStoreStatus);
-        }
+        saleStore.setSaleStoreTitle(saleStoreTitle);
+        saleStore.setSaleStoreIntro(saleStoreIntro);
+        saleStore.setSaleStoreContent(saleStoreContent);
+        saleStore.setSaleStoreStartTime(saleStoreStartTime);
+        saleStore.setSaleStoreEndTime(saleStoreEndTime);
+        saleStore.setSaleStoreRange(saleStoreRange);
+        saleStore.setSaleStoreType(saleStoreType);
+        saleStore.setSaleStoreStatus(saleStoreStatus);
 
         return saleStoreDao.insert(saleStore);
 
     }
 
-    public Boolean update(SaleStore saleStore, String saleStoreTitle, String saleStoreIntro,
+    public Boolean update(String saleStoreId, String saleStoreTitle, String saleStoreIntro,
                           String saleStoreContent, Timestamp saleStoreStartTime,
                           Timestamp saleStoreEndTime, String saleStoreRange, String saleStoreType,
                           String saleStoreStatus) throws SQLException{
 
-        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
-        String saleStoreId = snowflake.nextIdStr();
+        SaleStore saleStore = saleStoreDao.findOneStore(saleStoreId);
 
         if(saleStore != null){
             if (!saleStore.getSaleStoreTitle().equals(saleStoreTitle)) {

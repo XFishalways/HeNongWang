@@ -85,7 +85,7 @@ public class AdminSaleStoreController {
     /**
      * 注册商店商品
      */
-    @PostMapping("/Admin/saleStore/register")
+    @PostMapping("/admin/saleStore/register")
     public String registerSaleStore (@RequestParam("saleStoreTitle") String saleStoreTitle,
                                      @RequestParam("saleStoreIntro") String saleStoreIntro,
                                      @RequestParam("saleStoreContent") String saleStoreContent,
@@ -110,7 +110,7 @@ public class AdminSaleStoreController {
     /**
      * 更新商店活动信息
      */
-    @PostMapping("/Admin/saleStore/update")
+    @PostMapping("/admin/saleStore/update")
     public String updateOneSaleStore(@RequestParam("saleStoreId") String saleStoreId,
                                      @RequestParam("saleStoreTitle") String saleStoreTitle,
                                      @RequestParam("saleStoreIntro") String saleStoreIntro,
@@ -125,9 +125,8 @@ public class AdminSaleStoreController {
         Timestamp saleStoreStartTime = Timestamp.valueOf(salestorestarttime);
         Timestamp saleStoreEndTime = Timestamp.valueOf(salestoreendtime);
 
-        SaleStore saleStore = saleStoreService.getSaleStoreId(saleStoreId);
 
-        saleStoreService.update(saleStore, saleStoreTitle, saleStoreIntro, saleStoreContent,
+        saleStoreService.update(saleStoreId, saleStoreTitle, saleStoreIntro, saleStoreContent,
                                 saleStoreStartTime, saleStoreEndTime,  saleStoreRange,  saleStoreType,
                                 saleStoreStatus);
 
