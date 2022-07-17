@@ -51,7 +51,7 @@
                             <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">商品ID:</div>
                         </div>
                         <div class="layui-col-md3" style="margin-top:15px;">
-                            <div id="skiId" style="font-size: 20px;font-family:'楷体';font-weight: bold;">1433223</div>
+                            <div id="goodsId" style="font-size: 20px;font-family:'楷体';font-weight: bold;">1433223</div>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                             <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">销售价：</div>
                         </div>
                         <div class="layui-col-md3" style="margin-top:15px;">
-                            <div id="sallPrice" style="font-size: 20px;font-family:'楷体';font-weight: bold;">1433223</div>
+                            <div id="salePrice" style="font-size: 20px;font-family:'楷体';font-weight: bold;">1433223</div>
                         </div>
                         <div class="layui-col-md3" style="margin-top:15px;">
                             <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">元</div>
@@ -178,14 +178,14 @@
                     url:'',
                     data:{
                         userId:getCookie('userId'),
-                        skiId:getCookie('skiId')
+                        goodsId:getCookie('goodsId')
                     },
                     dataType:'json',
 
                     success:function(data){
-                        $('#skiId').val(getCookie('skiId'));
+                        $('#goodsId').val(getCookie('goodsId'));
                         $('#price').val(data.price);
-                        $('#sallPrice').val(data.sallPrice);
+                        $('#salePrice').val(data.salePrice);
                         $('#catagory').val(data.catalog);
                         $('#content1').val(data.intro);
                     },
@@ -200,7 +200,7 @@
                         url:'/login',
                         data:{
                             userId:getCookie('userId'),
-                            skiId:getCookie('skiId'),
+                            goodsId:getCookie('goodsId'),
                             quantity:$('#input-num').val(),
                             type:'buyNow'
                         },
@@ -222,7 +222,7 @@
                         url:'/login',
                         data:{
                             userId:getCookie('userId'),
-                            skiId:getCookie('skiId'),
+                            goodsId:getCookie('goodsId'),
                             quantity:$('#input-num').val(),
                             type:'inCart'
                         },
