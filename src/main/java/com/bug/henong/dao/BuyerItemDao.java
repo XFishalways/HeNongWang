@@ -66,7 +66,16 @@ public class BuyerItemDao {
 
         return  buyerItem;
     }
+    //更新订单ID
+    public int updateOrderID(String id, String orderId) throws SQLException {
 
+        int rw = Db.use().update(
+                Entity.create().set("ORDER_ID",orderId),
+                Entity.create("BUYER_ITEM").set("SKU_ID",id)
+        );
+
+        return rw;
+    }
     //更新商品标题
     public int updateSkuTitle(String id, String skuTitle) throws SQLException {
 
