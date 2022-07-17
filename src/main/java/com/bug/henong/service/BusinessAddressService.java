@@ -1,20 +1,31 @@
 package com.bug.henong.service;
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import com.bug.henong.dao.BusinessAddressDao;
 import com.bug.henong.entity.BusinessAddress;
-import com.bug.henong.entity.Farmer;
 import org.springframework.stereotype.Service;
 
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service("BusinessAddressService")
 public class BusinessAddressService {
 
     private BusinessAddressDao businessAddressDao =new BusinessAddressDao();
 
-    /**得到商品地址信息*/
-    public BusinessAddress getBusinessAddressDetailById(String addressId) throws SQLException {
+    /**
+     * 得到所有商品地址信息
+     */
+    public List<BusinessAddress> getBusinessAddressDetailById(String userId) throws SQLException {
+        return businessAddressDao.findAll(userId);
+    }
+
+    /**
+     * 得到一个商品信息
+     */
+    public BusinessAddress findOneAddress(String addressId) throws SQLException{
         return businessAddressDao.findOneAddress(addressId);
     }
 
@@ -113,7 +124,7 @@ public class BusinessAddressService {
     }
 
     public int update(String addressId, String addressName, String province, String city,
-                      String county, String street, String lastDetail, String isDefault) throws SQLException{
+                      String county, String street, String lastDetail, String isDefault, String userId) throws SQLException{
 
         BusinessAddress businessAddress = businessAddressDao.findOneAddress(addressId);
 
@@ -121,27 +132,58 @@ public class BusinessAddressService {
             return 0;
         }
         if(!businessAddress.getAddressName().equals(addressId)){
-            updateAddress((String) addressId, addressName);
+            businessAddressDao.updateAddressName(addressId, addressName);
         }
         if(!businessAddress.getProvince().equals(province)){
-            updateProvince((String) addressId, province);
+            businessAddressDao.updateProvince(addressId, province);
         }
         if(!businessAddress.getCity().equals(city)){
-            updateCity((String) addressId, city);
+            businessAddressDao.updateCity(addressId, city);
         }
         if(!businessAddress.getCounty().equals(county)){
-            updateCounty((String) addressId, county);
+            businessAddressDao.updateCounty(addressId, county);
         }
         if(!businessAddress.getStreet().equals(street)){
-            updateStreet((String) addressId, street);
+            businessAddressDao.updateStreet(addressId, street);
         }
         if(!businessAddress.getLastDetail().equals(lastDetail)){
-            updateLastDetail((String) addressId, lastDetail);
-        }   if(!businessAddress.getIsDefault().equals(isDefault)){
-
+            businessAddressDao.updateLastDetail(addressId, lastDetail);
+        }
+        if(!businessAddress.getIsDefault().equals(isDefault)){
+            businessAddressDao.updateIsDefault(addressId, isDefault);
+        }
+        if(!businessAddress.getUserId().equals(userId)){
+            businessAddressDao.updateIsDefault(addressId, userId);
         }
         return 1;
 
     }
 
+    public int Insert(String addressName, String province, String city, String county, String street,
+                      String lastDetail, String isDefault, String userId) throws SQLException{
+
+        BusinessAddress businessAddress = new BusinessAddress();
+
+        Snowflake snowflake = IdUtil.getSnowflake(3, 1);
+        String businessAddressId = snowflake.nextIdStr();
+
+        businessAddress.setAddressId(businessAddressId);
+
+        businessAddress.setAddressName(addressName);
+        businessAddress.setProvince(province);
+        businessAddress.setCity(city);
+        businessAddress.setCounty(county);
+        businessAddress.setStreet(street);
+        businessAddress.setLastDetail(lastDetail);
+        businessAddress.setIsDefault(isDefault);
+        businessAddress.setUserId(userId);
+
+        return businessAddressDao.insert(businessAddress);
+
+    }
+    public void deleteAddress(String addressId) throws SQLException {
+
+        businessAddressDao.delete(addressId);
+
+    }
 }

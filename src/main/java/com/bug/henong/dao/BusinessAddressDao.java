@@ -39,12 +39,14 @@ public class BusinessAddressDao {
     }
 
     /**返回所有信息*/
-    public List<BusinessAddress> findAll() throws SQLException {
-
-
+    public List<BusinessAddress> findAll(String userId) throws SQLException {
 
         List<BusinessAddress> businessAddresses = new ArrayList<BusinessAddress>();
-        List<Entity> entities = Db.use().findAll("BUSINESS_ADDRESS");
+        List<Entity> entities = Db.use().findAll(Entity.create("BUSINESS_ADDRESS").set("USER_ID", userId));
+
+        if (entities.isEmpty()) {
+            return null;
+        }
 
         for(Entity e : entities){
             String addressStr = JSONUtil.toJsonStr(e);
@@ -154,6 +156,37 @@ public class BusinessAddressDao {
         );
 
         return rw;
+
+    }
+
+    /**
+     *更新是否默认
+     */
+    public int updateIsDefault(String id, String isDefault) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("IS_DEFAULT", isDefault),
+                Entity.create("BUSINESS_ADDRESS").set("ADDRESS_ID",id)
+        );
+
+        return rw;
+
+    }
+
+    /**
+     * 得到地址数量
+     */
+    public int getSize()throws SQLException{
+        List<BusinessAddress> businessAddresses = new ArrayList<BusinessAddress>();
+        List<Entity> entities = Db.use().findAll("BUSINESS_ADDRESS");
+
+        for(Entity e : entities){
+            String addressStr = JSONUtil.toJsonStr(e);
+            BusinessAddress businessAddress = JSONUtil.toBean(addressStr,BusinessAddress.class);
+            businessAddresses.add(businessAddress);
+        }
+
+        return businessAddresses.size();
 
     }
 

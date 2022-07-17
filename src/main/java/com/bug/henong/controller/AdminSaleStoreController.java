@@ -1,7 +1,10 @@
 package com.bug.henong.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
+import com.bug.henong.entity.BusinessAddress;
 import com.bug.henong.entity.Goods;
+import com.bug.henong.entity.SaleProduct;
 import com.bug.henong.entity.SaleStore;
 import com.bug.henong.service.SaleStoreService;
 import com.bug.henong.utils.MapFactory;
@@ -22,53 +25,42 @@ public class AdminSaleStoreController {
     private SaleStoreService saleStoreService = new SaleStoreService();
 
     /**
-     * 查询一个商店活动
+     * 查询所有商店活动
      */
-    @GetMapping("/admin/saleStore/{saleStoreId}")
-    public void findOneSale(@RequestParam("saleStoreId") String saleStoreId,
-                            HttpServletResponse response) throws SQLException, IOException {
-        PrintWriter printWriter = response.getWriter();
+    @RequestMapping(value = "/admin/saleStore/findAll", method = RequestMethod.GET)
+
+    public String findAllSales (@RequestParam("saleId") String saleId,
+                                HttpSession session ) throws SQLException{
 
         String json;
 
-        SaleStore saleStore = saleStoreService.getSaleStoreId(saleStoreId);
-        if (saleStoreId != null) {
-            json = JSON.toJSONString(saleStore);
-            json = "[" + json + "]";
-        } else {
-            json = "{\"log\":\"Please input the sale's id of a store!\"}";
-        }
-        printWriter.print(json);
-        printWriter.flush();
-        printWriter.close();
+        List<SaleStore> saleStores = saleStoreService.getAllSalesById(saleId);
+        if (saleId == null) {
 
+            session.setAttribute("errorMsg", "查找不到商店活动id");
+            return JSONUtil.toJsonStr(saleStores);
+        }
+
+        json = JSON.toJSONString(saleStores);
+        return json;
     }
 
     /**
-     * 查询所有商店活动
+     * 查询一个商店活动
      */
+    @GetMapping("/admin/saleStore/findOne")
+    public String findOneSales(HttpSession session)throws SQLException {
+        Object saleStoreId = session.getAttribute("saleStoreId");
+        String id = (String) saleStoreId;
+        SaleStore saleStore = saleStoreService.getSaleStoreId(id);
 
-    @GetMapping("/admin/saleStore/findAll")
-    public void findAllSales(HttpServletResponse response)throws IOException, SQLException {
-
-        PrintWriter printWriter = response.getWriter();
-
-        String json;
-
-        List<SaleStore> saleStore = saleStoreService.getAllSales();
-
-        if(saleStore != null) {
-            json = JSON.toJSONString(saleStore);
-            System.out.println(json);
-        }
-        else {
-            json = "{\"log\":\"Invalid id\"}";
+        if(saleStore == null){
+            session.setAttribute("errorMsg", "查找不到商店活动id");
+            return null;
         }
 
-        printWriter.print(json);
-        printWriter.flush();
-        printWriter.close();
-
+        String json = JSON.toJSONString(saleStore);
+        return json;
     }
 
     /**

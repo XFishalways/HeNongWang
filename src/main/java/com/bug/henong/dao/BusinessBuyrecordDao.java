@@ -44,7 +44,7 @@ public class BusinessBuyrecordDao {
 
         String sql = "SELECT * FROM BUSINESS_BUYRECORD";
 
-        List<BusinessBuyrecord> businessBuyrecords = new ArrayList<BusinessBuyrecord>();
+        List<BusinessBuyrecord> businessBuyrecords = new ArrayList<>();
         List<Entity> entities = Db.use().findAll("BUSINESS_BUYRECORD");
 
         for(Entity e : entities){
@@ -129,6 +129,15 @@ public class BusinessBuyrecordDao {
     public int updateAddressId(String id, String addressId) throws SQLException {
         int rw = Db.use().update(
                 Entity.create().set("SKU_STATUS",addressId),
+                Entity.create("BUSINESS_BUYRECORD").set("RECORD_ID",id)
+        );
+
+        return rw;
+    }
+
+    public int updateRrcordStatus(String id, String recordStatus) throws SQLException {
+        int rw = Db.use().update(
+                Entity.create().set("RECORD_STATUS",recordStatus),
                 Entity.create("BUSINESS_BUYRECORD").set("RECORD_ID",id)
         );
 

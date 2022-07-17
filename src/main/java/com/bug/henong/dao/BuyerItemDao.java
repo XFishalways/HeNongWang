@@ -34,16 +34,20 @@ public class BuyerItemDao {
     }
 
     //返回所有信息
-    public List<BuyerItem> findAll() throws SQLException {
-
-        String sql = "SELECT * FROM BUYER_ITEM";
+    public List<BuyerItem> findAllItem(String id) throws SQLException {
 
         List<BuyerItem> buyerItems = new ArrayList<BuyerItem>();
-        List<Entity> entities = Db.use().findAll("BUYER_ITEM");
+        List<Entity> entities= Db.use().findAll(
+                Entity.create("BUYER_ITEM").set("SKU_ID",id)
+        );
 
-        for(Entity e : entities){
-            String buyerStr = JSONUtil.toJsonStr(e);
-            BuyerItem buyerItem = JSONUtil.toBean(buyerStr,BuyerItem.class);
+        if(entities.isEmpty()){
+            return null;
+        }
+        for(Entity e : entities) {
+
+            String buyerItemStr = JSONUtil.toJsonStr(e);
+            BuyerItem buyerItem = JSONUtil.toBean(buyerItemStr,BuyerItem.class);
             buyerItems.add(buyerItem);
         }
 
@@ -60,13 +64,23 @@ public class BuyerItemDao {
         if(entities.isEmpty()){
             return null;
         }
+
         Entity e = entities.get(0);
-        String buyerStr = JSONUtil.toJsonStr(e);
-        BuyerItem buyerItem = JSONUtil.toBean(buyerStr,BuyerItem.class);
+        String buyerItemStr = JSONUtil.toJsonStr(e);
+        BuyerItem buyerItem = JSONUtil.toBean(buyerItemStr,BuyerItem.class);
 
-        return  buyerItem;
+        return buyerItem;
     }
+    //更新订单ID
+    public int updateOrderID(String id, String orderId) throws SQLException {
 
+        int rw = Db.use().update(
+                Entity.create().set("ORDER_ID",orderId),
+                Entity.create("BUYER_ITEM").set("SKU_ID",id)
+        );
+
+        return rw;
+    }
     //更新商品标题
     public int updateSkuTitle(String id, String skuTitle) throws SQLException {
 
@@ -105,6 +119,16 @@ public class BuyerItemDao {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRICE",salePrice),
+                Entity.create("BUYER_ITEM").set("SKU_ID",id)
+        );
+
+        return rw;
+    }
+    //更新数量
+    public int updateQuantity(String id, double quantity) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("QUANTITY",quantity),
                 Entity.create("BUYER_ITEM").set("SKU_ID",id)
         );
 
@@ -157,7 +181,23 @@ public class BuyerItemDao {
         }
         return buyerItems;
     }
+    /**
+     *通过用户ID与商品id查找
+     */
+    public BuyerItem findBuyerItemByUserIdAndSkuID(String userId,String skuId) throws SQLException {
 
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ITEM Where USER_ID = ? AND SKU_ID", userId,skuId);
+
+        if(entities.isEmpty()){
+            return null;
+        }
+            Entity e =entities.get(0);
+            String buyerItemStr = JSONUtil.toJsonStr(e);
+            BuyerItem buyerItem = JSONUtil.toBean(buyerItemStr, BuyerItem.class);
+
+
+        return buyerItem;
+    }
     /**
      *通过商品标题查找
      */
@@ -172,5 +212,6 @@ public class BuyerItemDao {
         }
         return buyerItems;
     }
+
 
 }

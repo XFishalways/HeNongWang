@@ -71,7 +71,7 @@
             $(document).ready(function(){
                 $.ajax({
                     type:'GET',
-                    url:'',
+                    url:'/buyer/showAllInfo',
                     data:{
                         userId:getCookie('userId')
                     },
@@ -79,7 +79,7 @@
 
                     success:function(data){
                         $('#name').html(data.userName);
-                        $('#nickname').html(data.userNickname);
+                        $('#nickname').html(data.nickName);
                         $('#userId').html(data.userId);
                         $('#phone').html(data.phone);
                         $('#intro').html(data.userIntro);

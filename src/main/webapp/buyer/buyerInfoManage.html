@@ -21,25 +21,19 @@
             </from>
             <form class="layui-form" method="post">
                 <div class="layui-form-item">
-                     <label class="layui-form-label">姓名</label>
-                     <div class="layui-input-inline">
-                       <input id="account-name" type="text" name="name" value="现姓名" required  lay-verify="required" placeholder="账号名" autocomplete="off" class="layui-input">
-                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">昵称</label>
+                    <label class="layui-form-label" style="color: white">昵称</label>
                     <div class="layui-input-inline">
                       <input id="account-nickname" type="text" name="nickname" value="" required  lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">电话号码</label>
+                    <label class="layui-form-label"style="color: white">电话号码</label>
                     <div class="layui-input-inline">
                         <input id="phone" type="text" name="phone" value="" required  lay-verify="required" placeholder="电话号码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">用户状态</label>
+                    <label class="layui-form-label"style="color: white">用户状态</label>
                     <div class="layui-input-inline">
                         <select id="status" name="status" lay-verify="">
                             <option value="online">在线</option>
@@ -48,27 +42,27 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">原密码</label>
+                    <label class="layui-form-label"style="color: white">原密码</label>
                     <div class="layui-input-inline">
                         <input id="old-pass" type="password" name="oldPass" value="" required  lay-verify="required" placeholder="原密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">新密码</label>
+                    <label class="layui-form-label"style="color: white">新密码</label>
                     <div class="layui-input-inline">
                       <input id="new-pass" type="password" name="newPass" value="" required  lay-verify="required" placeholder="新密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">确认密码</label>
+                    <label class="layui-form-label"style="color: white">确认密码</label>
                     <div class="layui-input-inline">
                       <input id="confirm-pass" type="password" name="confirmPass" value="" required  lay-verify="required|pass" placeholder="确认密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">个性签名</label>
+                    <label class="layui-form-label"style="color: white">个性签名</label>
                     <div class="layui-input-inline">
-                      <input id="account-intro" type="text" name="address" value="原地址" required  lay-verify="required" placeholder="个性签名" autocomplete="off" class="layui-input">
+                      <input id="account-intro" type="text" name="intro" value="原地址" required  lay-verify="required" placeholder="个性签名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -91,10 +85,10 @@
                     elem: '#uploadImg' //绑定元素
                     ,url: '/buyer/upload' //上传接口
                     ,done: function(res){
-                        //上传完毕回调
+                        alert('success');
                     }
                     ,error: function(){
-                        //请求异常回调
+                        alert('failed');
                     }
                 });
 
@@ -117,11 +111,10 @@
                     url:'/buyer/update',
                     data:{
                       userId:getCookie('userId'),
-                      userName:data.field.name,
                       nickName:data.field.nickname,
                       originalPass:data.field.oldPass,
                       newPass:data.field.newPass,
-                      userIntro:data.field.intro,
+                      userIntro:data.field.userIntro,
                       phone:data.field.phone,
                       userStatus:$('#status').val()
                     },
@@ -143,15 +136,14 @@
 
                 $.ajax({
                   type:'GET',
-                  url:'',
+                  url:'/buyer/showAllInfo',
                   data:{
                     userId:getCookie('userId')
                   },
                   dataType:'json',
 
                   success:function(data){
-                    $('#account-name').val(data.userName);
-                    $('#account-nickname').val(data.nickname);
+                    $('#account-nickname').val(data.nickName);
                     $('#account-intro').val(data.userIntro);
                     $('#phone').val(data.phone);
                   },

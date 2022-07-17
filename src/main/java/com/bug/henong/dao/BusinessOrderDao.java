@@ -71,7 +71,43 @@ public class BusinessOrderDao {
 
         return  businessOrder;
     }
+    /**通过卖家id查找某一行数据*/
+    public List<BusinessOrder> findOneOrderByBusinessId(String businessId) throws SQLException {
 
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ORDER WHERE USER_ID ?", businessId);
+
+        List<BusinessOrder> businessOrders = new ArrayList<BusinessOrder>();
+        if(entities.isEmpty()){
+            return null;
+        }
+        for(Entity e : entities){
+            String orderStr = JSONUtil.toJsonStr(e);
+            BusinessOrder businessOrder = JSONUtil.toBean(orderStr,BusinessOrder.class);
+            businessOrders.add(businessOrder);
+        }
+
+        return businessOrders;
+
+    }
+
+    /**通过卖家id查找某一行数据*/
+    public List<BusinessOrder> findOneOrderByBusinessIdAndOrderId(String businessId,String orderId) throws SQLException {
+
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ORDER WHERE USER_ID ? AND ORDER_ID LIKE ?", businessId,"%"+orderId+"%");
+
+        List<BusinessOrder> businessOrders = new ArrayList<BusinessOrder>();
+        if(entities.isEmpty()){
+            return null;
+        }
+        for(Entity e : entities){
+            String orderStr = JSONUtil.toJsonStr(e);
+            BusinessOrder businessOrder = JSONUtil.toBean(orderStr,BusinessOrder.class);
+            businessOrders.add(businessOrder);
+        }
+
+        return businessOrders;
+
+    }
     /**更新地址ID*/
     public int updateAddressID(String id, String addressID) throws SQLException {
 
@@ -88,6 +124,16 @@ public class BusinessOrderDao {
 
         int rw = Db.use().update(
                 Entity.create().set("ORDER_STATUS",orderStatus),
+                Entity.create("BUSINESS_ORDER").set("ORDER_ID",id)
+        );
+
+        return rw;
+    }
+
+    public int updateSkuAmount(String id, Double skuAmount) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("SKU_AMOUNT",skuAmount),
                 Entity.create("BUSINESS_ORDER").set("ORDER_ID",id)
         );
 

@@ -75,12 +75,6 @@
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">个性签名:</label>
-                                        <div class="layui-input-block">
-                                            <input id='input-intro' type="text" name="province" placeholder="请填写个性签名" class="layui-input" lay-verify="required" required />
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
                                         <div class="layui-input-block">
                                             <button type="button" class="layui-btn layui-btn-primary pre">上一步</button>
                                             <button class="layui-btn" id="register-btn-2" lay-submit lay-filter="registerStep2">
@@ -111,9 +105,9 @@
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">个性签名:</label>
+                                        <label class="layui-form-label">电话号码:</label>
                                         <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux" id="confirm-intro" >dog</div>
+                                            <div class="layui-form-mid layui-word-aux" id="confirm-phone">323360</div>
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -151,6 +145,7 @@
 </div>
 <script src="../lib/layui/layui.js" charset="utf-8"></script>
 <script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="../js/myCookie.js"></script>
 <script>
     layui.use([ 'form', 'step'], function () {
         var $ = layui.$,
@@ -195,21 +190,19 @@
             $('#confirm-name').html($('#input-name').val());
             $('#confirm-nickname').html($('#input-nickname').val());
             $('#confirm-userId').html($('#input-userId').val());
-            $('#confirm-intro').html($('#input-intro').val(),);
+            $('#confirm-phone').html($('#input-phone').val());
             return false;
         });
 
         form.on('submit(registerStep3)', function (data) {
             $.ajax({
                 type:"POST",
-                url:'farmer/update',
+                url:'/business/register',
                 data:{
                     userName:$('#input-name').val(),
                     nickName:$('#input-nickname').val(),
                     userId:$('#input-userId').val(),
                     usePass:$('#password').val(),
-                    userIntro:$('#input-intro').val(),
-                    avatar:null,
                     phone:$('#input-phone').val(),
                 },
                 dataType:'json',
@@ -239,6 +232,6 @@
     })
 </script>
 
-<script src="../js/myCookie.js"></script>
+
 </body>
 </html>

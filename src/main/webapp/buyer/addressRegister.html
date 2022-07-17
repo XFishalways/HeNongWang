@@ -12,39 +12,60 @@
         <div style="margin-top: 50px;">
             <form class="layui-form" method="post">
                 <div class="layui-form-item">
-                     <label class="layui-form-label">地址名称</label>
+                    <label class="layui-form-label" style="color: white">是否默认</label>
+                    <div class="layui-input-inline">
+                        <select id="isDefault" name="isDefault" lay-verify="">
+                            <option value="online">否</option>
+                            <option value="offline">是</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="color: white">收件人姓名</label>
+                    <div class="layui-input-inline">
+                        <input id="receiverName" type="text" name="receiverName" value="" required  lay-verify="required" placeholder="收件人姓名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="color: white">收件人电话号码</label>
+                    <div class="layui-input-inline">
+                        <input id="receiverPhone" type="text" name="receiverPhone" value="" required  lay-verify="required" placeholder="收件人电话号码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                     <label class="layui-form-label" style="color: white">地址名称</label>
                      <div class="layui-input-inline">
                        <input id="addr-name" type="text" name="addrName" value="" required  lay-verify="required" placeholder="地址名" autocomplete="off" class="layui-input">
                      </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">省</label>
+                    <label class="layui-form-label" style="color: white">省</label>
                     <div class="layui-input-inline">
                       <input id="province" type="text" name="province" value="" required  lay-verify="required" placeholder="省" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">市</label>
+                    <label class="layui-form-label" style="color: white">市</label>
                     <div class="layui-input-inline">
                         <input id="city" type="text" name="city" value="" required  lay-verify="required" placeholder="市" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">区</label>
+                    <label class="layui-form-label" style="color: white">区</label>
                     <div class="layui-input-inline">
-                      <input id="block" type="text" name="block" value="" required  lay-verify="required" placeholder="区" autocomplete="off" class="layui-input">
+                      <input id="county" type="text" name="county" value="" required  lay-verify="required" placeholder="区" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">街道</label>
+                    <label class="layui-form-label" style="color: white">街道</label>
                     <div class="layui-input-inline">
                       <input id="street" type="text" name="street" value="" required  lay-verify="required" placeholder="街道" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">门牌号</label>
+                    <label class="layui-form-label" style="color: white">门牌号</label>
                     <div class="layui-input-inline">
-                      <input id="houseNum" type="text" name="houseNum" value="" required  lay-verify="required" placeholder="门牌号" autocomplete="off" class="layui-input">
+                      <input id="lastDetail" type="text" name="lastDetail" value="" required  lay-verify="required" placeholder="门牌号" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -67,15 +88,18 @@
                   alert(data.field);
                   $.ajax({
                     type:"POST",
-                    url:'/business/addrRegister',
+                    url:'/buyer/address/register',
                     data:{
                       userId:getCookie('userId'),
                       addressName:data.field.addrName,
                       province:data.field.province,
                       city:data.field.city,
-                      block:data.field.block,
+                      county:data.field.county,
                       street:data.field.street,
-                      houseNum:data.field.houseNum,
+                      lastDetail:data.field.lastDetail,
+                      isDefault:$('#isDefault').val(),
+                      receiverName:data.field.receiverName,
+                      receiverPhone:data.field.receiverPhone
                     },
                     dataType:'json',
 

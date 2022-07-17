@@ -18,6 +18,7 @@
 </div>
 <table class="layui-hide" id="test" lay-filter="test"></table>
 
+<script src="../js/myCookie.js"></script>
 <script type="text/javascript">
 
 
@@ -44,14 +45,16 @@
 				,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 				,cols: [[
 					{field:'addressId', width:180, title: '地址ID', sort: true}
-					,{field:'addressName', width:180, title: '地址名'}
-					,{field:'seqNumber', width:180, title: '地址顺序',sort:true}
-					,{field:'isDefault', width:180, title: '是否默认'}
-					,{field:'addressContent', width:450, title: '地址内容'}
+					,{field:'addressName', width:180, title: '地址名称'}
+					,{field:'province', width:100, title: '省'}
+					,{field:'city', width:100, title: '市'}
+					,{field:'county', width:180, title: '区'}
+					,{field:'street', width:180, title: '街道'}
+					,{field:'isDefault', width:100, title: '是否为默认地址'}
 					,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 				]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("farmerGoods/getAll");
+					if( url.search(patt) != -1) tableInit("/business/address/findAddressInfo？userId="+getCookie('userId'));
 				}
 			});
 
@@ -60,10 +63,19 @@
 				var data = obj.data; //获得当前行数据
 				var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 				var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+				var id =obj.data.addressId;
 
 				if(layEvent === 'detail'){ //查看
+					createCookie('addressId',id);
 					//do
-					window.location.href="user_register.html";
+					layer.open({
+						type:2,
+						area:['360px','500px'],
+						content:'addressDetail.html',
+						success:function(){
+							alert('layer open success');
+						}
+					})
 				} else if(layEvent === 'del'){ //删除
 
 				} else if(layEvent === 'edit'){ //编辑
@@ -81,7 +93,7 @@
 		});
 	}
 
-	tableInit("farmerGoods/getAll");
+	tableInit("/business/address/findAddressInfo?userId="+ getCookie('userId'));
 
 	//第一种：主动加载jquery模块
 	layui.use(['jquery', 'layer'], function(){
@@ -91,7 +103,7 @@
 		//后面就跟你平时使用jQuery一样
 		$('#findById').on('click',function(res){
 			var id = $(this).parent().parent().find(".layui-input").val();
-			tableInit("FindGOODS?USER_ID=" +id +"&goodsPatt=");
+			tableInit("/business/address/findOneAddress?businessAddressId" +id);
 		})
 	});
 

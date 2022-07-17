@@ -33,10 +33,10 @@
                     zlt
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">个人信息查看</a></dd>
+                    <dd><a id="log-out" href="">退出</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退出</a></li>
         </ul>
     </div>
 
@@ -45,7 +45,7 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree layui-bg-green"  lay-filter="test">
                 <li class="layui-nav-item">
-                    <a class="" href="javascript:;">个人中心</a>
+                    <a class="" href="javascript:;">个人信息</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">个人信息查看</a></dd>
                         <dd><a href="javascript:;">个人信息更改</a></dd>
@@ -102,6 +102,14 @@
     layui.use('element', function(){
         var element = layui.element;
         var $ = layui.jquery;
+
+        $('#log-out').click(function(){
+            deleteCookie('userId');
+            deleteCookie('userType');
+            window.location.href = '../login.html';
+            return false;
+        })
+
         $("a").click(function(){
             //alert($(this).text());
             var text = $(this).text()

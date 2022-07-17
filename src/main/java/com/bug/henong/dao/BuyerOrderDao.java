@@ -66,7 +66,24 @@ public class BuyerOrderDao {
 
         return  buyerOrder;
     }
+    //通过用户id查找数据
+    public List<BuyerOrder> findOrdersByUserId(String userId) throws SQLException {
+        List<BuyerOrder> buyerOrders = new ArrayList<BuyerOrder>();
+        List<Entity> entities= Db.use().findAll(
+                Entity.create("BUYER_ORDER").set("USER_ID",userId)
+        );
 
+        if(entities.isEmpty()){
+            return null;
+        }
+        for(Entity e : entities){
+            String buyerStr = JSONUtil.toJsonStr(e);
+            BuyerOrder buyerOrder = JSONUtil.toBean(buyerStr,BuyerOrder.class);
+            buyerOrders.add(buyerOrder);
+        }
+
+        return buyerOrders;
+    }
 
     //更新地址
     public int updateAddressId(String id, String addressId) throws SQLException {
@@ -79,30 +96,36 @@ public class BuyerOrderDao {
         return rw;
     }
 
-    //更新订单状态
+    //更新开票id
     public int updateInvoiceTplId(String id, String invoiceTplId) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("ORDER_STATUS",invoiceTplId),
+                Entity.create().set("INVOICE_TP_ID",invoiceTplId),
+                Entity.create("BUYER_ORDER").set("ORDER_ID",id)
+        );
+
+        return rw;
+    }
+    //更新订单状态
+    public int updateStatus(String id, String status) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("ORDER_STATUS",status),
+                Entity.create("BUYER_ORDER").set("ORDER_ID",id)
+        );
+
+        return rw;
+    }
+    //更新支付方式
+    public int updatePayMethod(String id, String payMethod) throws SQLException {
+
+        int rw = Db.use().update(
+                Entity.create().set("PAY_METHOD",payMethod),
                 Entity.create("BUYER_ORDER").set("ORDER_ID",id)
         );
 
         return rw;
     }
 
-    /**
-     *通过userID查找
-     */
-    public List<BuyerOrder> findBuyerOrderByUserId(String userId) throws SQLException {
-        List<BuyerOrder> buyerOrders = new ArrayList<BuyerOrder>();
-        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ORDER Where USER_ID LIKE ? ", userId);
-
-        for (Entity e : entities) {
-            String userStr = JSONUtil.toJsonStr(e);
-            BuyerOrder buyerOrder = JSONUtil.toBean(userStr, BuyerOrder.class);
-            buyerOrders.add(buyerOrder);
-        }
-        return buyerOrders;
-    }
 
 }

@@ -49,11 +49,11 @@ public class BuyerCartDao {
         return buyerCarts;
     }
 
-    //通过id查找某一行数据
-    public BuyerCart findOneCart(String id) throws SQLException {
+    //通过用户id查找某一行数据
+    public BuyerCart findOneCart(String userId) throws SQLException {
 
         List<Entity> entities= Db.use().findAll(
-                Entity.create("BUYER_CART").set("USER_ID",id)
+                Entity.create("BUYER_CART").set("USER_ID",userId)
         );
 
         if(entities.isEmpty()){
@@ -67,10 +67,10 @@ public class BuyerCartDao {
     }
 
     //更新总金额
-    public int updateTotalPrice(String id, Double totalPrice) throws SQLException {
+    public int updateTotalPrice(String id, Double price) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("TOTAL_PRICE",totalPrice),
+                Entity.create().set("TOTAL_PRICE",price),
                 Entity.create("BUYER_CART").set("USER_ID",id)
         );
 

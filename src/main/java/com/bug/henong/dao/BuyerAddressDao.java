@@ -34,12 +34,14 @@ public class BuyerAddressDao {
     }
 
     //返回所有信息
-    public List<BuyerAddress> findAll() throws SQLException {
-
-        String sql = "SELECT * FROM BUYER_ADDRESS";
+    public List<BuyerAddress> findAll(String userId) throws SQLException {
 
         List<BuyerAddress> buyerAddresses = new ArrayList<BuyerAddress>();
-        List<Entity> entities = Db.use().findAll("BUYER_ADDRESS");
+        List<Entity> entities = Db.use().findAll(Entity.create("BUYER_ADDRESS").set("USER_ID", userId));
+
+        if (entities.isEmpty()) {
+            return null;
+        }
 
         for(Entity e : entities){
             String buyerStr = JSONUtil.toJsonStr(e);
@@ -65,6 +67,24 @@ public class BuyerAddressDao {
         BuyerAddress buyerAddress = JSONUtil.toBean(buyerStr,BuyerAddress.class);
 
         return  buyerAddress;
+    }
+    //通过用户id查找某一行数据
+    public List<BuyerAddress> findAddressByBuyerId(String buyerId) throws SQLException {
+        List<BuyerAddress> buyerAddresses = new ArrayList<BuyerAddress>();
+        List<Entity> entities= Db.use().findAll(
+                Entity.create("BUYER_ADDRESS").set("USER_ID",buyerId)
+        );
+
+        if(entities.isEmpty()){
+            return null;
+        }
+        for(Entity e : entities){
+            String buyerStr = JSONUtil.toJsonStr(e);
+            BuyerAddress buyerAddress = JSONUtil.toBean(buyerStr,BuyerAddress.class);
+            buyerAddresses.add(buyerAddress);
+        }
+
+        return buyerAddresses;
     }
 
     //更新地址名称
