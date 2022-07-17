@@ -2,7 +2,7 @@ package com.bug.henong.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.bug.henong.entity.SaleProduct;
-import com.bug.henong.service.SaleProductService;
+import com.bug.henong.service.AdminSaleProductService;
 import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,59 +19,48 @@ import java.util.List;
 
 @Controller
 
-public class SaleProductController {
+public class AdminSaleProductController {
 
-    private SaleProductService saleProductService = new SaleProductService();
+    private AdminSaleProductService saleProductService = new AdminSaleProductService();
 
-    @RequestMapping(value = "/admin/saleProduct/{saleProductId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/saleProduct", method = RequestMethod.GET)
 
-    public void findOneGoods (@RequestParam("saleProductId") String saleProductId,
-                                            HttpServletResponse response ) throws SQLException, IOException{
+    public String findOneGoods (@RequestParam("saleProductTitle") String saleProductTitle,
+                                            HttpSession session ) throws SQLException, IOException{
 
-        PrintWriter printWriter = response.getWriter();
-        String json;
+        SaleProduct saleProducts = saleProductService.getSaleProductDetailByTitle(saleProductTitle);
 
-        SaleProduct saleProduct = saleProductService.getSaleProductId(saleProductId);
-        if (saleProductId != null) {
-            json = JSON.toJSONString(saleProduct);
-            json = "[" + json + "]";
+        if (saleProducts == null){
+            session.setAttribute("errorMsg","数据为空");
+            return JSON.toJSONString(saleProducts);
         }else {
-            json = "{\"log\":\"Please input saleProduct id!\"}";
+            return JSON.toJSONString(saleProducts);
         }
-
-        printWriter.print(json);
-        printWriter.flush();
-        printWriter.close();
     }
 
     @RequestMapping(value = "/admin/saleProduct", method = RequestMethod.GET)
-    public void findAllProducts (HttpServletResponse response)  throws IOException, SQLException{
+    public String findAllProducts (@RequestParam("adminId")String adminID, HttpSession session)  throws IOException, SQLException{
 
-        PrintWriter printWriter = response.getWriter();
+        List<SaleProduct> saleProducts = saleProductService.getAllProducts(adminID);
 
-        String json;
-
-        List<SaleProduct> saleProducts = saleProductService.getAllProducts();
-        if (saleProducts != null) {
-            json = JSON.toJSONString(saleProducts);
-            System.out.println(json);
+        if (saleProducts == null){
+            session.setAttribute("errorMsg","数据为空");
+            return JSON.toJSONString(saleProducts);
+        }else{
+            return JSON.toJSONString(saleProducts);
         }
-        else {
-            json = "{\"log\":\"Invalid id\"}";
-        }
-
-        printWriter.print(json);
-        printWriter.flush();
-        printWriter.close();
 
     }
 
     @RequestMapping(value = "/admin/saleProduct/delete", method = RequestMethod.GET)
-    public void deleteOneProduct(@RequestParam("saleProductId") String saleProductId) throws SQLException {
+    public String deleteOneProduct(@RequestParam("saleProductId") String saleProductId,HttpSession session) throws SQLException {
 
-        SaleProduct saleProduct = saleProductService.getSaleProductId(saleProductId);
+        SaleProduct saleProduct = saleProductService.getSaleProductDetailByID(saleProductId);
 
         saleProductService.deleteSaleProduct(saleProductId);
+
+        MapFactory mapFactory = new MapFactory();
+        return mapFactory.getStringObjectMap(session);
 
     }
 
@@ -90,16 +79,26 @@ public class SaleProductController {
         Timestamp saleProductStartTime = Timestamp.valueOf(saleProductstartTime);
         Timestamp saleProductEndTime = Timestamp.valueOf(saleProductendTime);
 
-        saleProductService.updateInfo(saleProductId, saleProductTitle, saleProductIntro, saleProductContent, saleProductStartTime, saleProductEndTime, saleProductRange, saleProductType, saleProductStatus);
+        int result = saleProductService.updateInfo(saleProductId, saleProductTitle, saleProductIntro, saleProductContent, saleProductStartTime, saleProductEndTime, saleProductRange, saleProductType, saleProductStatus);
+
+        if (result == 0 ) {
+            session.setAttribute("errorMsg", "查找不到该活动");
+            return null;
+        }
+        if (result == 1 ) {
+            session.setAttribute("errorMsg", "活动相同");
+            return null;
+        }
 
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }
 
-    @RequestMapping(value = "/admin/saleProductReport", method = RequestMethod.POST)
-    public String registerProduct (@RequestParam("saleProductTitle") String saleProductTitle,
+    @RequestMapping(value = "/admin/insertSaleProduct", method = RequestMethod.POST)
+    public String insertSaleProduct (@RequestParam("saleProductTitle") String saleProductTitle,
                                    @RequestParam("saleProductIntro") String saleProductIntro,
                                    @RequestParam("saleProductContent") String saleProductContent,
+                                     @RequestParam("adminId") String adminId,
                                    @RequestParam("saleProductStartTime") String saleProductstartTime,
                                    @RequestParam("saleProductEndTime") String saleProductendTime,
                                    @RequestParam("saleProductRange") String saleProductRange,
@@ -110,9 +109,14 @@ public class SaleProductController {
         Timestamp saleProductStartTime = Timestamp.valueOf(saleProductstartTime);
         Timestamp saleProductEndTime = Timestamp.valueOf(saleProductendTime);
 
-        saleProductService.Insert(saleProductTitle, saleProductIntro, saleProductContent,saleProductStartTime, saleProductEndTime, saleProductRange, saleProductType, saleProductStatus);
+        int result = saleProductService.Insert(adminId, saleProductTitle, saleProductIntro, saleProductContent,saleProductStartTime, saleProductEndTime, saleProductRange, saleProductType, saleProductStatus);
 
-        MapFactory mapFactory = new MapFactory();
-        return mapFactory.getStringObjectMap(session);
+        if (result == 1){
+            session.setAttribute("errorMsg","请输入管理员ID");
+            return null;
+        }else {
+            MapFactory mapFactory = new MapFactory();
+            return mapFactory.getStringObjectMap(session);
+        }
     }
 }
