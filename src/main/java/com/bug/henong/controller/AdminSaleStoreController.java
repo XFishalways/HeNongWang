@@ -39,6 +39,8 @@ public class AdminSaleStoreController {
             json = "{\"log\":\"Please input the sale's id of a store!\"}";
         }
         printWriter.print(json);
+        printWriter.flush();
+        printWriter.close();
 
     }
 
@@ -64,6 +66,8 @@ public class AdminSaleStoreController {
         }
 
         printWriter.print(json);
+        printWriter.flush();
+        printWriter.close();
 
     }
 
