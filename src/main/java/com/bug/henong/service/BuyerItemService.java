@@ -23,7 +23,7 @@ public class BuyerItemService {
         return buyerItemDao.findAllItem(itemId);
     }
 
-    public Boolean cartInsert (String userId, Double price, Double payablePrice, String cartStatus) throws SQLException {
+    public Boolean cartInsert (String userId, Double price, Double payablePrice) throws SQLException {
 
         BuyerCartDao buyerCartDao = new BuyerCartDao();
         BuyerCart buyerCart = buyerCartDao.findOneCart(userId);
@@ -33,12 +33,12 @@ public class BuyerItemService {
         buyerCart.setUserId(userId);
         buyerCart.setTotalPrice(price);
         buyerCart.setPayablePrice(payablePrice);
-        buyerCart.setCartStatus(cartStatus);
+        buyerCart.setCartStatus("Y");
 
         return buyerCartDao.insert(buyerCart) > 0;
     }
 
-    public Boolean orderInsert (String orderId, String addressId, Double price, Double couponPrice, Double payablePrice, String payMethod, String invoiceTplId, String orderStatus) throws SQLException {
+    public Boolean orderInsert (String orderId, String addressId, Double price, Double couponPrice, Double payablePrice, String payMethod, String invoiceTplId) throws SQLException {
 
         BuyerOrderDao buyerOrderDao = new BuyerOrderDao();
         BuyerOrder buyerOrder = buyerOrderDao.findOneOrder(orderId);
@@ -52,6 +52,7 @@ public class BuyerItemService {
         buyerOrder.setPayablePrice(payablePrice);
         buyerOrder.setInvoiceTplId(invoiceTplId);
         buyerOrder.setPayMethod(payMethod);
+        buyerOrder.setOrderStatus(null);
 
         return buyerOrderDao.insert(buyerOrder) > 0;
     }
