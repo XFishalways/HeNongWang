@@ -1,8 +1,8 @@
 package com.bug.henong.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.bug.henong.entity.BusinessAddress;
-import com.bug.henong.entity.SaleStore;
 import com.bug.henong.service.BusinessAddressService;
 import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
@@ -12,28 +12,52 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class BusinessAddressController {
     private BusinessAddressService businessAddressService = new BusinessAddressService();
 
     /**
-     * 查询卖家地址
+     * 查询所有卖家地址
      */
     @GetMapping("/business/address/findAddressInfo")
-    public String findAddressInfo(HttpSession session) throws SQLException{
-        Object businessAddressId = session.getAttribute("businessAddressId");
-        String id = (String) businessAddressId;
-        BusinessAddress businessAddress = businessAddressService.getBusinessAddressDetailById(id);
+    public String findAddressInfo(@RequestParam("userId") String userId,
+                                  HttpSession session) throws SQLException{
+
+        String json;
+        List<BusinessAddress> businessAddresses = businessAddressService.getBusinessAddressDetailById(userId);
+
+        if(businessAddresses == null){
+            session.setAttribute("errorMsg", "查找不到卖家地址id");
+            return JSONUtil.toJsonStr(businessAddresses);
+        }
+
+        json= JSON.toJSONString(businessAddresses);
+        return json;
+    }
+
+    /**
+     * 查找一个卖家地址
+     */
+    @GetMapping("/business/address/findOneAddress")
+    public String findOneAddress(@RequestParam("businessAddressId") String businessAddressId,
+                                 HttpSession session) throws SQLException{
+
+        String json;
+        BusinessAddress businessAddress = businessAddressService.findOneAddress(businessAddressId);
 
         if(businessAddress == null){
             session.setAttribute("errorMsg", "查找不到卖家地址id");
-            return null;
+            return JSONUtil.toJsonStr(businessAddress);
         }
 
-        String json = JSON.toJSONString(businessAddress);
+        json = JSON.toJSONString(businessAddress);
         return json;
+
     }
+
+
 
     /**
      * 更新卖家地址
@@ -89,7 +113,7 @@ public class BusinessAddressController {
     @GetMapping("/business/address/delete")
     public void deleteOneAddress(@RequestParam("addressId") String addressId) throws SQLException{
 
-        BusinessAddress businessAddress = businessAddressService.getBusinessAddressDetailById(addressId);
+        BusinessAddress businessAddress = (BusinessAddress) businessAddressService.getBusinessAddressDetailById(addressId);
 
         businessAddressService.deleteAddress(addressId);
 
