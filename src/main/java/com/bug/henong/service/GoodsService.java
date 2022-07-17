@@ -222,12 +222,12 @@ public class GoodsService {
         return false;
     }
 
-    public List<Goods> getGoodsFromTo(int curentPage, int pageSize) throws SQLException {
-        return goodsDao.findGoodsFromTo(curentPage,pageSize);
+    public List<Goods> getGoodsFromTo(int currentPage, int pageSize) throws SQLException {
+        return goodsDao.findGoodsFromTo(currentPage,pageSize);
     }
 
-    public List<Goods> getFarmerAllGoods(String famrerId) throws SQLException {
-        return goodsDao.findFarmerAll(famrerId);
+    public List<Goods> getFarmerAllGoods(String farmerId) throws SQLException {
+        return goodsDao.findFarmerAll(farmerId);
     }
 
     public List<Goods> getFarmerGoodsByName(String farmerId, String goodsName) throws SQLException {
