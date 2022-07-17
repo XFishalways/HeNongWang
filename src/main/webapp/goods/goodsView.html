@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>合农网</title>
+    <link rel="stylesheet" href="../lib/layui/css/layui.css">
+</head>
+<body style="background-image: url(../images/bg3.jpg); ">
+<!-- 进度条 -->
+<div class="layui-progress" style="margin:auto; ">
+    <div class="layui-progress-bar layui-bg-cyan" lay-percent="100%"></div>
+</div>
+<div class="layui-row">
+    <ul id="homepage-head" class="layui-nav layui-col-md12 layui-bg-green">
+        <li class="layui-nav-item layui-col-md3 ">
+            <a href="" class= "layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center; font-size: 50px; font-family: KaiTi;" >合农网</a>
+        </li>
+        <li class="layui-nav-item layui-col-md2">
+            <a href="" class= "layui-this layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">首页</a>
+        </li>
+        <li class="layui-nav-item layui-col-md2">
+            <a href="buyer/index.html" class= "layui-font-20 layui-font-cyan layui-anim layui-anim-scaleSpring" style="text-align: center;">个人中心</a>
+        </li>
+        <form class=" layui-form layui-col-md4 layui-col-md-offset1" action="">
+            <div class="layui-form-item" style="margin-top:15px;">
+                <div class="layui-input-inline">
+                    <input id="search-input" type="text" name="title" required  lay-verify="required" placeholder="搜索" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-anim layui-anim-scaleSpring" style="padding:0!important;">
+                    <button id="search" type="submit" class="layui-btn layui-btn-normal" lay-submit lay-filter="demo1">搜索</button>
+                </div>
+            </div>
+        </form>
+
+    </ul>
+</div>
+<div class="layui-container">
+    <ul class="flow-default" style="height: 300px;" id="view-list"></ul>
+</div>
+
+
+
+
+
+
+<script>
+
+    layui.use(['jquery', 'layer','flow'], function(){
+        var $ = layui.$; //重点处
+        var layer = layui.layer;
+        var flow = layui.flow;
+
+        function myLoad(url){
+            flow.load({
+                elem:'#view-list',
+                done:function(page,next){
+                    var lis = [];
+                    $.ajax({
+                        url:url + (url == '' ? '&' : '?') + 'page=' + page,
+                        type:'POST',
+                        dataType:'json',
+                        success:function(res){
+                            
+                            for (i in res) {
+                                var myHtml = '';
+                                myHtml += '<li>';
+                                myHtml += '<div class="layui-container">';
+                                myHtml += '<div class="layui-row layui-col-md12">';
+                                myHtml += '<div class="layui-col-md3">';
+                                myHtml += '<img src="' + res.img +'">';
+                                myHtml += '</div>';
+                                myHtml += '<div class="layui-col-md3">';
+                                myHtml += '<div class="layui-row">';
+                                myHtml += '<div class="layui-anim layui-anim-fadein">';
+                                myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
+                                myHtml += '<div style="font-size: 20px;font-family:"KaiTi";font-weight: bold;">商品名：</div>';
+                                myHtml += '</div>';
+                                myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
+                                myHtml += '<div style="font-size: 20px;font-family:"KaiTi";font-weight: bold;">' + res.name + '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
+                                myHtml += '<div class="layui-row">';
+                                myHtml += '<div class="layui-anim layui-anim-fadein">';
+                                myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
+                                myHtml += '<div style="font-size: 20px;font-family:"KaiTi";font-weight: bold;">商品售价：</div>';
+                                myHtml += '</div>';
+                                myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
+                                myHtml += '<div style="font-size: 20px;font-family:"KaiTi";font-weight: bold;">' + res.price + '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</li>';
+                                lis.push(myHtml);
+                            }
+
+                            next(lis.join(''), page<100);
+                        },
+
+                        error:function(){
+                            alert(error);
+                        }
+                    })
+                }
+            })
+        }
+
+        myLoad('url');
+
+        //后面就跟你平时使用jQuery一样
+        $('#search').on('click',function(res){
+            var name = $('#search-input').val();
+            myLoad('searchUrl');
+        })
+    });
+</script>
+</body>

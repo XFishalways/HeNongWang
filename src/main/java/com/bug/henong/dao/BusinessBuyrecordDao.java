@@ -44,7 +44,7 @@ public class BusinessBuyrecordDao {
 
         String sql = "SELECT * FROM BUSINESS_BUYRECORD";
 
-        List<BusinessBuyrecord> businessBuyrecords = new ArrayList<BusinessBuyrecord>();
+        List<BusinessBuyrecord> businessBuyrecords = new ArrayList<>();
         List<Entity> entities = Db.use().findAll("BUSINESS_BUYRECORD");
 
         for(Entity e : entities){

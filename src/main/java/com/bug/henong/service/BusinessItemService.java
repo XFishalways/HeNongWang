@@ -6,17 +6,37 @@ import com.bug.henong.entity.Farmer;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service("BusinessItemService")
 public class BusinessItemService {
 
     private BusinessItemDao businessItemDao =new BusinessItemDao();
 
+    /**得到商家所有商品*/
+    public List<BusinessItem> getBusinessItemsByBusinessId(String businessId) throws SQLException {
+        return businessItemDao.findBusinessItemsByUserID(businessId);
+    }
     /**得到商品信息*/
     public BusinessItem getItemDetailById(String itemId) throws SQLException {
         return businessItemDao.findOneItem(itemId);
     }
-
+    /**通过名字得到商品*/
+    public List<BusinessItem> getBusinessItemsByName(String businessId,String itemName) throws SQLException {
+        return businessItemDao.findBusinessItemByTitle(itemName);
+    }
+    /**通过名字*/
+    public List<BusinessItem> getBusinessItemsByNameAndBusinessId(String businessId,String itemName) throws SQLException {
+        return businessItemDao.findBusinessItemsByTitleAndBusinessId(businessId,itemName);
+    }
+    /**得到商家所有在售商品*/
+    public List<BusinessItem> getBusinessItemsOnsale(String businessId) throws SQLException {
+        return businessItemDao.getBusinessItemsOnsale(businessId);
+    }
+    /**得到商家所有未售商品*/
+    public List<BusinessItem> getBusinessItemsOffsale(String businessId) throws SQLException {
+        return businessItemDao.getBusinessItemsOffsale(businessId);
+    }
     /**修改商品标题*/
     public Boolean updateSkuTitle(String itemId, String newSkuTitle) throws SQLException {
         BusinessItem businessItem = businessItemDao.findOneItem(itemId);
@@ -96,5 +116,14 @@ public class BusinessItemService {
 
         return false;
     }
-
+    /**上架商品*/
+    public Boolean putItemOnSale(String skuId) throws SQLException {
+        int rs = businessItemDao.updateSkuStatus(skuId,"onsale");
+        return rs>0;
+    }
+    /**下架商品*/
+    public Boolean putItemOffSale(String skuId) throws SQLException {
+        int rs = businessItemDao.updateSkuStatus(skuId,"offsale");
+        return rs>0;
+    }
 }
