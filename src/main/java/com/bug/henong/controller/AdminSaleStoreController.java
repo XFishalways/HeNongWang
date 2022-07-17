@@ -125,9 +125,8 @@ public class AdminSaleStoreController {
         Timestamp saleStoreStartTime = Timestamp.valueOf(salestorestarttime);
         Timestamp saleStoreEndTime = Timestamp.valueOf(salestoreendtime);
 
-        SaleStore saleStore = saleStoreService.getSaleStoreId(saleStoreId);
 
-        saleStoreService.update(saleStore, saleStoreTitle, saleStoreIntro, saleStoreContent,
+        saleStoreService.update(saleStoreId, saleStoreTitle, saleStoreIntro, saleStoreContent,
                                 saleStoreStartTime, saleStoreEndTime,  saleStoreRange,  saleStoreType,
                                 saleStoreStatus);
 

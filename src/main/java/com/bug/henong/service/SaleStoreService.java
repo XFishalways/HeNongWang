@@ -198,13 +198,12 @@ public class SaleStoreService {
 
     }
 
-    public Boolean update(SaleStore saleStore, String saleStoreTitle, String saleStoreIntro,
+    public Boolean update(String saleStoreId, String saleStoreTitle, String saleStoreIntro,
                           String saleStoreContent, Timestamp saleStoreStartTime,
                           Timestamp saleStoreEndTime, String saleStoreRange, String saleStoreType,
                           String saleStoreStatus) throws SQLException{
 
-        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
-        String saleStoreId = snowflake.nextIdStr();
+        SaleStore saleStore = saleStoreDao.findOneStore(saleStoreId);
 
         if(saleStore != null){
             if (!saleStore.getSaleStoreTitle().equals(saleStoreTitle)) {
