@@ -49,6 +49,9 @@ public class BusinessItem implements Serializable,Cloneable{
      /** 卖家商品图片 */
      @ApiModelProperty(name = "卖家商品图片",notes = "")
      private String businessImage ;
+     /** 商品状态 */
+     @ApiModelProperty(name = "商品状态",notes = "")
+     private String skuStatus ;
 
     /** 返回商品ID */
     public String getSkuId(){
@@ -137,5 +140,13 @@ public class BusinessItem implements Serializable,Cloneable{
      /** 设置卖家商品图片 */
      public void setBusinessImage(String businessImage){
          this.businessImage=businessImage;
+     }
+     /** 商品状态 */
+     public String getSkuStatus(){
+         return this.skuStatus;
+     }
+     /** 商品状态 */
+     public void setSkuStatus(String skuStatus){
+         this.skuStatus=skuStatus;
      }
 }
