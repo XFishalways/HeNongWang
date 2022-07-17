@@ -97,6 +97,20 @@ public class BusinessBuyrecordDao {
         }
         return businessBuyrecords;
     }
+    /**通过商品Id找数据*/
+    public BusinessBuyrecord findRecordsBySkuId(String skuId) throws SQLException {
+
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_BUYRECORD Where SKU_ID = ?", skuId);
+        if(entities.isEmpty()){
+            return null;
+        }
+
+        Entity e = entities.get(0);
+        String recordStr = JSONUtil.toJsonStr(e);
+        BusinessBuyrecord businessBuyrecord = JSONUtil.toBean(recordStr,BusinessBuyrecord.class);
+
+        return  businessBuyrecord;
+    }
     /**
      *修改账单状态
      */
