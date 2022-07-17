@@ -197,12 +197,12 @@
         form.on('submit(registerStep3)', function (data) {
             $.ajax({
                 type:"POST",
-                url:'/register',
+                url:'register',
                 data:{
                     userName:$('#input-name').val(),
                     nickName:$('#input-nickname').val(),
                     userId:$('#input-userId').val(),
-                    usePass:$('#input-password').val(),
+                    userPass:$('#input-password').val(),
                     phone:$('#input-phone').val(),
                 },
                 dataType:'json',

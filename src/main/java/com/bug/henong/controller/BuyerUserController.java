@@ -72,6 +72,7 @@ public class BuyerUserController {
      * 注册买家信息
      */
     @PostMapping("/buyer/register")
+    @ResponseBody
     public String register(@RequestParam("userId") String userId,
                            @RequestParam("userName") String userName,
                            @RequestParam("nickName") String nickName,

@@ -168,9 +168,10 @@ public class BusinessUserService {
     public Boolean BusinessUserRegister(String userId, String userName, String nickName, String phone, String userPass)
             throws SQLException {
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
-        if (businessUser == null) {
+        if (businessUser != null) {
             return false;
         } else {
+            businessUser= new BusinessUser();
             businessUser.setUserId(userId);
             businessUser.setUserName(userName);
             businessUser.setNickName(nickName);

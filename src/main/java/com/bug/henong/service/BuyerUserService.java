@@ -203,9 +203,10 @@ public class BuyerUserService {
     public Boolean register(String userId, String userName, String nickName,
                              String phone, String userPass)throws SQLException{
         BuyerUser buyerUser = buyerUserDao.findOneBuyer(userId);
-        if(buyerUser == null){
+        if(buyerUser != null){
             return false;
         }else{
+            buyerUser= new BuyerUser();
             buyerUser.setUserId(userId);
             buyerUser.setUserName(userName);
             buyerUser.setNickName(nickName);
