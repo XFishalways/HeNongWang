@@ -112,13 +112,15 @@ public class FarmerGoodsController {
                                 @RequestParam("goodsPrice") String goodsprice,
                                 @RequestParam("goodsTime") String goodstime,
                                 @RequestParam("goodsPlace") String goodsPlace,
+                                @RequestParam("goodsQuantity") String goodsquantity,
                                 @RequestParam("farmerId") String farmerId,
                                 HttpSession session) throws SQLException {
 
         Double goodsPrice = Double.parseDouble(goodsprice);
+        Double goodsQuantity = Double.parseDouble(goodsquantity);
         Timestamp goodsTime = Timestamp.valueOf(goodstime);
         System.out.println(goodsTime);
-        int result =goodsService.insert(goodsName, goodsPrice, goodsTime, goodsPlace,farmerId);
+        int result =goodsService.insert(goodsName, goodsPrice, goodsTime, goodsPlace, goodsQuantity, farmerId);
         if(result==0){
             return null;
         }

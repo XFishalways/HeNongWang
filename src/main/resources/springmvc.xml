@@ -27,6 +27,11 @@
         <property name="maxInMemorySize" value="40960"/>
     </bean>
 
+    <!--<aop:include name="servicesLogger"/>
+</aop:aspectj-autoproxy> -->
+
+    <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
+
     <!-- 开启SpringMVC框架注解的支持 -->
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
