@@ -3,6 +3,7 @@ package com.bug.henong.servlet;
 import com.alibaba.fastjson.JSON;
 import com.bug.henong.dao.BuyerUserDao;
 import com.bug.henong.entity.BuyerUser;
+import com.bug.henong.utils.MapFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,15 +31,18 @@ public class DeleteBuyerUserServlet extends HttpServlet {
         try {
             int rw = buyerUserDao.delete(id);
             if(rw>0) {
-                json = "{\"log\":\"Success\"}";
+                MapFactory mapFactory = new MapFactory();
+                json = mapFactory.getStringObjectMap();
             }
             else {
-                json = "{\"log\":\"Invalid id\"}";
+                json = null;
             }
         } catch (SQLException e) {
-            json = "{\"log\":\"Error connection to database\"}";
+            json = null;
         }
         System.out.println(json);
         pw.print(json);
+        pw.flush();
+        pw.close();
     }
 }
