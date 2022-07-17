@@ -92,7 +92,7 @@ public class SaleStoreDao {
     }
 
     /**更新标题*/
-    public int updateActivityTitle(String activityTitle, String id) throws SQLException {
+    public int updateActivityTitle(String id, String activityTitle) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_STORE_TITLE",activityTitle),
@@ -102,7 +102,7 @@ public class SaleStoreDao {
         return rw;
     }
     /**更新说明*/
-    public int updateActivityIntro(String activityIntro, String id) throws SQLException {
+    public int updateActivityIntro(String id, String activityIntro) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_STORE_INTRO",activityIntro),
@@ -113,7 +113,7 @@ public class SaleStoreDao {
     }
 
     /**更新内容*/
-    public int updateActivityContent(String activityContent, String id) throws SQLException {
+    public int updateActivityContent(String id, String activityContent) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_STORE_CONTENT",activityContent),
@@ -124,7 +124,7 @@ public class SaleStoreDao {
     }
 
     /**更新开始时间*/
-    public int updateActivityStart_Time(Timestamp activityStartTime, String id) throws SQLException {
+    public int updateActivityStart_Time(String id, Timestamp activityStartTime) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_STORE_START_TIME",activityStartTime),
@@ -135,7 +135,7 @@ public class SaleStoreDao {
     }
 
     /**更新结束时间*/
-    public int updateActivityEnd_time(Timestamp activityEndTime, String id) throws SQLException {
+    public int updateActivityEnd_time(String id, Timestamp activityEndTime) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_STORE_END_TIME",activityEndTime),
@@ -146,7 +146,7 @@ public class SaleStoreDao {
     }
 
     /**更新范围*/
-    public int updateActivityRange(String activityRange, String id) throws SQLException {
+    public int updateActivityRange(String id, String activityRange) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_STORE_RANGE",activityRange),
@@ -156,7 +156,7 @@ public class SaleStoreDao {
         return rw;
     }
     /**更新类型*/
-    public int updateActivityType(String activityType, String id) throws SQLException {
+    public int updateActivityType(String id, String activityType) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_STORE_TYPE",activityType),
@@ -166,7 +166,7 @@ public class SaleStoreDao {
         return rw;
     }
     /**更新状态*/
-    public int updateActivity_Status(String activityStatus, String id) throws SQLException {
+    public int updateActivity_Status(String id, String activityStatus) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_STORE_STATUS",activityStatus),

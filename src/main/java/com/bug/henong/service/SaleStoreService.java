@@ -88,7 +88,7 @@ public class SaleStoreService {
 
         //当前用户非空才可以进行更改
         if (saleStore != null) {
-                 int rw = saleStoreDao.updateActivityStart_Time(newActivityStartTime,loginStoreId);
+                 int rw = saleStoreDao.updateActivityStart_Time(loginStoreId,newActivityStartTime);
                 return rw > 0;
 
         }
@@ -104,7 +104,7 @@ public class SaleStoreService {
 
         //当前用户非空才可以进行更改
         if (saleStore != null) {
-               int rw = saleStoreDao.updateActivityEnd_time(newActivityEndTime,loginStoreId);
+               int rw = saleStoreDao.updateActivityEnd_time(loginStoreId,newActivityEndTime);
                 return rw > 0;
         }
 
@@ -217,10 +217,10 @@ public class SaleStoreService {
                 saleStoreDao.updateActivityContent(saleStoreContent, saleStoreId);
             }
             if (!saleStore.getSaleStoreStartTime().equals(saleStoreStartTime)) {
-                saleStoreDao.updateActivityStart_Time(saleStoreStartTime, saleStoreId);
+                saleStoreDao.updateActivityStart_Time(saleStoreId, saleStoreStartTime);
             }
             if (!saleStore.getSaleStoreEndTime().equals(saleStoreEndTime)) {
-                saleStoreDao.updateActivityEnd_time(saleStoreEndTime, saleStoreId);
+                saleStoreDao.updateActivityEnd_time( saleStoreId, saleStoreEndTime);
             }
             if (!saleStore.getSaleStoreRange().equals(saleStoreRange)) {
                 saleStoreDao.updateActivityRange(saleStoreRange, saleStoreId);
