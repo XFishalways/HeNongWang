@@ -55,8 +55,6 @@ public class FarmerGoodsController {
     @ResponseBody
     public String findAllGoods(@RequestParam String farmerId,HttpSession session) throws IOException, SQLException {
 
-
-
         String json;
 
         List<Goods> goods = goodsService.getFarmerGoods(farmerId);

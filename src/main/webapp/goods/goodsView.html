@@ -40,10 +40,6 @@
 </div>
 
 
-
-
-
-
 <script>
 
     layui.use(['jquery', 'layer','flow'], function(){
@@ -57,7 +53,7 @@
                 done:function(page,next){
                     var lis = [];
                     $.ajax({
-                        url:url + (url == '' ? '&' : '?') + 'page=' + page,
+                        url:url + '?page=' + page,
                         type:'POST',
                         dataType:'json',
                         success:function(res){
@@ -71,26 +67,37 @@
                                 myHtml += '<img src="' + res.img +'">';
                                 myHtml += '</div>';
                                 myHtml += '<div class="layui-col-md3">';
+
                                 myHtml += '<div class="layui-row">';
                                 myHtml += '<div class="layui-anim layui-anim-fadein">';
                                 myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
-                                myHtml += '<div style="font-size: 20px;font-family:"KaiTi";font-weight: bold;">商品名：</div>';
+                                myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">商品名：</div>';
                                 myHtml += '</div>';
                                 myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
-                                myHtml += '<div style="font-size: 20px;font-family:"KaiTi";font-weight: bold;">' + res.name + '</div>';
+                                myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">' + res.name + '</div>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
+                                
                                 myHtml += '<div class="layui-row">';
                                 myHtml += '<div class="layui-anim layui-anim-fadein">';
                                 myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
-                                myHtml += '<div style="font-size: 20px;font-family:"KaiTi";font-weight: bold;">商品售价：</div>';
+                                myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">商品售价：</div>';
                                 myHtml += '</div>';
                                 myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
-                                myHtml += '<div style="font-size: 20px;font-family:"KaiTi";font-weight: bold;">' + res.price + '</div>';
+                                myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">' + res.price + '</div>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
+
+                                myHtml += '<div class="layui-row " style="margin-top:15px;">';
+                                myHtml += '<div class="layui-form-item">';
+                                myHtml += '<div class="layui-input-block layui-col-md2 layui-anim layui-anim-up">';
+                                myHtml += '<button id="goodsInfo" type="button" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">查看详情</button>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
+
                                 myHtml += '</div>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
@@ -119,3 +126,5 @@
     });
 </script>
 </body>
+
+</html>
