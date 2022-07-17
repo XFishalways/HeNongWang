@@ -12,6 +12,15 @@
         <div style="margin-top: 50px;">
             <form class="layui-form" method="post">
                 <div class="layui-form-item">
+                    <label class="layui-form-label" style="color: white">是否默认</label>
+                    <div class="layui-input-inline">
+                        <select id="isDefault" name="isDefault" lay-verify="">
+                            <option value="online">否</option>
+                            <option value="offline">是</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
                      <label class="layui-form-label">地址名称</label>
                      <div class="layui-input-inline">
                        <input id="addr-name" type="text" name="addrName" value="" required  lay-verify="required" placeholder="地址名" autocomplete="off" class="layui-input">
@@ -32,7 +41,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">区</label>
                     <div class="layui-input-inline">
-                      <input id="block" type="text" name="block" value="" required  lay-verify="required" placeholder="区" autocomplete="off" class="layui-input">
+                      <input id="county" type="text" name="county" value="" required  lay-verify="required" placeholder="区" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -73,9 +82,10 @@
                       addressName:data.field.addrName,
                       province:data.field.province,
                       city:data.field.city,
-                      block:data.field.block,
+                      county:data.field.county,
                       street:data.field.street,
                       lastDetail:data.field.lastDetail,
+                      isDefault:$('#isDefault').val()
                     },
                     dataType:'json',
 

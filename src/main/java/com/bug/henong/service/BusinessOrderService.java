@@ -6,6 +6,7 @@ import com.bug.henong.entity.Farmer;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service("BusinessOrderService")
 public class BusinessOrderService {
@@ -47,6 +48,15 @@ public class BusinessOrderService {
         }
 
         return false;
+    }
+    /**通过商家Id查找数据*/
+    public List<BusinessOrder> getOrdersByBusinessId(String businessId) throws SQLException {
+        return businessOrderDao.findOneOrderByBusinessId(businessId);
+
+    }
+    /**通过商家Id与订单id查找数据*/
+    public List<BusinessOrder> getOrdersByBusinessIdAndOrderId(String businessId,String orderId) throws SQLException {
+        return businessOrderDao.findOneOrderByBusinessIdAndOrderId(businessId, orderId);
     }
 
 }
