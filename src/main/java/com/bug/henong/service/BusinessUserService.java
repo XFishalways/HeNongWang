@@ -168,7 +168,7 @@ public class BusinessUserService {
 
     }
     /**注册用户*/
-    public Boolean BusinessUserRegister(String userId, String userName, String nickName, String userIntro, String avatar, String phone, String userPass) throws SQLException{
+    public Boolean BusinessUserRegister(String userId, String userName, String nickName, String phone, String userPass) throws SQLException{
         BusinessUser businessUser = businessUserDao.findOneBusiness(userId);
         if (businessUser==null){
             return  false;
@@ -176,8 +176,6 @@ public class BusinessUserService {
             businessUser.setUserId(userId);
             businessUser.setUserName(userName);
             businessUser.setNickName(nickName);
-            businessUser.setUserIntro(userIntro);
-            businessUser.setAvatar(avatar);
             businessUser.setUserPass(userPass);
             businessUser.setPhone(phone);
             return businessUserDao.insert(businessUser)>0;
