@@ -68,7 +68,7 @@
 			$(document).ready(function(){
 				$.ajax({
 					type:'GET',
-					url:'/business/address/findAddressInfo?addressId=' + getCookie('addressId'),
+					url:'/address/findAddressInfo?addressId=' + getCookie('addressId'),
 					dataType:'json',
 
 					success:function(data){

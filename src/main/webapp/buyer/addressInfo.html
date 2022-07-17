@@ -9,7 +9,7 @@
 <body class="layui-layout-body">
 <div>
 	<div class="layui-inline">
-		<input type="text" name="title" required lay-verify="required" placeholder="输入地址id" autocomplete="off" class="layui-input" style="width:125px;" >
+		<input type="text" name="title" required lay-verify="required" placeholder="输入地址名称" autocomplete="off" class="layui-input" style="width:125px;" >
 	</div>
 	<div class="layui-inline">
 		<button type="button" class="layui-btn"  id="findById">搜寻地址</button>
@@ -17,7 +17,7 @@
 
 </div>
 <table class="layui-hide" id="test" lay-filter="test"></table>
-
+<script src="js/myCookie.js"></script>
 <script type="text/javascript">
 
 
@@ -53,7 +53,7 @@
 					,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 				]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("");
+					if( url.search(patt) != -1) tableInit("/address/findAllAddress?buyerUserId="+getCookie('userId'));
 				}
 			});
 
@@ -94,8 +94,8 @@
 
 		//后面就跟你平时使用jQuery一样
 		$('#findById').on('click',function(res){
-			var id = $(this).parent().parent().find(".layui-input").val();
-			tableInit();
+			var title = $(this).parent().parent().find(".layui-input").val();
+			tableInit('/address/findOneAddress?addressTitle='+title);
 		})
 	});
 
