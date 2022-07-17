@@ -15,12 +15,11 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-right layui-bg-green">
       <li class="layui-nav-item">
-        <a href="javascript:;">
+        <a id="userName" href="javascript:;">
           <img src="../images/test.png" class="layui-nav-img">
-          zlt
+          用户名称
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="">个人信息查看</a></dd>
           <dd><a id="log-out" href="">退出</a></dd>
         </dl>
       </li>
@@ -92,7 +91,11 @@ layui.use('element', function(){
 		}else if(text=="申报商品"){
 			$("#main").find("#ifr").remove();
 			$("#main").append('<iframe src="farmerReport.html" id="ifr" style="width:100%;height:100%"></iframe>');
-		}
+		}else if(text=="退出") {
+          createCookie('userId','');
+          createCookie('userType','');
+          window.location.href = "../login.html";
+        }
 			
 	})
 });
