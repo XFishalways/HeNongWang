@@ -160,4 +160,61 @@ public class BuyerUserService {
         return false;
     }
 
+    public int updateInfo(String userId,String nickName, String userIntro, String avatar,
+                          String phone, String userStatus, String originalPass, String newPass) throws SQLException {
+        BuyerUser buyerUser = getUserDetailById((String) userId);
+
+        if (buyerUser == null) {
+            return 0;
+        }
+
+        if (!buyerUser.getUserPass().equals(originalPass)) {
+            return 2;
+        }
+        if (!buyerUser.getNickName().equals(nickName)) {
+            updateNickName((String) userId, nickName);
+        }
+        if (!buyerUser.getUserIntro().equals(userIntro)) {
+            updateUserIntro((String) userId, userIntro);
+        }
+        if (!buyerUser.getAvatar().equals(avatar)) {
+            updateAvatar((String) userId, avatar);
+        }
+        if (!buyerUser.getPhone().equals(phone)) {
+            updatePhone((String) userId, phone);
+        }
+        if (!buyerUser.getUserStatus().equals(userStatus)) {
+            updateUserStatus((String) userId, userStatus);
+        }
+        if (!originalPass.equals(newPass)) {
+            if (newPass != null) {
+                updateUserPass((String) userId, newPass);
+                //修改密码盐
+
+            }
+        }
+
+
+        return 1;
+
+    }
+
+
+    public Boolean register(String userId, String userName, String nickName, String userIntro,
+                            String avatar, String phone, String userPass)throws SQLException{
+        BuyerUser buyerUser = buyerUserDao.findOneBuyer(userId);
+        if(buyerUser == null){
+            return false;
+        }else{
+            buyerUser.setUserId(userId);
+            buyerUser.setUserName(userName);
+            buyerUser.setNickName(nickName);
+            buyerUser.setUserIntro(userIntro);
+            buyerUser.setAvatar(avatar);
+            buyerUser.setPhone(phone);
+            buyerUser.setUserPass(userPass);
+            return buyerUserDao.insert(buyerUser)>0;
+        }
+    }
+
 }
