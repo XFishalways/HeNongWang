@@ -89,7 +89,7 @@ public class SaleProductDao {
     }
 
     /**更新标题*/
-    public int updateTitle(String title, String id) throws SQLException {
+    public int updateTitle( String id, String title) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_TITLE",title),
@@ -100,7 +100,7 @@ public class SaleProductDao {
     }
 
     /**更新说明*/
-    public int updateIntro(String intro, String id) throws SQLException {
+    public int updateIntro( String id, String intro) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_INTRO",intro),
@@ -111,7 +111,7 @@ public class SaleProductDao {
     }
 
     /**更新内容*/
-    public int updateContent(String content, String id) throws SQLException {
+    public int updateContent(String id, String content) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_CONTENT",content),
@@ -121,7 +121,7 @@ public class SaleProductDao {
         return rw;
     }
     /**更新开始时间*/
-    public int updateStart_time(Timestamp startTime, String id) throws SQLException {
+    public int updateStart_time(String id, Timestamp startTime) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_START_TIME",startTime),
@@ -132,7 +132,7 @@ public class SaleProductDao {
     }
 
     /**更新结束时间*/
-    public int updateEnd_time(Timestamp endTime, String id) throws SQLException {
+    public int updateEnd_time(String id, Timestamp endTime) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_END_TIME",endTime),
@@ -143,7 +143,7 @@ public class SaleProductDao {
     }
 
     /**更新范围*/
-    public int updateRange(String range, String id) throws SQLException {
+    public int updateRange( String id, String range) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_RANGE",range),
@@ -154,7 +154,7 @@ public class SaleProductDao {
     }
 
     /**更新类型*/
-    public int updateType(String type, String id) throws SQLException {
+    public int updateType( String id,String type) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_TYPE",type),
@@ -165,7 +165,7 @@ public class SaleProductDao {
     }
 
     /**更新状态*/
-    public int updateStatus(String status, String id) throws SQLException {
+    public int updateStatus(String id, String status) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("SALE_PRODUCT_STATUS",status),
