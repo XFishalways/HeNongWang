@@ -88,7 +88,7 @@ public class BusinessBuyrecordDao {
     /**通过卖家ID和农户名字查找数据*/
     public List<BusinessBuyrecord> findRecordsByBusinessIdAndFarmerName(String businessId,String farmerName) throws SQLException {
         List<BusinessBuyrecord> businessBuyrecords = new ArrayList<BusinessBuyrecord>();
-        List<Entity> entities = Db.use().query("SELECT * FROM business_buyrecord JOIN farmer ON business_buyrecord.FARMER_ID = farmer.FARMER_ID WHERE business_id = ？ AND farmer.FARMER_NAME LIKE ？", businessId,"%"+farmerName+"%");
+        List<Entity> entities = Db.use().query("SELECT * FROM business_buyrecord JOIN farmer ON business_buyrecord.FARMER_ID = farmer.FARMER_ID WHERE business_buyrecord.user_id = ? AND farmer.FARMER_NAME LIKE ? ",businessId,"%"+farmerName+"%");
 
         for (Entity e : entities) {
             String recordStr = JSONUtil.toJsonStr(e);
