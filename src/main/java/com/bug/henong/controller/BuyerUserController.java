@@ -23,6 +23,7 @@ public class BuyerUserController {
      * 查询买家信息
      */
     @GetMapping("/buyer/findAllUser")
+    @ResponseBody
     public String findAllUser(@RequestParam("userId") String userId,
                               HttpSession session) throws SQLException {
         String json;
