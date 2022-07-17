@@ -25,6 +25,11 @@ public class FarmerInfoController {
         return json;
     }
 
+    /**
+     *调试用代码
+     *
+     */
+
     @GetMapping(value = "/farmer/update")
     public String update(@RequestParam("farmerName") String farmerName) {
         System.out.println("1");

@@ -7,23 +7,16 @@
         <link rel="stylesheet" href="lib/layui/css/layui.css">
 
     </head>
-    <body style="background-image: url(images/backgroud.jpg);">
-    <div class="layui-row">
-        <ul id="homepage-head" class="layui-nav layui-col-md12 layui-bg-green">
-            <li class="layui-nav-item layui-col-md2 ">
-                <a href="" class= "layui-font-cyan layui-anim layui-anim-scaleSpring" style="font-size: 50px; text-align: center; font-family: KaiTi;" >合农网</a>
-            </li>
-        </ul>
-    </div>
+    <body style="background-image: url(images/bg.jpg);">
+
 
     <div class="layui-container" id="PoisonDogSb">
         <div class="layui-row layui-col-md12 ">
 
             <div class = "layui-col-md6" style="margin-top:200px;">
-                <p class= "layui-anim layui-anim-scaleSpring" style="font-size: 100px; color: gold; text-align: center; letter-spacing: 10px; font-family: KaiTi;" >要买菜</p>
-                <p class= "layui-anim layui-anim-scaleSpring" style="font-size: 100px; color: gold; text-align: center; letter-spacing: 10px; font-family: KaiTi;" >上合农</p>
+
             </div>
-            <div class = "layui-col-md6 layui-bg-gray" style="margin-top:160px;">
+            <div class = "layui-col-md6" style="margin-top:160px; background: rgba(192, 192, 192,0.5);" >
                 <div class="layui-row">
                     <p class= "layui-anim layui-anim-scaleSpring" style="font-size: 50px; color:black; text-align: center; letter-spacing: 10px; font-family: KaiTi;" >用户登录</p>
                 </div>
@@ -105,7 +98,8 @@
                         data:{
                             userId:$('#input-account').val(),
                             password:$('#input-pass').val(),
-                            type:$('#input-type').val()
+                            type:$('#input-type').val(),
+                            check:Math.random().toString(36).slice(-Math.random()*8-1)
                         },
                         dataType:"json",
 
@@ -128,11 +122,11 @@
                     if(getCookie('userId') != ""){
                         var type = getCookie('userType');
                         if(type == 'buyer'){
-                            window.location.href = "";
+                            window.location.href = "buyer/index.html";
                         }else if(type == 'farmer'){
-                            window.location.href = "farmer/";
+                            window.location.href = "farmer/index.html";
                         }else if(type == 'business'){
-                            window.location.href = "business/";
+                            window.location.href = "business/index.html";
                         }
                     }
 

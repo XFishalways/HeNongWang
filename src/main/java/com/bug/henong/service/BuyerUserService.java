@@ -200,8 +200,8 @@ public class BuyerUserService {
     }
 
 
-    public Boolean register(String userId, String userName, String nickName, String userIntro,
-                            String avatar, String phone, String userPass)throws SQLException{
+    public Boolean register(String userId, String userName, String nickName,
+                             String phone, String userPass)throws SQLException{
         BuyerUser buyerUser = buyerUserDao.findOneBuyer(userId);
         if(buyerUser == null){
             return false;
@@ -209,8 +209,6 @@ public class BuyerUserService {
             buyerUser.setUserId(userId);
             buyerUser.setUserName(userName);
             buyerUser.setNickName(nickName);
-            buyerUser.setUserIntro(userIntro);
-            buyerUser.setAvatar(avatar);
             buyerUser.setPhone(phone);
             buyerUser.setUserPass(userPass);
             return buyerUserDao.insert(buyerUser)>0;
