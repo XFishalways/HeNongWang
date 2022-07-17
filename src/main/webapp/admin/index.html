@@ -14,16 +14,14 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
-        <a href="javascript:;">
+        <a id="userName" href="javascript:;">
           <img src="../images/test.png" class="layui-nav-img">
-          zlt
+          用户昵称
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="">基本资料</a></dd>
-          
+          <dd><a href="">退出</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">退出</a></li>
     </ul>
   </div>
   
@@ -83,6 +81,9 @@ layui.use('element', function(){
         }else if(text=="新增活动") {
           $("#main").find("#ifr").remove();
           $("#main").append('<iframe src="storeEvent.html" id="ifr" style="width:100%;height:100%"></iframe>');
+        }else if(text=="退出") {
+          createCookie('userId','');
+          window.location.href = "adminLogin.html";
         }
 	})
 });
