@@ -92,9 +92,9 @@ public class BusinessItemDao {
     /**
      * 通过用户ID查找
      */
-    public List<BusinessItem> findBusinessItemByUserID(String userId) throws SQLException {
+    public List<BusinessItem> findBusinessItemsByUserID(String userId) throws SQLException {
         List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
-        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where USER_ID LIKE ?", "%"+userId+"%");
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where USER_ID = ?", userId);
 
         for (Entity e : entities) {
             String itemStr = JSONUtil.toJsonStr(e);
@@ -159,15 +159,25 @@ public class BusinessItemDao {
         return rw;
 
     }
+    /**更新商品状态*/
+    public int updateSkuStatus(String id, String status) throws SQLException {
 
+        int rw = Db.use().update(
+                Entity.create().set("SKU_STATUS",status),
+                Entity.create("BUSINESS_ITEM").set("SKU_ID",id)
+        );
+
+        return rw;
+
+    }
     /**
      通过id和名字来共同寻找信息
      */
 
-    public List<BusinessItem> findBusinessByTitle(String userId, String skuTitle) throws SQLException {
+    public List<BusinessItem> findBusinessItemsByTitleAndBusinessId(String userId, String skuTitle) throws SQLException {
         List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
 
-        List<Entity> entities = Db.use().query("\"SELECT * FROM BUSINESS_ITEM Where USER_ID = ? AND SKU_TITLE LIKE ?",userId, "%"+skuTitle+"%");
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where USER_ID = ? AND SKU_TITLE LIKE ?",userId, "%"+skuTitle+"%");
         if (entities.isEmpty()) {
             return null;
         }
@@ -178,6 +188,30 @@ public class BusinessItemDao {
             businessItem.add(businessItem1);
         }
 
+        return businessItem;
+    }
+    /**得到商家所有在售商品*/
+    public List<BusinessItem> getBusinessItemsOnsale(String userId) throws SQLException {
+        List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where USER_ID = ? AND SKU_STATUS", userId,"onsale");
+
+        for (Entity e : entities) {
+            String itemStr = JSONUtil.toJsonStr(e);
+            BusinessItem businessItem1 = JSONUtil.toBean(itemStr, BusinessItem.class);
+            businessItem.add(businessItem1);
+        }
+        return businessItem;
+    }
+    /**得到商家所有未售商品*/
+    public List<BusinessItem> getBusinessItemsOffsale(String userId) throws SQLException {
+        List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where USER_ID = ? AND SKU_STATUS", userId,"offsale");
+
+        for (Entity e : entities) {
+            String itemStr = JSONUtil.toJsonStr(e);
+            BusinessItem businessItem1 = JSONUtil.toBean(itemStr, BusinessItem.class);
+            businessItem.add(businessItem1);
+        }
         return businessItem;
     }
 
