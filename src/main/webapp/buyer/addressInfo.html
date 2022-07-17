@@ -17,7 +17,7 @@
 
 </div>
 <table class="layui-hide" id="test" lay-filter="test"></table>
-<script src="js/myCookie.js"></script>
+<script src="../js/myCookie.js"></script>
 <script type="text/javascript">
 
 
@@ -49,7 +49,7 @@
 					,{field:'city', width:100, title: '市'}
 					,{field:'county', width:180, title: '区'}
 					,{field:'street', width:180, title: '街道'}
-					,{field:'isDefault', width:200, title: '是否为默认地址'}
+					,{field:'isDefault', width:150, title: '是否为默认地址'}
 					,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 				]]
 				,error: function(){
@@ -77,7 +77,19 @@
 						}
 					})
 				} else if(layEvent === 'del'){ //删除
+					layer.confirm('确认删除该地址？', function(index){
+						var id = obj.data.addressId;
+						obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+						layer.close(index);
+						//向服务端发送删除指令
 
+						$.ajax({
+							url:"/address/delete" + id,
+							success:function(res){
+								alert('success');
+							}
+						})
+					});
 				} else if(layEvent === 'LAYTABLE_TIPS'){
 					layer.alert('Hi，头部工具栏扩展的右侧图标。');
 				}
@@ -85,7 +97,7 @@
 		});
 	}
 
-	tableInit("");
+	tableInit("/address/findAllAddress?buyerUserId="+getCookie('userId'));
 
 	//第一种：主动加载jquery模块
 	layui.use(['jquery', 'layer'], function(){
