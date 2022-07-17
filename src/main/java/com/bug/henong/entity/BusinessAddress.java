@@ -22,9 +22,6 @@ public class BusinessAddress implements Serializable,Cloneable{
     /** 地址名称 */
     @ApiModelProperty(name = "地址名称",notes = "")
     private String addressName ;
-    /** 顺序号 */
-    @ApiModelProperty(name = "顺序号",notes = "")
-    private int seqNumber ;
     /** 用户ID */
     @ApiModelProperty(name = "用户ID",notes = "")
     private String userId ;
@@ -62,14 +59,6 @@ public class BusinessAddress implements Serializable,Cloneable{
     /** 设置地址名称 */
     public void setAddressName(String addressName){
         this.addressName=addressName;
-    }
-    /** 返回顺序号 */
-    public int getSeqNumber(){
-        return this.seqNumber;
-    }
-    /** 设置顺序号 */
-    public void setSeqNumber(int seqNumber){
-        this.seqNumber=seqNumber;
     }
     /** 返回用户ID */
     public String getUserId(){
