@@ -91,10 +91,10 @@
                     elem: '#uploadImg' //绑定元素
                     ,url: '/buyer/upload' //上传接口
                     ,done: function(res){
-                        //上传完毕回调
+                        alert('success');
                     }
                     ,error: function(){
-                        //请求异常回调
+                        alert('failed');
                     }
                 });
 
@@ -121,7 +121,7 @@
                       nickName:data.field.nickname,
                       originalPass:data.field.oldPass,
                       newPass:data.field.newPass,
-                      userIntro:data.field.intro,
+                      userIntro:data.field.userIntro,
                       phone:data.field.phone,
                       userStatus:$('#status').val()
                     },
