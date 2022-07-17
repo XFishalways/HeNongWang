@@ -35,7 +35,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">原密码</label>
                     <div class="layui-input-inline">
-                        <input id="old-pass" type="password" name="oldPass" value="" required  lay-verify="required|pass" placeholder="原密码" autocomplete="off" class="layui-input">
+                        <input id="old-pass" type="password" name="oldPass" value="" required  lay-verify="required" placeholder="原密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -103,11 +103,11 @@
                     data:{
                       userId:getCookie('userId'),
                       userName:data.field.name,
-                      nickname:data.field.nickname,
+                      nickName:data.field.nickname,
                       originalUserPass:data.field.oldPass,
                       newUserPass:data.field.newPass,
                       confirmUserPass:data.field.confirmPass,
-                      intro:data.field.intro,
+                      userIntro:data.field.intro,
                     },
                     dataType:'json',
 

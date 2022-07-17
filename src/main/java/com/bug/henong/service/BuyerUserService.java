@@ -160,8 +160,7 @@ public class BuyerUserService {
         return false;
     }
 
-    public int updateInfo(String userId,String nickName, String userIntro, String avatar,
-                          String phone, String userStatus, String originalPass, String newPass) throws SQLException {
+    public int updateInfo(String userId, String nickName, String userIntro, String phone, String userStatus, String originalPass, String newPass) throws SQLException {
         BuyerUser buyerUser = buyerUserDao.findOneBuyer(userId);
 
         if (buyerUser == null) {
@@ -176,9 +175,6 @@ public class BuyerUserService {
         }
         if (!buyerUser.getUserIntro().equals(userIntro)) {
             buyerUserDao.updateUserIntro(userId, userIntro);
-        }
-        if (!buyerUser.getAvatar().equals(avatar)) {
-            buyerUserDao.updateAvatar(userId, avatar);
         }
         if (!buyerUser.getPhone().equals(phone)) {
             buyerUserDao.updatePhone(userId, phone);
