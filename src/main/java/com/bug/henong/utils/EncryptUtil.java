@@ -12,7 +12,11 @@ public class EncryptUtil {
 
         String digestHex_1 = digester.digestHex(password);
 
-        String digestHex_2 = digester.digestHex(digestHex_1 + salt);
+        //将salt插入digestHex_1一固定位置
+        StringBuilder str = new StringBuilder(digestHex_1);
+        str.insert(14, salt);
+
+        String digestHex_2 = digester.digestHex(str.toString());
 
         return digestHex_2;
     }
