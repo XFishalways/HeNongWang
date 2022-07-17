@@ -31,12 +31,14 @@ public class GetBuyerUsersServlet extends HttpServlet {
                 System.out.println(json);
             }
             else {
-                json = "{\"log\":\"Invalid id\"}";
+                json = null;
             }
         } catch (SQLException e) {
-            json = "{\"log\":\"Error connection to database\"}";
+            json = null;
         }
         System.out.println(json);
         pw.print(json);
+        pw.flush();
+        pw.close();
     }
 }

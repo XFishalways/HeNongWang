@@ -36,6 +36,18 @@ public class MapFactory {
 
         return json;
     }
+    public String getStringObjectMap() {
+
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("message","ok");
+        map.put("code",0);
+        map.put("data","success");
+
+        String json = JSONUtil.toJsonStr(map);
+
+        return json;
+    }
 
     public Map<String,Object> error() {
         Map<String, Object> map = new HashMap<>();
