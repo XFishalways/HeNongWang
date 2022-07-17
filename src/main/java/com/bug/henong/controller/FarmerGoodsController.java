@@ -69,7 +69,7 @@ public class FarmerGoodsController {
 
     }
 
-    @RequestMapping(value = "/farmer/farmerGoods/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/farmer/farmerGoods/delete/{goodsId}", method = RequestMethod.GET)
     @ResponseBody
     public void deleteOneGoods(@RequestParam("goodsId") String goodsId) throws SQLException {
 
