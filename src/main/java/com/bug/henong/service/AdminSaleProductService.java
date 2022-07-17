@@ -16,7 +16,7 @@ import java.util.List;
  * @version 1.0.0
  */
 
-@Service("SaleProductService")
+@Service("AdminSaleProductService")
 public class AdminSaleProductService {
 
     private SaleProductDao saleProductDao = new SaleProductDao();

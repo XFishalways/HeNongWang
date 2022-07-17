@@ -51,7 +51,8 @@
 			    ]]
 
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("farmerGoods/getFarmerGoods?farmerId=" + getCookie('userId'));
+			    	var patt = 'getRecordsByFarmerName';
+					if( url.search(patt) != -1) tableInit("buyrecord/getRecordsByBusinessId?userId=" + getCookie('userId'));
 				}
 			  });
 			  
@@ -166,8 +167,8 @@
 			  });
 			});
 		}
-		
-		tableInit("farmerGoods/getFarmerGoods?farmerId=" + getCookie('userId'));
+
+		tableInit("buyrecord/getRecordsByBusinessId?userId=" + getCookie('userId'));
 		
 		//第一种：主动加载jquery模块
 		layui.use(['jquery', 'layer'], function(){ 
@@ -176,8 +177,8 @@
 		  
 		  //后面就跟你平时使用jQuery一样
 		  $('#findById').on('click',function(res){
-			  var goodsName = $(this).parent().parent().find(".layui-input").val();
-			  tableInit("farmerGoods/getFarmerGoodsByName?farmerId=" + getCookie('userId') +"&goodsName=" + goodsName);
+			  var farmerName = $(this).parent().parent().find(".layui-input").val();
+			  tableInit("buyrecord/getRecordsByFarmerName?userId=" + getCookie('userId') +"&farmerName=" + farmerName);
 		  })
 		});
 		
