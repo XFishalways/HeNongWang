@@ -64,7 +64,7 @@ public class AdminSaleProductController {
 
     }
 
-    @RequestMapping(value = "/admin/saleProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/saleProduct/update", method = RequestMethod.POST)
     public String updateOneProduct(@RequestParam("saleProductId") String saleProductId,
                                    @RequestParam("saleProductTitle") String saleProductTitle,
                                    @RequestParam("saleProductIntro") String saleProductIntro,
