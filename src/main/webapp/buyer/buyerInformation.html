@@ -65,13 +65,16 @@
     </div>
 
     <script>
-        layui.use(['jquery'], function(args){
+        layui.use(['jquery','form'], function(args){
             var $ = layui.$;
+            var form = layui.form;
+
+            form.render();
 
             $(document).ready(function(){
                 $.ajax({
                     type:'GET',
-                    url:'/showAllInfo',
+                    url:'showAllInfo',
                     data:{
                         userId:getCookie('userId')
                     },
