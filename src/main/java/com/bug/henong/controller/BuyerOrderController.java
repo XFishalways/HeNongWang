@@ -23,14 +23,24 @@ public class BuyerOrderController {
     @ResponseBody
     public String getOrders(@RequestParam("userId")String userId, HttpSession session) throws SQLException {
         List<BuyerOrder> buyerOrders = buyerOrderService.getBuyerOrderByBuyerId(userId);
-        if(buyerOrders==null){
+          if(buyerOrders==null){
             session.setAttribute("errorMsg","数据为空");
             return JSON.toJSONString(buyerOrders);
         }else {
             return JSON.toJSONString(buyerOrders);
         }
     }
-
+    @RequestMapping("/buyer/buyerOrder/getOrder")
+    @ResponseBody
+    public String getOrder(@RequestParam("orderId")String orderId,HttpSession session) throws SQLException {
+        BuyerOrder order = buyerOrderService.getBuyerOrderById(orderId);
+        if(order==null){
+            session.setAttribute("errorMsg","请求失败");
+            return JSON.toJSONString(order);
+        }else{
+            return JSON.toJSONString(order);
+        }
+    }
     @RequestMapping("/buyer/buyerOrder/getAddressId")
     @ResponseBody
     public String getAddressId(@RequestParam("userId")String userId,HttpSession session) throws SQLException {
