@@ -36,7 +36,7 @@ public class GoodsService {
         String goodsId = snowflake.nextIdStr();
 
         goods.setGoodsId(goodsId);
-
+        goods.setGoodsPass("non-examined");
         if (goodsName != null) {
             goods.setGoodsName(goodsName);
         }
@@ -60,6 +60,7 @@ public class GoodsService {
         businessBuyrecord.setUserId(businessId);
         businessBuyrecord.setTotalPrice(goodsPrice);
         businessBuyrecord.setSkuId(goodsId);
+        businessBuyrecord.setSkuStatus("non-examined");
         BusinessBuyrecordDao businessBuyrecordDao = new BusinessBuyrecordDao();
         businessBuyrecordDao.insert(businessBuyrecord);
 
