@@ -23,7 +23,7 @@ public class GoodsService {
     /**
      * 添加一个商品
      */
-    public int insert( String goodsName, Double goodsPrice, Timestamp goodsTime, String goodsPlace,String farmerId) throws SQLException {
+    public int insert( String goodsName, Double goodsPrice, Timestamp goodsTime, String goodsPlace, Double goodsQuantity, String farmerId) throws SQLException {
 
         Goods goods = new Goods();
         FarmerDao farmerDao =new FarmerDao();
@@ -48,6 +48,9 @@ public class GoodsService {
         }
         if (goodsPlace != null) {
             goods.setGoodsPlace(goodsPlace);
+        }
+        if (goodsQuantity != null) {
+            goods.setGoodsQuantity(goodsQuantity);
         }
         if(farmerId !=null){
             goods.setFarmerId(farmerId);
