@@ -1,18 +1,18 @@
 package com.bug.henong.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.bug.henong.entity.BusinessAddress;
 import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.service.BuyerUserService;
 import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Controller
 public class BuyerUserController {
@@ -22,24 +22,26 @@ public class BuyerUserController {
      * 查询买家信息
      */
     @GetMapping("/buyer/showAllInfo")
-    public String showAllInfo(HttpSession session) throws SQLException {
-        Object buyerUserId = session.getAttribute("buyerUserId");
-        String id = (String) buyerUserId;
-        BuyerUser buyerUser = buyerUserService.getUserDetailById(id);
+    public String showAllInfo(@RequestParam("userId") String userId,
+                              HttpSession session) throws SQLException {
+        String json;
 
-        if(buyerUser == null){
+        List<BuyerUser> buyerUsers = buyerUserService.getUserDetailById(userId);
+
+        if(buyerUsers == null){
             session.setAttribute("errorMsg", "查找不到卖家地址id");
-            return null;
+            return JSONUtil.toJsonStr(buyerUsers);
         }
 
-        String json = JSON.toJSONString(buyerUser);
+        json = JSON.toJSONString(buyerUsers);
         return json;
     }
 
     /**
      *更新买家信息
      */
-    @PostMapping("/buyer/update")
+    @RequestMapping(value = "/buyer/update", method = RequestMethod.POST)
+    @ResponseBody
     public String updateInfo(@RequestParam("userId") String userId,
                              @RequestParam("nickName") String nickName,
                              @RequestParam("userIntro") String userIntro,

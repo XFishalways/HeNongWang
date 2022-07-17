@@ -18,7 +18,6 @@ public class BusinessUserInfoController {
 
     private BusinessUserService businessUserService = new BusinessUserService();
 
-
     /**
      * 查询卖家所有信息
      * */

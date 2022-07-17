@@ -41,12 +41,16 @@ public class BuyerUserDao {
     }
 
     /**返回所有信息*/
-    public List<BuyerUser> findAll() throws SQLException {
+    public List<BuyerUser> findAll(String userId) throws SQLException {
 
 
 
         List<BuyerUser> buyerUsers = new ArrayList<BuyerUser>();
-        List<Entity> entities = Db.use().findAll("BUYER_USER");
+        List<Entity> entities = Db.use().findAll(Entity.create("BUYER_USER").set("USER_ID", userId));
+
+        if (entities.isEmpty()) {
+            return null;
+        }
 
         for(Entity e : entities){
             String buyerStr = JSONUtil.toJsonStr(e);
