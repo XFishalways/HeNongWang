@@ -109,7 +109,7 @@
 			      	layer.open({
 					type: 1,//1 dom或文本，2 iframe,3 加载层,4 tips
 					shadeClose:true,
-					content: '<div class="layui-inline" id="openGoodsInfo"><input placeholder="请选择地址ID" class="layui-input"></div>'
+					content: '<div class="layui-inline"><input placeholder="请选择地址ID" class="layui-input" id="openGoodsInfo"></div></br><div class="layui-inline"><button id="confirm-btn" class="layui-btn layui-btn-primary">确认</button></div>'
 					,success: function(layero){
 						 $.ajax({
 							url:'buyrecord/getAddressId?userId=' + getCookie('userId'),
@@ -133,17 +133,21 @@
 									elem:'#openGoodsInfo',
 									data:myData,
 									click:function(select){
-										$.ajax({
-											url:'buyrecord/confirm',
-											type:'POST',
-											data:{
-												recordId:id,
-												addressId:select.title
-											}
-										})
+										this.elem.val(select.title);
 									}
 								  })
 								}); 
+
+								$('#confirm-btn').click(function(){
+									$.ajax({
+										url:'buyrecord/confirm',
+										type:'POST',
+										data:{
+											recordId:id,
+											addressId:$('#openGoodsInfo').val()
+										}
+									})
+								})
 							}
 						 })
 					 }

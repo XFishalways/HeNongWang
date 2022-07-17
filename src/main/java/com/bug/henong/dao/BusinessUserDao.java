@@ -52,12 +52,16 @@ public class BusinessUserDao {
         return null;
     }
     /**返回所有信息*/
-    public List<BusinessUser> findAll() throws SQLException {
+    public List<BusinessUser> findAll(String userId) throws SQLException {
 
-        String sql = "SELECT * FROM BUSINESS_USER";
+
 
         List<BusinessUser> businessUsers = new ArrayList<BusinessUser>();
-        List<Entity> entities = Db.use().findAll("BUSINESS_USER");
+        List<Entity> entities = Db.use().findAll(Entity.create("BUSINESS_USER").set("USER_ID", userId));
+
+        if (entities.isEmpty()) {
+            return null;
+        }
 
         for(Entity e : entities){
             String businessStr = JSONUtil.toJsonStr(e);
@@ -178,5 +182,8 @@ public class BusinessUserDao {
         return rw;
 
     }
-
+    /**通过id查找密码盐*/
+    public String getBusinessPassSalt(String userId) throws SQLException {
+        return findOneBusiness(userId).getPassSalt();
+    }
 }

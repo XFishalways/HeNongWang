@@ -1,5 +1,6 @@
 package com.bug.henong.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.bug.henong.entity.BusinessUser;
 import com.bug.henong.service.BusinessUserService;
@@ -7,12 +8,13 @@ import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class BusinessUserInfoController {
@@ -21,22 +23,25 @@ public class BusinessUserInfoController {
 
     /**
      * 查询卖家所有信息
-     * */
-    @RequestMapping(value = "/businessUser/showAllInfo", method = RequestMethod.GET)
-    public String showAllInfo(HttpSession session) throws SQLException{
-       Object userId = session.getAttribute("userId");
-       String id = (String) userId;
-       BusinessUser businessUser = businessUserService.getBusinessUserDetailById(id);
-       if(businessUser == null) {
+     */
+    @RequestMapping("/businessUser/showAllInfo")
+    public String showAllInfo(@RequestParam("userId") String userId,
+                                HttpSession session) throws SQLException{
+
+        String json;
+
+        List<BusinessUser> businessUsers = businessUserService.getBusinessUserDetailById(userId);
+
+       if(businessUsers == null) {
            session.setAttribute("errorMsg", "查找不到用户id");
-           return  null;
+           return JSONUtil.toJsonStr(businessUsers);
 
        }
-
-       String json = JSON.toJSONString(businessUser);
+       json = JSON.toJSONString(businessUsers);
        return json;
 
     }
+
 
     @PostMapping("/businessUser/update")
     public String updateInfo(@RequestParam("userId") String userId,
@@ -54,7 +59,7 @@ public class BusinessUserInfoController {
             session.setAttribute("errorMsg", "查找不到用户id");
             return null;
         }
-        if (result == 1 ) {
+        if (result == 2 ) {
             session.setAttribute("errorMsg", "原密码不等");
             return null;
         }

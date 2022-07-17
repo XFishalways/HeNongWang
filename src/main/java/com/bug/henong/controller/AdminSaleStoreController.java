@@ -29,13 +29,13 @@ public class AdminSaleStoreController {
      */
     @RequestMapping(value = "/admin/saleStore/findAll", method = RequestMethod.GET)
 
-    public String findAllSales (@RequestParam("saleId") String saleId,
+    public String findAllSales (@RequestParam("adminId") String adminId,
                                 HttpSession session ) throws SQLException{
 
         String json;
 
-        List<SaleStore> saleStores = saleStoreService.getAllSalesById(saleId);
-        if (saleId == null) {
+        List<SaleStore> saleStores = saleStoreService.getAllSalesById(adminId);
+        if (adminId == null) {
 
             session.setAttribute("errorMsg", "查找不到商店活动id");
             return JSONUtil.toJsonStr(saleStores);
@@ -49,17 +49,19 @@ public class AdminSaleStoreController {
      * 查询一个商店活动
      */
     @GetMapping("/admin/saleStore/findOne")
-    public String findOneSales(HttpSession session)throws SQLException {
-        Object saleStoreId = session.getAttribute("saleStoreId");
-        String id = (String) saleStoreId;
-        SaleStore saleStore = saleStoreService.getSaleStoreId(id);
+    public String findOneSales(@RequestParam("saleStoreTitle") String saleStoreTitle,
+            HttpSession session)throws SQLException {
 
-        if(saleStore == null){
+        String json;
+        List<SaleStore> saleStores = saleStoreService.getOneSaleByTitle(saleStoreTitle);
+
+
+        if(saleStores == null){
             session.setAttribute("errorMsg", "查找不到商店活动id");
             return null;
         }
 
-        String json = JSON.toJSONString(saleStore);
+        json = JSON.toJSONString(saleStores);
         return json;
     }
 
@@ -67,11 +69,14 @@ public class AdminSaleStoreController {
      * 删除商店活动
      */
     @GetMapping("/admin/saleStore/delete")
-    public void deleteOneSale(@RequestParam("saleStoreId") String saleStoreId) throws SQLException{
+    public String deleteOneSale(@RequestParam("saleStoreId") String saleStoreId,
+                                HttpSession session) throws SQLException{
 
         SaleStore saleStore = saleStoreService.getSaleStoreId(saleStoreId);
 
         saleStoreService.deleteSale(saleStoreId);
+        MapFactory mapFactory=new MapFactory();
+        return mapFactory.getStringObjectMap(session);
     }
 
     /**

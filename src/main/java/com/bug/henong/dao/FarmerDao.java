@@ -72,7 +72,10 @@ public class FarmerDao {
 
         return farmer;
     }
-
+    /**通过id查找农户密码盐*/
+    public String getFarmerPassSalt(String farmerId) throws SQLException {
+        return findOneFarmer(farmerId).getPassSalt();
+    }
     /**登录*/
     public Farmer login(String id,String pass) throws SQLException {
         Farmer farmer = findOneFarmer(id);

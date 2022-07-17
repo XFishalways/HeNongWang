@@ -57,6 +57,9 @@
           <a href="javascript:;">我的购物车</a>
         </li>
         <li class="layui-nav-item">
+          <a href="javascript:;">我的订单</a>
+        </li>
+        <li class="layui-nav-item">
           <a class="" href="javascript:;">消息管理</a>
           <dl class="layui-nav-child">
             <dd><a href="javascript:;">消息推送</a></dd>
@@ -127,6 +130,9 @@ layui.use('element', function(){
         }else if(text=="注册新地址") {
           $("#main").find("#ifr").remove();
           $("#main").append('<iframe src="addressRegister.html" id="ifr" style="width:100%;height:100%"></iframe>');
+        }else if(text=="我的订单") {
+          $("#main").find("#ifr").remove();
+          $("#main").append('<iframe src="displayOrder.html" id="ifr" style="width:100%;height:100%"></iframe>');
         }
     })
 });

@@ -36,18 +36,18 @@ public class SaleStoreDao {
     public int delete(String id) throws SQLException {
 
         int rw=Db.use().del(
-                Entity.create("SALE_STORE").set("STOREID",id)
+                Entity.create("SALE_STORE").set("STORE_ID",id)
         );
         return rw;
 
     }
     /**返回所有信息*/
-    public List<SaleStore> findAll(String saleStoreId) throws SQLException {
+    public List<SaleStore> findAll(String adminId) throws SQLException {
 
 
 
         List<SaleStore> saleStores = new ArrayList<SaleStore>();
-        List<Entity> entities = Db.use().findAll(Entity.create("SALE_STORE").set("SALE_STOREID", saleStoreId));
+        List<Entity> entities = Db.use().findAll(Entity.create("SALE_STORE").set("ADMIN_ID", adminId));
 
         if (entities.isEmpty()) {
             return null;
