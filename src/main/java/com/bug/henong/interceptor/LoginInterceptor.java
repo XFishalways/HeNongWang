@@ -32,10 +32,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         String checkBySession = String.valueOf(session.getAttribute("check"));
         session.removeAttribute("check");
 
-        if (StringUtils.isNotBlank(checkBySession)) {
+        if (checkBySession == "null") {
             return true;
         }
-        if(StringUtils.isNotBlank(checkByForm) && StringUtils.isNotBlank(checkBySession) && checkByForm.equals(checkBySession)){
+        if(checkBySession != "null" && checkByForm != "null" && checkByForm.equals(checkBySession)){
             return true;
         } else{
             response.setContentType("text/html;charset=utf-8");

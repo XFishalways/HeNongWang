@@ -27,14 +27,13 @@ public class BuyerUserController {
                               HttpSession session) throws SQLException {
         String json;
 
-        List<BuyerUser> buyerUsers = buyerUserService.getUserDetailById(userId);
+        BuyerUser buyerUser = buyerUserService.getUserDetailById(userId);
 
-        if(buyerUsers == null){
+        if(buyerUser == null){
             session.setAttribute("errorMsg", "查找不到卖家地址id");
-            BuyerUser buyerUser = new BuyerUser();
+            buyerUser = new BuyerUser();
             return JSONUtil.toJsonStr(buyerUser);
         }
-        BuyerUser buyerUser = new BuyerUser();
         json = JSON.toJSONString(buyerUser);
         return json;
     }

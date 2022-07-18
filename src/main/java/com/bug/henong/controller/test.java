@@ -11,11 +11,7 @@ import java.sql.SQLException;
 @RequestMapping(value = "/GetBuyerUser", method = RequestMethod.GET)
 
 public class test {
-    @GetMapping("/test")
-    public BuyerUser test() throws SQLException {
-        BuyerUserDao dao = new BuyerUserDao();
-        BuyerUser user =dao.findOneBuyer("1");
-        return user;
-    }
+
+
 
 }

@@ -19,7 +19,7 @@ public class AdminLoginController {
 
     private AdminLoginService adminLoginService = new AdminLoginService();
 
-    @PostMapping(value = "/login" )
+    @PostMapping(value = "/admin/login" )
     @ResponseBody
     public String login(@RequestParam("adminId") String adminId,
                         @RequestParam("adminPasswd") String adminPasswd,

@@ -30,7 +30,7 @@ public class LoginController {
                         @RequestParam("password") String password,
                         @RequestParam("type") String type,
                         @RequestParam("check") String check,
-                        HttpSession session, HttpServletRequest request) throws SQLException {
+                        HttpSession session) throws SQLException {
 
         if (userId==null || password==null) {
             session.setAttribute("errorMsg", "用户名或密码不能为空");
@@ -40,7 +40,6 @@ public class LoginController {
         MapFactory mapFactory =new MapFactory();
         if(loginService.login(userId,password,type)){
 
-            session = request.getSession();
             session.setAttribute("check", check);
             session.setAttribute("userId",userId );
             return mapFactory.getStringObjectMap(session);
