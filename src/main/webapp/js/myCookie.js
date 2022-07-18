@@ -16,5 +16,5 @@ function getCookie(cName){
 function deleteCookie(cName){
     var date = new Date();
     date.setTime(date.getTime() - 100);
-    document.cookie = cName + "=a; expires=" + date.toGMTString(); 
+    document.cookie = cName + "=" + getCookie(cName) + "; expires=" + date.toGMTString();
 }
