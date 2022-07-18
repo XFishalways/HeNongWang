@@ -114,7 +114,7 @@
                       nickName:data.field.nickname,
                       originalPass:data.field.oldPass,
                       newPass:data.field.newPass,
-                      userIntro:data.field.intro,
+                      userIntro:data.field.userIntro,
                       phone:data.field.phone,
                       userStatus:$('#status').val()
                     },
@@ -136,7 +136,7 @@
 
                 $.ajax({
                   type:'GET',
-                  url:'showAllInfo',
+                  url:'showUserInfo',
                   data:{
                     userId:getCookie('userId')
                   },
