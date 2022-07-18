@@ -137,7 +137,10 @@ public class BusinessUserService {
         if (businessUser == null) {
             return 0;
         }
-        if (!businessUser.getUserPass().equals(originalUserPass)) {
+        String originalPassSalt =businessUser.getPassSalt();
+        String realEncryptPassword = businessUser.getUserPass();
+        String originalEncryptPassWord = EncryptUtil.getDigestHex(originalUserPass,originalPassSalt);
+        if (!realEncryptPassword.equals(originalEncryptPassWord)) {
             return 2;
         }
         if (!businessUser.getNickName().equals(nickName)) {
