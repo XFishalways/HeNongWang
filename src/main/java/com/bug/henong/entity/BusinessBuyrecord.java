@@ -38,7 +38,7 @@ public class BusinessBuyrecord implements Serializable,Cloneable{
       * 账单状态
       */
      @ApiModelProperty(name = "账单状态",notes = "")
-     private String skuStatus ;
+     private String recordStatus ;
 
 
      /** 返回账单ID */
@@ -93,14 +93,14 @@ public class BusinessBuyrecord implements Serializable,Cloneable{
      /**
       *返回账单状态
       */
-     public String getSkuStatus() {
-         return skuStatus;
+     public String getRecordStatus() {
+         return recordStatus;
      }
 
      /**
       *设置账单状态
       */
-     public void setSkuStatus(String skuStatus) {
-         this.skuStatus = skuStatus;
+     public void setRecordStatus(String recordStatus) {
+         this.recordStatus=recordStatus;
      }
  }

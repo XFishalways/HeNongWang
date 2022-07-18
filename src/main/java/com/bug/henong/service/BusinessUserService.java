@@ -183,8 +183,8 @@ public class BusinessUserService {
             businessUser.setUserPass(encryptPassword);
             businessUser.setPassSalt(passSalt);
             businessUser.setPhone(phone);
-            businessUser.setUserIntro("null");
-            businessUser.setAvatar("null");
+            businessUser.setUserIntro("NONE");
+            businessUser.setAvatar("NONE");
             businessUser.setUserStatus("online");
             return businessUserDao.insert(businessUser) > 0;
         }

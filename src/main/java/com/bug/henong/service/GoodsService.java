@@ -55,6 +55,7 @@ public class GoodsService {
         if(farmerId !=null){
             goods.setFarmerId(farmerId);
         }
+
         BusinessBuyrecord businessBuyrecord =new BusinessBuyrecord();
 
         String recordId = snowflake.nextIdStr();
@@ -63,7 +64,7 @@ public class GoodsService {
         businessBuyrecord.setUserId(businessId);
         businessBuyrecord.setTotalPrice(goodsPrice * goodsQuantity);
         businessBuyrecord.setSkuId(goodsId);
-        businessBuyrecord.setSkuStatus("non-examined");
+        businessBuyrecord.setRecordStatus("non-examined");
         BusinessBuyrecordDao businessBuyrecordDao = new BusinessBuyrecordDao();
         businessBuyrecordDao.insert(businessBuyrecord);
 

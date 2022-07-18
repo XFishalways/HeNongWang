@@ -69,8 +69,9 @@ public class ProductExamineService {
     }
 
     /**确认通过审核*/
-    public Boolean confirmProduct(String loginProductId,String adminId) throws SQLException {
+    public Boolean confirmProduct(String loginProductId,String adminId,String productNotes) throws SQLException {
         productExamineDao.updateAdminId(loginProductId, adminId);
+        productExamineDao.updateProductNote(loginProductId,productNotes);
         Boolean rs= updateProductResult(loginProductId,"pass");
         if(rs==false){
             return false;
@@ -109,8 +110,9 @@ public class ProductExamineService {
     }
 
     /**拒绝通过审核*/
-    public Boolean denyProduct(String loginProductId,String adminId) throws SQLException {
+    public Boolean denyProduct(String loginProductId,String adminId,String productNotes) throws SQLException {
         productExamineDao.updateAdminId(loginProductId, adminId);
+        productExamineDao.updateProductNote(loginProductId,productNotes);
         Boolean rs= updateProductResult(loginProductId,"refused");
         if(rs==false){
             return false;
