@@ -61,10 +61,11 @@
 		</form>
 	</div>
 	<script src="../js/myCookie.js"></script>
+	<script src="../lib/layui/layui.js"></script>
 	<script>
-		layui.use(['jquery','from'], function(args){
+		layui.use(['jquery','form'], function(args){
 			var $ = layui.$;
-			var from = layui.from;
+			var form = layui.form;
 			$(document).ready(function(){
 				$.ajax({
 					type:'GET',

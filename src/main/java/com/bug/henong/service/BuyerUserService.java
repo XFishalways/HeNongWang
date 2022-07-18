@@ -19,8 +19,8 @@ public class BuyerUserService {
     /**
      * 得到买家信息
      */
-    public List<BuyerUser> getUserDetailById(String UserId) throws SQLException {
-        return buyerUserDao.findAll(UserId);
+    public BuyerUser getUserDetailById(String UserId) throws SQLException {
+        return buyerUserDao.findOneBuyer(UserId);
     }
 
     /**
