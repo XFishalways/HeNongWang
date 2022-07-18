@@ -28,7 +28,7 @@ public class AdminSaleStoreController {
      * 查询所有商店活动
      */
     @RequestMapping(value = "/admin/saleStore/findAll", method = RequestMethod.GET)
-
+    @ResponseBody
     public String findAllSales (@RequestParam("adminId") String adminId,
                                 HttpSession session ) throws SQLException{
 
@@ -50,6 +50,7 @@ public class AdminSaleStoreController {
      * 查询一个商店活动
      */
     @GetMapping("/admin/saleStore/findOne")
+    @ResponseBody
     public String findOneSales(@RequestParam("saleStoreTitle") String saleStoreTitle,
             HttpSession session)throws SQLException {
 
@@ -70,6 +71,7 @@ public class AdminSaleStoreController {
      * 删除商店活动
      */
     @GetMapping("/admin/saleStore/delete")
+    @ResponseBody
     public String deleteOneSale(@RequestParam("saleStoreId") String saleStoreId,
                                 HttpSession session) throws SQLException{
 
@@ -84,6 +86,7 @@ public class AdminSaleStoreController {
      * 注册商店商品
      */
     @PostMapping("/admin/saleStore/register")
+    @ResponseBody
     public String registerSaleStore (@RequestParam("saleStoreTitle") String saleStoreTitle,
                                      @RequestParam("saleStoreIntro") String saleStoreIntro,
                                      @RequestParam("saleStoreContent") String saleStoreContent,
@@ -109,6 +112,7 @@ public class AdminSaleStoreController {
      * 更新商店活动信息
      */
     @PostMapping("/admin/saleStore/update")
+    @ResponseBody
     public String updateOneSaleStore(@RequestParam("saleStoreId") String saleStoreId,
                                      @RequestParam("saleStoreTitle") String saleStoreTitle,
                                      @RequestParam("saleStoreIntro") String saleStoreIntro,

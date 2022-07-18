@@ -109,10 +109,10 @@
             $('#log-btn').click(function(){
                 $.ajax({
                     type:'POST',
-                    url:'',
+                    url:'admin/login',
                     data:{
                         adminUserId:$('#input-account').val(),
-                        password:$('#input-pass').val(),
+                        adminPassword:$('#input-pass').val(),
                     },
                     dataType:'json',
 
