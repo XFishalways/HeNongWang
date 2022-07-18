@@ -29,7 +29,8 @@ public class AdminUserController {
 
         if(admins == null){
             session.setAttribute("errorMsg", "查找不到管理员地址id");
-            return JSONUtil.toJsonStr(admins);
+            Admin admin = new Admin();
+            return JSONUtil.toJsonStr(admin);
         }
 
         json = JSON.toJSONString(admins);
