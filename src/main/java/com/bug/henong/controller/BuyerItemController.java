@@ -8,10 +8,7 @@ import com.bug.henong.entity.BuyerItem;
 import com.bug.henong.service.BuyerItemService;
 import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
@@ -23,6 +20,7 @@ public class BuyerItemController {
     private BuyerItemService buyerItemService = new BuyerItemService();
 
     @RequestMapping(value = "/goods/goodsInformation/addToCart", method = RequestMethod.POST)
+    @ResponseBody
     public String addToCart(@RequestParam("userId") String userId,
                             @RequestParam("skuId") String skuId,
                             @RequestParam("quantity") String Quantity,
@@ -39,6 +37,7 @@ public class BuyerItemController {
     }
 
     @RequestMapping(value = "/goods/goodsInformation/addToOrder", method = RequestMethod.POST)
+    @ResponseBody
     public String addToOrder(@RequestParam("userId") String userId,
                              @RequestParam("skuId") String skuId,
                              @RequestParam("quantity") String Quantity,
@@ -55,6 +54,7 @@ public class BuyerItemController {
     }
 
     @RequestMapping(value = "/business/displayGoods", method = RequestMethod.GET)
+    @ResponseBody
     public String insertItem (@RequestParam("skuId") String skuId,
                               HttpSession session) throws SQLException {
 
@@ -65,6 +65,7 @@ public class BuyerItemController {
     }
 
     @RequestMapping(value = "/goods/goodsView", method = RequestMethod.GET)
+    @ResponseBody
     public String findAllItem(@RequestParam("itemId") String itemId,
                               HttpSession session) throws SQLException {
 
@@ -77,8 +78,7 @@ public class BuyerItemController {
             BuyerItem buyerItem = new BuyerItem();
             return JSONUtil.toJsonStr(buyerItem);
         }
-        BuyerItem buyerItem = new BuyerItem();
-        json = JSONUtil.toJsonStr(buyerItem);
+        json = JSONUtil.toJsonStr(buyerItems);
         return json;
     }
 

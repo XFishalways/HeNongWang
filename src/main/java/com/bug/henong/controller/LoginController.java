@@ -8,6 +8,7 @@ import com.bug.henong.service.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ public class LoginController {
                         @RequestParam("password") String password,
                         @RequestParam("type") String type,
                         @RequestParam("check") String check,
-                        HttpSession session) throws SQLException {
+                        HttpSession session, HttpServletRequest request) throws SQLException {
 
         if (userId==null || password==null) {
             session.setAttribute("errorMsg", "用户名或密码不能为空");
@@ -37,9 +38,9 @@ public class LoginController {
         }
 
         MapFactory mapFactory =new MapFactory();
-
         if(loginService.login(userId,password,type)){
 
+            session = request.getSession();
             session.setAttribute("check", check);
             session.setAttribute("userId",userId );
             return mapFactory.getStringObjectMap(session);

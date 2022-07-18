@@ -25,11 +25,10 @@ public class BuyerCartController {
         List<BuyerItem> buyerItems = buyerCartService.getItemsInCart(userId);
         if(buyerItems==null){
             session.setAttribute("errorMsg","数据为空");
-            BuyerItem buyerItem = new BuyerItem();
-            return JSON.toJSONString(buyerItem);
+
+            return JSON.toJSONString(buyerItems);
         }else {
-            BuyerItem buyerItem = new BuyerItem();
-            return JSON.toJSONString(buyerItem);
+            return JSON.toJSONString(buyerItems);
         }
     }
 

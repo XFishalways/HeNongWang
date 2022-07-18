@@ -3,6 +3,7 @@ package com.bug.henong.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -13,6 +14,7 @@ import java.io.*;
 public class FileUploadController {
 
     @RequestMapping(value = "/business/upload", method = RequestMethod.POST)
+    @ResponseBody
     public String businessFileUpload(@RequestParam("file") CommonsMultipartFile avatar , HttpServletResponse response, HttpServletRequest request) throws IOException {
         String path=request.getServletContext().getRealPath("/upload");
         //获取文件名 : file.getOriginalFilename();
@@ -46,6 +48,7 @@ public class FileUploadController {
     }
 
     @RequestMapping(value = "/buyer/upload")
+    @ResponseBody
     public String buyerFileUpload(@RequestParam("file") MultipartFile avatar,
                                   HttpServletResponse response,
                                   HttpServletRequest request) throws IOException {

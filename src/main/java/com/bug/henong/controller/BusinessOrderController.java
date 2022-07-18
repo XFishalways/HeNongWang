@@ -24,11 +24,9 @@ public class BusinessOrderController {
 
         if(businessOrders==null){
             session.setAttribute("errorMsg","数据为空");
-            BusinessOrder businessOrder = new BusinessOrder();
-            return JSON.toJSONString(businessOrder);
+            return JSON.toJSONString(businessOrders);
         }else{
-            BusinessOrder businessOrder = new BusinessOrder();
-            return JSON.toJSONString(businessOrder);
+            return JSON.toJSONString(businessOrders);
         }
     }
 
@@ -38,11 +36,9 @@ public class BusinessOrderController {
         List<BusinessOrder>businessOrders = businessOrderService.getOrdersByBusinessIdAndOrderId(userId,orderId);
         if(businessOrders==null){
             session.setAttribute("errorMsg","数据为空");
-            BusinessOrder businessOrder = new BusinessOrder();
-            return JSON.toJSONString(businessOrder);
+            return JSON.toJSONString(businessOrders);
         }else{
-            BusinessOrder businessOrder = new BusinessOrder();
-            return JSON.toJSONString(businessOrder);
+            return JSON.toJSONString(businessOrders);
         }
     }
 }
