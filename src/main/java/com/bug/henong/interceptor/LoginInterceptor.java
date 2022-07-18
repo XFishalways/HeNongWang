@@ -22,6 +22,7 @@ import java.io.OutputStream;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
+    @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws Exception {
@@ -29,7 +30,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         String checkByForm = request.getParameter("check");
         String checkBySession = String.valueOf(session.getAttribute("check"));
-        session.removeAttribute("check");  //使用之后从session中删掉
+        session.removeAttribute("check");
 
         if (StringUtils.isNotBlank(checkBySession)) {
             return true;
@@ -47,6 +48,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
     }
 
+    @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
