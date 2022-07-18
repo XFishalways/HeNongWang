@@ -31,10 +31,6 @@
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item">
           <a class="" href="javascript:;">商品管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="javascript:;">商品展示</a></dd>
-            <dd><a href="javascript:;">商品审批</a></dd>
-          </dl>
         </li>
         <li class="layui-nav-item">
           <a href="javascript:;">用户管理</a>
@@ -99,10 +95,7 @@ layui.use('element', function(){
 		if(text=="用户管理"){
 			$("#main").find("#ifr").remove();
 			$("#main").append('<iframe src="userManagement.html" id="ifr" style="width:100%;height:100%"></iframe>');
-		}else if(text=="商品展示"){
-          $("#main").find("#ifr").remove();
-          $("#main").append('<iframe src="productExamine.html" id="ifr" style="width:100%;height:100%"></iframe>');
-        }else if(text=="商品审批"){
+		}else if(text=="商品管理"){
           $("#main").find("#ifr").remove();
           $("#main").append('<iframe src="productExamine.html" id="ifr" style="width:100%;height:100%"></iframe>');
         }else if(text=="商品活动") {
