@@ -33,10 +33,8 @@ public class AdminSaleProductController {
 
         if (saleProduct == null){
             session.setAttribute("errorMsg","数据为空");
-            saleProduct = new SaleProduct();
             return JSON.toJSONString(saleProduct);
         }else {
-            saleProduct = new SaleProduct();
             return JSON.toJSONString(saleProduct);
         }
     }
@@ -49,11 +47,9 @@ public class AdminSaleProductController {
 
         if (saleProducts == null){
             session.setAttribute("errorMsg","数据为空");
-            SaleProduct saleProduct = new SaleProduct();
-            return JSON.toJSONString(saleProduct);
+            return JSON.toJSONString(saleProducts);
         } else{
-            SaleProduct saleProduct = new SaleProduct();
-            return JSON.toJSONString(saleProduct);
+            return JSON.toJSONString(saleProducts);
         }
 
     }

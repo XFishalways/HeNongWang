@@ -22,7 +22,6 @@ public class FarmerInfoController {
             return null;
 
         }
-        farmer = new Farmer();
         String json = JSON.toJSONString(farmer);
         return json;
     }

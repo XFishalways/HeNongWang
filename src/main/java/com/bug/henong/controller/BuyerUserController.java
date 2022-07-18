@@ -33,8 +33,7 @@ public class BuyerUserController {
             BuyerUser buyerUser = new BuyerUser();
             return JSONUtil.toJsonStr(buyerUser);
         }
-        BuyerUser buyerUser = new BuyerUser();
-        json = JSON.toJSONString(buyerUser);
+        json = JSON.toJSONString(buyerUsers);
         return json;
     }
 

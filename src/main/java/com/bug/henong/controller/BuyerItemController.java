@@ -78,8 +78,7 @@ public class BuyerItemController {
             BuyerItem buyerItem = new BuyerItem();
             return JSONUtil.toJsonStr(buyerItem);
         }
-        BuyerItem buyerItem = new BuyerItem();
-        json = JSONUtil.toJsonStr(buyerItem);
+        json = JSONUtil.toJsonStr(buyerItems);
         return json;
     }
 
