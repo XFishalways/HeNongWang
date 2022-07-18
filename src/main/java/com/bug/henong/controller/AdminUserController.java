@@ -21,6 +21,7 @@ public class AdminUserController {
      * 查询管理员信息
      */
     @GetMapping("/admin/findAdmin")
+    @ResponseBody
     public String findOneAdmin(@RequestParam("userId") String userId,
                               HttpSession session) throws SQLException {
         String json;
@@ -69,6 +70,7 @@ public class AdminUserController {
      * 注册买家信息
      */
     @PostMapping("/admin/register")
+    @ResponseBody
     public String register(@RequestParam("adminId") String adminId,
                            @RequestParam("adminName") String adminName,
                            @RequestParam("phone") String phone,

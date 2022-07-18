@@ -14,6 +14,7 @@ public class FarmerInfoController {
     private FarmerService farmerService = new FarmerService();
 
     @RequestMapping("/farmer/showAllInfo")
+    @ResponseBody
     public String showAllInfo(@RequestParam String userId, HttpSession session) throws SQLException{
         Farmer farmer = farmerService.getFarmerDetailById(userId);
         if(farmer == null){
@@ -32,12 +33,14 @@ public class FarmerInfoController {
      */
 
     @GetMapping(value = "/farmer/update")
+    @ResponseBody
     public String update(@RequestParam("farmerName") String farmerName) {
         System.out.println("1");
         return farmerName;
     }
 
     @PostMapping("/farmer/update")
+    @ResponseBody
     public String updateInfo(@RequestParam("userId") String userId, @RequestParam("farmerName") String farmerName , @RequestParam("farmerAge") String farmerage, @RequestParam("farmerPlace") String farmerPlace
                             , @RequestParam("businessId") String businessId, @RequestParam("originalUserPass") String originalUserPass, @RequestParam("newUserPass") String newUserPass,
                           HttpSession session) throws SQLException {

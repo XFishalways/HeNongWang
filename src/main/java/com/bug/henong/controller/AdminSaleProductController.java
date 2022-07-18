@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,7 +25,7 @@ public class AdminSaleProductController {
     private AdminSaleProductService saleProductService = new AdminSaleProductService();
 
     @RequestMapping(value = "/admin/saleProduct/findOne", method = RequestMethod.GET)
-
+    @ResponseBody
     public String findOneGoods (@RequestParam("saleProductTitle") String saleProductTitle,
                                             HttpSession session ) throws SQLException, IOException{
 
@@ -41,6 +42,7 @@ public class AdminSaleProductController {
     }
 
     @RequestMapping(value = "/admin/saleProduct/findAll", method = RequestMethod.GET)
+    @ResponseBody
     public String findAllProducts (@RequestParam("adminId")String adminID, HttpSession session)  throws IOException, SQLException{
 
         List<SaleProduct> saleProducts = saleProductService.getAllProducts(adminID);
@@ -57,6 +59,7 @@ public class AdminSaleProductController {
     }
 
     @RequestMapping(value = "/admin/saleProduct/delete", method = RequestMethod.GET)
+    @ResponseBody
     public String deleteOneProduct(@RequestParam("saleProductId") String saleProductId,HttpSession session) throws SQLException {
 
         SaleProduct saleProduct = saleProductService.getSaleProductDetailByID(saleProductId);
@@ -69,6 +72,7 @@ public class AdminSaleProductController {
     }
 
     @RequestMapping(value = "/admin/saleProduct/update", method = RequestMethod.POST)
+    @ResponseBody
     public String updateOneProduct(@RequestParam("saleProductId") String saleProductId,
                                    @RequestParam("saleProductTitle") String saleProductTitle,
                                    @RequestParam("saleProductIntro") String saleProductIntro,
@@ -99,6 +103,7 @@ public class AdminSaleProductController {
     }
 
     @RequestMapping(value = "/admin/insertSaleProduct", method = RequestMethod.POST)
+    @ResponseBody
     public String insertSaleProduct (@RequestParam("saleProductTitle") String saleProductTitle,
                                    @RequestParam("saleProductIntro") String saleProductIntro,
                                    @RequestParam("saleProductContent") String saleProductContent,
