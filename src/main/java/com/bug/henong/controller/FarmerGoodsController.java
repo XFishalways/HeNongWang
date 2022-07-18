@@ -38,8 +38,10 @@ public class FarmerGoodsController {
 
         if (goods == null) {
             session.setAttribute("errorMsg","数据为空");
+            goods = new Goods();
             return JSON.toJSONString(goods);
         }else {
+            goods = new Goods();
             return JSON.toJSONString(goods);
         }
 
@@ -55,9 +57,11 @@ public class FarmerGoodsController {
 
         if (goods == null) {
            session.setAttribute("errorMsg","查找失败");
-            return JSON.toJSONString(goods);
+           Goods good = new Goods();
+            return JSON.toJSONString(good);
         } else {
-           json=JSON.toJSONString(goods);
+            Goods good = new Goods();
+           json=JSON.toJSONString(good);
            return json;
         }
 
@@ -130,7 +134,8 @@ public class FarmerGoodsController {
         int pageSize = Integer.getInteger(limit);
         List<Goods> goods = goodsService.getGoodsFromTo(currentPage, pageSize);
         if (goods != null) {
-            String json = JSON.toJSONString(goods);
+            Goods good = new Goods();
+            String json = JSON.toJSONString(good);
             session.getAttribute("");
             return json;
         }
@@ -141,7 +146,8 @@ public class FarmerGoodsController {
     public String getFarmerGoodsByName(@RequestParam String farmerId,@RequestParam String goodsName, HttpSession session) throws SQLException {
         List<Goods> goods = goodsService.getFarmerGoodsByName(farmerId, goodsName);
         if (goods != null) {
-            String json = JSON.toJSONString(goods);
+            Goods good = new Goods();
+            String json = JSON.toJSONString(good);
             session.getAttribute("");
             return json;
         }

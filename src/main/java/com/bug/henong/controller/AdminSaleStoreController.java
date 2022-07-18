@@ -38,7 +38,8 @@ public class AdminSaleStoreController {
         if (adminId == null) {
 
             session.setAttribute("errorMsg", "查找不到商店活动id");
-            return JSONUtil.toJsonStr(saleStores);
+            SaleStore saleStore = new SaleStore();
+            return JSONUtil.toJsonStr(saleStore);
         }
 
         json = JSON.toJSONString(saleStores);

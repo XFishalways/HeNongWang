@@ -34,7 +34,8 @@ public class BuyerAddressController {
 
         if(buyerAddresses == null){
             session.setAttribute("errorMsg", "查找不到买家地址id");
-            return JSONUtil.toJsonStr(buyerAddresses);
+            BuyerAddress buyerAddress = new BuyerAddress();
+            return JSONUtil.toJsonStr(buyerAddress);
         }
 
         json = JSON.toJSONString(buyerAddresses);
@@ -52,6 +53,7 @@ public class BuyerAddressController {
 
         if(buyerAddress == null){
             session.setAttribute("errorMsg", "查找不到买家地址id");
+            buyerAddress = new BuyerAddress();
             return JSONUtil.toJsonStr(buyerAddress);
         }
 

@@ -20,13 +20,15 @@ public class BusinessOrderController {
     @RequestMapping("/business/businessOrder/getOrders")
     @ResponseBody
     public String getOrders(@RequestParam("userId")String userId, HttpSession session) throws SQLException {
-        List<BusinessOrder>businessOrders = businessOrderService.getOrdersByBusinessId(userId);
+        List<BusinessOrder> businessOrders = businessOrderService.getOrdersByBusinessId(userId);
 
         if(businessOrders==null){
             session.setAttribute("errorMsg","数据为空");
-            return JSON.toJSONString(businessOrders);
+            BusinessOrder businessOrder = new BusinessOrder();
+            return JSON.toJSONString(businessOrder);
         }else{
-            return JSON.toJSONString(businessOrders);
+            BusinessOrder businessOrder = new BusinessOrder();
+            return JSON.toJSONString(businessOrder);
         }
     }
 
@@ -36,9 +38,11 @@ public class BusinessOrderController {
         List<BusinessOrder>businessOrders = businessOrderService.getOrdersByBusinessIdAndOrderId(userId,orderId);
         if(businessOrders==null){
             session.setAttribute("errorMsg","数据为空");
-            return JSON.toJSONString(businessOrders);
+            BusinessOrder businessOrder = new BusinessOrder();
+            return JSON.toJSONString(businessOrder);
         }else{
-            return JSON.toJSONString(businessOrders);
+            BusinessOrder businessOrder = new BusinessOrder();
+            return JSON.toJSONString(businessOrder);
         }
     }
 }

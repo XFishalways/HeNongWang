@@ -34,7 +34,8 @@ public class BusinessUserInfoController {
 
        if(businessUsers == null) {
            session.setAttribute("errorMsg", "查找不到用户id");
-           return JSONUtil.toJsonStr(businessUsers);
+           BusinessUser businessUser = new BusinessUser();
+           return JSONUtil.toJsonStr(businessUser);
 
        }
        json = JSON.toJSONString(businessUsers);

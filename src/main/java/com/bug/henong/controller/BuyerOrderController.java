@@ -25,9 +25,11 @@ public class BuyerOrderController {
         List<BuyerOrder> buyerOrders = buyerOrderService.getBuyerOrderByBuyerId(userId);
           if(buyerOrders==null){
             session.setAttribute("errorMsg","数据为空");
-            return JSON.toJSONString(buyerOrders);
+            BuyerOrder buyerOrder = new BuyerOrder();
+            return JSON.toJSONString(buyerOrder);
         }else {
-            return JSON.toJSONString(buyerOrders);
+              BuyerOrder buyerOrder = new BuyerOrder();
+            return JSON.toJSONString(buyerOrder);
         }
     }
     @RequestMapping("/buyer/buyerOrder/getOrder")
@@ -36,8 +38,10 @@ public class BuyerOrderController {
         BuyerOrder order = buyerOrderService.getBuyerOrderById(orderId);
         if(order==null){
             session.setAttribute("errorMsg","请求失败");
+            order = new BuyerOrder();
             return JSON.toJSONString(order);
         }else{
+            order = new BuyerOrder();
             return JSON.toJSONString(order);
         }
     }

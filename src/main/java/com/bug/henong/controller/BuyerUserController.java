@@ -31,10 +31,11 @@ public class BuyerUserController {
 
         if(buyerUsers == null){
             session.setAttribute("errorMsg", "查找不到卖家地址id");
-            return JSONUtil.toJsonStr(buyerUsers);
+            BuyerUser buyerUser = new BuyerUser();
+            return JSONUtil.toJsonStr(buyerUser);
         }
-
-        json = JSON.toJSONString(buyerUsers);
+        BuyerUser buyerUser = new BuyerUser();
+        json = JSON.toJSONString(buyerUser);
         return json;
     }
 

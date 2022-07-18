@@ -74,10 +74,11 @@ public class BuyerItemController {
 
         if(buyerItems == null) {
             session.setAttribute("errorMsg", "查找不到商品id");
-            return JSONUtil.toJsonStr(buyerItems);
+            BuyerItem buyerItem = new BuyerItem();
+            return JSONUtil.toJsonStr(buyerItem);
         }
-
-        json = JSONUtil.toJsonStr(buyerItems);
+        BuyerItem buyerItem = new BuyerItem();
+        json = JSONUtil.toJsonStr(buyerItem);
         return json;
     }
 
