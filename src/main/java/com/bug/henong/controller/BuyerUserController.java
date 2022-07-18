@@ -22,19 +22,19 @@ public class BuyerUserController {
     /**
      * 查询买家信息
      */
-    @GetMapping("/buyer/showAllInfo")
-    @ResponseBody
-    public String findOneBuyer(@RequestParam("userId") String userId,
+    @GetMapping("/buyer/findAllUser")
+    public String findAllUser(@RequestParam("userId") String userId,
                               HttpSession session) throws SQLException {
         String json;
 
-        BuyerUser buyerUser = buyerUserService.getUserDetailById(userId);
+        List<BuyerUser> buyerUsers = buyerUserService.getUserDetailById(userId);
 
-        if(buyerUser == null){
+        if(buyerUsers == null){
             session.setAttribute("errorMsg", "查找不到卖家地址id");
+            BuyerUser buyerUser = new BuyerUser();
             return JSONUtil.toJsonStr(buyerUser);
         }
-
+        BuyerUser buyerUser = new BuyerUser();
         json = JSON.toJSONString(buyerUser);
         return json;
     }

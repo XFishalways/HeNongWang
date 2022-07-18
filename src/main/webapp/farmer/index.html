@@ -108,11 +108,7 @@ layui.use('element', function(){
 		}else if(text=="申报商品"){
 			$("#main").find("#ifr").remove();
 			$("#main").append('<iframe src="farmerReport.html" id="ifr" style="width:100%;height:100%"></iframe>');
-		}else if(text=="退出") {
-          createCookie('userId','');
-          createCookie('userType','');
-          window.location.href = "../login.html";
-        }
+		}
 			
 	})
 });

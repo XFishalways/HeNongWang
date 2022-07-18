@@ -28,7 +28,8 @@ public class ProductExamineController {
             session.setAttribute("errorMsg","请求失败");
             return null;
         }else{
-            String json = JSON.toJSONString(productExamines);
+            ProductExamine productExamine = new ProductExamine();
+            String json = JSON.toJSONString(productExamine);
             return json;
         }
     }
@@ -41,7 +42,8 @@ public class ProductExamineController {
             session.setAttribute("errorMsg","没有该商品");
             return null;
         }else{
-            String json = JSON.toJSONString(productExamines);
+            ProductExamine productExamine = new ProductExamine();
+            String json = JSON.toJSONString(productExamine);
             return json;
         }
     }
