@@ -28,13 +28,12 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
-                <a href="javascript:;">
+                <a id="userName" href="javascript:;">
                     <img src="../images/test.png" class="layui-nav-img">
-                    zlt
+                   用户昵称
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">个人信息查看</a></dd>
-                    <dd><a id="log-out" href=""  onclick="return false">退出</a></dd>
+                    <dd><a id="log-out" onclick="return false" href="">退出</a></dd>
                 </dl>
             </li>
         </ul>
@@ -51,14 +50,6 @@
                         <dd><a href="javascript:;">个人信息更改</a></dd>
                         <dd><a href="javascript:;">地址查看</a></dd>
                         <dd><a href="javascript:;">注册新地址</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a class="" href="javascript:;">消息管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">消息推送</a></dd>
-                        <dd><a href="javascript:;">客服消息</a></dd>
-                        <dd><a href="javascript:;">活动推送</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -96,7 +87,6 @@
         © layui.com - 底部固定区域
     </div>
 </div>
-
 <script src="../js/myCookie.js"></script>
 <script>
     //JavaScript代码区域
@@ -109,6 +99,25 @@
             deleteCookie('userType');
             window.location.href = '../login.html';
             return false;
+        })
+
+        $(document).ready(function(){
+            $.ajax({
+                type:'GET',
+                url:'/businessUser/showAllInfo',
+                data:{
+                    userId:getCookie('addressId')
+                },
+                dataType:'json',
+
+                success:function(data){
+                    $('#userName').html(data.nickName);
+                },
+
+                error:function(){
+                    alert('failed');
+                }
+            })
         })
 
         $("a").click(function(){
