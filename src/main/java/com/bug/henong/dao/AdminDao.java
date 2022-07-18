@@ -5,6 +5,7 @@ import cn.hutool.db.Entity;
 import cn.hutool.json.JSONUtil;
 import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.entity.Admin;
+import com.bug.henong.entity.Farmer;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -80,10 +81,26 @@ public class AdminDao {
         return adminUser;
     }
 
+    /**通过id查找农户密码盐*/
+    public String getAdminPassSalt(String adminID) throws SQLException {
+        return findOneAdmin(adminID).getPassSalt();
+    }
+    /**登录*/
+    public Admin login(String id, String pass) throws SQLException {
+        Admin admin = findOneAdmin(id);
+        if(admin!=null){
+            String passWord = admin.getAdminPasswd();
+            if(passWord.equals(pass)){
+                return admin;
+            }
+        }
+        return null;
+    }
+
     /**
      * 更新用户名
      */
-    public int updateName(String name, String id) throws SQLException {
+    public int updateName( String id,String name) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("ADMIN_NAME", name),
@@ -97,7 +114,7 @@ public class AdminDao {
     /**
      * 更新密码
      */
-    public int updatePass(String passwd, String id) throws SQLException {
+    public int updatePass(String id ,String passwd) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("ADMIN_PASSWD", passwd),
@@ -110,7 +127,7 @@ public class AdminDao {
     /**
      * 更新手机号
      */
-    public int updatePhone(String phone, String id) throws SQLException {
+    public int updatePhone(String id, String phone) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("ADMIN_PASSWORD", phone),
@@ -124,7 +141,7 @@ public class AdminDao {
     /**
      * 更新密码盐
      */
-    public int updatePassSalt(String passSalt, String id) throws SQLException {
+    public int updatePassSalt(String id, String passSalt) throws SQLException {
 
         int rw = Db.use().update(
                 Entity.create().set("PASS_SALT", passSalt),

@@ -64,9 +64,20 @@
                                 myHtml += '<div class="layui-container">';
                                 myHtml += '<div class="layui-row layui-col-md12">';
                                 myHtml += '<div class="layui-col-md3">';
-                                myHtml += '<img src="' + res.img +'">';
+                                myHtml += '<img src="../images/test.png">';
                                 myHtml += '</div>';
                                 myHtml += '<div class="layui-col-md3">';
+
+                                myHtml += '<div class="layui-row">';
+                                myHtml += '<div class="layui-anim layui-anim-fadein">';
+                                myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
+                                myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">商品ID：</div>';
+                                myHtml += '</div>';
+                                myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
+                                myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">' + res[i].goodsId + '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
+                                myHtml += '</div>';
 
                                 myHtml += '<div class="layui-row">';
                                 myHtml += '<div class="layui-anim layui-anim-fadein">';
@@ -74,7 +85,7 @@
                                 myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">商品名：</div>';
                                 myHtml += '</div>';
                                 myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
-                                myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">' + res.name + '</div>';
+                                myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">' + res[i].goodsName + '</div>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
@@ -85,7 +96,7 @@
                                 myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">商品售价：</div>';
                                 myHtml += '</div>';
                                 myHtml += '<div class="layui-col-md1" style="margin-top:15px;">';
-                                myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">' + res.price + '</div>';
+                                myHtml += '<div style="font-size: 15px;font-family:"KaiTi";font-weight: bold;">' + res[i].goodsPrice + '</div>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
@@ -93,7 +104,7 @@
                                 myHtml += '<div class="layui-row " style="margin-top:15px;">';
                                 myHtml += '<div class="layui-form-item">';
                                 myHtml += '<div class="layui-input-block layui-col-md2 layui-anim layui-anim-up">';
-                                myHtml += '<button id="goodsInfo" type="button" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">查看详情</button>';
+                                myHtml += '<button id="' + res[i].goodsId + '" type="button" class="info-btn layui-btn layui-btn-normal" lay-submit="" lay-filter="demo1">查看详情</button>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
                                 myHtml += '</div>';
@@ -115,6 +126,16 @@
                 }
             })
         }
+
+        $('.info-btn').click(function(){
+            if(getCookie('userId') == ''){
+                alert('请先登录');
+                window.location.href = 'login.html';
+            }else{
+                createCookie('goodsId',this.attr('id'));
+                window.location.href = 'goodsInformation.html';
+            }
+        })
 
         //后面就跟你平时使用jQuery一样
         $('#search').on('click',function(res){

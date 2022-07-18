@@ -169,8 +169,10 @@ public class BuyerUserService {
         if (buyerUser == null) {
             return 0;
         }
-
-        if (!buyerUser.getUserPass().equals(originalPass)) {
+        String originalPassSalt =buyerUser.getPassSalt();
+        String realEncryptPassword = buyerUser.getUserPass();
+        String originalEncryptPassWord = EncryptUtil.getDigestHex(originalPass,originalPassSalt);
+        if (!realEncryptPassword.equals(originalEncryptPassWord)) {
             return 2;
         }
         if (!buyerUser.getNickName().equals(nickName)) {

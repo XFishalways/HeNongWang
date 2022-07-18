@@ -99,7 +99,7 @@
 			$(document).ready(function(){
 				$.ajax({
 					type:'GET',
-					url:'/address/findAddressInfo?addressId=' + getCookie('addressId'),
+					url:'businessOrder/getOrdersByOrderId?userId=' + getCookie('userId'),
 					dataType:'json',
 
 					success:function(data){

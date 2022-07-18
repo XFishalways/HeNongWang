@@ -25,9 +25,9 @@ public class GetBuyerUsersServlet extends HttpServlet {
         String id = req.getParameter("USER_ID");
         String json = null;
         try {
-            List<BuyerUser> users = buyerUserDao.findAll(id);
-            if(users != null) {
-                json = JSON.toJSONString(users);
+            BuyerUser user = buyerUserDao.findOneBuyer(id);
+            if(user != null) {
+                json = JSON.toJSONString(user);
                 System.out.println(json);
             }
             else {

@@ -28,13 +28,15 @@ public class AdminSaleProductController {
     public String findOneGoods (@RequestParam("saleProductTitle") String saleProductTitle,
                                             HttpSession session ) throws SQLException, IOException{
 
-        SaleProduct saleProducts = saleProductService.getSaleProductDetailByTitle(saleProductTitle);
+        SaleProduct saleProduct = saleProductService.getSaleProductDetailByTitle(saleProductTitle);
 
-        if (saleProducts == null){
+        if (saleProduct == null){
             session.setAttribute("errorMsg","数据为空");
-            return JSON.toJSONString(saleProducts);
+            saleProduct = new SaleProduct();
+            return JSON.toJSONString(saleProduct);
         }else {
-            return JSON.toJSONString(saleProducts);
+            saleProduct = new SaleProduct();
+            return JSON.toJSONString(saleProduct);
         }
     }
 
@@ -45,9 +47,11 @@ public class AdminSaleProductController {
 
         if (saleProducts == null){
             session.setAttribute("errorMsg","数据为空");
-            return JSON.toJSONString(saleProducts);
+            SaleProduct saleProduct = new SaleProduct();
+            return JSON.toJSONString(saleProduct);
         } else{
-            return JSON.toJSONString(saleProducts);
+            SaleProduct saleProduct = new SaleProduct();
+            return JSON.toJSONString(saleProduct);
         }
 
     }

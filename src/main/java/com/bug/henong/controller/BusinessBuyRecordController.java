@@ -102,7 +102,8 @@ public class BusinessBuyRecordController {
     /**
      * 查找一个农户
      */
-    @GetMapping("/business/farmerManage/getFarmerByName")
+    @GetMapping("/business" +
+            "")
     @ResponseBody
     public String getFramerByFarmerName(@RequestParam("userId")String userId,@RequestParam("farmerName")String farmerName,HttpSession session) throws SQLException {
         List<Farmer> farmers = businessBuyRecordService.findFarmerByName(userId,farmerName);
