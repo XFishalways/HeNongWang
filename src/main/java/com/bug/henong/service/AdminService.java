@@ -1,9 +1,11 @@
 package com.bug.henong.service;
 
+import cn.hutool.core.util.RandomUtil;
 import com.bug.henong.dao.AdminDao;
 import com.bug.henong.dao.ProductExamineDao;
 import com.bug.henong.entity.Admin;
 import com.bug.henong.entity.ProductExamine;
+import com.bug.henong.utils.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -86,5 +88,38 @@ public class AdminService {
         return false;
     }
 
+    /**修改信息
+     * @return  0: 无此用户ID 1：修改成功 2：密码不符
+     * */
+    public int updateInfo(String adminId, String adminName, String originalAdminPass, String newAdminPass, String phone) throws SQLException{
+        Admin admin = adminDao.findOneAdmin(adminId);
+
+        if (admin == null){
+            return 0;
+        }
+        String originalPassSalt =admin.getPassSalt();
+        String realEncryptPassword = admin.getAdminPasswd();
+        String originalEncryptPassWord = EncryptUtil.getDigestHex(originalAdminPass,originalPassSalt);
+        if (!realEncryptPassword.equals(originalEncryptPassWord)) {
+            return 2;
+        }
+        if (!admin.getAdminName().equals(adminName)){
+            adminDao.updateName(adminId,adminName);
+        }
+        if (!admin.getAdminPhone().equals(phone)){
+            adminDao.updatePhone(adminId,phone);
+        }
+        if (!originalAdminPass.equals(newAdminPass)) {
+            if (newAdminPass != null) {
+                String passSalt= RandomUtil.randomString(10);
+                String encyptPassWord = EncryptUtil.getDigestHex(newAdminPass,passSalt);
+                updatePassword(adminId, encyptPassWord);
+                //修改密码盐
+
+            }
+        }
+        return 1;
+
+    }
 
 }
