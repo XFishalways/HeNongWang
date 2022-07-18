@@ -183,6 +183,9 @@ public class BusinessUserService {
             businessUser.setUserPass(encryptPassword);
             businessUser.setPassSalt(passSalt);
             businessUser.setPhone(phone);
+            businessUser.setUserIntro("null");
+            businessUser.setAvatar("null");
+            businessUser.setUserStatus("online");
             return businessUserDao.insert(businessUser) > 0;
         }
 

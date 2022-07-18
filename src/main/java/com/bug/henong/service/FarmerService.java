@@ -222,6 +222,9 @@ public class FarmerService {
             farmer.setPassSalt(passSalt);
             farmer.setFarmerAge(farmerAge);
             farmer.setFarmerPlace(farmerPlace);
+            farmer.setFarmerCredibility("0");
+            farmer.setFarmerValue(0.0);
+            farmer.setBusinessId("null");
             return farmerDao.insert(farmer)>0;
         }
     }

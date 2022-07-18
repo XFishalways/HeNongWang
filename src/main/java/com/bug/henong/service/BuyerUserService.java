@@ -217,6 +217,11 @@ public class BuyerUserService {
             String encryptPassword = EncryptUtil.getDigestHex(userPass,passSalt);
             buyerUser.setUserPass(encryptPassword);
             buyerUser.setPassSalt(passSalt);
+            buyerUser.setAvatar("null");
+            buyerUser.setLastLoginTime(null);
+            buyerUser.setTotalCostAmt(0.0);
+            buyerUser.setUserStatus("online");
+
             return buyerUserDao.insert(buyerUser)>0;
         }
     }
