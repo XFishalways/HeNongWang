@@ -60,15 +60,15 @@
 			<hr>
 		</form>
 	</div>
-
+	<script src="../js/myCookie.js"></script>
 	<script>
-		layui.use(['jquery'], function(args){
+		layui.use(['jquery','from'], function(args){
 			var $ = layui.$;
-
+			var from = layui.from;
 			$(document).ready(function(){
 				$.ajax({
 					type:'GET',
-					url:'/address/findAddressInfo?addressId=' + getCookie('addressId'),
+					url:'address/findAddressInfo?addressId=' + getCookie('addressId'),
 					dataType:'json',
 
 					success:function(data){
