@@ -32,7 +32,8 @@ public class BusinessAddressController {
 
         if(businessAddresses == null){
             session.setAttribute("errorMsg", "查找不到卖家地址id");
-            return JSONUtil.toJsonStr(businessAddresses);
+            BusinessAddress businessAddress = new BusinessAddress();
+            return JSONUtil.toJsonStr(businessAddress);
         }
 
         json= JSON.toJSONString(businessAddresses);
@@ -52,6 +53,7 @@ public class BusinessAddressController {
 
         if(businessAddress == null){
             session.setAttribute("errorMsg", "查找不到卖家地址id");
+            businessAddress = new BusinessAddress();
             return JSONUtil.toJsonStr(businessAddress);
         }
 
