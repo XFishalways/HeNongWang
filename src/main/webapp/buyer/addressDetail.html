@@ -31,7 +31,7 @@
 			</div>
 			<hr>
 			<div class="layui-form-item layui-bg-gray">
-				<label class="layui-form-label">city:</label>
+				<label class="layui-form-label">市:</label>
 				<div class="layui-input-block">
 					<div id="city" class="layui-form-mid layui-word-aux">241111</div>
 				</div>
@@ -61,10 +61,13 @@
 		</form>
 	</div>
 	<script src="../js/myCookie.js"></script>
+	<script src="../lib/layui/layui.js"></script>
 	<script>
-		layui.use(['jquery','from'], function(args){
+		layui.use(['jquery','form'], function(args){
 			var $ = layui.$;
-			var from = layui.from;
+			var form = layui.form;
+
+			form.render();
 			$(document).ready(function(){
 				$.ajax({
 					type:'GET',
@@ -75,6 +78,7 @@
 					dataType:'json',
 
 					success:function(data){
+
 						$('#addressName').html(data.addressName);
 						$('#province').html(data.province);
 						$('#city').html(data.city);
