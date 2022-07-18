@@ -6,9 +6,7 @@ import com.bug.henong.entity.BusinessUser;
 import com.bug.henong.service.BusinessUserService;
 import com.bug.henong.utils.MapFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.*;
@@ -24,7 +22,8 @@ public class BusinessUserInfoController {
     /**
      * 查询卖家所有信息
      */
-    @RequestMapping("/businessUser/showAllInfo")
+    @GetMapping(value = "/business/showAllInfo")
+    @ResponseBody
     public String showAllInfo(@RequestParam("userId") String userId,
                                 HttpSession session) throws SQLException{
 
@@ -44,7 +43,8 @@ public class BusinessUserInfoController {
     }
 
 
-    @PostMapping("/businessUser/update")
+    @PostMapping("/business/updateUser")
+    @ResponseBody
     public String updateInfo(@RequestParam("userId") String userId,
                              @RequestParam("nickName") String nickName,
                              @RequestParam("userIntro") String userIntro,
@@ -70,6 +70,7 @@ public class BusinessUserInfoController {
     }
 
     @PostMapping("/business/register")
+    @ResponseBody
     public String businessUserRegister (@RequestParam("userId") String userId,
                                         @RequestParam("userName")String userName,
                                         @RequestParam("nickName")String nickName,

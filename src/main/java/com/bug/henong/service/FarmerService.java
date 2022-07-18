@@ -175,8 +175,10 @@ public class FarmerService {
         if (farmer == null) {
             return 0;
         }
-
-        if (!farmer.getUserPass().equals(originalUserPass)) {
+        String originalPassSalt =farmer.getPassSalt();
+        String realEncryptPassword = farmer.getUserPass();
+        String originalEncryptPassWord = EncryptUtil.getDigestHex(originalUserPass,originalPassSalt);
+        if (!realEncryptPassword.equals(originalEncryptPassWord)) {
             return 2;
         }
         if (!farmer.getFarmerName().equals(farmerName)) {

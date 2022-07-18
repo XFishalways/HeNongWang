@@ -83,7 +83,7 @@
         //执行实例
         var uploadInst = upload.render({
             elem: '#uploadImg' //绑定元素
-            ,url: '/buyer/upload' //上传接口
+            ,url: 'upload' //上传接口
             ,done: function(res){
                 //上传完毕回调
             }
@@ -108,7 +108,7 @@
             alert(data.field);
             $.ajax({
                 type:"POST",
-                url:'/businessUser/update',
+                url:'updateUser',
                 data:{
                     userId:getCookie('userId'),
                     nickName:data.field.nickname,
@@ -136,7 +136,7 @@
 
             $.ajax({
                 type:'GET',
-                url:'/businessUser/showAllInfo',
+                url:'showAllInfo',
                 data:{
                     userId:getCookie('userId')
                 },

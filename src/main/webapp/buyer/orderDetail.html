@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
 	<link rel="stylesheet" href="../css/public.css" media="all">
 	<link rel="stylesheet" href="../js/lay-module/step-lay/step.css" media="all">
+
 </head>
 <body>
 <script src="../js/myCookie.js"></script>
@@ -79,15 +80,15 @@
 			<hr>
 		</form>
 	</div>
-
+	<script src="../lib/layui/layui.js"></script>
 	<script>
-		layui.use(['jquery'], function(args){
+		layui.use(['jquery','form'], function(args){
 			var $ = layui.$;
-
+			var form = layui.form;
 			$(document).ready(function(){
 				$.ajax({
 					type:'GET',
-					url:'/buyer/buyerOrder/getOrder?orderId=' + getCookie('orderId'),
+					url:'buyerOrder/getOrder?orderId=' + getCookie('orderId'),
 					dataType:'json',
 
 					success:function(data){

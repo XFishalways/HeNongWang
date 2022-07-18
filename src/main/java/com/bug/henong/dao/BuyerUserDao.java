@@ -40,26 +40,24 @@ public class BuyerUserDao {
 
     }
 
-    /**返回所有信息*/
-    public List<BuyerUser> findAll(String userId) throws SQLException {
-
-
-
-        List<BuyerUser> buyerUsers = new ArrayList<BuyerUser>();
-        List<Entity> entities = Db.use().findAll(Entity.create("BUYER_USER").set("USER_ID", userId));
-
-        if (entities.isEmpty()) {
-            return null;
-        }
-
-        for(Entity e : entities){
-            String buyerStr = JSONUtil.toJsonStr(e);
-            BuyerUser buyerUser = JSONUtil.toBean(buyerStr,BuyerUser.class);
-            buyerUsers.add(buyerUser);
-        }
-
-        return buyerUsers;
-    }
+//    /**返回所有信息*/
+//    public BuyerUser findOneBuyer(String userId) throws SQLException {
+//
+//
+//
+//
+//        List<Entity> entities = Db.use().findAll(Entity.create("BUYER_USER").set("USER_ID", userId));
+//
+//        if (entities.isEmpty()) {
+//            return null;
+//        }
+//
+//        Entity e = entities.get(0);
+//            String buyerStr = JSONUtil.toJsonStr(e);
+//            BuyerUser buyerUser = JSONUtil.toBean(buyerStr,BuyerUser.class);
+//
+//        return buyerUser;
+//    }
 
     /**
      * 通过当前页数获取buyer信息

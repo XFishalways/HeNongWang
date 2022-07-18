@@ -52,11 +52,10 @@ public class BuyerAddressDao {
         return buyerAddresses;
     }
 
-    //通过id查找某一行数据
+    //通过名字查找某一行数据
     public BuyerAddress findOneAddress(String addressTitle) throws SQLException {
 
-        List<Entity> entities= Db.use().findAll(
-                Entity.create("BUYER_ADDRESS").set("ADDRESS_TITLE",addressTitle));
+        List<Entity> entities= Db.use().query("SELECT * FROM BUYER_ADDRESS WHERE ADDRESS_NAME LIKE ?","%"+addressTitle+"%");
 
         if(entities.isEmpty()){
             return null;

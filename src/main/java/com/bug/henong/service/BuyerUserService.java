@@ -19,8 +19,8 @@ public class BuyerUserService {
     /**
      * 得到买家信息
      */
-    public List<BuyerUser> getUserDetailById(String UserId) throws SQLException {
-        return buyerUserDao.findAll(UserId);
+    public BuyerUser getUserDetailById(String UserId) throws SQLException {
+        return buyerUserDao.findOneBuyer(UserId);
     }
 
     /**
@@ -169,8 +169,10 @@ public class BuyerUserService {
         if (buyerUser == null) {
             return 0;
         }
-
-        if (!buyerUser.getUserPass().equals(originalPass)) {
+        String originalPassSalt =buyerUser.getPassSalt();
+        String realEncryptPassword = buyerUser.getUserPass();
+        String originalEncryptPassWord = EncryptUtil.getDigestHex(originalPass,originalPassSalt);
+        if (!realEncryptPassword.equals(originalEncryptPassWord)) {
             return 2;
         }
         if (!buyerUser.getNickName().equals(nickName)) {
@@ -214,6 +216,7 @@ public class BuyerUserService {
             String  passSalt= RandomUtil.randomString(10);
             String encryptPassword = EncryptUtil.getDigestHex(userPass,passSalt);
             buyerUser.setUserPass(encryptPassword);
+            buyerUser.setPassSalt(passSalt);
             return buyerUserDao.insert(buyerUser)>0;
         }
     }

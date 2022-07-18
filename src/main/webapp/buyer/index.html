@@ -28,15 +28,15 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
-        <a href="javascript:;">
+        <a id="userName" href="javascript:;">
           <img src="../images/test.png" class="layui-nav-img">
-          zlt
+         用户昵称
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="">个人信息查看</a></dd>
-          <dd><a id="log-out" href="">退出</a></dd>
+          <dd><a id="log-out" onclick="return false"href="">退出</a></dd>
         </dl>
       </li>
+      <li class="layui-nav-item"><a href="../index.html">返回首页</a></li>
     </ul>
   </div>
   
@@ -96,6 +96,25 @@ layui.use('element', function(){
   var element = layui.element;
   var $ = layui.jquery;
 
+  $(document).ready(function(){
+    $.ajax({
+      type:'GET',
+      url:'showUserInfo',
+      data:{
+        userId:getCookie('userId')
+      },
+      dataType:'json',
+
+      success:function(data){
+        $('#userName').html(data.nickName);
+      },
+
+      error:function(){
+        alert('failed');
+      }
+    })
+  })
+
   $('#log-out').click(function(){
     deleteCookie('userId');
     deleteCookie('userType');
@@ -133,6 +152,10 @@ layui.use('element', function(){
         }else if(text=="我的订单") {
           $("#main").find("#ifr").remove();
           $("#main").append('<iframe src="displayOrder.html" id="ifr" style="width:100%;height:100%"></iframe>');
+        }else if(text=="退出") {
+          createCookie('userId','');
+          createCookie('userType','');
+          window.location.href = "../login.html";
         }
     })
 });

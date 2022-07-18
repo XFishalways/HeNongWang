@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
@@ -25,6 +26,7 @@ public class BuyerAddressController {
      * 查询卖家所有地址
      */
     @GetMapping("/buyer/address/findAllAddress")
+    @ResponseBody
     public String findAllAddress(@RequestParam("buyerUserId") String buyerUserId,
             HttpSession session) throws SQLException {
 
@@ -46,6 +48,7 @@ public class BuyerAddressController {
      * 查询一个卖家地址
      */
     @GetMapping("/buyer/address/findOneAddress")
+    @ResponseBody
     public String findOneAddress(@RequestParam("addressTitle") String addressTitle,
                                  HttpSession session) throws SQLException{
         String json;
@@ -66,6 +69,7 @@ public class BuyerAddressController {
      * 更新卖家地址
      */
     @PostMapping("/buyer/address/update")
+    @ResponseBody
     public String update(@RequestParam("addressId") String addressId,
                          @RequestParam("addressName") String addressName,
                          @RequestParam("receiverName") String receiverName,
@@ -95,6 +99,7 @@ public class BuyerAddressController {
      * 注册买家地址
      */
     @PostMapping("/buyer/address/register")
+    @ResponseBody
     public String register(@RequestParam("addressName") String addressName,
                            @RequestParam("receiverName") String receiverName,
                            @RequestParam("receiverPhone") String receiverPhone,
@@ -117,6 +122,7 @@ public class BuyerAddressController {
      * 删除卖家地址
      */
     @GetMapping("/buyer/address/delete")
+    @ResponseBody
     public String deleteOneAddress(@RequestParam("addressId") String addressId,
                                  HttpSession session) throws SQLException{
 
