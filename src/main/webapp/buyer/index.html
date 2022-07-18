@@ -96,7 +96,24 @@ layui.use('element', function(){
   var element = layui.element;
   var $ = layui.jquery;
 
+  $(document).ready(function(){
+    $.ajax({
+      type:'GET',
+      url:'findAllUser',
+      data:{
+        userId:getCookie('userId')
+      },
+      dataType:'json',
 
+      success:function(data){
+        $('#userName').html(data.nickName);
+      },
+
+      error:function(){
+        alert('failed');
+      }
+    })
+  })
 
   $('#log-out').click(function(){
     deleteCookie('userId');
