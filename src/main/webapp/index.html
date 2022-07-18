@@ -139,9 +139,10 @@
                         alert('请先登录');
                         window.location.href = 'login.html';
                     }else{
-                        createCookie('goodsId',this.attr('id'));
+                        createCookie('goodsId',$(this).attr('id'));
                         window.location.href = 'goods/goodsInformation.html';
                     }
+                    return false;
                 })
 
                 $('#person').click(function(){

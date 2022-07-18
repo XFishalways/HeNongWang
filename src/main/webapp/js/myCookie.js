@@ -1,6 +1,6 @@
 function createCookie(cName,cValue){
     var tmp = "";
-    document.cookie = tmp + cName + "=" + cValue;
+    document.cookie = tmp + cName + "=" + cValue + ";path=/";
 }
 
 function getCookie(cName){
@@ -15,6 +15,6 @@ function getCookie(cName){
 
 function deleteCookie(cName){
     var date = new Date();
-    date.setTime(date.getTime() - 100);
-    document.cookie = cName + "=" + getCookie(cName) + "; expires=" + date.toGMTString();
+    date.setTime(date.getTime() - 1);
+    document.cookie = cName + "=; expires=" + date.toGMTString() + ";path=/";
 }

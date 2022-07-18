@@ -190,6 +190,9 @@ public class FarmerService {
         if (!farmer.getFarmerPlace().equals(farmerPlace)) {
             farmerDao.updatePlace(userId, farmerPlace);
         }
+        if (farmer.getBusinessId()==null){
+            farmerDao.updateBusinessId(userId,businessId);
+        }
         if (!farmer.getBusinessId().equals(businessId)) {
             farmerDao.updateBusinessId(userId, businessId);
         }
@@ -224,7 +227,7 @@ public class FarmerService {
             farmer.setFarmerPlace(farmerPlace);
             farmer.setFarmerCredibility("0");
             farmer.setFarmerValue(0.0);
-            farmer.setBusinessId("null");
+            farmer.setBusinessId("1");
             return farmerDao.insert(farmer)>0;
         }
     }

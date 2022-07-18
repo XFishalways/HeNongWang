@@ -143,7 +143,7 @@ public class BusinessBuyrecordDao {
      */
     public int updateAddressId(String id, String addressId) throws SQLException {
         int rw = Db.use().update(
-                Entity.create().set("SKU_STATUS",addressId),
+                Entity.create().set("ADDRESS_ID",addressId),
                 Entity.create("BUSINESS_BUYRECORD").set("RECORD_ID",id)
         );
 

@@ -21,8 +21,8 @@ public class AdminLoginController {
 
     @PostMapping(value = "/admin/login" )
     @ResponseBody
-    public String login(@RequestParam("adminId") String adminId,
-                        @RequestParam("adminPasswd") String adminPasswd,
+    public String login(@RequestParam("adminUserId") String adminId,
+                        @RequestParam("adminPassword") String adminPasswd,
                         HttpSession session) throws SQLException{
         if (adminId == null || adminPasswd ==null){
             session.setAttribute("errorMsg", "用户名或密码不能为空");

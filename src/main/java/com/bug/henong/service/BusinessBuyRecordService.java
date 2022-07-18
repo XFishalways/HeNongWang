@@ -37,8 +37,8 @@ public class BusinessBuyRecordService {
         ProductExamine productExamine = new ProductExamine();
         productExamine.setProductId(businessBuyrecord.getSkuId());
         ProductExamineDao productExamineDao = new ProductExamineDao();
-        productExamine.setProductNotes("non-examined");
-
+        productExamine.setProductResult("non-examined");
+        productExamine.setAdminId("0");
         int result =productExamineDao.insert(productExamine);
 
         if(result>0){
