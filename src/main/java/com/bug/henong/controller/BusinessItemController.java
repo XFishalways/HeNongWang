@@ -27,11 +27,9 @@ public class BusinessItemController {
         List<BusinessItem> businessItems = businessItemService.getBusinessItemsByName(skuName,currentPage,size);
         if(businessItems==null){
             session.setAttribute("errorMsg","未找到");
-            BusinessItem businessItem = new BusinessItem();
-            return JSON.toJSONString(businessItem);
+            return JSON.toJSONString(businessItems);
         }else{
-            BusinessItem businessItem = new BusinessItem();
-            return JSON.toJSONString(businessItem);
+            return JSON.toJSONString(businessItems);
         }
     }
     @GetMapping("/business/businessItem/getBusinessItems")
@@ -40,11 +38,9 @@ public class BusinessItemController {
         List<BusinessItem> businessItems = businessItemService.getBusinessItemsByBusinessId(businessId);
         if(businessItems==null){
             session.setAttribute("errorMsg","未找到");
-            BusinessItem businessItem = new BusinessItem();
-            return JSON.toJSONString(businessItem);
+            return JSON.toJSONString(businessItems);
         }else{
-            BusinessItem businessItem = new BusinessItem();
-            return JSON.toJSONString(businessItem);
+            return JSON.toJSONString(businessItems);
         }
     }
 
@@ -54,11 +50,9 @@ public class BusinessItemController {
         List<BusinessItem> businessItems= businessItemService.getBusinessItemsByNameAndBusinessId(businessId,itemName);
         if(businessItems==null){
             session.setAttribute("errprMsg","未找到");
-            BusinessItem businessItem = new BusinessItem();
-            return JSON.toJSONString(businessItem);
+            return JSON.toJSONString(businessItems);
         }else{
-            BusinessItem businessItem = new BusinessItem();
-            return JSON.toJSONString(businessItem);
+            return JSON.toJSONString(businessItems);
         }
     }
 
@@ -68,11 +62,9 @@ public class BusinessItemController {
         List<BusinessItem> businessItems = businessItemService.getBusinessItemsOnsale(businessId);
         if(businessItems==null){
             session.setAttribute("errprMsg","未找到");
-            BusinessItem businessItem = new BusinessItem();
-            return JSON.toJSONString(businessItem);
+            return JSON.toJSONString(businessItems);
         }else{
-            BusinessItem businessItem = new BusinessItem();
-            return JSON.toJSONString(businessItem);
+            return JSON.toJSONString(businessItems);
         }
     }
     @GetMapping("/business/businessItem/getBusinessOffsaleItems")
@@ -81,11 +73,9 @@ public class BusinessItemController {
         List<BusinessItem> businessItems = businessItemService.getBusinessItemsOffsale(businessId);
         if(businessItems==null){
             session.setAttribute("errprMsg","未找到");
-            BusinessItem businessItem = new BusinessItem();
-            return JSON.toJSONString(businessItem);
+            return JSON.toJSONString(businessItems);
         }else{
-            BusinessItem businessItem = new BusinessItem();
-            return JSON.toJSONString(businessItem);
+            return JSON.toJSONString(businessItems);
         }
     }
     @GetMapping("/business/businessItem/putItemOnsale")
@@ -108,6 +98,17 @@ public class BusinessItemController {
         }else {
             MapFactory mapFactory = new MapFactory();
             return mapFactory.getStringObjectMap(session);
+        }
+    }
+    @GetMapping("/goods/randomView")
+    @ResponseBody
+    public String randomView(HttpSession session) throws SQLException {
+        List<BusinessItem> businessItems = businessItemService.getBusinessItemsRandom();
+        if(businessItems==null){
+            BusinessItem businessItem = new BusinessItem();
+            return JSON.toJSONString(businessItem);
+        }else{
+            return JSON.toJSONString(businessItems);
         }
     }
 

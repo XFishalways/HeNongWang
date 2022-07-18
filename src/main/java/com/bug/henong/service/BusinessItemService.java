@@ -37,6 +37,10 @@ public class BusinessItemService {
     public List<BusinessItem> getBusinessItemsOffsale(String businessId) throws SQLException {
         return businessItemDao.getBusinessItemsOffsale(businessId);
     }
+    /**得到随机十二件商品*/
+    public List<BusinessItem> getBusinessItemsRandom() throws SQLException {
+        return businessItemDao.getRandomItems();
+    }
     /**修改商品标题*/
     public Boolean updateSkuTitle(String itemId, String newSkuTitle) throws SQLException {
         BusinessItem businessItem = businessItemDao.findOneItem(itemId);
