@@ -109,7 +109,7 @@
             $('#log-btn').click(function(){
                 $.ajax({
                     type:'POST',
-                    url:'/login',
+                    url:'admin/login',
                     data:{
                         adminUserId:$('#input-account').val(),
                         adminPassword:$('#input-pass').val(),
