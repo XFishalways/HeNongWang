@@ -42,7 +42,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.setStatus(403);
 
             OutputStream oStream = response.getOutputStream();
-            oStream.write("不要重复提交请求！返回原始页面刷新后再次尝试！！".getBytes("UTF-8"));
+            oStream.write("不可访问！".getBytes("UTF-8"));
 
             return false;
         }

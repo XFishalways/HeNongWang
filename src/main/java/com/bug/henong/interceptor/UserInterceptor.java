@@ -20,7 +20,8 @@ public class UserInterceptor implements HandlerInterceptor {
 
         HttpSession session = request.getSession();
 
-        if(session == null) {
+        Object checker = session.getAttribute("userId");
+        if(checker == null) {
             response.sendRedirect("login.html");
             return false;
         }
