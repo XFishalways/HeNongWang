@@ -116,7 +116,7 @@
                                 </div>
                                 <div style="text-align: center;margin-top: 50px;">
                                     <button class="layui-btn next">再次注册</button>
-                                    <button class="layui-btn layui-btn-primary">立刻登录</button>
+                                    <button id="log" class="layui-btn layui-btn-primary">立刻登录</button>
                                 </div>
                             </div>
                         </div>
@@ -208,6 +208,10 @@
 
         $('.next').click(function () {
             step.next('#stepForm');
+        });
+
+        $('#log').click(function () {
+            window.location.href = "../login.html";
         });
     })
 </script>
