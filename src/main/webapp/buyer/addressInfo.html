@@ -53,7 +53,7 @@
 					,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 				]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("/address/findAllAddress?buyerUserId="+getCookie('userId'));
+					if( url.search(patt) != -1) tableInit("address/findAllAddress?buyerUserId="+getCookie('userId'));
 				}
 			});
 
@@ -97,7 +97,7 @@
 		});
 	}
 
-	tableInit("/address/findAllAddress?buyerUserId="+getCookie('userId'));
+	tableInit("address/findAllAddress?buyerUserId="+getCookie('userId'));
 
 	//第一种：主动加载jquery模块
 	layui.use(['jquery', 'layer'], function(){
@@ -107,7 +107,7 @@
 		//后面就跟你平时使用jQuery一样
 		$('#findById').on('click',function(res){
 			var title = $(this).parent().parent().find(".layui-input").val();
-			tableInit('/address/findOneAddress?addressTitle='+title);
+			tableInit('address/findOneAddress?addressTitle='+title);
 		})
 	});
 
