@@ -22,7 +22,7 @@ public class BuyerUserController {
     /**
      * 查询买家信息
      */
-    @GetMapping("/buyer/showUserInfo")
+    @GetMapping("/buyer/showAllInfo")
     @ResponseBody
     public String findOneBuyer(@RequestParam("userId") String userId,
                               HttpSession session) throws SQLException {
