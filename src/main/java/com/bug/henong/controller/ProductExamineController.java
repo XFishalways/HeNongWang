@@ -47,8 +47,8 @@ public class ProductExamineController {
     }
     @PostMapping("/admin/prodectExamine/confirmProduct")
     @ResponseBody
-    public String confirmProduct(@RequestParam("productId")String productId,@RequestParam("adminId")String adminId,HttpSession session) throws SQLException {
-        Boolean rs = productExamineService.confirmProduct(productId,adminId);
+    public String confirmProduct(@RequestParam("productId")String productId,@RequestParam("userId")String adminId,@RequestParam("productNotes")String productNotes, HttpSession session) throws SQLException {
+        Boolean rs = productExamineService.confirmProduct(productId,adminId,productNotes);
         if(rs==false){
             session.setAttribute("errorMsg","确认失败");
             return null;
@@ -60,8 +60,8 @@ public class ProductExamineController {
 
     @PostMapping("/admin/prodectExamine/denyProduct")
     @ResponseBody
-    public String denyProduct(@RequestParam("productId")String productId,@RequestParam("adminId")String adminId,HttpSession session) throws SQLException {
-        Boolean rs = productExamineService.denyProduct(productId,adminId);
+    public String denyProduct(@RequestParam("productId")String productId,@RequestParam("userId")String adminId,@RequestParam("productNote")String productNotes, HttpSession session) throws SQLException {
+        Boolean rs = productExamineService.denyProduct(productId,adminId,productNotes);
         if(rs==false){
             session.setAttribute("errorMsg","确认失败");
             return null;
