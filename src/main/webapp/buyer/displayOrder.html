@@ -90,7 +90,45 @@
 						})
 					});
 				}else if(layEvent === 'confirmAddress'){ //确认地址
+					layer.open({
+						type: 1,//1 dom或文本，2 iframe,3 加载层,4 tips
+						shadeClose:true,
+						content: '<div class="layui-inline"><input placeholder="请选择地址ID" class="layui-input" id="openGoodsInfo"></div></br><div class="layui-inline"><button id="confirm-btn" class="layui-btn layui-btn-primary">确认</button></div>'
+						,success: function(layero){
+							$.ajax({
+								url:'address/findAllAddress?userId=' + getCookie('userId'),
+								success:function(data){
+									//成功后删除该行
 
+									var jsonData = JSON.parse(data);
+
+									//请求数据成功
+									var myData = [];
+									var index = 0;
+									for (key in data) {
+										myData[index] = {addressName:jsonData[key],id:index};
+										index += 1;
+									}
+
+									//渲染下拉菜单
+									layui.use(['dropdown'], function(args){
+										var dropdown = layui.dropdown;
+										dropdown.render({
+											elem:'#openGoodsInfo',
+											data:myData,
+											click:function(select){
+												this.elem.val(select.addressName);
+											}
+										})
+									});
+
+									$('#confirm-btn').click(function(){
+
+									})
+								}
+							})
+						}
+					});
 				}else if(layEvent === 'LAYTABLE_TIPS'){
 					layer.alert('Hi，头部工具栏扩展的右侧图标。');
 				}
