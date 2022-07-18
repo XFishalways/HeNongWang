@@ -2,7 +2,6 @@ package com.bug.henong.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
-import com.bug.henong.entity.BusinessAddress;
 import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.service.BuyerUserService;
 import com.bug.henong.utils.MapFactory;
@@ -27,7 +26,7 @@ public class BuyerUserController {
                               HttpSession session) throws SQLException {
         String json;
 
-        List<BuyerUser> buyerUsers = buyerUserService.getUserDetailById(userId);
+        List<BuyerUser> buyerUsers = (List<BuyerUser>) buyerUserService.getUserDetailById(userId);
 
         if(buyerUsers == null){
             session.setAttribute("errorMsg", "查找不到卖家地址id");
