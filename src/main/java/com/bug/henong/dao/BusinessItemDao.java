@@ -196,7 +196,9 @@ public class BusinessItemDao {
     public List<BusinessItem> getBusinessItemsOnsale(String userId) throws SQLException {
         List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
         List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where USER_ID = ? AND SKU_STATUS", userId,"onsale");
-
+        if (entities.isEmpty()) {
+            return null;
+        }
         for (Entity e : entities) {
             String itemStr = JSONUtil.toJsonStr(e);
             BusinessItem businessItem1 = JSONUtil.toBean(itemStr, BusinessItem.class);
@@ -208,7 +210,9 @@ public class BusinessItemDao {
     public List<BusinessItem> getBusinessItemsOffsale(String userId) throws SQLException {
         List<BusinessItem> businessItem = new ArrayList<BusinessItem>();
         List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM Where USER_ID = ? AND SKU_STATUS", userId,"offsale");
-
+        if (entities.isEmpty()) {
+            return null;
+        }
         for (Entity e : entities) {
             String itemStr = JSONUtil.toJsonStr(e);
             BusinessItem businessItem1 = JSONUtil.toBean(itemStr, BusinessItem.class);
@@ -216,5 +220,18 @@ public class BusinessItemDao {
         }
         return businessItem;
     }
-
+    /**随机得到*/
+    public List<BusinessItem> getRandomItems() throws SQLException {
+        List<BusinessItem> businessItems = new ArrayList<>();
+        List<Entity> entities = Db.use().query("SELECT * FROM BUSINESS_ITEM ORDER BY RAND() LIMIT 12") ;
+        if (entities.isEmpty()) {
+            return null;
+        }
+        for (Entity e : entities) {
+            String itemStr = JSONUtil.toJsonStr(e);
+            BusinessItem businessItem = JSONUtil.toBean(itemStr, BusinessItem.class);
+            businessItems.add(businessItem);
+        }
+        return businessItems;
+    }
 }

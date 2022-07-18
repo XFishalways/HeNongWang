@@ -110,5 +110,16 @@ public class BusinessItemController {
             return mapFactory.getStringObjectMap(session);
         }
     }
+    @GetMapping("/goods/randomView")
+    @ResponseBody
+    public String randomView(HttpSession session) throws SQLException {
+        List<BusinessItem> businessItems = businessItemService.getBusinessItemsRandom();
+        if(businessItems==null){
+            BusinessItem businessItem = new BusinessItem();
+            return JSON.toJSONString(businessItem);
+        }else{
+            return JSON.toJSONString(businessItems);
+        }
+    }
 
 }
