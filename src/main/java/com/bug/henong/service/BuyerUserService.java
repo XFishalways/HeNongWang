@@ -1,7 +1,9 @@
 package com.bug.henong.service;
 
 import cn.hutool.core.util.RandomUtil;
+import com.bug.henong.dao.BuyerCartDao;
 import com.bug.henong.dao.BuyerUserDao;
+import com.bug.henong.entity.BuyerCart;
 import com.bug.henong.entity.BuyerUser;
 import com.bug.henong.entity.Farmer;
 import com.bug.henong.utils.EncryptUtil;
@@ -222,7 +224,18 @@ public class BuyerUserService {
             buyerUser.setTotalCostAmt(0.0);
             buyerUser.setUserStatus("online");
 
-            return buyerUserDao.insert(buyerUser)>0;
+            BuyerCartDao buyerCartDao = new BuyerCartDao();
+            BuyerCart buyerCart = buyerCartDao.findOneCart(userId);
+            if(buyerCart!=null){
+                return false;
+            }
+            buyerCart = new BuyerCart();
+            buyerCart.setUserId(userId);
+            buyerCart.setCartStatus("N");
+            buyerCart.setTotalPrice(0.0);
+            buyerCart.setPayablePrice(0.0);
+
+            return buyerCartDao.insert(buyerCart)>0 && buyerUserDao.insert(buyerUser)>0;
         }
     }
 
