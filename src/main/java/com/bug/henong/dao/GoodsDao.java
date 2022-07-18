@@ -170,7 +170,7 @@ public class GoodsDao {
     public int updatePass(String id, String ifPass) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("IF_PASS", ifPass),
+                Entity.create().set("GOODS_PASS", ifPass),
                 Entity.create("GOODS").set("GOODS_ID", id)
         );
 

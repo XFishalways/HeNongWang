@@ -109,7 +109,7 @@
             $('#log-btn').click(function(){
                 $.ajax({
                     type:'POST',
-                    url:'admin/login',
+                    url:'login',
                     data:{
                         adminUserId:$('#input-account').val(),
                         adminPassword:$('#input-pass').val(),
@@ -118,6 +118,7 @@
 
                     success:function(data){
                         createCookie('userId',$('#input-account').val());
+                        createCookie('userType','admin');
                         alert('success');
                     },
 

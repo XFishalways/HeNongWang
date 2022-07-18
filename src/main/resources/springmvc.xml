@@ -41,32 +41,32 @@
     <mvc:default-servlet-handler/>
 
      <!--SQL Injection Interceptor-->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/login" />
-            <bean class="com.bug.henong.interceptor.SqlInjectInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors>
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/login" />-->
+<!--            <bean class="com.bug.henong.interceptor.SqlInjectInterceptor" />-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
 
-    <!-- CSRF Interceptor -->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <!-- 对登录操作进行拦截 -->
-            <mvc:mapping path="/login" />
-            <bean class="com.bug.henong.interceptor.LoginInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors>
+<!--    &lt;!&ndash; CSRF Interceptor &ndash;&gt;-->
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            &lt;!&ndash; 对登录操作进行拦截 &ndash;&gt;-->
+<!--            <mvc:mapping path="/login" />-->
+<!--            <bean class="com.bug.henong.interceptor.LoginInterceptor" />-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
 
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <!-- 判断session是否过期 -->
-            <mvc:mapping path="/farmer" />
-            <mvc:mapping path="/business" />
-            <mvc:mapping path="/buyer" />
-            <mvc:mapping path="/admin" />
-            <bean class="com.bug.henong.interceptor.UserInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors>
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            &lt;!&ndash; 判断session是否过期 &ndash;&gt;-->
+<!--            <mvc:mapping path="/farmer" />-->
+<!--            <mvc:mapping path="/business" />-->
+<!--            <mvc:mapping path="/buyer" />-->
+<!--            <mvc:mapping path="/admin" />-->
+<!--            <bean class="com.bug.henong.interceptor.UserInterceptor" />-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
 
     <context:property-placeholder location= "classpath:db.properties" />
 </beans>

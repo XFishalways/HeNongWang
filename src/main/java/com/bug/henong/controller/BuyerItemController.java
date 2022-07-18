@@ -30,7 +30,7 @@ public class BuyerItemController {
         Double quantity = Double.parseDouble(Quantity);
         Double price = Double.parseDouble(Price);
 
-        Boolean result = buyerItemService.cartInsert(userId, skuId, quantity, price);
+        buyerItemService.cartInsert(userId, skuId, quantity, price);
 
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
@@ -48,7 +48,10 @@ public class BuyerItemController {
         Double price = Double.parseDouble(Price);
 
         Boolean result = buyerItemService.orderInsert(userId, skuId, quantity, price);
-
+        if(result==false){
+            session.setAttribute("errorMsg","请求失败");
+            return null;
+        }
         MapFactory mapFactory = new MapFactory();
         return mapFactory.getStringObjectMap(session);
     }

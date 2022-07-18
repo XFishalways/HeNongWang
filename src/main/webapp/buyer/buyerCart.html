@@ -82,14 +82,14 @@
 					var data = checkStatus.data;
 					var myData = [];
 					for(var index = 0;index < data.length;index++){
-						myData[index] = data[index].goodsId;
+						myData[index] = data[index].skuId;
 					}
 					
 					$.ajax({
 						url:'buyerCart/confirmItems',
 						type:'POST',
 						data:{
-							skuIds:myData,
+							skuIds:JSON.stringify(myData),
 							userId:getCookie('userId')
 						},
 						dataType:'json',
@@ -104,14 +104,14 @@
 					var data = checkStatus.data;
 					var myData = [];
 					for(var index = 0;index < data.length;index++){
-						myData[index] = data[index].goodsId;
+						myData[index] = data[index].skuId;
 					}
 					
 					$.ajax({
 						url:'buyerCart/deleteItems',
 						type:'POST',
 						data:{
-							skuIds:myData,
+							skuIds:JSON.stringify(myData),
 							userId:getCookie('userId')
 						},
 						dataType:'json',

@@ -55,20 +55,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="layui-row">
-                    <div class="layui-anim layui-anim-fadein">
-                        <div class="layui-col-md3" style="margin-top:15px;">
-                            <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">原价：</div>
-                        </div>
-                        <div class="layui-col-md3" style="margin-top:15px;">
-                            <div id="price" style="font-size: 20px;font-family:'楷体';font-weight: bold;">1433223</div>
-                        </div>
-                        <div class="layui-col-md3" style="margin-top:15px;">
-                            <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">元</div>
-                        </div>
-                    </div>
-                </div>
                 <div class="layui-row">
                     <div class="layui-anim layui-anim-fadein">
                         <div class="layui-col-md3" style="margin-top:15px;">
@@ -82,17 +68,17 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="layui-row">
                     <div class="layui-anim layui-anim-fadein">
                         <div class="layui-col-md3" style="margin-top:15px;">
-                            <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">种类：</div>
+                            <div style="font-size: 20px;font-family:'楷体';font-weight: bold;">销售状态：</div>
                         </div>
                         <div class="layui-col-md3" style="margin-top:15px;">
-                            <div id="catagory" style="font-size: 20px;font-family:'楷体';font-weight: bold;">果类</div>
+                            <div id="skuStatus" style="font-size: 20px;font-family:'楷体';font-weight: bold;">1433223</div>
                         </div>
                     </div>
                 </div>
+
 
                 <form class="layui-form">
                     <div class="layui-row">
@@ -176,20 +162,17 @@
                 var price;
                 $.ajax({
                     type:'GET',
-                    url:'',
+                    url:'getGoodsById',
                     data:{
-                        userId:getCookie('userId'),
-                        goodsId:getCookie('goodsId')
+                        skuId:getCookie('goodsId')
                     },
                     dataType:'json',
 
                     success:function(data){
-                        $('#goodsId').val(getCookie('goodsId'));
-                        $('#price').val(data.price);
-                        $('#salePrice').val(data.salePrice);
-                        $('#catagory').val(data.catalog);
-                        $('#content1').val(data.intro);
-                        price = val(data.salePrice)
+                        $('#goodsId').html(getCookie('goodsId'));
+                        $('#salePrice').html(data.salePrice);
+                        $('#skuStatus').html(data.skuStatus);
+                        price = data.salePrice
                     },
 
                     error:function(){
@@ -199,10 +182,10 @@
                 $('#buyNow').click(function(){
                     $.ajax({
                         type:'POST',
-                        url:'/login',
+                        url:'goodsInformation/addToOrder',
                         data:{
                             userId:getCookie('userId'),
-                            goodsId:getCookie('goodsId'),
+                            skuId:getCookie('goodsId'),
                             quantity:$('#input-num').val(),
                             price:price
                         },
@@ -221,10 +204,10 @@
                 $('#cart').click(function(){
                     $.ajax({
                         type:'POST',
-                        url:'/login',
+                        url:'goodsInformation/addToCart',
                         data:{
                             userId:getCookie('userId'),
-                            goodsId:getCookie('goodsId'),
+                            skuId:getCookie('goodsId'),
                             quantity:$('#input-num').val(),
                             price:price
                         },

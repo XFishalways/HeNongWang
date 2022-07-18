@@ -41,9 +41,9 @@ public class BuyerOrderController {
             return JSON.toJSONString(order);
         }
     }
-    @RequestMapping("/buyer/buyerOrder/getAddressId")
+    @RequestMapping("/buyer/buyerOrder/getAddressById")
     @ResponseBody
-    public String getAddressId(@RequestParam("userId")String userId,HttpSession session) throws SQLException {
+    public String getAddressById(@RequestParam("userId")String userId,HttpSession session) throws SQLException {
         Map<String ,String> map = buyerOrderService.getAddress(userId);
         if(map==null){
             session.setAttribute("errorMsg","数据为空");

@@ -1,9 +1,8 @@
 package com.bug.henong.service;
 
-import com.bug.henong.dao.BusinessItemDao;
-import com.bug.henong.dao.BuyerAddressDao;
-import com.bug.henong.dao.BuyerItemDao;
-import com.bug.henong.dao.BuyerOrderDao;
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
+import com.bug.henong.dao.*;
 import com.bug.henong.entity.*;
 import org.springframework.stereotype.Service;
 
@@ -69,15 +68,31 @@ public class BuyerOrderService {
         BuyerItemDao buyerItemDao = new BuyerItemDao();
         List<BuyerItem> buyerItems= buyerItemDao.findBuyerItemByOrderId(orderId);
         BusinessItemDao businessItemDao = new BusinessItemDao();
+        BusinessOrderDao businessOrderDao = new BusinessOrderDao();
+        GoodsDao goodsDao =new GoodsDao();
 
         for(BuyerItem item:buyerItems){
             String itemId = item.getSkuId();
             Double quantity = item.getQuantity();
-            Double orginalQuantity=businessItemDao.findOneItem(itemId).getQuantity();
+
+            Goods goods =goodsDao.findOneGoods(itemId);
+            Double orginalQuantity=goods.getGoodsQuantity();
             businessItemDao.updateQuantity(itemId,orginalQuantity-quantity);
+            BusinessOrder businessOrder = new BusinessOrder();
+            Snowflake snowflake = IdUtil.getSnowflake(3, 1);
+            String businessOrderId = snowflake.nextIdStr();
+            businessOrder.setOrderId(businessOrderId);
+            businessOrder.setPayMethod(payMethod);
+            businessOrder.setOrderStatus("needToPay");
+            businessOrder.setAddressId(addressId);
+            businessOrder.setSkuAmount(item.getQuantity().toString());
+            businessOrder.setPayablePrice(item.getPrice());
+            businessOrder.setTotalPrice(item.getQuantity()*item.getPrice());
+            businessOrderDao.insert(businessOrder);
         }
         return  rs;
-        }
+    }
+
 
     /**取消订单*/
     public Boolean denyOrder(String orderId) throws SQLException {

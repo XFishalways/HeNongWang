@@ -118,14 +118,15 @@
 
                 $(document).ready(function(){
                     $.ajax({
-                        url:'',
+                        url:'goods/randomView',
                         dataType:'json',
                         success:function(res){
                             var goodsLength = 12;
                             var goodsList = $('#well-sold > div > div > a');
-                            for(var index = 0; index < goodsLength ; index++ ){
-                                goodsList[index].attr('id',res[index].goodsId);
-                                goodsList[index].attr('onclick','return false')
+                            for(var index = 0; index < res.length ; index++ ){
+                                var obj = goodsList[index];
+                                obj.setAttribute('id',res[index].skuId);
+                                obj.setAttribute('onclick','return false');
                             }
                         },
                         error:function(){

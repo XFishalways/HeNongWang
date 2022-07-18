@@ -197,7 +197,7 @@ public class BuyerItemDao {
      */
     public BuyerItem findBuyerItemByUserIdAndSkuID(String userId,String skuId) throws SQLException {
 
-        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ITEM Where USER_ID = ? AND SKU_ID", userId,skuId);
+        List<Entity> entities = Db.use().query("SELECT * FROM BUYER_ITEM Where USER_ID = ? AND SKU_ID = ?", userId,skuId);
 
         if(entities.isEmpty()){
             return null;

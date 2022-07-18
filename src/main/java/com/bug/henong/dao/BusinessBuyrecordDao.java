@@ -132,7 +132,7 @@ public class BusinessBuyrecordDao {
     public int updateSkuStatus(String id, String status) throws SQLException {
 
         int rw = Db.use().update(
-                Entity.create().set("SKU_STATUS",status),
+                Entity.create().set("RECORD_STATUS",status),
                 Entity.create("BUSINESS_BUYRECORD").set("RECORD_ID",id)
         );
 

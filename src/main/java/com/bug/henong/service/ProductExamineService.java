@@ -44,7 +44,7 @@ public class ProductExamineService {
 
         //当前用户非空才可以进行更改
         if (productExamine != null) {
-                int rw = productExamineDao.updateProductResult(newProductResult,loginProductId);
+                int rw = productExamineDao.updateProductResult(loginProductId,newProductResult);
                 return rw > 0;
 
         }
@@ -87,19 +87,22 @@ public class ProductExamineService {
                 businessBuyrecordDao.updateSkuStatus(id,"pass");
 
                 GoodsDao goodsDao= new GoodsDao();
-                int result =goodsDao.updatePass(id,"pass");
+                String goodsId= businessBuyrecord.getSkuId();
+                int result =goodsDao.updatePass(goodsId,"pass");
 
                 if(result<=0){
                     return false;
                 }
-                Goods goods = goodsDao.findOneGoods(id);
+                Goods goods = goodsDao.findOneGoods(goodsId);
 
                 BusinessItem businessItem = new BusinessItem();
-                businessItem.setSkuId(goods.getGoodsId());
+                businessItem.setSkuId(goodsId);
                 businessItem.setFarmerId(goods.getFarmerId());
                 businessItem.setUserId(businessBuyrecord.getUserId());
                 businessItem.setQuantity(goods.getGoodsQuantity());
                 businessItem.setSkuStatus("offsale");
+                businessItem.setSalePrice(goods.getGoodsPrice());
+                businessItem.setQuantity(goods.getGoodsQuantity());
 
                 BusinessItemDao businessItemDao = new BusinessItemDao();
                 businessItemDao.insert(businessItem);

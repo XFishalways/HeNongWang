@@ -61,7 +61,6 @@ public class BuyerItemService {
 
         if (buyerCart == null) return false;
 
-        buyerCart.setUserId(userId);
         buyerCart.setTotalPrice(quantity*price);
         buyerCart.setPayablePrice(quantity*price);
         buyerCart.setCartStatus("Y");
@@ -70,18 +69,28 @@ public class BuyerItemService {
     }
 
     public Boolean orderInsert (String userId, String skuId, Double quantity, Double price) throws SQLException {
-
+        Snowflake snowflake = IdUtil.getSnowflake(4, 1);
+        String orderId = snowflake.nextIdStr();
         BuyerOrderDao buyerOrderDao = new BuyerOrderDao();
 
-        BuyerOrder buyerOrder = buyerOrderDao.findOneOrder(userId);
-        BuyerItem buyerItem = buyerItemDao.findOneItem(skuId);
+        BuyerItem buyerItem = new BuyerItem();
+        buyerItem.setSkuId(skuId);
+        buyerItem.setPrice(price);
+        buyerItem.setQuantity(quantity);
+        buyerItem.setUserId(userId);
+        buyerItem.setSalePrice(price);
+        buyerItem.setSkuImage(null);
+        buyerItem.setOrderId(orderId);
+        int rs =buyerItemDao.insert(buyerItem);
+        if(rs<=0){
+            return false;
+        }
 
-        if(buyerOrder == null) return false;
+        BuyerOrder buyerOrder = new BuyerOrder();
 
-        Snowflake snowflake = IdUtil.getSnowflake(4, 1);
         String invoiceTplId = snowflake.nextIdStr();
-        String orderId = snowflake.nextIdStr();
 
+        buyerOrder.setUserId(userId);
         buyerOrder.setOrderId(orderId);
         buyerOrder.setTotalPrice(price * quantity);
         buyerOrder.setCouponPrice(0.0);
@@ -94,6 +103,7 @@ public class BuyerItemService {
     }
 
     public Boolean itemInsert (String skuId) throws SQLException {
+
 
         Snowflake snowflake = IdUtil.getSnowflake(4, 1);
         String orderId = snowflake.nextIdStr();

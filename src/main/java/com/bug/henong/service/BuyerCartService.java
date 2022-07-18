@@ -118,7 +118,7 @@ public class BuyerCartService {
     public Boolean delete(String skuId,String userId) throws SQLException {
         BuyerItemDao buyerItemDao = new BuyerItemDao();
         BuyerItem buyerItem = buyerItemDao.findBuyerItemByUserIdAndSkuID(userId,skuId);
-        if(buyerItem.getOrderId()!=null){
+        if(buyerItem.getOrderId()!=""){
             return false;
         }
         int rs= buyerItemDao.delete(skuId);
@@ -137,7 +137,7 @@ public class BuyerCartService {
         Double totalPrice = 0.0;
         for(String id:skuIds){
             BuyerItem buyerItem = buyerItemDao.findBuyerItemByUserIdAndSkuID(userId,id);
-            if(buyerItem.getOrderId()!=null){
+            if(buyerItem.getOrderId()!=""){
                 return false;
             }else {
                 buyerItemDao.updateOrderID(buyerItem.getSkuId(),orderId);

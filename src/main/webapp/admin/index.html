@@ -65,6 +65,11 @@ layui.use('element', function(){
   var $ = layui.jquery;
 
   $(document).ready(function(){
+    if(getCookie('userId') == '' || getCookie('userType') != 'admin'){
+       alert('请登录');
+       window.location.href = 'adminLogin.html';
+    }
+
     $.ajax({
       type:'GET',
       url:'findAdmin',

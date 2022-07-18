@@ -111,5 +111,16 @@ public class BusinessItemController {
             return JSON.toJSONString(businessItems);
         }
     }
+    @RequestMapping("/goods/getGoodsById")
+    @ResponseBody
+    public String getGoodsById(@RequestParam("skuId")String skuId,HttpSession session) throws SQLException {
+        BusinessItem businessItem = businessItemService.getItemDetailById(skuId);
+        if(businessItem==null){
+            businessItem = new BusinessItem();
+            return JSON.toJSONString(businessItem);
+        }else {
+            return JSON.toJSONString(businessItem);
+        }
+    }
 
 }

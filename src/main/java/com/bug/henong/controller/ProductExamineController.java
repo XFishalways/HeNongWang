@@ -26,7 +26,8 @@ public class ProductExamineController {
         List<ProductExamine> productExamines = productExamineService.getAll();
         if(productExamines==null){
             session.setAttribute("errorMsg","请求失败");
-            return null;
+            ProductExamine productExamine = new ProductExamine();
+            return JSON.toJSONString(productExamine);
         }else{
             String json = JSON.toJSONString(productExamines);
             return json;

@@ -40,7 +40,7 @@ public class LoginService {
     public BusinessUser businessUserLogin(String id, String password) throws SQLException {
         String passSalt= businessUserDao.getBusinessPassSalt(id);
         String encyptPassWord = EncryptUtil.getDigestHex(password,passSalt);
-        return businessUserDao.login(id, password);
+        return businessUserDao.login(id, encyptPassWord);
     }
 
     public Boolean login(String id, String password, String type) throws  SQLException{

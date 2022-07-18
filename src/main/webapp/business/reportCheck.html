@@ -119,14 +119,14 @@
 							url:'buyrecord/getAddressId?userId=' + getCookie('userId'),
 							success:function(data){
 								//成功后删除该行
-								var id = obj.data.reportId;
+								var id = obj.data.recordId;
 								var jsonData = JSON.parse(data);
 								obj.del();
 
 								//请求数据成功
 								var myData = [];
 								var index = 0;
-								for (key in data) {
+								for (key in jsonData) {
 									myData[index] = {title:jsonData[key],id:index};
 									index += 1;
 								}

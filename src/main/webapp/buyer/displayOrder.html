@@ -50,7 +50,7 @@
 					,{field:'couponPrice', width:120, title: '优惠金额',sort:true}
 					,{field:'payablePrice', width:100, title: '应付金额'}
 					,{field:'payMethod', width:100, title: '支付方式'}
-					,{field:'invoiceTqlId', width:100, title: '开票设置ID'}
+					,{field:'invoiceTplId', width:100, title: '开票设置ID'}
 					,{field:'orderStatus', width:100, title: '订单状态'}
 					,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 				]]
@@ -96,17 +96,18 @@
 						content: '<div class="layui-inline"><input placeholder="请选择地址ID" class="layui-input" id="openGoodsInfo"></div></br><div class="layui-inline"><button id="confirm-btn" class="layui-btn layui-btn-primary">确认</button></div>'
 						,success: function(layero){
 							$.ajax({
-								url:'address/findAllAddress?userId=' + getCookie('userId'),
+								url:'buyerOrder/getAddressById?userId=' + getCookie('userId'),
 								success:function(data){
 									//成功后删除该行
-
+									var id = obj.data.orderId;
 									var jsonData = JSON.parse(data);
+									obj.del();
 
 									//请求数据成功
 									var myData = [];
 									var index = 0;
-									for (key in data) {
-										myData[index] = {addressName:jsonData[key],id:index};
+									for (key in jsonData) {
+										myData[index] = {title:jsonData[key],id:index};
 										index += 1;
 									}
 
@@ -117,18 +118,31 @@
 											elem:'#openGoodsInfo',
 											data:myData,
 											click:function(select){
-												this.elem.val(select.addressName);
+												this.elem.val(select.title);
 											}
 										})
 									});
 
 									$('#confirm-btn').click(function(){
-
+										$.ajax({
+											url:'buyerOrder/confirmOrder',
+											type:'POST',
+											data:{
+												orderId:id,
+												addressId:$('#openGoodsInfo').val(),
+												payMethod:'COD'
+											},
+											success:function (){
+												alert('订单确认成功');
+												layer.closeAll();
+											}
+										})
 									})
 								}
 							})
 						}
 					});
+
 				}else if(layEvent === 'LAYTABLE_TIPS'){
 					layer.alert('Hi，头部工具栏扩展的右侧图标。');
 				}
