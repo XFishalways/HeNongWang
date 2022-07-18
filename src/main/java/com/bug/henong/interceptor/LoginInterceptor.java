@@ -14,7 +14,6 @@ import java.io.OutputStream;
 
 /**
  * 避免重复提交
- * 防止爆破
  * 防止csrf
  * @author XFishalways
  * @version 1.0.0
