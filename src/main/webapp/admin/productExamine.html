@@ -42,15 +42,11 @@
 			    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
 			    ,cols: [[
 			      {field:'productId', width:180, title: '商品ID', sort: true}
-			      ,{field:'goodsName', width:180, title: '商品名'}
-                  ,{field:'goodsPrice', width:100, title: '商品价格'}
-                  ,{field:'goodsFarmer', width:180, title: '商品所属农户'}
-                  ,{field:'goodsData', width:180, title: '商品采摘时间'}
-                  ,{field:'goodsAddr', width:280, title: '商品采摘地址'}
+			      ,{field:'adminId', width:180, title: '管理员ID'}
 				  ,{fixed: 'right', width:250, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 			    ]]
 				,error: function(){
-					if( url.search(patt) != -1) tableInit("GetBuyerUsers");
+					
 				}
 			  });
 			  
@@ -61,6 +57,8 @@
 			    var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
 			   
 			    if(layEvent === 'pass'){ //查看
+
+				  var id = obj.data.productId;
 			      //do 
 				  layer.open({
 					type: 1,//1 dom或文本，2 iframe,3 加载层,4 tips
@@ -69,15 +67,16 @@
 					,success: function(layero){
 						$('#confirm-btn').click(function(){
 							$.ajax({
-								url:'buyrecord/confirm',
+								url:'prodectExamine/confirmProduct',
 								type:'POST',
 								data:{
-									recordId:id,
+									productId:id,
 									userId:getCookie('userId'),
 									examineNote:$('#examine-note').val()
 								},
 								success:function(){
 									alert('已通过');
+									obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
 									layer.closeAll();
 								}
 							})
@@ -86,23 +85,32 @@
 				  });
 
 			    } else if(layEvent === 'del'){ //删除
-					layer.confirm('真的删除行么', function(index){
 					var id = obj.data.reportId;
-			        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-			        layer.close(index);
+			        
 			        //向服务端发送删除指令
-
-					$.ajax({
-						url:"buyrecord/deny",
-						type:'POST',
-						data:{
-							recordId:id
-						},
-						success:function(res){
-							alert('success');
-						}
-					})
-			      });
+					layer.open({
+					type: 1,//1 dom或文本，2 iframe,3 加载层,4 tips
+					shadeClose:true,
+					content: '<div class="layui-inline"><input placeholder="请输入审核批注" class="layui-input" id="examine-note"></div></br><div class="layui-inline"><button id="confirm-btn" class="layui-btn layui-btn-primary">确认</button></div>'
+					,success: function(layero){
+						$('#confirm-btn').click(function(){
+							$.ajax({
+								url:'prodectExamine/denyProduct',
+								type:'POST',
+								data:{
+									productId:id,
+									userId:getCookie('userId'),
+									examineNote:$('#examine-note').val()
+								},
+								success:function(){
+									alert('已通过');
+									obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+									layer.closeAll();
+								}
+							})
+						})
+					 }
+				  });
 			    } else if(layEvent === 'LAYTABLE_TIPS'){
 			      layer.alert('Hi，头部工具栏扩展的右侧图标。');
 			    }
