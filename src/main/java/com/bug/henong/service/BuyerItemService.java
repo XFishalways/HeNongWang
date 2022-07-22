@@ -5,7 +5,6 @@ import cn.hutool.core.util.IdUtil;
 import com.bug.henong.dao.*;
 import com.bug.henong.dao.BuyerItemDao;
 import com.bug.henong.entity.*;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;

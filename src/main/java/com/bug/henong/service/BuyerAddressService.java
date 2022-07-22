@@ -3,10 +3,7 @@ package com.bug.henong.service;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
 import com.bug.henong.dao.BuyerAddressDao;
-import com.bug.henong.entity.BusinessAddress;
 import com.bug.henong.entity.BuyerAddress;
-import com.bug.henong.entity.Farmer;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
