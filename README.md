@@ -17,4 +17,4 @@
 使用 interceptor 在进入 controller 接口前拦截危险操作  
 - SqlInjectInterceptor 拦截 and or select order delete drop 等 sql 注入的关键词 & 拦截 eval < > script 等 xss 关键词
 - LoginInterceptor 通过每次提交表单传入隐藏的随机值并存入session 每次登录进行比对 拦截表单的重复提交 阻止CSRF
-- UserInterceptor 通过判断 seesion 内的值 组织访客直接访问 /farmer /business /buyer 等各端后台 若有非法访问自动重定向到 login.html
+- UserInterceptor 通过判断 seesion 内的值 阻止访客直接访问 /farmer /business /buyer 等各端后台 若有非法访问自动重定向到 login.html
